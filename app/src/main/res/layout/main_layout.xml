@@ -50,15 +50,15 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="393dp"
-        android:layout_height="210dp"
+        android:layout_width="411dp"
+        android:layout_height="211dp"
         android:background="#92D347"
         android:backgroundTint="#94B172"
         android:text="\n 환경 보호 실천 TIP \n\n ex) 설거지를 할 때는 먼저 거품을 묻힌 후 마지막에 물을 틀어 행궈내요 "
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="140dp" />
+        tools:layout_editor_absoluteY="139dp" />
 
     <ImageButton
         android:id="@+id/imageButton"
