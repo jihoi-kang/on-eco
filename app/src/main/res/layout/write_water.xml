@@ -5,151 +5,151 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="전일대비 절약한 물의 양 "
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="729dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView7"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="전일대비 절약한 물의 양 "-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+<!--        tools:layout_editor_absoluteX="60dp"-->
+<!--        tools:layout_editor_absoluteY="729dp" />-->
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="L"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:layout_editor_absoluteX="351dp"
-        tools:layout_editor_absoluteY="729dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView8"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="L"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+<!--        tools:layout_editor_absoluteX="351dp"-->
+<!--        tools:layout_editor_absoluteY="729dp" />-->
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="오늘의 물 사용"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="16dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="오늘의 물 사용"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--        tools:layout_editor_absoluteX="131dp"-->
+<!--        tools:layout_editor_absoluteY="16dp" />-->
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="63dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#00FFFFFF"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="0dp" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/imageButton2"-->
+<!--        android:layout_width="63dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:backgroundTint="#00FFFFFF"-->
+<!--        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"-->
+<!--        tools:layout_editor_absoluteX="-4dp"-->
+<!--        tools:layout_editor_absoluteY="0dp" />-->
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        tools:layout_editor_absoluteX="351dp"
-        tools:layout_editor_absoluteY="7dp"
-        android:layout_width="62dp"
-        android:layout_height="41dp"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleX="30dp"
-        android:tint="#989292"
-        app:srcCompat="?attr/actionModePasteDrawable" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/imageButton3"-->
+<!--        tools:layout_editor_absoluteX="351dp"-->
+<!--        tools:layout_editor_absoluteY="7dp"-->
+<!--        android:layout_width="62dp"-->
+<!--        android:layout_height="41dp"-->
+<!--        android:backgroundTint="#00FFFFFF"-->
+<!--        android:scaleX="30dp"-->
+<!--        android:tint="#989292"-->
+<!--        app:srcCompat="?attr/actionModePasteDrawable" />-->
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="94dp"
-        android:layout_height="61dp"
-        android:text="세수"
-        tools:layout_editor_absoluteX="279dp"
-        tools:layout_editor_absoluteY="129dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button2"-->
+<!--        android:layout_width="94dp"-->
+<!--        android:layout_height="61dp"-->
+<!--        android:text="세수"-->
+<!--        tools:layout_editor_absoluteX="279dp"-->
+<!--        tools:layout_editor_absoluteY="129dp" />-->
 
-    <Button
-        android:id="@+id/button15"
-        android:layout_width="94dp"
-        android:layout_height="61dp"
-        android:text="손 씻기"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="129dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button15"-->
+<!--        android:layout_width="94dp"-->
+<!--        android:layout_height="61dp"-->
+<!--        android:text="손 씻기"-->
+<!--        tools:layout_editor_absoluteX="158dp"-->
+<!--        tools:layout_editor_absoluteY="129dp" />-->
 
-    <Button
-        android:id="@+id/button16"
-        android:layout_width="94dp"
-        android:layout_height="61dp"
-        android:text="양치"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="129dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button16"-->
+<!--        android:layout_width="94dp"-->
+<!--        android:layout_height="61dp"-->
+<!--        android:text="양치"-->
+<!--        tools:layout_editor_absoluteX="44dp"-->
+<!--        tools:layout_editor_absoluteY="129dp" />-->
 
-    <Button
-        android:id="@+id/button17"
-        android:layout_width="94dp"
-        android:layout_height="61dp"
-        android:text="추가"
-        tools:layout_editor_absoluteX="288dp"
-        tools:layout_editor_absoluteY="570dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button17"-->
+<!--        android:layout_width="94dp"-->
+<!--        android:layout_height="61dp"-->
+<!--        android:text="추가"-->
+<!--        tools:layout_editor_absoluteX="288dp"-->
+<!--        tools:layout_editor_absoluteY="570dp" />-->
 
-    <Button
-        android:id="@+id/button22"
-        android:layout_width="94dp"
-        android:layout_height="61dp"
-        android:text="기타"
-        tools:layout_editor_absoluteX="279dp"
-        tools:layout_editor_absoluteY="215dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button22"-->
+<!--        android:layout_width="94dp"-->
+<!--        android:layout_height="61dp"-->
+<!--        android:text="기타"-->
+<!--        tools:layout_editor_absoluteX="279dp"-->
+<!--        tools:layout_editor_absoluteY="215dp" />-->
 
-    <Button
-        android:id="@+id/button18"
-        android:layout_width="94dp"
-        android:layout_height="61dp"
-        android:text="샤워"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="215dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button18"-->
+<!--        android:layout_width="94dp"-->
+<!--        android:layout_height="61dp"-->
+<!--        android:text="샤워"-->
+<!--        tools:layout_editor_absoluteX="158dp"-->
+<!--        tools:layout_editor_absoluteY="215dp" />-->
 
-    <Button
-        android:id="@+id/button19"
-        android:layout_width="94dp"
-        android:layout_height="61dp"
-        android:text="설거지"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="215dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button19"-->
+<!--        android:layout_width="94dp"-->
+<!--        android:layout_height="61dp"-->
+<!--        android:text="설거지"-->
+<!--        tools:layout_editor_absoluteX="44dp"-->
+<!--        tools:layout_editor_absoluteY="215dp" />-->
 
-    <Button
-        android:id="@+id/button20"
-        android:layout_width="353dp"
-        android:layout_height="70dp"
-        android:text="샤워 타이머 게임"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="440dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button20"-->
+<!--        android:layout_width="353dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:text="샤워 타이머 게임"-->
+<!--        tools:layout_editor_absoluteX="29dp"-->
+<!--        tools:layout_editor_absoluteY="440dp" />-->
 
-    <Button
-        android:id="@+id/button21"
-        android:layout_width="353dp"
-        android:layout_height="70dp"
-        android:text="물 사용량 측정"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="336dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button21"-->
+<!--        android:layout_width="353dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:text="물 사용량 측정"-->
+<!--        tools:layout_editor_absoluteX="29dp"-->
+<!--        tools:layout_editor_absoluteY="336dp" />-->
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="273dp"
-        android:layout_height="63dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="570dp" />
+<!--    <EditText-->
+<!--        android:id="@+id/editTextTextPersonName"-->
+<!--        android:layout_width="273dp"-->
+<!--        android:layout_height="63dp"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:text="Name"-->
+<!--        tools:layout_editor_absoluteX="36dp"-->
+<!--        tools:layout_editor_absoluteY="570dp" />-->
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="오늘 사용한 물의 양"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="665dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="오늘 사용한 물의 양"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+<!--        tools:layout_editor_absoluteX="60dp"-->
+<!--        tools:layout_editor_absoluteY="665dp" />-->
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="L"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:layout_editor_absoluteX="351dp"
-        tools:layout_editor_absoluteY="665dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView6"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="L"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+<!--        tools:layout_editor_absoluteX="351dp"-->
+<!--        tools:layout_editor_absoluteY="665dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
