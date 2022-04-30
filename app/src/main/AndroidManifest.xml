@@ -12,7 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnEco">
         <activity
-            android:name=".MainActivity"
+            android:name=".MyPage"
+            android:exported="false" />
+        <activity
+            android:name=".Statistic"
+            android:exported="false" />
+        <activity
+            android:name=".WaterTimer"
+            android:exported="false" />
+        <activity
+            android:name=".WriteWater"
+            android:exported="false" />
+        <activity
+            android:name=".MainHome"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +32,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".WaterStopGame"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"></activity>
     </application>
 
 </manifest>

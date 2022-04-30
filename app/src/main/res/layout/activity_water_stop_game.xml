@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".WaterStopGame"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/Btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/Btn_before"
+            app:srcCompat="?attr/actionModeCloseDrawable"
+            app:tint="#606060"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/title_water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/title_write_water"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <ImageButton
+            android:id="@+id/Wstatistic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/Btn_checkStatis"
+            app:srcCompat="?attr/actionModePasteDrawable"
+            app:tint="#606060"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="92dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="223dp"
+        android:contentDescription="@string/timer_img"
+        app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="241dp" />
+
+    <Button
+        android:id="@+id/Btn_gameStart"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:text="@string/Btn_gameStart"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+</LinearLayout>
