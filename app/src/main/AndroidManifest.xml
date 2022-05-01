@@ -12,7 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnEco">
         <activity
+<<<<<<< HEAD
             android:name=".test.TestActivity"
+=======
+            android:name=".MyPage"
+            android:exported="false" />
+        <activity
+            android:name=".Statistic"
+            android:exported="false" />
+        <activity
+            android:name=".WaterTimer"
+            android:exported="false" />
+        <activity
+            android:name=".WriteWater"
+            android:exported="false" />
+        <activity
+            android:name=".MainHome"
+>>>>>>> master
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +36,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".test.TestActivity2"/>
+=======
+        <activity
+            android:name=".WaterStopGame"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"></activity>
+>>>>>>> master
     </application>
 
 </manifest>
