@@ -46,4 +46,19 @@
     <string name="title_on_eco">ON-ECO</string>
     <string name="start_decibel">측정 시작하기</string>
     <string name="get_ampl">진폭 가져오기</string>
+    <string name="disposable_cup">일회용 컵</string>
+    <string name="tissue">휴지/물티슈</string>
+    <string name="disposable_spoon">일회용 수저</string>
+    <string name="paper">종이</string>
+    <string name="plastic">플라스틱</string>
+    <string name="plastic_bag">비닐</string>
+    <string name="can">캔</string>
+    <string name="bottle">bottle</string>
+    <string name="etc">기타</string>
+    <string name="empty_bottle">공병</string>
+    <string name="mtitle_today_trash">오늘 배출한 쓰레기</string>
+    <string name="real_used_trash">100G</string>
+    <string name="saving_trash">전일 대비 절약한 쓰레기</string>
+    <string name="real_saving_trash">10G</string>
+    <string name="Userinput_today_T">trash</string>
 </resources>
