@@ -25,6 +25,15 @@ public class MainHome extends AppCompatActivity {
             }
         });
 
+        Button goto_write_trash = findViewById(R.id.goto_write_trash);
+        goto_write_trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WriteTrash.class);
+                startActivity(intent);
+            }
+        });
+
         Button goto_write_water = findViewById(R.id.goto_write_water);
         goto_write_water.setOnClickListener(new View.OnClickListener() {
             @Override
