@@ -10,92 +10,106 @@
     android:orientation="vertical"
     tools:context=".MainHome">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_on_eco"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/goto_mypage"
-            android:layout_width="56dp"
-            android:layout_height="49dp"
-            android:backgroundTint="#00FFFFFF"
-            app:tint="#857F7F"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_launcher_foreground"
-            android:contentDescription="@string/goto_mypage" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/Environ_tips"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#D7EDAA"
-        android:gravity="center"
-        android:text="@string/textview"
-        android:textColor="#33691E" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/goto_write_trash"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="@string/write_trash_Btn" />
+            android:layout_height="match_parent" >
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
 
-        <Button
-            android:id="@+id/goto_write_water"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="@string/write_water_Btn" />
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_on_eco"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+                <ImageButton
+                    android:id="@+id/goto_mypage"
+                    android:layout_width="56dp"
+                    android:layout_height="49dp"
+                    android:backgroundTint="#00FFFFFF"
+                    app:tint="#857F7F"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:srcCompat="@drawable/ic_launcher_foreground"
+                    android:contentDescription="@string/goto_mypage" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/goto_statistic"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="@string/string_statisbtn" />
+            <TextView
+                android:id="@+id/Environ_tips"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#D7EDAA"
+                android:gravity="center"
+                android:text="@string/textview"
+                android:textColor="#33691E" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
 
-        <Button
-            android:id="@+id/goto_shower_game"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="@string/water_gameBtn" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/goto_write_trash"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:text="@string/write_trash_Btn" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <Button
+                    android:id="@+id/goto_write_water"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:text="@string/write_water_Btn" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <Button
+                    android:id="@+id/goto_statistic"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:text="@string/string_statisbtn" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <Button
+                    android:id="@+id/goto_shower_game"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:text="@string/water_gameBtn" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
