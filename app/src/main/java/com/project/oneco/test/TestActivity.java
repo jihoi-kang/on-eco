@@ -12,10 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 import com.project.oneco.R;
 import com.project.oneco.SoundMeter;
+import com.project.oneco.data.PreferenceManager;
+import com.project.oneco.data.WaterUsage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +53,26 @@ public class TestActivity extends AppCompatActivity {
                 second.cancel();
                 soundMeter.stop();
                 // todo: 지금까지 모아둔 데시벨 값을 파싱한다.
+
+                // todo: 이전에 저장해둔 데이터이력이 있는지 확인
+                PreferenceManager manager = PreferenceManager.getInstance(TestActivity.this);
+                String data = manager.getString("05.08", "");
+                WaterUsage waterUsage;
+                Gson gson = new Gson();
+                if (data.equals("")) {
+                    waterUsage = new WaterUsage();
+                } else {
+                    waterUsage = gson.fromJson(data, WaterUsage.class);
+                }
+
+                // todo: type에 따른 데이터 만들어주기
+                if (type == "hand") {
+                    waterUsage.setHand(average);
+                } else if (type == "dish") {
+                    waterUsage.setHand(average);
+                }
+                // todo: 데이터 저장
+                manager.putString("05.08", gson.toJson(waterUsage));
             }
         });
         btnStart.setOnClickListener(new View.OnClickListener() {
