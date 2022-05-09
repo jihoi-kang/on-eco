@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnEco">
         <activity
+            android:name=".test.TimerTest"
+            android:exported="false" />
+        <activity
             android:name=".MyPage"
             android:exported="false" />
         <activity
