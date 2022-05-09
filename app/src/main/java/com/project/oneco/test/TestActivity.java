@@ -31,7 +31,7 @@ public class TestActivity extends AppCompatActivity {
     private final ArrayList<Float> dbUsedList = new ArrayList<>();
     private final ArrayList<Float> dbSavingList = new ArrayList<>();
     private SoundMeter soundMeter = null;
-    private float Wpower = 0f;
+    private float Wpower = 80f;
     private float usedW = 0f;      // 물 사용량 = Wpower * usedWT
     private float usedWT = 0f;      // 물 사용 시간
     private float savingWT = 0f;    // 물 절약 시간
@@ -51,6 +51,8 @@ public class TestActivity extends AppCompatActivity {
                     Wpower = 35;
                     break;
             }
+
+            Log.d("jay", "Wpower: " + Wpower);
         }
     };
 
@@ -109,6 +111,8 @@ public class TestActivity extends AppCompatActivity {
                     savingWT = dbSavingList.size();
 
                     usedW = usedWT * Wpower;
+
+                    setResult();
                 }
             });
 
@@ -137,7 +141,6 @@ public class TestActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Log.d("jay", "Timer start: " + timerSec); // 로그 찍기
-                    updateUi();
 
                     // soundMeter getAmplitude() 작업 수행
                     if (soundMeter == null) {
@@ -150,6 +153,7 @@ public class TestActivity extends AppCompatActivity {
                     // 데이터를 전역변수의 dbList로 저장한다.
                     dbList.add(db);
                     timerSec++;
+                    setSec();
                 }
             };
             Timer timer = new Timer();  // Timer는 안드로이드 클래스
@@ -158,13 +162,20 @@ public class TestActivity extends AppCompatActivity {
 
 
         // UI 변경 메서드
-        private void updateUi() {
+        private void setSec() {
             // todo: 00:00:00 구현
             Runnable updater = new Runnable() {
                 public void run() {
                     // 여기서부터는 main(UI) thread를 활용한다.
                     tvSec.setText(timerSec + "초");
+                }
+            };
+            handler.post(updater);
+        }
 
+        private void setResult() {
+            Runnable updater = new Runnable() {
+                public void run() {
                     TextView usedWater = findViewById(R.id.usedWater);
                     usedWater.setText("사용한 물의 양 : " + usedW + "ml");
 
