@@ -12,10 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 import com.project.oneco.R;
 import com.project.oneco.SoundMeter;
+import com.project.oneco.data.PreferenceManager;
+import com.project.oneco.data.WaterUsage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +81,33 @@ public class TestActivity extends AppCompatActivity {
             Wmiddle.setOnClickListener(listener);
             Wweakness.setOnClickListener(listener);
 
+            tvSec.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PreferenceManager manager = PreferenceManager.getInstance(TestActivity.this);
+                    Gson gson = new Gson();
+
+                    // data 만들기
+                    WaterUsage usage = new WaterUsage();
+                    usage.setDish(3f);
+                    usage.setHand(7f);
+
+                    // data를 String화 시키기
+                    String json = gson.toJson(usage);
+
+                    // 변환한 String 값을 SharedPreference에 저장
+                    manager.putString("0508", json);
+
+                    // 데이터 꺼내오기
+                    String data = manager.getString("0508", "");
+
+                    // String을 데이터 모델로 변경
+                    WaterUsage waterUsage = gson.fromJson(data, WaterUsage.class);
+                    Log.d("jay", "dish: " + waterUsage.getDish());
+                    Log.d("jay", "hand: " + waterUsage.getHand());
+                }
+            });
+
             // 정지 버튼을 누르면
             btnStop.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,11 +126,11 @@ public class TestActivity extends AppCompatActivity {
                     float average = total / dbList.size();
 
 
+
                     for (int i = 0; i < dbList.size(); i++) {
                         if (dbList.get(i) > average) {
                             // 물을 사용하는 중이라는 뜻
                             dbUsedList.add(dbList.get(i));
-
                         } else {
                             // 물을 사용하지 않고 있다는 뜻
                             dbSavingList.add(dbList.get(i));
@@ -113,6 +143,30 @@ public class TestActivity extends AppCompatActivity {
                     usedW = usedWT * Wpower;
 
                     setResult();
+
+                    // todo: 이전에 저장해둔 데이터이력이 있는지 확인
+                    PreferenceManager manager = PreferenceManager.getInstance(TestActivity.this);
+                    String data = manager.getString("0508", "");
+                    WaterUsage waterUsage;
+                    Gson gson = new Gson();
+                    if (data.equals("")) {
+                        waterUsage = new WaterUsage();
+                    } else {
+                        waterUsage = gson.fromJson(data, WaterUsage.class);
+                    }
+
+                    // todo: type에 따른 데이터 만들어주기
+//                    if (type.equals("hand")) {
+//                        // todo: 기존에 값이 있으면 어떡해??
+//                        float hand = waterUsage.getHand();
+//                        waterUsage.setHand(hand + average);
+//                    } else if (type.equals("dish")) {
+//                        waterUsage.setDish(average);
+//                    } else if (type.equals("etc")) {
+//                        waterUsage.setEtc(average);
+//                    }
+                    // todo: 데이터 저장
+                    manager.putString("0508", gson.toJson(waterUsage));
                 }
             });
 
