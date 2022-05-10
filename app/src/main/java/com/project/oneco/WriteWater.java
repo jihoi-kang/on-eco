@@ -10,6 +10,11 @@ import android.widget.ImageButton;
 
 public class WriteWater extends AppCompatActivity {
 
+    // todo: 손씻기, 샤워 등등을 누를 때마 값을 변경해줘됨
+    // todo: 측정 화면으로 넘어갈 때 type을 넣어줘야됨
+    private String type = "hand";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -38,6 +38,9 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        //
+        String type = getIntent().getStringExtra("type");
+
         checkPermission();
 
         soundMeter = new SoundMeter();
@@ -45,6 +48,33 @@ public class TestActivity extends AppCompatActivity {
         tvSec = findViewById(R.id.tv_sec);
         Button btnStop = findViewById(R.id.btn_stop);
         Button btnStart = findViewById(R.id.btn_start);
+
+        tvSec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PreferenceManager manager = PreferenceManager.getInstance(TestActivity.this);
+                Gson gson = new Gson();
+
+                // data 만들기
+                WaterUsage usage = new WaterUsage();
+                usage.setDish(3f);
+                usage.setHand(7f);
+
+                // data를 String화 시키기
+                String json = gson.toJson(usage);
+
+                // 변환한 String 값을 SharedPreference에 저장
+                manager.putString("0508", json);
+
+                // 데이터 꺼내오기
+                String data = manager.getString("0508", "");
+
+                // String을 데이터 모델로 변경
+                WaterUsage waterUsage = gson.fromJson(data, WaterUsage.class);
+                Log.d("jay", "dish: " + waterUsage.getDish());
+                Log.d("jay", "hand: " + waterUsage.getHand());
+            }
+        });
 
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +86,7 @@ public class TestActivity extends AppCompatActivity {
 
                 // todo: 이전에 저장해둔 데이터이력이 있는지 확인
                 PreferenceManager manager = PreferenceManager.getInstance(TestActivity.this);
-                String data = manager.getString("05.08", "");
+                String data = manager.getString("0508", "");
                 WaterUsage waterUsage;
                 Gson gson = new Gson();
                 if (data.equals("")) {
@@ -66,13 +96,17 @@ public class TestActivity extends AppCompatActivity {
                 }
 
                 // todo: type에 따른 데이터 만들어주기
-                if (type == "hand") {
-                    waterUsage.setHand(average);
-                } else if (type == "dish") {
-                    waterUsage.setHand(average);
+                if (type.equals("hand")) {
+                    // todo: 기존에 값이 있으면 어떡해??
+                    float hand = waterUsage.getHand();
+                    waterUsage.setHand(hand + average);
+                } else if (type.equals("dish")) {
+                    waterUsage.setDish(average);
+                } else if (type.equals("etc")) {
+                    waterUsage.setEtc(average);
                 }
                 // todo: 데이터 저장
-                manager.putString("05.08", gson.toJson(waterUsage));
+                manager.putString("0508", gson.toJson(waterUsage));
             }
         });
         btnStart.setOnClickListener(new View.OnClickListener() {

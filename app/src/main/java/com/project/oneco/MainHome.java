@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.project.oneco.test.TestActivity;
+
 public class MainHome extends AppCompatActivity {
 
     @Override
@@ -20,7 +22,9 @@ public class MainHome extends AppCompatActivity {
         goto_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MyPage.class);
+                Intent intent = new Intent(getApplicationContext(), TestActivity.class);
+                // intent에 type이라는 데이터 담기
+                intent.putExtra("type", "hand");
                 startActivity(intent);
             }
         });
