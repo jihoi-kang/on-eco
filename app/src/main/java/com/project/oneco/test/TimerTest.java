@@ -1,16 +1,14 @@
 package com.project.oneco.test;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.os.Bundle;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.oneco.R;
 
@@ -37,7 +35,6 @@ public class TimerTest extends AppCompatActivity {
     FrameLayout setting;    // 셋팅 화면
     FrameLayout timer;      // 타이머 화면
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +57,8 @@ public class TimerTest extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 firstState = true;
-                setting.setVisibility(setting.GONE);    // 설정 사라짐
-                timer.setVisibility(timer.VISIBLE);     // 타이머 생김
+                setting.setVisibility(View.GONE);    // 설정 사라짐
+                timer.setVisibility(View.VISIBLE);     // 타이머 생김
                 startStop();
             }
         });
@@ -78,8 +75,8 @@ public class TimerTest extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setting.setVisibility(setting.VISIBLE); // 설정 생김
-                timer.setVisibility(timer.GONE);        // 타이머 사라짐
+                setting.setVisibility(View.VISIBLE); // 설정 생김
+                timer.setVisibility(View.GONE);        // 타이머 사라짐
                 firstState = true;
                 stopTimer();
             }
@@ -88,8 +85,8 @@ public class TimerTest extends AppCompatActivity {
     }
 
     // 타이머 상태에 따른 시작 & 정지
-    private void startStop(){
-        if(timerRunning){   // 시작이면 정지
+    private void startStop() {
+        if (timerRunning) {   // 시작이면 정지
             stopTimer();
         } else {
             startTimer();   // 정지면 시작
@@ -97,9 +94,9 @@ public class TimerTest extends AppCompatActivity {
     }
 
     // 타이머 구현
-    private void startTimer(){
+    private void startTimer() {
         // 처음이면 설정 타이머 값을 사용한다.
-        if(firstState){
+        if (firstState) {
             String sHour = hourText.getText().toString();
             String sMin = minText.getText().toString();
             String sSecond = secondText.getText().toString();
@@ -116,7 +113,8 @@ public class TimerTest extends AppCompatActivity {
             }
 
             @Override
-            public void onFinish() { }
+            public void onFinish() {
+            }
         }.start();
 
         stopButton.setText("일시정지");
@@ -125,14 +123,14 @@ public class TimerTest extends AppCompatActivity {
     }
 
     // 타이머 정지
-    private void stopTimer(){
+    private void stopTimer() {
         countDownTimer.cancel();
         timerRunning = false;
         stopButton.setText("계속");
     }
 
     // 시간 업데이트
-    private void updateTimer(){
+    private void updateTimer() {
         int hour = (int) tempTime / 3600000;
         int minutes = (int) tempTime % 3600000 / 60000;
         int seconds = (int) tempTime % 3600000 % 60000 / 1000;
@@ -142,11 +140,11 @@ public class TimerTest extends AppCompatActivity {
         timeLeftText = "" + hour + ":";
 
         // 분이 10보다 작으면 0이 붙는다
-        if(minutes < 10) timeLeftText += "0";
+        if (minutes < 10) timeLeftText += "0";
         timeLeftText += minutes + ":";
 
         // 초가 10보다 작으면 0이 붙는다
-        if(seconds <10) timeLeftText += "0";
+        if (seconds < 10) timeLeftText += "0";
         timeLeftText += seconds + ":";
 
         countdownText.setText(timeLeftText);

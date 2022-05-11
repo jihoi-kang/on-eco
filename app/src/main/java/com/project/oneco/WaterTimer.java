@@ -1,32 +1,16 @@
 package com.project.oneco;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.Manifest;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.normal.TedPermission;
-import com.project.oneco.test.TestActivity;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.zip.Deflater;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class WaterTimer extends AppCompatActivity {
 
@@ -43,6 +27,9 @@ public class WaterTimer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water_timer);
 
+        // todo: SoundMeter 이용하여 기능 구현(TestActivity 참고)
+        // todo: timer 구현(62초 -> 00:01:02)
+
         setting = findViewById(R.id.setting);
         timer = findViewById(R.id.timer);
 
@@ -53,8 +40,8 @@ public class WaterTimer extends AppCompatActivity {
             public void onClick(View view) {
                 start_already = 1;
 
-                setting.setVisibility(setting.GONE);    // 설정 사라짐
-                timer.setVisibility(timer.VISIBLE);     // 타이머 생김
+                setting.setVisibility(View.GONE);    // 설정 사라짐
+                timer.setVisibility(View.VISIBLE);     // 타이머 생김
             }
         });
 
@@ -63,30 +50,28 @@ public class WaterTimer extends AppCompatActivity {
         Btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (start_already == 1){
-                     // 종료하시겠습니까? 팝업창을 띄움
-                        AlertDialog.Builder dlg_sure_out = new AlertDialog.Builder(WaterTimer.this);
-                        dlg_sure_out.setMessage("취소하시겠습니까?");
-                        dlg_sure_out.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int which) {
-                                Toast.makeText(WaterTimer.this, "계속합니다.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        dlg_sure_out.setNegativeButton("네", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                onBackPressed();
-                            }
-                        });
-                        dlg_sure_out.show();
+                if (start_already == 1) {
+                    // 종료하시겠습니까? 팝업창을 띄움
+                    AlertDialog.Builder dlg_sure_out = new AlertDialog.Builder(WaterTimer.this);
+                    dlg_sure_out.setMessage("취소하시겠습니까?");
+                    dlg_sure_out.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int which) {
+                            Toast.makeText(WaterTimer.this, "계속합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    dlg_sure_out.setNegativeButton("네", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            onBackPressed();
+                        }
+                    });
+                    dlg_sure_out.show();
                 } else {
                     onBackPressed();
                 }
             }
         });
-
-
 
 
         // 물 사용 통계 화면 넘어가기

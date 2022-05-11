@@ -20,7 +20,10 @@ import com.project.oneco.SoundMeter;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.WaterUsage;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -64,6 +67,8 @@ public class TestActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_test);
 
+            // todo: OnEcoApplication에 저장된 값을 가져옴(물 사용량의 유형)
+
             checkPermission();
 
             soundMeter = new SoundMeter();
@@ -75,12 +80,12 @@ public class TestActivity extends AppCompatActivity {
             Button Wmiddle = findViewById(R.id.Wmiddle);
             Button Wweakness = findViewById(R.id.Wweakness);
 
-
             // todo: 나중에 일시정지 및 계속 기능 구현
             Wstrenth.setOnClickListener(listener);
             Wmiddle.setOnClickListener(listener);
             Wweakness.setOnClickListener(listener);
 
+            // todo: need to remove(SharedPreference 실습을 위한 코드)
             tvSec.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -125,8 +130,6 @@ public class TestActivity extends AppCompatActivity {
                     // 평균 데시벨
                     float average = total / dbList.size();
 
-
-
                     for (int i = 0; i < dbList.size(); i++) {
                         if (dbList.get(i) > average) {
                             // 물을 사용하는 중이라는 뜻
@@ -145,6 +148,10 @@ public class TestActivity extends AppCompatActivity {
                     setResult();
 
                     // todo: 이전에 저장해둔 데이터이력이 있는지 확인
+                    // todo: 주석되어 있는 코드는 오늘 날짜를 String화 시킨 작업입니다.(ex. 20220511, 20220512) SharedPreference Key값으로 사용합니다.
+//                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+//                    Date today = Calendar.getInstance().getTime();
+//                    String today = dateFormat.format(today);
                     PreferenceManager manager = PreferenceManager.getInstance(TestActivity.this);
                     String data = manager.getString("0508", "");
                     WaterUsage waterUsage;
@@ -217,7 +224,7 @@ public class TestActivity extends AppCompatActivity {
 
         // UI 변경 메서드
         private void setSec() {
-            // todo: 00:00:00 구현
+            // todo: 1초, 2초, 3초, ... , 61초, 62초, 63초... 를 00:00:00 모양으로 변환
             Runnable updater = new Runnable() {
                 public void run() {
                     // 여기서부터는 main(UI) thread를 활용한다.

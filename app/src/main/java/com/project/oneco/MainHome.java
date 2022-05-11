@@ -12,6 +12,8 @@ import com.project.oneco.test.TestActivity;
 
 public class MainHome extends AppCompatActivity {
 
+    // todo: layout 공통 => 필요한 곳에 ScrollView 달아주기
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,14 +22,12 @@ public class MainHome extends AppCompatActivity {
         // Activity간의 데이터 공유를 위한 application 가져오기
         OnEcoApplication application = (OnEcoApplication) getApplication();
 
-
         ImageButton goto_mypage = findViewById(R.id.goto_mypage);
         goto_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TestActivity.class);
-                // intent에 type이라는 데이터 담기
-                intent.putExtra("type", "hand");
+                // todo: OnEcoApplication에 물 사용 유형(샤워, 설거지, 기타 등등...)을 저장
                 startActivity(intent);
             }
         });

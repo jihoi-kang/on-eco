@@ -1,19 +1,16 @@
 package com.project.oneco;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Statistic extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // todo: UI 화면 만들기(activity_statistic.xml), 그래프 제외(다음주 수업때 알려드릴게요~)
         setContentView(R.layout.activity_statistic);
 
         OnEcoApplication application = (OnEcoApplication) getApplication();
@@ -22,12 +19,5 @@ public class Statistic extends AppCompatActivity {
 
         Log.d("jay", "Statistic number: " + number);
         Log.d("jay", "Statistic count: " + count);
-
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        PagerAdapter adapter = new PageAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
     }
 }

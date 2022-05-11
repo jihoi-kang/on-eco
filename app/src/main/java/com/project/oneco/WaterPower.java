@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+// todo: 이 화면은 지금 사용하고 있지 않음. '물 사용량 측정' 버튼 눌렀을 때에 보이고 Wpower 값을 OnEcoApplication에 저장하여 관리
+
 public class WaterPower extends AppCompatActivity {
     private float Wpower = 80f;
 
