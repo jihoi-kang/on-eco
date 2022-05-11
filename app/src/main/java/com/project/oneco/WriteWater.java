@@ -21,6 +21,7 @@ public class WriteWater extends AppCompatActivity {
         setContentView(R.layout.activity_write_water);
 
 
+        // 이전 버튼
         ImageButton Btn_back = findViewById(R.id.Btn_back);
         Btn_back.setOnClickListener(new View.OnClickListener() {
             @Override

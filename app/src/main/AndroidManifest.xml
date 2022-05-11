@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnEco">
         <activity
+            android:name=".WaterPower"
+            android:exported="false" />
+        <activity
             android:name=".test.TimerTest"
             android:exported="false" />
         <activity

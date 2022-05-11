@@ -58,15 +58,54 @@
         android:contentDescription="@string/timer_img"
         app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
 
+    <TextView
+        android:id="@+id/spended_AllT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="00:00"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4" />
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="241dp" />
+        android:layout_height="51dp" />
 
-    <Button
-        android:id="@+id/Btn_start_TimerW"
+
+<!--셋팅 화면-->
+    <FrameLayout
+        android:id="@+id/setting"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:text="@string/Btn_start_TimerW"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/Btn_start_TimerW"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:text="@string/Btn_start_TimerW"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+    </FrameLayout>
+
+
+<!--타이머 화면-->
+    <FrameLayout
+        android:id="@+id/timer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="99dp"
+            android:text="중지" />
+
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_gravity="bottom"
+            android:text="완료" />
+
+    </FrameLayout>
+
 
 </LinearLayout>
