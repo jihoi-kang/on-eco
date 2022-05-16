@@ -66,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="223dp"
                 android:contentDescription="@string/timer_img"
+                android:text="00:00"
                 app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
 
             <TextView

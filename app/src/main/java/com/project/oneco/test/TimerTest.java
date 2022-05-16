@@ -145,7 +145,7 @@ public class TimerTest extends AppCompatActivity {
 
         // 초가 10보다 작으면 0이 붙는다
         if (seconds < 10) timeLeftText += "0";
-        timeLeftText += seconds + ":";
+        timeLeftText += seconds;
 
         countdownText.setText(timeLeftText);
 

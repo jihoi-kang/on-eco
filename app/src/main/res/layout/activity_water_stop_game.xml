@@ -55,7 +55,6 @@
 
             </LinearLayout>
 
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="92dp" />
@@ -70,44 +69,90 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:gravity="center"
+                    android:id="@+id/seleted_minText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
-                    android:text="선택된 단어:"/>
+                    android:layout_weight="1"
+                    android:text="00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display4" />
+
                 <TextView
-                    android:id="@+id/selectedText"
+                    android:id="@+id/textView8"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="30dp"
-                    android:text=""/>
+                    android:layout_weight="1"
+                    android:text=":"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display4" />
+
+                <TextView
+                    android:id="@+id/secondText"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display4" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_marginTop="20dp"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <Spinner
-                    android:id="@+id/spinner"
+                <LinearLayout
+                    android:id="@+id/setting"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </Spinner>
-            </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="241dp" />
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="타이머 선택"
+                        android:minHeight="48dp" />
 
-            <Button
-                android:id="@+id/Btn_gameStart"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:text="@string/Btn_gameStart"
-                tools:ignore="DuplicateSpeakableTextCheck" />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="106dp" />
+
+                    <Button
+                        android:id="@+id/countdown_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:text="@string/Btn_gameStart"
+                        tools:ignore="DuplicateSpeakableTextCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/timer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/stop_btn2"
+                        android:layout_width="match_parent"
+                        android:layout_height="89dp"
+                        android:layout_marginTop="185dp"
+                        android:text="일시정지" />
+
+                    <Button
+                        android:id="@+id/cancel_btn2"
+                        android:layout_width="match_parent"
+                        android:layout_height="77dp"
+                        android:text="취소" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -16,9 +16,6 @@
             android:name=".WaterAfterStati"
             android:exported="false" />
         <activity
-            android:name=".WaterStopWatchStati"
-            android:exported="false" />
-        <activity
             android:name=".WaterPower"
             android:exported="false" />
         <activity

@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.oneco.test.TestActivity;
+import com.project.oneco.test.TimerTest;
 
 public class MainHome extends AppCompatActivity {
 
@@ -26,7 +27,7 @@ public class MainHome extends AppCompatActivity {
         goto_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TestActivity.class);
+                Intent intent = new Intent(getApplicationContext(), TimerTest.class);
                 // todo: OnEcoApplication에 물 사용 유형(샤워, 설거지, 기타 등등...)을 저장
                 startActivity(intent);
             }
