@@ -34,6 +34,9 @@
             android:name=".WriteWater"
             android:exported="false" />
         <activity
+            android:name=".WriteTrash"
+            android:exported="false" />
+        <activity
             android:name=".MainHome"
             android:exported="true" >
             <intent-filter>
