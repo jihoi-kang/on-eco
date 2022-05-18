@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +28,17 @@ public class WriteWater extends AppCompatActivity {
             }
         });
 
+        // 홈 화면으로 넘어가기
+        TextView title_ONECO = findViewById(R.id.title_ONECO);
+        title_ONECO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainHome.class);
+                startActivity(intent);
+            }
+        });
+
+        // 통계 화면으로 넘어가기
         ImageButton Wstatistic = findViewById(R.id.Wstatistic);
         Wstatistic.setOnClickListener(new View.OnClickListener() {
             @Override

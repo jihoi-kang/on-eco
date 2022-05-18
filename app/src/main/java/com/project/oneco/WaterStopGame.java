@@ -99,18 +99,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         });
 
 
-        // 물 사용 통계 화면 넘어가기
-        // todo: 통계화면 넘어갈 때 물 vs 쓰레기 중 먼저 보여주는 그래프가 다르도록 구현
-        ImageButton Wstatistic = findViewById(R.id.Wstatistic);
-        Wstatistic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Statistic.class);
-                startActivity(intent);
-            }
-        });
-
-        // 게임 후 물 사용 통계 화면 넘어가기
+        // 완료버튼 누르면 물 사용 통계 화면 넘어가기
         // todo: 통계화면 넘어갈 때 물 vs 쓰레기 중 먼저 보여주는 그래프가 다르도록 구현
         Btn_finish_game.setOnClickListener(new View.OnClickListener() {
             @Override
