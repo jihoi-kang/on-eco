@@ -77,7 +77,6 @@ public class TestActivity extends AppCompatActivity {
             Button Wmiddle = findViewById(R.id.Wmiddle);
             Button Wweakness = findViewById(R.id.Wweakness);
 
-            // todo: 일시정지 후 계속 기능 구현
             Wstrenth.setOnClickListener(listener);
             Wmiddle.setOnClickListener(listener);
             Wweakness.setOnClickListener(listener);
@@ -213,7 +212,7 @@ public class TestActivity extends AppCompatActivity {
                     // 데이터를 전역변수의 dbList로 저장한다.
                     dbList.add(db);
 
-                    timerSec++;
+                    timerSec += 1000;
 
                     setSec();
                 }
@@ -228,7 +227,7 @@ public class TestActivity extends AppCompatActivity {
             Runnable updater = new Runnable() {
                 public void run() {
                     // 여기서부터는 main(UI) thread를 활용한다.
-                    tvSec.setText(timerSec + "초");
+                    tvSec.setText(getUITime(timerSec));
                 }
             };
             handler.post(updater);

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -19,6 +20,7 @@ import android.widget.Toast;
 public class WaterStopWatch extends AppCompatActivity {
 
     private TextView countup_text; // 타이머 현황
+    private final Handler handler = new Handler();
 
     private Button Btn_start_ST;
     private Button Btn_stop_ST;
@@ -32,8 +34,6 @@ public class WaterStopWatch extends AppCompatActivity {
     private boolean firstState;     // 처음인지 아닌지
     private boolean start_already;
 
-    private long time = 0;
-
     LinearLayout setting;    // 셋팅 화면
     LinearLayout timeup;      // 타이머 화면
 
@@ -41,7 +41,7 @@ public class WaterStopWatch extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_water_stop_game);
+        setContentView(R.layout.activity_water_stop_watch);
 
 
         countup_text = findViewById(R.id.countup_text);
@@ -79,7 +79,7 @@ public class WaterStopWatch extends AppCompatActivity {
                             timeup.setVisibility(View.GONE);        // 타이머 사라짐
                             firstState = true;
                             stopTimer();
-                            updateTimer();
+                            //updateTimer();
                             start_already = false;
                             countup_text.setText("00:00");
                         }
@@ -135,7 +135,6 @@ public class WaterStopWatch extends AppCompatActivity {
                 start_already = true;
             }
         });
-        updateTimer();
     }
 
     // 타이머 상태에 따른 시작 & 정지
@@ -160,6 +159,10 @@ public class WaterStopWatch extends AppCompatActivity {
             @Override
             public void run() {
                 Log.d("jay", "Timer start: " + timerSec); // 로그 찍기
+
+                timerSec += 1000;
+
+                setSec();
             }
         };
         Timer CountUpTimer = new Timer();  // Timer는 안드로이드 클래스
@@ -170,15 +173,27 @@ public class WaterStopWatch extends AppCompatActivity {
         firstState = false;
     }
 
+    // Time up UI 변경 메서드
+    private void setSec() {
+        Runnable updater = new Runnable() {
+            public void run() {
+                // 여기서부터는 main(UI) thread를 활용한다.
+                countup_text.setText(getUITime(timerSec));
+            }
+        };
+        handler.post(updater);
+    }
+
     // 타이머 정지
     private void stopTimer() {
         countUpTimer.cancel();
+        second.cancel();
         timerRunning = false;
         Btn_stop_ST.setText("계속");
     }
 
     // 시간 업데이트
-    private void updateTimer() {
+    private String getUITime(long time) {
         int one_day = 1000 * 60 * 60 * 24;
         int one_hour = 1000 * 60 * 60;
         int one_min = 1000 * 60;
@@ -202,10 +217,7 @@ public class WaterStopWatch extends AppCompatActivity {
         if (seconds < 10) timeLeftText += "0";
         timeLeftText += seconds;
 
-        Log.d("tag", " timeLeftText: " + timeLeftText);
-
-        countup_text.setText(timeLeftText);
-
+        return timeLeftText;
     }
 }
 
