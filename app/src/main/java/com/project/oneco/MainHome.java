@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.oneco.test.TestActivity;
-import com.project.oneco.test.TimerTest;
 
 public class MainHome extends AppCompatActivity {
 
