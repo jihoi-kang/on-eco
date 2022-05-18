@@ -70,7 +70,7 @@
                 app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
 
             <TextView
-                android:id="@+id/spended_AllT"
+                android:id="@+id/countup_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -106,14 +106,10 @@
                         android:text="@string/Btn_start_TimerW"
                         tools:ignore="DuplicateClickableBoundsCheck" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
-
                 <LinearLayout
-                    android:id="@+id/timer"
+                    android:id="@+id/timeup"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -126,15 +122,18 @@
                         android:id="@+id/Btn_stop_ST"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:text="중지" />
+                        android:text="일시 정지" />
 
                     <Button
                         android:id="@+id/Btn_finish_ST"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:layout_gravity="bottom"
-                        android:text="완료" />
+                        android:text="완료"
+                        tools:ignore="DuplicateClickableBoundsCheck" />
                 </LinearLayout>
+
+
             </FrameLayout>
         </LinearLayout>
     </ScrollView>

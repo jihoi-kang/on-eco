@@ -20,10 +20,7 @@ import com.project.oneco.SoundMeter;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.WaterUsage;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -80,7 +77,7 @@ public class TestActivity extends AppCompatActivity {
             Button Wmiddle = findViewById(R.id.Wmiddle);
             Button Wweakness = findViewById(R.id.Wweakness);
 
-            // todo: 나중에 일시정지 및 계속 기능 구현
+            // todo: 일시정지 후 계속 기능 구현
             Wstrenth.setOnClickListener(listener);
             Wmiddle.setOnClickListener(listener);
             Wweakness.setOnClickListener(listener);
@@ -89,6 +86,8 @@ public class TestActivity extends AppCompatActivity {
             tvSec.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Log.d("tag", "getUITime: " + getUITime(1000 * 60 * 10));
+
                     PreferenceManager manager = PreferenceManager.getInstance(TestActivity.this);
                     Gson gson = new Gson();
 
@@ -188,14 +187,14 @@ public class TestActivity extends AppCompatActivity {
                     }
                     soundMeter.start();
 
-                    // timer 시작
-                    startTimer();
+                    // timeup 시작
+                    startTimeup();
                 }
             });
         }
 
         // 타이머 시작 메서드
-        public void startTimer() {
+        public void startTimeup() {
             // 초기화 작업
             timerSec = 0;
             second = new TimerTask() {  // TimerTask는 안드로이드 클래스
@@ -213,7 +212,9 @@ public class TestActivity extends AppCompatActivity {
 
                     // 데이터를 전역변수의 dbList로 저장한다.
                     dbList.add(db);
+
                     timerSec++;
+
                     setSec();
                 }
             };
@@ -224,7 +225,6 @@ public class TestActivity extends AppCompatActivity {
 
         // UI 변경 메서드
         private void setSec() {
-            // todo: 1초, 2초, 3초, ... , 61초, 62초, 63초... 를 00:00:00 모양으로 변환
             Runnable updater = new Runnable() {
                 public void run() {
                     // 여기서부터는 main(UI) thread를 활용한다.
@@ -240,7 +240,7 @@ public class TestActivity extends AppCompatActivity {
                     TextView usedWater = findViewById(R.id.usedWater);
                     usedWater.setText("사용한 물의 양 : " + usedW + "ml");
 
-                    TextView spended_AllT = findViewById(R.id.spended_AllT);
+                    TextView spended_AllT = findViewById(R.id.countup_text);
                     spended_AllT.setText("총 소요 시간 : " + timerSec + "초");
 
                     TextView spended_RealT = findViewById(R.id.spended_RealT);
@@ -275,34 +275,61 @@ public class TestActivity extends AppCompatActivity {
         }
 
 
-        private void test() {
-            // 배열 추가할 때
-            dbList.add(1.0f);
-            dbList.add(2.5f);
-            dbList.add(3.5f);
-            dbList.add(4.5f);
-            // 배열값 가져 올 때
-//                dbList.get(0); // 1.3f
-//                dbList.get(1); // 2.7f
-            // 배열 초기화
-//                dbList.clear();
-            // 반복문
-            float total = 0f;
-            for (int i = 0; i < dbList.size(); i++) {
-                total = total + dbList.get(i);
-                // 0 + 1.0f = 1.0f
-                // 1.0f + 2.5f = 3.5f
-                // 3.5f + 3.5f = 7f
-                // 7f + 4.5f = 11.5f
-            }
-            float average = total / dbList.size();
-            for (int i = 0; i < dbList.size(); i++) {
-                if (dbList.get(i) > average) {
-                    // 물을 사용하는 중이라는 뜻
-                } else {
-                    // 물을 사용하지 않고 있다는 뜻
-                }
-            }
+//        private void test() {
+//            // 배열 추가할 때
+//            dbList.add(1.0f);
+//            dbList.add(2.5f);
+//            dbList.add(3.5f);
+//            dbList.add(4.5f);
+//            // 배열값 가져 올 때
+////                dbList.get(0); // 1.3f
+////                dbList.get(1); // 2.7f
+//            // 배열 초기화
+////                dbList.clear();
+//            // 반복문
+//            float total = 0f;
+//            for (int i = 0; i < dbList.size(); i++) {
+//                total = total + dbList.get(i);
+//                // 0 + 1.0f = 1.0f
+//                // 1.0f + 2.5f = 3.5f
+//                // 3.5f + 3.5f = 7f
+//                // 7f + 4.5f = 11.5f
+//            }
+//            float average = total / dbList.size();
+//            for (int i = 0; i < dbList.size(); i++) {
+//                if (dbList.get(i) > average) {
+//                    // 물을 사용하는 중이라는 뜻
+//                } else {
+//                    // 물을 사용하지 않고 있다는 뜻
+//                }
+//            }
+//        }
+
+        private String getUITime(long time) {
+            int one_day = 1000 * 60 * 60 * 24;
+            int one_hour = 1000 * 60 * 60;
+            int one_min = 1000 * 60;
+            int one_sec = 1000;
+
+            int hours = (int) time % one_day / one_hour;
+            int minutes = (int) time % one_hour / one_min;
+            int seconds = (int) time % one_hour % one_min / one_sec;
+
+            String timeLeftText = "";
+
+            // 분이 10보다 작으면 0이 붙는다
+            if (hours < 10) timeLeftText += "0";
+            timeLeftText += hours + ":";
+
+            // 분이 10보다 작으면 0이 붙는다
+            if (minutes < 10) timeLeftText += "0";
+            timeLeftText += minutes + ":";
+
+            // 초가 10보다 작으면 0이 붙는다
+            if (seconds < 10) timeLeftText += "0";
+            timeLeftText += seconds;
+
+            return timeLeftText;
         }
 
 

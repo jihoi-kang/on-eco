@@ -25,4 +25,10 @@ public class WaterAfterStati extends AppCompatActivity {
         });
 
     }
+
+    // 뒤로 가기 버튼 막기
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }
