@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.project.oneco" >
+    package="com.project.oneco">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
@@ -11,7 +11,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.OnEco" >
+        android:theme="@style/Theme.OnEco">
+        <activity
+            android:name=".test.ListActivity"
+            android:exported="false" />
         <activity
             android:name=".WaterAfterStati"
             android:exported="false" />
@@ -34,8 +37,11 @@
             android:name=".WriteWater"
             android:exported="false" />
         <activity
+            android:name=".WriteTrash"
+            android:exported="false" />
+        <activity
             android:name=".MainHome"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
