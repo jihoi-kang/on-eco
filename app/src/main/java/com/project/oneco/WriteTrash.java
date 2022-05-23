@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+
+
 public class WriteTrash extends AppCompatActivity {
     // todo: 쓰레기 종류
     private String trashType;
@@ -43,6 +45,63 @@ public class WriteTrash extends AppCompatActivity {
             public void onClick(View view) {
                 // todo: trashType에 쓰레기 유형 저장
                 // todo: item들을 listview에 셋해준다.
+                trashType = "tissue";
+            }
+        });
+
+        Btn_disposable_cup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                trashType = "disposable_cup";
+            }
+        });
+
+        Btn_disposable_cup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                trashType = "disposable_spoon";
+            }
+        });
+
+        Btn_paper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                trashType = "paper";
+            }
+        });
+
+        Btn_plastic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                trashType = "plastic";
+            }
+        });
+
+        Btn_plastic_bag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                trashType = "plastic_bag";
+            }
+        });
+
+        Btn_can.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                trashType = "can";
+            }
+        });
+
+        Btn_empty_bottle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                trashType = "empty_bottle";
+            }
+        });
+
+        Btn_etc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                trashType = "etc";
             }
         });
 
