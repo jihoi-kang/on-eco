@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
+import com.project.oneco.OnEcoApplication;
 import com.project.oneco.R;
 import com.project.oneco.SoundMeter;
 import com.project.oneco.data.PreferenceManager;
@@ -65,6 +66,8 @@ public class TestActivity extends AppCompatActivity {
             setContentView(R.layout.activity_test);
 
             // todo: OnEcoApplication에 저장된 값을 가져옴(물 사용량의 유형)
+            // Activity간의 데이터 공유를 위한 application 가져오기
+            OnEcoApplication application = (OnEcoApplication) getApplication();
 
             checkPermission();
 
@@ -85,15 +88,20 @@ public class TestActivity extends AppCompatActivity {
             tvSec.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("tag", "getUITime: " + getUITime(1000 * 60 * 10));
+                    //Log.d("tag", "getUITime: " + getUITime(1000 * 60 * 10));
 
                     PreferenceManager manager = PreferenceManager.getInstance(TestActivity.this);
                     Gson gson = new Gson();
 
                     // data 만들기
                     WaterUsage usage = new WaterUsage();
-                    usage.setDish(3f);
+                    // todo: 측정 or 값 직접 입력하여 사용자가 사용한 값이 들어가도록
+                    usage.setTooth(3f);
                     usage.setHand(7f);
+                    usage.setFace(3f);
+                    usage.setDish(3f);
+                    usage.setShower(7f);
+                    usage.setEtc(3f);
 
                     // data를 String화 시키기
                     String json = gson.toJson(usage);
@@ -160,16 +168,22 @@ public class TestActivity extends AppCompatActivity {
                         waterUsage = gson.fromJson(data, WaterUsage.class);
                     }
 
-                    // todo: type에 따른 데이터 만들어주기
-//                    if (type.equals("hand")) {
+                    // todo: waterType에 따른 데이터 만들어주기
+//                    if (waterType.equals("toothBrush")) {
 //                        // todo: 기존에 값이 있으면 어떡해??
 //                        float hand = waterUsage.getHand();
 //                        waterUsage.setHand(hand + average);
-//                    } else if (type.equals("dish")) {
+//                    } else if (waterType.equals("handWash")) {
 //                        waterUsage.setDish(average);
-//                    } else if (type.equals("etc")) {
+//                    } else if (waterType.equals("faceWash")) {
 //                        waterUsage.setEtc(average);
-//                    }
+//                    } else if (waterType.equals("shower")) {
+////                        waterUsage.setEtc(average);
+////                    } else if (waterType.equals("dishWash")) {
+////                        waterUsage.setEtc(average);
+////                    } else if (waterType.equals("etc_water")) {
+////                        waterUsage.setEtc(average);
+////                    }
                     // todo: 데이터 저장
                     manager.putString("0508", gson.toJson(waterUsage));
                 }

@@ -10,14 +10,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#C5E0B4">
+        android:background="#C5E0B4"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_margin="10dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <ImageButton
@@ -50,54 +50,79 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="400dp"
         android:background="#C5E0B4">
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/temp_level"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:gravity="center"
-            android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:text="레벨 1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#ffffff" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/point_announce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
             android:gravity="center"
-            android:text="TextView"
-            android:layout_marginTop="95dp"/>
+            android:text="포인트를 모으면 나무가 성장해요!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#ffffff" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_launcher_background"
-            android:layout_marginTop="95dp"/>
+            android:layout_marginTop="-10dp"
+            app:srcCompat="@drawable/level2" />
 
         <TextView
             android:id="@+id/textView20"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="300dp"
+            android:background="#FFFFFF"
+            android:text=" "
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/title_condition"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="270dp"
+            android:layout_marginTop="350dp"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="달성 조건"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/title_level"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="350dp"
+            android:gravity="center"
+            android:text="레벨"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="280dp"
+            android:layout_marginRight="20dp"
+            android:background="#FFFFFF"
             android:gravity="center"
-            android:text="TextView"
+            android:text="눈송이님의 햇살은 30 밝기 입니다."
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:layout_marginLeft="170dp"/>
     </FrameLayout>
 
     <ScrollView
@@ -106,36 +131,177 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_height="90dp"
                 android:background="#D8D2D2">
 
                 <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/level1_text"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="TextView"
+                    android:text="레벨 1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+                    android:id="@+id/level1_img"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="160dp"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/level1" />
 
                 <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/level1_condition"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="270dp"
+                    android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="TextView"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:text="없음"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:id="@+id/level2_text"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="레벨 2"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/level2_img"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="160dp"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/level2" />
+
+                <TextView
+                    android:id="@+id/level2_condition"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="270dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="30 밝기"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="#D8D2D2">
+
+                <TextView
+                    android:id="@+id/level3_text"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="레벨 3"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/level3_img"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="160dp"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/level3" />
+
+                <TextView
+                    android:id="@+id/level3_condition"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="270dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="50 밝기"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:id="@+id/level4_text"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="레벨 4"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/level4_img"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="160dp"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/level4" />
+
+                <TextView
+                    android:id="@+id/level4_condition"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="270dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="70 밝기"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="#D8D2D2">
+
+                <TextView
+                    android:id="@+id/level5_text"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="레벨 5"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/level5_img"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="160dp"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/level5" />
+
+                <TextView
+                    android:id="@+id/level5_condition"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="270dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="100 밝기"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </FrameLayout>
         </LinearLayout>
     </ScrollView>

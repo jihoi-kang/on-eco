@@ -27,7 +27,6 @@ public class MainHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TestActivity.class);
-                // todo: OnEcoApplication에 물 사용 유형(샤워, 설거지, 기타 등등...)을 저장
                 startActivity(intent);
             }
         });

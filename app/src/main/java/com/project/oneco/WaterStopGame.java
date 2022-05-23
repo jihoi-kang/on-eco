@@ -237,6 +237,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         if(selected_minText.getText().toString().equals("선택하세요")){
             selected_minText.setText("00:00");
         }
+        Toast.makeText(getApplicationContext(), "제한 시간" +item[i]+ "을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
     }
 
     @Override

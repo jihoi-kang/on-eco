@@ -97,7 +97,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/Btn_toothBrush" />
+                            android:text="손 씻기" />
 
                         <Button
                             android:id="@+id/Btn_faceWash"
@@ -130,7 +130,7 @@
                             android:text="@string/Btn_dishwash" />
 
                         <Button
-                            android:id="@+id/Btn_ect"
+                            android:id="@+id/Btn_etc_water"
                             style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
