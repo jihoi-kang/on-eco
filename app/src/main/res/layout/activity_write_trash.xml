@@ -32,8 +32,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/write_trash_Btn" />
-"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <ImageButton
             android:id="@+id/Tstatistic"
@@ -149,7 +149,8 @@
                 android:text="@string/etc" />
         </LinearLayout>
 
-        <Space
+        <ListView
+            android:id="@+id/lv_list"
             android:layout_width="match_parent"
             android:layout_height="120dp" />
 
@@ -165,9 +166,16 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/user_input_TW"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:minHeight="48dp"
                 android:text="@string/Userinput_today_T" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="36dp"
+                android:text="g"
+                android:textSize="18dp" />
 
             <Button
                 android:id="@+id/button"
@@ -182,10 +190,10 @@
             android:layout_height="20dp" />
 
         <TextView
-            android:gravity="center"
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/mtitle_today_trash"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -193,9 +201,9 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="end"
             android:text="@string/real_used_trash"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:gravity="end"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
             android:id="@+id/textView9"
