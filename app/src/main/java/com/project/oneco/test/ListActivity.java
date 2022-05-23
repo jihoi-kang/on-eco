@@ -23,7 +23,7 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
     String[] paperItems = {"A4", "B4", "택배박스 1호(50cm)", "택배박스 2호(60cm)", "택배박스 3호(80cm)", "택배박스 4호(100cm)", "택배박스 5호(120cm)"};
     String[] plasticItems = {"250ml", "500ml", "1L", "2L"};
     String[] plasticBagItems = {"3L", "5L", "10L", "20L"};
-    String[] canItems = {"250ml", "355ml", "참치캔"};
+    String[] canItems = {"250ml", "355ml", "500ml", "750ml", "참치캔"};
     String[] emptyBottleItems = {"100ml", "180ml"};
 
     @Override
