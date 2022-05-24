@@ -16,6 +16,9 @@
             android:name=".test.ListActivity"
             android:exported="false" />
         <activity
+            android:name=".test.ChartTestActivity"
+            android:exported="false" />
+        <activity
             android:name=".WaterAfterStati"
             android:exported="false" />
         <activity
