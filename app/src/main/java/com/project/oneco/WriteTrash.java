@@ -39,6 +39,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     String[] plasticBagItems = {"3L", "5L", "10L", "20L"};
     String[] canItems = {"250ml", "355ml", "500ml", "750ml", "참치캔"};
     String[] emptyBottleItems = {"100ml", "180ml"};
+    String[] etcItems = {"기타"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 trashType = "disposable_spoon";
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, disposableSpoonItems);
+                lvList.setAdapter(adapter);
             }
         });
 
@@ -97,13 +100,18 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 trashType = "paper";
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, paperItems);
+                lvList.setAdapter(adapter);
             }
+
         });
 
         Btn_plastic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 trashType = "plastic";
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticItems);
+                lvList.setAdapter(adapter);
             }
         });
 
@@ -111,6 +119,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 trashType = "plastic_bag";
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticBagItems);
+                lvList.setAdapter(adapter);
             }
         });
 
@@ -118,6 +128,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 trashType = "can";
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, canItems);
+                lvList.setAdapter(adapter);
             }
         });
 
@@ -125,6 +137,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 trashType = "empty_bottle";
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, emptyBottleItems);
+                lvList.setAdapter(adapter);
             }
         });
 
@@ -132,6 +146,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 trashType = "etc";
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, etcItems);
+                lvList.setAdapter(adapter);
             }
         });
 
@@ -171,9 +187,37 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             itemName = tissueItems[position];
             // 물티슈, 각티슈 등등 에 따라 값을 넣어주는거에요(editTextView에)
             if (itemName.equals("물티슈")) {
-                currentItemWeight = 180;
+                currentItemWeight = 2;
             } else if (itemName.equals("각티슈")) {
-                currentItemWeight = 140;
+                currentItemWeight = 1;
+            } else if (itemName.equals("손 닦는 휴지")) {
+                    currentItemWeight = 2;
+            } else if (itemName.equals("두루말이 휴지")) {
+                currentItemWeight = 1;
+            }
+            etItemWeight.setText("" + currentItemWeight);
+        } else if (trashType.equals("disposable_cup")) {
+            itemName = disposableCupItems[position];
+        }
+
+        if (trashType.equals("disposable_cup")) {
+            itemName = disposableCupItems[position];
+            if (itemName.equals("종이 정수기컵")) {
+                currentItemWeight = 3;
+            } else if (itemName.equals("종이 자판기컵")) {
+                currentItemWeight = 5;
+            } else if (itemName.equals("종이 Tall 사이즈(355ml)")) {
+                currentItemWeight = 7;
+            } else if (itemName.equals("종이 Grande 사이즈(473ml)")) {
+                currentItemWeight = 9;
+            } else if (itemName.equals("종이 Venti 사이즈(591ml)")) {
+                currentItemWeight = 11;
+            } else if (itemName.equals("플라스틱 Tall 사이즈(355ml)")) {
+                currentItemWeight = 7;
+            } else if (itemName.equals("플라스틱 Grande 사이즈(473ml)")) {
+                currentItemWeight = 9;
+            } else if (itemName.equals("플라스틱 Venti 사이즈(591ml)")) {
+                currentItemWeight = 11;
             }
             etItemWeight.setText("" + currentItemWeight);
         } else if (trashType.equals("disposable_cup")) {
