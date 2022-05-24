@@ -41,17 +41,19 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     String[] emptyBottleItems = {"100ml", "180ml"};
     String[] etcItems = {"기타"};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_trash);
+
 
         // todo: listview bind & item click listener 달기(setOnItemClickListener)
         lvList = findViewById(R.id.lv_list);
         lvList.setOnItemClickListener(this);
 
         etItemWeight = findViewById(R.id.UserInput_TodayT);
-        TextView tvTodayTrash = findViewById(R.id.textView10);
+        TextView tvTodayTrash = findViewById(R.id.textView6);
 
         // todo: Button 9개 bind
         Button Btn_tissue = findViewById(R.id.Btn_tissue);
@@ -64,6 +66,37 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Button Btn_empty_bottle = findViewById(R.id.Btn_empty_bottle);
         Button Btn_etc = findViewById(R.id.Btn_etc);
         Button Btn_add = findViewById(R.id.button);
+
+
+        // 이전 버튼
+        ImageButton Btn_back = findViewById(R.id.Btn_back);
+        Btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        // 홈 화면으로 넘어가기
+        TextView title_ONECO = findViewById(R.id.title_ONECO);
+        title_ONECO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainHome.class);
+                startActivity(intent);
+            }
+        });
+
+        // 통계 화면으로 넘어가기
+        ImageButton Wstatistic = findViewById(R.id.Wstatistic);
+        Wstatistic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Statistic.class);
+                startActivity(intent);
+            }
+        });
+
 
         // todo: Button을 눌렀을 때 trashType에 저장.(9개 모두 구현)
         Btn_tissue.setOnClickListener(new View.OnClickListener() {
@@ -159,24 +192,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
-        ImageButton Btn_back = findViewById(R.id.Btn_back);
-        Btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+    }   // end of onCreate
 
-        ImageButton Tstatistic = findViewById(R.id.Tstatistic);
-        Tstatistic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Statistic.class);
-                startActivity(intent);
-            }
-        });
-
-    }
 
     // todo: onItemClick 리스너 구현
     @Override
@@ -227,4 +244,4 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Log.d("jay", "itemName: " + itemName);
     }
 
-}
+}   // end of class

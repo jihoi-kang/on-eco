@@ -30,11 +30,14 @@ public class TestActivity extends AppCompatActivity {
     private TextView tvSec;
     private TimerTask second;
     private int timerSec = 0;
+
     private final Handler handler = new Handler();
+
     private final ArrayList<Float> dbList = new ArrayList<>();
     private final ArrayList<Float> dbUsedList = new ArrayList<>();
     private final ArrayList<Float> dbSavingList = new ArrayList<>();
     private SoundMeter soundMeter = null;
+
     private float Wpower = 80f;
     private float usedW = 0f;      // 물 사용량 = Wpower * usedWT
     private float usedWT = 0f;      // 물 사용 시간
@@ -65,7 +68,6 @@ public class TestActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_test);
 
-            // todo: OnEcoApplication에 저장된 값을 가져옴(물 사용량의 유형)
             // Activity간의 데이터 공유를 위한 application 가져오기
             OnEcoApplication application = (OnEcoApplication) getApplication();
 
@@ -95,6 +97,7 @@ public class TestActivity extends AppCompatActivity {
 
                     // data 만들기
                     WaterUsage usage = new WaterUsage();
+
                     // todo: 측정 or 값 직접 입력하여 사용자가 사용한 값이 들어가도록
                     usage.setTooth(3f);
                     usage.setHand(7f);
@@ -114,8 +117,12 @@ public class TestActivity extends AppCompatActivity {
 
                     // String을 데이터 모델로 변경
                     WaterUsage waterUsage = gson.fromJson(data, WaterUsage.class);
-                    Log.d("jay", "dish: " + waterUsage.getDish());
+                    Log.d("jay", "dish: " + waterUsage.getTooth());
                     Log.d("jay", "hand: " + waterUsage.getHand());
+                    Log.d("jay", "dish: " + waterUsage.getFace());
+                    Log.d("jay", "hand: " + waterUsage.getShower());
+                    Log.d("jay", "dish: " + waterUsage.getDish());
+                    Log.d("jay", "hand: " + waterUsage.getEtc());
                 }
             });
 
@@ -127,7 +134,7 @@ public class TestActivity extends AppCompatActivity {
                     second.cancel();
                     soundMeter.stop();
 
-                    // todo: 지금까지 모아둔 데시벨 값을 파싱한다.
+                    // 지금까지 모아둔 데시벨 값을 파싱한다.
                     float total = 0f;
                     for (int i = 0; i < dbList.size(); i++) {
                         total = total + dbList.get(i);
@@ -135,6 +142,7 @@ public class TestActivity extends AppCompatActivity {
 
                     // 평균 데시벨
                     float average = total / dbList.size();
+                    //Log.d("jay", "DB average: " + average); // 로그 찍기
 
                     for (int i = 0; i < dbList.size(); i++) {
                         if (dbList.get(i) > average) {
@@ -254,41 +262,68 @@ public class TestActivity extends AppCompatActivity {
                     usedWater.setText("사용한 물의 양 : " + usedW + "ml");
 
                     TextView spended_AllT = findViewById(R.id.countup_text);
-                    spended_AllT.setText("총 소요 시간 : " + timerSec + "초");
+                    spended_AllT.setText("총 소요 시간 : " + timerSec/1000 + "초");
 
                     TextView spended_RealT = findViewById(R.id.spended_RealT);
                     spended_RealT.setText("물 사용 시간 : " + usedWT + "초");
 
-                    TextView savingT = findViewById(R.id.savingT);
+                    TextView savingT = findViewById(R.id.no_SpendedT);
                     savingT.setText("물 절약 시간 : " + savingWT + "초");
                 }
             };
             handler.post(updater);
         }
 
-        /**
-         * 데시벨을 측정하기 위해선 RECORD_AUDIO라는 권한을 사용자로부터 받아야 합니다.
-         * RECORD_AUDIO 권한이 있는지 확인합니다.
-         */
-        private void checkPermission() {
-            TedPermission.create()
-                    .setPermissionListener(new PermissionListener() {
-                        @Override
-                        public void onPermissionGranted() {
-                            Toast.makeText(TestActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
-                        }
+        private String getUITime(long time) {
+            int one_day = 1000 * 60 * 60 * 24;
+            int one_hour = 1000 * 60 * 60;
+            int one_min = 1000 * 60;
+            int one_sec = 1000;
 
-                        @Override
-                        public void onPermissionDenied(List<String> deniedPermissions) {
-                            Toast.makeText(TestActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    }).setDeniedMessage("권한을 허용하지 않을 경우 서비스를 제대로 이용할 수 없습니다. [Setting] > [Permission]에서 권한을 확인해주세요.")
-                    .setPermissions(Manifest.permission.RECORD_AUDIO)
-                    .check();
+            int hours = (int) time % one_day / one_hour;
+            int minutes = (int) time % one_hour / one_min;
+            int seconds = (int) time % one_hour % one_min / one_sec;
+
+            String timeLeftText = "";
+
+            // 분이 10보다 작으면 0이 붙는다
+            if (hours < 10) timeLeftText += "0";
+            timeLeftText += hours + ":";
+
+            // 분이 10보다 작으면 0이 붙는다
+            if (minutes < 10) timeLeftText += "0";
+            timeLeftText += minutes + ":";
+
+            // 초가 10보다 작으면 0이 붙는다
+            if (seconds < 10) timeLeftText += "0";
+            timeLeftText += seconds;
+
+            return timeLeftText;
         }
 
+    /**
+     * 데시벨을 측정하기 위해선 RECORD_AUDIO라는 권한을 사용자로부터 받아야 합니다.
+     * RECORD_AUDIO 권한이 있는지 확인합니다.
+     */
+    private void checkPermission() {
+        TedPermission.create()
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        Toast.makeText(TestActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                    }
 
-//        private void test() {
+                    @Override
+                    public void onPermissionDenied(List<String> deniedPermissions) {
+                        Toast.makeText(TestActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }).setDeniedMessage("권한을 허용하지 않을 경우 서비스를 제대로 이용할 수 없습니다. [Setting] > [Permission]에서 권한을 확인해주세요.")
+                .setPermissions(Manifest.permission.RECORD_AUDIO)
+                .check();
+    }
+
+
+    //        private void test() {
 //            // 배열 추가할 때
 //            dbList.add(1.0f);
 //            dbList.add(2.5f);
@@ -318,32 +353,4 @@ public class TestActivity extends AppCompatActivity {
 //            }
 //        }
 
-        private String getUITime(long time) {
-            int one_day = 1000 * 60 * 60 * 24;
-            int one_hour = 1000 * 60 * 60;
-            int one_min = 1000 * 60;
-            int one_sec = 1000;
-
-            int hours = (int) time % one_day / one_hour;
-            int minutes = (int) time % one_hour / one_min;
-            int seconds = (int) time % one_hour % one_min / one_sec;
-
-            String timeLeftText = "";
-
-            // 분이 10보다 작으면 0이 붙는다
-            if (hours < 10) timeLeftText += "0";
-            timeLeftText += hours + ":";
-
-            // 분이 10보다 작으면 0이 붙는다
-            if (minutes < 10) timeLeftText += "0";
-            timeLeftText += minutes + ":";
-
-            // 초가 10보다 작으면 0이 붙는다
-            if (seconds < 10) timeLeftText += "0";
-            timeLeftText += seconds;
-
-            return timeLeftText;
-        }
-
-
-}
+}   // end of class

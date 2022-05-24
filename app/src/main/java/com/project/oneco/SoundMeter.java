@@ -8,8 +8,7 @@ import android.media.MediaRecorder;
 public class SoundMeter {
 
     /* 기능 정리
-    사용자가 시작 버튼을 누르면, 그 후부터 종료 버튼을 누를 때까지의 데시벨을 측정하여 기록하고
-     기록된 데이터를 다음과 같이 분석한다.
+    사용자가 시작 버튼을 누르면, 그 후부터 종료 버튼을 누를 때까지의 데시벨을 측정하여 기록하고, 기록된 데이터를 다음과 같이 분석한다.
         1) 평균 데시벨 => 물 사용 여부를 판가름하는 기준
         2) 평균 데시벨 이상 => 물 사용
         3) 평균 데시벨 미만 => 물 미사용
@@ -29,8 +28,8 @@ public class SoundMeter {
     public void start() {
         minSize = AudioRecord.getMinBufferSize(8000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
         ar = new AudioRecord(MediaRecorder.AudioSource.MIC, 8000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, minSize);
-            // AudioRecord 라이브러리를 import한 후, AudioRecord 클래스로 ar 객체를 생성.
-            // 안드로이드 기기 MIC에서 데시벨 값을 가져옴?
+            // AudioRecord 라이브러리를 import한 후, AudioRecord 클래스로 ar 객체를 생성
+            // 안드로이드 기기 MIC에서 데시벨 값을 가져옴
         ar.startRecording();
     }
 

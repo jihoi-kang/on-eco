@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
@@ -26,17 +26,16 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
-            android:id="@+id/title_trash"
+            android:id="@+id/title_ONECO"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/write_trash_Btn" />
-        "
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:text="ON-ECO"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <ImageButton
-            android:id="@+id/Tstatistic"
+            android:id="@+id/Wstatistic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,6 +46,16 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/subtitle_today_trash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="오늘의 쓰레기"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold" />
 
     <Space
         android:layout_width="match_parent"
@@ -202,7 +211,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:text="@string/real_used_trash"
+            android:text="0g"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
@@ -218,7 +227,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:text="@string/real_saving_trash"
+            android:text="0g"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <View

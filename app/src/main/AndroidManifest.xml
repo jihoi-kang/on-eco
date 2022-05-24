@@ -23,7 +23,9 @@
             android:exported="false" />
         <activity
             android:name=".WaterPower"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+            />
         <activity
             android:name=".test.TimerTest"
             android:exported="false" />

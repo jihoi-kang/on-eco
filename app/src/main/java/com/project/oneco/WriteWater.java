@@ -10,12 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class WriteWater extends AppCompatActivity {
+public class WriteWater extends AppCompatActivity{
     // todo: 측정 화면으로 넘어갈 때 type을 넣어줘야됨(OnEcoApplication의 변수로 사용)
-
-    // 손씻기, 샤워 등등을 누를 때마다 저장할 변수 생성(Data type: String):물 사용 종류
-    // todo:-> OnEcoApplication에 넣었는데 여기서도 또 선언해주어야하는지?
-    private String waterType;
 
     // 데이터 정의(오늘 사용한 물 사용량, 전일 대비 절약한 물 사용량)
     private String todayWater;
@@ -65,11 +61,13 @@ public class WriteWater extends AppCompatActivity {
         Btn_bef_WTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {    // Toast message : 물 사용 유형 먼저 선택하세요
-                if (waterType == null){
+                if (application.waterType == null){
                     Toast.makeText(getApplicationContext(), "사용할 물의 유형을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else{ // 물 사용량 측정 화면으로 넘어가기
                     Intent intent = new Intent(getApplicationContext(), WaterStopWatch.class);
                     startActivity(intent);
+
+                    application.waterType = null;
                 }
             }
         });
@@ -99,27 +97,27 @@ public class WriteWater extends AppCompatActivity {
                 switch (v.getId()){
 
                     case R.id.Btn_toothBrush:
-                        waterType = "toothBrush";
+                        application.waterType = "toothBrush";
                         break;
 
                     case R.id.Btn_handWash:
-                        waterType = "handWash";
+                        application.waterType = "handWash";
                         break;
 
                     case R.id.Btn_faceWash:
-                        waterType = "faceWash";
+                        application.waterType = "faceWash";
                         break;
 
                     case R.id.Btn_shower:
-                        waterType = "shower";
+                        application.waterType = "shower";
                         break;
 
                     case R.id.Btn_dishWash:
-                        waterType = "dishWash";
+                        application.waterType = "dishWash";
                         break;
 
                     case R.id.Btn_etc_water:
-                        waterType = "etc_water";
+                        application.waterType = "etc_water";
                         break;
                 }
             }

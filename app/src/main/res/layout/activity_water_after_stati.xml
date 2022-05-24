@@ -39,10 +39,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
-            android:id="@+id/savingT"
+            android:id="@+id/no_SpendedT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="물 절약 시간      : "
+            android:text="물 미사용 시간  : "
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <Space
