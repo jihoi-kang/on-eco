@@ -22,7 +22,7 @@
 
             <ImageButton
                 android:id="@+id/Btn_back"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
@@ -32,12 +32,12 @@
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <TextView
-                android:id="@+id/subtitle_mypage"
+                android:id="@+id/title_ONECO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="마이페이지"
+                android:text="ON-ECO"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <Space
@@ -46,6 +46,17 @@
                 android:layout_weight="1" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/subtitle_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="마이페이지"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <FrameLayout

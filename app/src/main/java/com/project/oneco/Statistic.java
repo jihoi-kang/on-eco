@@ -19,20 +19,15 @@ import com.project.oneco.test.TestActivity;
 
 public class Statistic extends AppCompatActivity {
     final int DIALOG_DATE = 1;
+    OnEcoApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // todo: UI 화면 만들기(activity_statistic.xml), 그래프 제외(다음주 수업때 알려드릴게요~)
         setContentView(R.layout.activity_statistic);
 
-//        // 모든 class에서 참조할 수 있는 변수 선언
-//        OnEcoApplication application = (OnEcoApplication) getApplication();
-//        int number = application.number;
-//        int count = application.count;
-//
-//        Log.d("jay", "Statistic number: " + number);
-//        Log.d("jay", "Statistic count: " + count);
+        // 모든 class에서 참조할 수 있는 변수 선언
+        application = (OnEcoApplication) getApplication();
 
         Button Btn_graph_trash = findViewById(R.id.Btn_graph_trash);
         Button Btn_graph_water = findViewById(R.id.Btn_graph_water);
@@ -47,7 +42,19 @@ public class Statistic extends AppCompatActivity {
         Btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                switch (application.active_activity) {
+                    case "mainHome":
+                        Intent intent = new Intent(getApplicationContext(), MainHome.class);
+                        startActivity(intent);
+                        application.active_activity = null;
+                        break;
+                    case "waterAfterStati":
+                        Intent intent2 = new Intent(getApplicationContext(), WriteWater.class);
+                        startActivity(intent2);
+                        break;
+                    default: onBackPressed();
+                        break;
+                }
             }
         });
 

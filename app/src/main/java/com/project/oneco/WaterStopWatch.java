@@ -36,9 +36,11 @@ public class WaterStopWatch extends AppCompatActivity {
     private SoundMeter soundMeter = null;
     // todo:checkPermission class를 참조하여 객체를 만든 후 사용하고 싶은데 잘 안됨..
     //private CheckPermission checkPermission = null;
-    private final ArrayList<Float> dbList = new ArrayList<>();
-    private final ArrayList<Float> dbUsedList = new ArrayList<>();
-    private final ArrayList<Float> dbSavingList = new ArrayList<>();
+
+    // todo:왜 final인지?
+    private ArrayList<Float> dbList = new ArrayList<>();
+    private ArrayList<Float> dbUsedList = new ArrayList<>();
+    private ArrayList<Float> dbNoUsedList = new ArrayList<>();
 
     private TextView countup_text; // 타이머 현황
     private final Handler handler = new Handler();
@@ -63,11 +65,12 @@ public class WaterStopWatch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water_stop_watch);
 
+
         // Activity간의 데이터 공유를 위한 application 가져오기1-2
         application = (OnEcoApplication) getApplication();
 
-//        // todo: WaterPower 화면 popup으로 띄우기
-//        startActivity(new Intent(this, WaterPower.class));
+        // WaterPower 팝업 띄우기
+        startActivity(new Intent(this, WaterPower.class));
 
         countup_text = findViewById(R.id.countup_text);
         Btn_start_ST = findViewById(R.id.Btn_start_ST);
@@ -100,15 +103,12 @@ public class WaterStopWatch extends AppCompatActivity {
                     dlg_sure_out.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int which) {
-                            firstState = false;
-                            startStop();
-
-                            //todo: 1초 텀 없이 바로 올라가는 문제 해결 필요
+                            //firstState = false;
+                            //1초 텀 없이 바로 올라가는 문제 해결 필요
+                            //startStop();  바로 시작하는 게 아니라 사용자가 시작하기 위해서 없앰
                             Toast.makeText(WaterStopWatch.this, "계속합니다.", Toast.LENGTH_SHORT).show();
                         }
                     });
-
-                    // todo: "네" 버튼 누르고 다시 시작하면 동작이 안되는 문제
                     dlg_sure_out.setNegativeButton("네", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -124,12 +124,23 @@ public class WaterStopWatch extends AppCompatActivity {
                             application.timerSec = 0;
                             application.RtimerSec = 0;
                             soundMeter = null;
+                            dbList = new ArrayList<>();
+                            dbUsedList = new ArrayList<>();
+                            dbNoUsedList = new ArrayList<>();
+                            // 수도꼭지, 수압 초기화
+                            application.Wtap = "null";
+                            application.Wpower = 0f;
+
                             setSec();
                         }
                     });
                     dlg_sure_out.show();
                 } else {
                     onBackPressed();
+
+                    // 수도꼭지, 수압 초기화
+                    application.Wtap = "null";
+                    application.Wpower = 0f;
                 }
             }
         });
@@ -159,12 +170,12 @@ public class WaterStopWatch extends AppCompatActivity {
                         dbUsedList.add(dbList.get(i));
                     } else {
                         // 물을 사용하지 않고 있다는 뜻
-                        dbSavingList.add(dbList.get(i));
+                        dbNoUsedList.add(dbList.get(i));
                     }
                 }
 
                 application.usedWT = dbUsedList.size();
-                application.noUsedWT = dbSavingList.size();
+                application.noUsedWT = dbNoUsedList.size();
 
                 application.usedW = application.usedWT * application.Wpower;
 
@@ -172,7 +183,6 @@ public class WaterStopWatch extends AppCompatActivity {
                 // 물 사용 통계 화면 넘어가기
                 Intent intent = new Intent(getApplicationContext(), WaterAfterStati.class);
                 startActivity(intent);
-
             }
         });
 
@@ -223,7 +233,7 @@ public class WaterStopWatch extends AppCompatActivity {
 
         // 데시벨을 얻어오기 위해 sound meter 시작
         if (soundMeter == null) {
-            return;
+            soundMeter = new SoundMeter();
         }
         soundMeter.start();
 

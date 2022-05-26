@@ -2,12 +2,16 @@ package com.project.oneco;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.project.oneco.test.DialogTest;
 
 public class WaterAfterStati extends AppCompatActivity {
 
@@ -21,7 +25,6 @@ public class WaterAfterStati extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water_after_stati);
 
-
         // Activity간의 데이터 공유를 위한 application 가져오기
         application = (OnEcoApplication) getApplication();
 
@@ -33,13 +36,20 @@ public class WaterAfterStati extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Statistic.class);
                 startActivity(intent);
+
+                application.active_activity = "waterAfterStati";
             }
         });
 
         setResult();
 
+        // 초기화
+        application.Wtap = "null";
+        application.Wpower = 0f;
+
 
     } // end of onCreate
+
 
     // todo:00분 00초로 바꾸기
     public void setResult() {

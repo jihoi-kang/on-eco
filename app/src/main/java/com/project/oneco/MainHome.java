@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.project.oneco.test.TestActivity;
 
@@ -14,10 +15,13 @@ public class MainHome extends AppCompatActivity {
 
     // todo: layout 공통 => 필요한 곳에 ScrollView 달아주기
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
+
+        onBackPressed();
 
         // Activity간의 데이터 공유를 위한 application 가져오기
         OnEcoApplication application = (OnEcoApplication) getApplication();
@@ -26,7 +30,7 @@ public class MainHome extends AppCompatActivity {
         goto_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TestActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MyPage.class);
                 startActivity(intent);
             }
         });
@@ -44,6 +48,9 @@ public class MainHome extends AppCompatActivity {
         goto_write_water.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                application.active_activity = "mainHome";
+
                 Intent intent = new Intent(getApplicationContext(), WriteWater.class);
                 startActivity(intent);
             }
@@ -53,7 +60,8 @@ public class MainHome extends AppCompatActivity {
         goto_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                application.number = 13;
+
+                application.active_activity = "mainHome";
 
                 Intent intent = new Intent(getApplicationContext(), Statistic.class);
                 startActivity(intent);
@@ -68,5 +76,11 @@ public class MainHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }   // end of onCreate
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
-}
+
+}   // end of class

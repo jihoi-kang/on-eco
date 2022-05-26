@@ -13,6 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnEco">
         <activity
+            android:name=".test.GetDialogTest"
+            android:exported="false" />
+        <activity
+            android:name=".test.DialogTest"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity
             android:name=".test.ListActivity"
             android:exported="false" />
         <activity
@@ -24,8 +31,7 @@
         <activity
             android:name=".WaterPower"
             android:exported="false"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
-            />
+            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name=".test.TimerTest"
             android:exported="false" />
@@ -45,6 +51,10 @@
             android:name=".WriteTrash"
             android:exported="false" />
         <activity
+            android:name=".WaterStopGame"
+            android:exported="false" />
+        <activity android:name=".test.TestActivity" />
+        <activity
             android:name=".MainHome"
             android:exported="true">
             <intent-filter>
@@ -53,10 +63,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".WaterStopGame"
-            android:exported="false" />
-        <activity android:name=".test.TestActivity" />
     </application>
 
 </manifest>

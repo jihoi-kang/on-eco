@@ -33,9 +33,9 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
     Spinner spinner;
     String[] item;
 
-    private final ArrayList<Float> dbList = new ArrayList<>();
-    private final ArrayList<Float> dbUsedList = new ArrayList<>();
-    private final ArrayList<Float> dbSavingList = new ArrayList<>();
+    private ArrayList<Float> dbList = new ArrayList<>();
+    private ArrayList<Float> dbUsedList = new ArrayList<>();
+    private ArrayList<Float> dbNoUsedList = new ArrayList<>();
     private SoundMeter soundMeter = null;
 
     private TextView selected_minText; // 타이머 현황
@@ -66,6 +66,9 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
         // Activity간의 데이터 공유를 위한 application 가져오기1-2
         application = (OnEcoApplication) getApplication();
+
+        // WaterPower 팝업 띄우기
+        startActivity(new Intent(this, WaterPower.class));
 
         spinner = (Spinner) findViewById(R.id.spinner);
 
@@ -99,7 +102,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
                     dlg_sure_out.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int which) {
-                            startStop();
+                            //startStop();
                             Toast.makeText(WaterStopGame.this, "계속합니다.", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -109,14 +112,24 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
                             setting.setVisibility(View.VISIBLE); // 설정 생김
                             timer.setVisibility(View.GONE);        // 타이머 사라짐
                             firstState = true;
-                            updateTimer();
                             start_already = false;
                             selected_minText.setText("00:00");
+                            soundMeter = null;
+                            dbList = new ArrayList<>();
+                            dbUsedList = new ArrayList<>();
+                            dbNoUsedList = new ArrayList<>();
+                            // 수도꼭지, 수압 초기화
+                            application.Wtap = "null";
+                            application.Wpower = 0f;
                         }
                     });
                     dlg_sure_out.show();
                 } else {
                     onBackPressed();
+
+                    // 수도꼭지, 수압 초기화
+                    application.Wtap = "null";
+                    application.Wpower = 0f;
                 }
             }
         });
@@ -145,12 +158,12 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
                         dbUsedList.add(dbList.get(i));
                     } else {
                         // 물을 사용하지 않고 있다는 뜻
-                        dbSavingList.add(dbList.get(i));
+                        dbNoUsedList.add(dbList.get(i));
                     }
                 }
 
                 application.usedWT = dbUsedList.size();
-                application.noUsedWT = dbSavingList.size();
+                application.noUsedWT = dbNoUsedList.size();
 
                 application.usedW = application.usedWT * application.Wpower;
 
@@ -169,7 +182,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 //        String m10 = "10:00";
 //        String m15 = "15:00";
 
-        item = new String[]{"선택하세요", "03:00", "05:00", "07:00", "10:00", "15:00"};
+        item = new String[]{"선택하세요", "01:00", "03:00", "05:00", "07:00", "10:00", "15:00"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -181,12 +194,15 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firstState = true;
-                start_already = true;
-                setting.setVisibility(View.GONE);    // 설정 사라짐
-                timer.setVisibility(View.VISIBLE);     // 타이머 생김
-                startStop();
-
+                if(selected_minText.getText().toString().equals("00:00")){
+                    Toast.makeText(WaterStopGame.this,"먼저 샤워시간을 선택해주세요", Toast.LENGTH_SHORT).show();
+                } else{
+                    firstState = true;
+                    start_already = true;
+                    setting.setVisibility(View.GONE);    // 설정 사라짐
+                    timer.setVisibility(View.VISIBLE);     // 타이머 생김
+                    startStop();
+                }
             }
         });
 
@@ -230,7 +246,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
         // 데시벨을 얻어오기 위해 sound meter 시작
         if (soundMeter == null) {
-            return;
+            soundMeter = new SoundMeter();
         }
         soundMeter.start();
 
@@ -258,6 +274,15 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
             @Override
             public void onFinish() {
+                // todo: Time Up되었을 때 기록 중지, 통계화면으로 넘어가기 안됨..
+
+                soundMeter.stop();
+                countDownTimer.cancel();
+                timerRunning = false;
+
+                // 통계화면으로 넘어가기
+                Intent intent = new Intent(getApplicationContext(), WaterAfterStati.class);
+                startActivity(intent);
             }
         }.start();
 
@@ -265,16 +290,6 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         timerRunning = true;
         firstState = false;
 
-//        // todo: Time Up되었을 때 기록 중지, 통계화면으로 넘어가기
-//        if(tempTime == 0){
-//            soundMeter.stop();
-//            countDownTimer.cancel();
-//            timerRunning = false;
-//
-//            // 통계화면으로 넘어가기
-//            Intent intent = new Intent(getApplicationContext(), WaterAfterStati.class);
-//            startActivity(intent);
-//        }
     }
 
     // 타이머 정지
@@ -331,7 +346,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        selected_minText.setText("");
+        selected_minText.setText("00:00");
     }
 
     /**

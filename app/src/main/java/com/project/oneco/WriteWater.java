@@ -26,13 +26,18 @@ public class WriteWater extends AppCompatActivity{
         // Activity간의 데이터 공유를 위한 application 가져오기
         OnEcoApplication application = (OnEcoApplication) getApplication();
 
+        if (application.active_activity == "waterAfterStati") {
+            onBackPressed();
+        }
 
         // 이전 버튼
         ImageButton Btn_back = findViewById(R.id.Btn_back);
         Btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(getApplicationContext(), MainHome.class);
+                startActivity(intent);
+                application.active_activity = null;
             }
         });
 
@@ -53,6 +58,8 @@ public class WriteWater extends AppCompatActivity{
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Statistic.class);
                 startActivity(intent);
+
+                application.active_activity = "statistic";
             }
         });
 
@@ -132,4 +139,11 @@ public class WriteWater extends AppCompatActivity{
 
 
     } // end of onClick
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
+
 } // end of class

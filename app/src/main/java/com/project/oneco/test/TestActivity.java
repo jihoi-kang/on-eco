@@ -98,7 +98,7 @@ public class TestActivity extends AppCompatActivity {
                     // data 만들기
                     WaterUsage usage = new WaterUsage();
 
-                    // todo: 측정 or 값 직접 입력하여 사용자가 사용한 값이 들어가도록
+                    // todo: 측정값 or 사용자가 직접 입력한 값이 들어가도록
                     usage.setTooth(3f);
                     usage.setHand(7f);
                     usage.setFace(3f);
