@@ -187,7 +187,7 @@
                 android:textSize="18dp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/Btn_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/input_TW"
@@ -199,7 +199,7 @@
             android:layout_height="20dp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/subtitle_today_water_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -207,7 +207,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/TXT_today_water_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -215,7 +215,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/subtitle_saving_water"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -223,7 +223,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/TXT_saving_water"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"

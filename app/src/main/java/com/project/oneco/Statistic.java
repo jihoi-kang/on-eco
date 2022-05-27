@@ -95,6 +95,8 @@ public class Statistic extends AppCompatActivity {
             }
         });
 
+        Text_pickDate.setText(application.todayDate);
+
         Text_pickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,10 +113,7 @@ public class Statistic extends AppCompatActivity {
                 DatePickerDialog dpd = new DatePickerDialog(Statistic.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         TextView Text_pickDate = findViewById(R.id.Text_pickDate);
-                        Text_pickDate.setText(year + "년 " + (monthOfYear + 1) + "월 " + dayOfMonth + "일");
-//                        Toast.makeText(getApplicationContext(),
-//                                year + "년 " + (monthOfYear + 1) + "월 " + dayOfMonth + "일 을 선택했습니다",
-//                                Toast.LENGTH_SHORT).show();
+                        Text_pickDate.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + "(" + ")");
                     }
                 },
                 2022, 05, 18);

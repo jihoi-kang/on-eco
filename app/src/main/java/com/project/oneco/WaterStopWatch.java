@@ -24,9 +24,7 @@ import android.widget.Toast;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
-//import com.project.oneco.test.WaterAfterStati;
 
-// todo: 뒤로가기 버튼 누를 때 상황에 따라 다르게 구현
 
 public class WaterStopWatch extends AppCompatActivity {
 

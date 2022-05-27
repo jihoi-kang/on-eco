@@ -1,7 +1,6 @@
 package com.project.oneco;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,7 +52,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         lvList.setOnItemClickListener(this);
 
         etItemWeight = findViewById(R.id.UserInput_TodayT);
-        TextView tvTodayTrash = findViewById(R.id.textView6);
+        TextView tvTodayTrash = findViewById(R.id.TXT_today_water_input);
 
         // todo: Button 9개 bind
         Button Btn_tissue = findViewById(R.id.Btn_tissue);
@@ -65,7 +64,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Button Btn_can = findViewById(R.id.Btn_can);
         Button Btn_empty_bottle = findViewById(R.id.Btn_empty_bottle);
         Button Btn_etc = findViewById(R.id.Btn_etc);
-        Button Btn_add = findViewById(R.id.button);
+        Button Btn_add = findViewById(R.id.Btn_add);
 
 
         // 이전 버튼

@@ -274,8 +274,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
             @Override
             public void onFinish() {
-                // todo: Time Up되었을 때 기록 중지, 통계화면으로 넘어가기 안됨..
-
+                // Time Up되었을 때 타이머 중지
                 soundMeter.stop();
                 countDownTimer.cancel();
                 timerRunning = false;

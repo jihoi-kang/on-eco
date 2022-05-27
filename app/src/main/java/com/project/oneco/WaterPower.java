@@ -9,7 +9,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -58,6 +60,9 @@ public class WaterPower extends AppCompatActivity {
         LinearLayout waterTab = findViewById(R.id.waterTap);
         LinearLayout waterPower = findViewById(R.id.waterPower);
 
+        ImageButton btn_backToWriteWater = findViewById(R.id.btn_backToWriteWater);
+        TextView Txt_waterTap = findViewById(R.id.Txt_waterTap);
+
         Button Wbath = findViewById(R.id.Wbath);
         Button Wsink = findViewById(R.id.Wsink);
         Button WshowerHead = findViewById(R.id.WshowerHead);
@@ -79,6 +84,14 @@ public class WaterPower extends AppCompatActivity {
         Wmiddle.setOnClickListener(listener);
         Wweakness.setOnClickListener(listener);
 
+        // <- 버튼 누르면
+        btn_backToWriteWater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WriteWater.class);
+                startActivity(intent);
+            }
+        });
 
         // 다음 버튼 누르면
         next_choice.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +100,7 @@ public class WaterPower extends AppCompatActivity {
                 if(application.Wtap != "null"){
                     waterTab.setVisibility(View.GONE);
                     waterPower.setVisibility(View.VISIBLE);
+                    Txt_waterTap.setText("사용할 물의 세기를 선택해주세요");
                 } else{
                     Toast.makeText(getApplicationContext(), "사용할 수도꼭지를 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 }
@@ -99,6 +113,7 @@ public class WaterPower extends AppCompatActivity {
             public void onClick(View view) {
                 waterTab.setVisibility(View.VISIBLE);
                 waterPower.setVisibility(View.GONE);
+                Txt_waterTap.setText("사용할 수도꼭지를 선택해주세요");
 
                 application.Wtap = "null";
                 application.Wpower = 0f;

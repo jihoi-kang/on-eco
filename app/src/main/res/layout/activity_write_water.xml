@@ -176,18 +176,16 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/UserInput_TodayW"
+                        android:id="@+id/UserInputWater"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:autofillHints=""
                         android:ems="10"
-                        android:hint="@string/user_input_TW"
-                        android:inputType="textPersonName"
-                        android:minHeight="48dp"
-                        android:text="@string/Userinput_today_W" />
+                        android:hint="사용한 물의 양을 입력하세요"
+                        android:inputType="number"
+                        android:minHeight="48dp" />
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/Btn_add"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/input_TW"
@@ -199,7 +197,7 @@
                     android:layout_height="20dp" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/subtitle_today_water_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -207,15 +205,15 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/TXT_today_water_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/real_used_water"
+                    android:text="ml"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:gravity="end"/>
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/subtitle_saving_water"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -223,11 +221,11 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/TXT_saving_water"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:text="@string/real_saving_water"
+                    android:text="ml"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             </LinearLayout>
