@@ -35,8 +35,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     ArrayAdapter<String> adapter;
 
     // todo: listView에 들어갈 item들 정의(9개)
-    String[] tissueItems = { "물티슈", "각티슈", "손 닦는 휴지", "두루말이 휴지" };
-    String[] disposableCupItems = { "종이 정수기컵", "종이 자판기컵", "종이 Tall 사이즈(355ml)", "종이 Grande 사이즈(473ml)", "종이 Venti 사이즈(591ml)",
+    String[] tissueItems = {"물티슈", "각티슈", "손 닦는 휴지", "두루말이 휴지"};
+    String[] disposableCupItems = {"종이 정수기컵", "종이 자판기컵", "종이 Tall 사이즈(355ml)", "종이 Grande 사이즈(473ml)", "종이 Venti 사이즈(591ml)",
             "플라스틱 Tall 사이즈(355ml)", "플라스틱 Grande 사이즈(473ml)", "플라스틱 Venti 사이즈(591ml)"};
     String[] disposableSpoonItems = {"일회용 수저", "일회용 그릇"};
     String[] paperItems = {"A4", "B4", "택배박스 1호(50cm)", "택배박스 2호(60cm)", "택배박스 3호(80cm)", "택배박스 4호(100cm)", "택배박스 5호(120cm)"};
@@ -109,6 +109,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Btn_tissue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("jay", "passed");
                 // todo: trashType에 쓰레기 유형 저장
                 trashType = "tissue";
                 // todo: item들을 riteTrash 셋해준다.
@@ -194,66 +195,68 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // todo:
 
+                // todo: update UI
                 tvTodayTrash.setText(currentItemWeight + "g");
             }
         });
 
 
-
-        Button.OnClickListener onClickListener = new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()){
-
-                    case R.id.Btn_tissue:
-                        application.trashType = "tissue";
-                        break;
-
-                    case R.id.Btn_disposable_cup:
-                        application.trashType = "disposable cup";
-                        break;
-
-                    case R.id.Btn_disposable_spoon:
-                        application.trashType = "disposable spoon";
-                        break;
-
-                    case R.id.Btn_paper:
-                        application.trashType = "paper";
-                        break;
-
-                    case R.id.Btn_plastic:
-                        application.trashType = "plastic";
-                        break;
-
-                    case R.id.Btn_plastic_bag:
-                        application.trashType = "plastic bag";
-                        break;
-
-                    case R.id.Btn_can:
-                        application.trashType = "can";
-                        break;
-
-                    case R.id.Btn_empty_bottle:
-                        application.trashType = "empty bottle";
-                        break;
-
-                    case R.id.Btn_etc:
-                        application.trashType = "etc";
-                        break;
-                }
-            }
-        };
-
-        Btn_tissue.setOnClickListener(onClickListener);
-        Btn_disposable_cup.setOnClickListener(onClickListener);
-        Btn_disposable_spoon.setOnClickListener(onClickListener);
-        Btn_paper.setOnClickListener(onClickListener);
-        Btn_plastic.setOnClickListener(onClickListener);
-        Btn_plastic_bag.setOnClickListener(onClickListener);
-        Btn_can.setOnClickListener(onClickListener);
-        Btn_empty_bottle.setOnClickListener(onClickListener);
-        Btn_etc.setOnClickListener(onClickListener);
+//        Button.OnClickListener onClickListener = new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                switch (v.getId()) {
+//
+//                    case R.id.Btn_tissue:
+//                        Log.d("jay", "passed #2");
+//                        application.trashType = "tissue";
+//                        break;
+//
+//                    case R.id.Btn_disposable_cup:
+//                        application.trashType = "disposable cup";
+//                        break;
+//
+//                    case R.id.Btn_disposable_spoon:
+//                        application.trashType = "disposable spoon";
+//                        break;
+//
+//                    case R.id.Btn_paper:
+//                        application.trashType = "paper";
+//                        break;
+//
+//                    case R.id.Btn_plastic:
+//                        application.trashType = "plastic";
+//                        break;
+//
+//                    case R.id.Btn_plastic_bag:
+//                        application.trashType = "plastic bag";
+//                        break;
+//
+//                    case R.id.Btn_can:
+//                        application.trashType = "can";
+//                        break;
+//
+//                    case R.id.Btn_empty_bottle:
+//                        application.trashType = "empty bottle";
+//                        break;
+//
+//                    case R.id.Btn_etc:
+//                        application.trashType = "etc";
+//                        break;
+//                }
+//            }
+//        };
+//
+//        Btn_tissue.setOnClickListener(onClickListener);
+//        Btn_disposable_cup.setOnClickListener(onClickListener);
+//        Btn_disposable_spoon.setOnClickListener(onClickListener);
+//        Btn_paper.setOnClickListener(onClickListener);
+//        Btn_plastic.setOnClickListener(onClickListener);
+//        Btn_plastic_bag.setOnClickListener(onClickListener);
+//        Btn_can.setOnClickListener(onClickListener);
+//        Btn_empty_bottle.setOnClickListener(onClickListener);
+//        Btn_etc.setOnClickListener(onClickListener);
 
         PreferenceManager manager = PreferenceManager.getInstance(WriteTrash.this);
         Gson gson = new Gson();
@@ -295,7 +298,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     } // end of onClick
 
 
-
     // todo: onItemClick 리스너 구현
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long index) {
@@ -309,7 +311,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             } else if (itemName.equals("각티슈")) {
                 currentItemWeight = 1;
             } else if (itemName.equals("손 닦는 휴지")) {
-                    currentItemWeight = 2;
+                currentItemWeight = 2;
             } else if (itemName.equals("두루말이 휴지")) {
                 currentItemWeight = 1;
             }
@@ -448,20 +450,14 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 currentItemWeight = 10;
             } else if (itemName.equals("180ml")) {
                 currentItemWeight = 20;
-            etItemWeight.setText("" + currentItemWeight);
-        } else if (trashType.equals("etc")) {
-            itemName = etcItems[position];
+                etItemWeight.setText("" + currentItemWeight);
+            } else if (trashType.equals("etc")) {
+                itemName = etcItems[position];
+            }
+
+            // todo: 나머지 item들도 구현 해야함.
+            Log.d("jay", "itemName: " + itemName);
         }
-
-        // todo: 나머지 item들도 구현 해야함.
-        Log.d("jay", "itemName: " + itemName);
     }
-
-
-    @Override
-    public void onBackPressed(); {
-        //super.onBackPressed();
-    }
-
 
 }   // end of class
