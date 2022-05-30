@@ -13,7 +13,7 @@ import com.project.oneco.test.TestActivity;
 
 public class MainHome extends AppCompatActivity {
 
-    // todo: layout 공통 => 필요한 곳에 ScrollView 달아주기
+    // todo: layout 공통 =>        application = (OnEcoApplication) getApplication(); 필요한 곳에 ScrollView 달아주기
 
 
     @Override

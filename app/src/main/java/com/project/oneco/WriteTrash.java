@@ -13,10 +13,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.project.oneco.data.PreferenceManager;
+import com.project.oneco.data.TrashUsage;
 
 public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemClickListener {
     // todo: 쓰레기 종류
     private String trashType;
+    private OnEcoApplication application;
 
     // todo: 데이터 정의(오늘 배출한 쓰레기, 전일 대비 절약한 쓰레기)
     private String todayTrash;
@@ -46,6 +52,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_trash);
 
+        application = (OnEcoApplication) getApplication();
 
         // todo: listview bind & item click listener 달기(setOnItemClickListener)
         lvList = findViewById(R.id.lv_list);
@@ -87,15 +94,16 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         });
 
         // 통계 화면으로 넘어가기
-        ImageButton Wstatistic = findViewById(R.id.Wstatistic);
-        Wstatistic.setOnClickListener(new View.OnClickListener() {
+        ImageButton Tstatistic = findViewById(R.id.Tstatistic);
+        Tstatistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Statistic.class);
                 startActivity(intent);
+
+                application.active_activity = "statistic";
             }
         });
-
 
         // todo: Button을 눌렀을 때 trashType에 저장.(9개 모두 구현)
         Btn_tissue.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +199,101 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
-    }   // end of onCreate
+
+
+        Button.OnClickListener onClickListener = new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+
+                    case R.id.Btn_tissue:
+                        application.trashType = "tissue";
+                        break;
+
+                    case R.id.Btn_disposable_cup:
+                        application.trashType = "disposable cup";
+                        break;
+
+                    case R.id.Btn_disposable_spoon:
+                        application.trashType = "disposable spoon";
+                        break;
+
+                    case R.id.Btn_paper:
+                        application.trashType = "paper";
+                        break;
+
+                    case R.id.Btn_plastic:
+                        application.trashType = "plastic";
+                        break;
+
+                    case R.id.Btn_plastic_bag:
+                        application.trashType = "plastic bag";
+                        break;
+
+                    case R.id.Btn_can:
+                        application.trashType = "can";
+                        break;
+
+                    case R.id.Btn_empty_bottle:
+                        application.trashType = "empty bottle";
+                        break;
+
+                    case R.id.Btn_etc:
+                        application.trashType = "etc";
+                        break;
+                }
+            }
+        };
+
+        Btn_tissue.setOnClickListener(onClickListener);
+        Btn_disposable_cup.setOnClickListener(onClickListener);
+        Btn_disposable_spoon.setOnClickListener(onClickListener);
+        Btn_paper.setOnClickListener(onClickListener);
+        Btn_plastic.setOnClickListener(onClickListener);
+        Btn_plastic_bag.setOnClickListener(onClickListener);
+        Btn_can.setOnClickListener(onClickListener);
+        Btn_empty_bottle.setOnClickListener(onClickListener);
+        Btn_etc.setOnClickListener(onClickListener);
+
+        PreferenceManager manager = PreferenceManager.getInstance(WriteTrash.this);
+        Gson gson = new Gson();
+
+        TrashUsage usage = new TrashUsage();
+
+        // todo: 측정값 or 사용자가 직접 입력한 값이 들어가도록
+        usage.setTissue(1f);
+        usage.setDisposable_cup(1f);
+        usage.setDisposable_spoon(1f);
+        usage.setPaper(1f);
+        usage.setPlastic(1f);
+        usage.setPlastic_bag(1f);
+        usage.setCan(1f);
+        usage.setEmpty_bottle(1f);
+        usage.setEtc(1f);
+
+        // data를 String화 시키기
+        String json = gson.toJson(usage);
+
+        // 변환한 String 값을 SharedPreference에 저장
+        manager.putString("0508", json);
+
+        // 데이터 꺼내오기
+        String data = manager.getString("0508", "");
+
+        // String을 데이터 모델로 변경
+        TrashUsage trashUsage = gson.fromJson(data, TrashUsage.class);
+        Log.d("jay", "tissue: " + trashUsage.getTissue());
+        Log.d("jay", "disposable_cup: " + trashUsage.getDisposable_cup());
+        Log.d("jay", "disposable_spoon: " + trashUsage.getDisposable_spoon());
+        Log.d("jay", "paper: " + trashUsage.getPaper());
+        Log.d("jay", "plastic: " + trashUsage.getPlastic());
+        Log.d("jay", "plastic_bag: " + trashUsage.getPlastic_bag());
+        Log.d("jay", "can: " + trashUsage.getCan());
+        Log.d("jay", "empty_bottle: " + trashUsage.getEmpty_bottle());
+        Log.d("jay", "etc: " + trashUsage.getEtc());
+
+    } // end of onClick
+
 
 
     // todo: onItemClick 리스너 구현
@@ -236,11 +338,130 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 currentItemWeight = 11;
             }
             etItemWeight.setText("" + currentItemWeight);
-        } else if (trashType.equals("disposable_cup")) {
-            itemName = disposableCupItems[position];
+        } else if (trashType.equals("disposable_spoon")) {
+            itemName = disposableSpoonItems[position];
         }
+
+        if (trashType.equals("disposable_spoon")) {
+            itemName = disposableSpoonItems[position];
+            if (itemName.equals("일회용 수저")) {
+                currentItemWeight = 3;
+            } else if (itemName.equals("일회용 그릇")) {
+                currentItemWeight = 2;
+            }
+            etItemWeight.setText("" + currentItemWeight);
+        } else if (trashType.equals("paper")) {
+            itemName = paperItems[position];
+        }
+
+        if (trashType.equals("paper")) {
+            itemName = paperItems[position];
+            if (itemName.equals("A4")) {
+                currentItemWeight = 2;
+            } else if (itemName.equals("B4")) {
+                currentItemWeight = 3;
+            } else if (itemName.equals("택배박스 1호(50cm)")) {
+                currentItemWeight = 6;
+            } else if (itemName.equals("택배박스 2호(60cm)")) {
+                currentItemWeight = 8;
+            } else if (itemName.equals("택배박스 3호(80cm)")) {
+                currentItemWeight = 10;
+            } else if (itemName.equals("택배박스 4호(100cm)")) {
+                currentItemWeight = 12;
+            } else if (itemName.equals("택배박스 4호(120cm)")) {
+                currentItemWeight = 14;
+            }
+            etItemWeight.setText("" + currentItemWeight);
+        } else if (trashType.equals("plastic")) {
+            itemName = plasticItems[position];
+        }
+
+        if (trashType.equals("plastic")) {
+            itemName = plasticItems[position];
+            if (itemName.equals("250ml")) {
+                currentItemWeight = 2;
+            } else if (itemName.equals("500ml")) {
+                currentItemWeight = 5;
+            } else if (itemName.equals("1L")) {
+                currentItemWeight = 10;
+            } else if (itemName.equals("2L")) {
+                currentItemWeight = 20;
+            }
+            etItemWeight.setText("" + currentItemWeight);
+        } else if (trashType.equals("plastic_bag")) {
+            itemName = plasticBagItems[position];
+        }
+
+        if (trashType.equals("plastic_bag")) {
+            itemName = plasticBagItems[position];
+            if (itemName.equals("3L")) {
+                currentItemWeight = 2;
+            } else if (itemName.equals("5L")) {
+                currentItemWeight = 2;
+            } else if (itemName.equals("10L")) {
+                currentItemWeight = 5;
+            } else if (itemName.equals("20L")) {
+                currentItemWeight = 7;
+            }
+            etItemWeight.setText("" + currentItemWeight);
+        } else if (trashType.equals("can")) {
+            itemName = canItems[position];
+        }
+
+        if (trashType.equals("plastic_bag")) {
+            itemName = plasticBagItems[position];
+            if (itemName.equals("3L")) {
+                currentItemWeight = 2;
+            } else if (itemName.equals("5L")) {
+                currentItemWeight = 2;
+            } else if (itemName.equals("10L")) {
+                currentItemWeight = 5;
+            } else if (itemName.equals("20L")) {
+                currentItemWeight = 7;
+            }
+            etItemWeight.setText("" + currentItemWeight);
+        } else if (trashType.equals("can")) {
+            itemName = canItems[position];
+        }
+
+        if (trashType.equals("can")) {
+            itemName = canItems[position];
+            if (itemName.equals("250ml")) {
+                currentItemWeight = 5;
+            } else if (itemName.equals("355ml")) {
+                currentItemWeight = 7;
+            } else if (itemName.equals("500ml")) {
+                currentItemWeight = 10;
+            } else if (itemName.equals("750ml")) {
+                currentItemWeight = 13;
+            } else if (itemName.equals("참치캔")) {
+                currentItemWeight = 15;
+            }
+            etItemWeight.setText("" + currentItemWeight);
+        } else if (trashType.equals("empty_bottle")) {
+            itemName = emptyBottleItems[position];
+        }
+
+        if (trashType.equals("empty_bottle")) {
+            itemName = canItems[position];
+            if (itemName.equals("100ml")) {
+                currentItemWeight = 10;
+            } else if (itemName.equals("180ml")) {
+                currentItemWeight = 20;
+            etItemWeight.setText("" + currentItemWeight);
+        } else if (trashType.equals("etc")) {
+            itemName = etcItems[position];
+        }
+
         // todo: 나머지 item들도 구현 해야함.
         Log.d("jay", "itemName: " + itemName);
     }
+
+
+    @Override
+    public void onBackPressed(); {
+        //super.onBackPressed();
+    }
+
 
 }   // end of class
