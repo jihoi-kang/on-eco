@@ -17,6 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.oneco.test.TestActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class Statistic extends AppCompatActivity {
     final int DIALOG_DATE = 1;
     OnEcoApplication application;
@@ -112,8 +116,12 @@ public class Statistic extends AppCompatActivity {
             case DIALOG_DATE:
                 DatePickerDialog dpd = new DatePickerDialog(Statistic.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(year, monthOfYear, dayOfMonth);
+                        SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE", Locale.getDefault());
+                        String dayName = simpledateformat.format(calendar.getTime());
                         TextView Text_pickDate = findViewById(R.id.Text_pickDate);
-                        Text_pickDate.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + "(" + ")");
+                        Text_pickDate.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + "(" + dayName + ")");
                     }
                 },
                 2022, 05, 18);

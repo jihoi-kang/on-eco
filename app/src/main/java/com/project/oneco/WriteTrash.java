@@ -1,7 +1,5 @@
 package com.project.oneco;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,11 +11,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.TrashUsage;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemClickListener {
     // todo: 쓰레기 종류
@@ -46,6 +49,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     String[] emptyBottleItems = {"100ml", "180ml"};
     String[] etcItems = {"기타"};
 
+    private PreferenceManager preferenceManager;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,9 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         setContentView(R.layout.activity_write_trash);
 
         application = (OnEcoApplication) getApplication();
+        preferenceManager = PreferenceManager.getInstance(this);
+        gson = new Gson();
+
 
         // todo: listview bind & item click listener 달기(setOnItemClickListener)
         lvList = findViewById(R.id.lv_list);
@@ -195,107 +203,97 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // todo:
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat simpledateformat = new SimpleDateFormat("MMdd", Locale.getDefault());
+                String key = simpledateformat.format(calendar.getTime()); // 0530
 
-                // todo: update UI
-                tvTodayTrash.setText(currentItemWeight + "g");
+                Log.d("jay", "key: " + key);
+
+                String trashUsageStr = preferenceManager.getString(key + "-trash-usage", "");
+                TrashUsage trashUsage;
+                if (trashUsageStr.equals("")) {
+                    trashUsage = new TrashUsage();
+                } else {
+                    trashUsage = gson.fromJson(trashUsageStr, TrashUsage.class);
+                }
+
+                Log.d("jay", "trashUsageStr: " + trashUsageStr);
+
+                // todo: 각각의 쓰레기 타입에 저장
+                if (trashType.equals("tissue")) {
+                    float tissue = trashUsage.getTissue();
+                    trashUsage.setTissue(tissue + currentItemWeight);
+                } else if (trashType.equals("disposable_cup")) {
+                    float disposableCup = trashUsage.getDisposable_cup();
+                    trashUsage.setDisposable_cup(disposableCup + currentItemWeight);
+                }
+
+                // todo: localStorage에 저장
+                String updatedTrashUsage = gson.toJson(trashUsage);
+                preferenceManager.putString(key + "-trash-usage", updatedTrashUsage);
+
+                // todo: 쓰레기 전체 g 구하기
+                float total = trashUsage.getTissue() + trashUsage.getDisposable_cup();
+                tvTodayTrash.setText(total + "g");
             }
         });
 
+//        PreferenceManager manager = PreferenceManager.getInstance(WriteTrash.this);
+//        Gson gson = new Gson();
+//
+//        TrashUsage usage = new TrashUsage();
+//
+//        // todo: 측정값 or 사용자가 직접 입력한 값이 들어가도록
+//        usage.setTissue(1f);
+//        usage.setDisposable_cup(1f);
+//        usage.setDisposable_spoon(1f);
+//        usage.setPaper(1f);
+//        usage.setPlastic(1f);
+//        usage.setPlastic_bag(1f);
+//        usage.setCan(1f);
+//        usage.setEmpty_bottle(1f);
+//        usage.setEtc(1f);
+//
+//        // data를 String화 시키기
+//        String json = gson.toJson(usage);
+//
+//        // 변환한 String 값을 SharedPreference에 저장
+//        manager.putString("0508", json);
+//
+//        // 데이터 꺼내오기
+//        String data = manager.getString("0508", "");
+//
+//        // String을 데이터 모델로 변경
+//        TrashUsage trashUsage = gson.fromJson(data, TrashUsage.class);
+//        Log.d("jay", "tissue: " + trashUsage.getTissue());
+//        Log.d("jay", "disposable_cup: " + trashUsage.getDisposable_cup());
+//        Log.d("jay", "disposable_spoon: " + trashUsage.getDisposable_spoon());
+//        Log.d("jay", "paper: " + trashUsage.getPaper());
+//        Log.d("jay", "plastic: " + trashUsage.getPlastic());
+//        Log.d("jay", "plastic_bag: " + trashUsage.getPlastic_bag());
+//        Log.d("jay", "can: " + trashUsage.getCan());
+//        Log.d("jay", "empty_bottle: " + trashUsage.getEmpty_bottle());
+//        Log.d("jay", "etc: " + trashUsage.getEtc());
 
-//        Button.OnClickListener onClickListener = new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switch (v.getId()) {
-//
-//                    case R.id.Btn_tissue:
-//                        Log.d("jay", "passed #2");
-//                        application.trashType = "tissue";
-//                        break;
-//
-//                    case R.id.Btn_disposable_cup:
-//                        application.trashType = "disposable cup";
-//                        break;
-//
-//                    case R.id.Btn_disposable_spoon:
-//                        application.trashType = "disposable spoon";
-//                        break;
-//
-//                    case R.id.Btn_paper:
-//                        application.trashType = "paper";
-//                        break;
-//
-//                    case R.id.Btn_plastic:
-//                        application.trashType = "plastic";
-//                        break;
-//
-//                    case R.id.Btn_plastic_bag:
-//                        application.trashType = "plastic bag";
-//                        break;
-//
-//                    case R.id.Btn_can:
-//                        application.trashType = "can";
-//                        break;
-//
-//                    case R.id.Btn_empty_bottle:
-//                        application.trashType = "empty bottle";
-//                        break;
-//
-//                    case R.id.Btn_etc:
-//                        application.trashType = "etc";
-//                        break;
-//                }
-//            }
-//        };
-//
-//        Btn_tissue.setOnClickListener(onClickListener);
-//        Btn_disposable_cup.setOnClickListener(onClickListener);
-//        Btn_disposable_spoon.setOnClickListener(onClickListener);
-//        Btn_paper.setOnClickListener(onClickListener);
-//        Btn_plastic.setOnClickListener(onClickListener);
-//        Btn_plastic_bag.setOnClickListener(onClickListener);
-//        Btn_can.setOnClickListener(onClickListener);
-//        Btn_empty_bottle.setOnClickListener(onClickListener);
-//        Btn_etc.setOnClickListener(onClickListener);
 
-        PreferenceManager manager = PreferenceManager.getInstance(WriteTrash.this);
-        Gson gson = new Gson();
+        // todo: 저장되어 있는 trash 값 반영
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("MMdd", Locale.getDefault());
+        String key = simpledateformat.format(calendar.getTime()); // 0530
 
-        TrashUsage usage = new TrashUsage();
+        String trashUsageStr = preferenceManager.getString(key + "-trash-usage", "");
+        TrashUsage todayTrashUsage;
+        if (trashUsageStr.equals("")) {
+            todayTrashUsage = new TrashUsage();
+        } else {
+            todayTrashUsage = gson.fromJson(trashUsageStr, TrashUsage.class);
+        }
 
-        // todo: 측정값 or 사용자가 직접 입력한 값이 들어가도록
-        usage.setTissue(1f);
-        usage.setDisposable_cup(1f);
-        usage.setDisposable_spoon(1f);
-        usage.setPaper(1f);
-        usage.setPlastic(1f);
-        usage.setPlastic_bag(1f);
-        usage.setCan(1f);
-        usage.setEmpty_bottle(1f);
-        usage.setEtc(1f);
+        // todo: 쓰레기 전체 g 구하기
+        float total = todayTrashUsage.getTissue() + todayTrashUsage.getDisposable_cup();
+        tvTodayTrash.setText(total + "g");
 
-        // data를 String화 시키기
-        String json = gson.toJson(usage);
-
-        // 변환한 String 값을 SharedPreference에 저장
-        manager.putString("0508", json);
-
-        // 데이터 꺼내오기
-        String data = manager.getString("0508", "");
-
-        // String을 데이터 모델로 변경
-        TrashUsage trashUsage = gson.fromJson(data, TrashUsage.class);
-        Log.d("jay", "tissue: " + trashUsage.getTissue());
-        Log.d("jay", "disposable_cup: " + trashUsage.getDisposable_cup());
-        Log.d("jay", "disposable_spoon: " + trashUsage.getDisposable_spoon());
-        Log.d("jay", "paper: " + trashUsage.getPaper());
-        Log.d("jay", "plastic: " + trashUsage.getPlastic());
-        Log.d("jay", "plastic_bag: " + trashUsage.getPlastic_bag());
-        Log.d("jay", "can: " + trashUsage.getCan());
-        Log.d("jay", "empty_bottle: " + trashUsage.getEmpty_bottle());
-        Log.d("jay", "etc: " + trashUsage.getEtc());
-
-    } // end of onClick
+    }   // end of onCreate
 
 
     // todo: onItemClick 리스너 구현
