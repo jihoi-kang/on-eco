@@ -118,18 +118,17 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
                             dbList = new ArrayList<>();
                             dbUsedList = new ArrayList<>();
                             dbNoUsedList = new ArrayList<>();
-                            // 수도꼭지, 수압 초기화
-                            application.Wtap = "null";
-                            application.Wpower = 0f;
+
+                            // 설정 초기화
+                            setInit();
                         }
                     });
                     dlg_sure_out.show();
                 } else {
                     onBackPressed();
 
-                    // 수도꼭지, 수압 초기화
-                    application.Wtap = "null";
-                    application.Wpower = 0f;
+                    // 설정 초기화
+                    setInit();
                 }
             }
         });
@@ -169,6 +168,9 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
                 Intent intent = new Intent(getApplicationContext(), WaterAfterStati.class);
                 startActivity(intent);
+
+                // 설정 초기화
+                setInit();
             }
         });
 
@@ -217,6 +219,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         updateTimer();
 
     }   // end of onCreate
+
 
     // 타이머 상태에 따른 시작 & 정지
     private void startStop() {
@@ -328,7 +331,13 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         //Log.d("tag", " timeLeftText: " + timeLeftText);
 
         selected_minText.setText(timeLeftText);
+    }
 
+    // 설정 초기화
+    private void setInit(){
+        application.waterType = null;
+        application.Wtap = "null";
+        application.Wpower = 0f;
     }
 
 

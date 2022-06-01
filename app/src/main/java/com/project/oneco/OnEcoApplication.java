@@ -30,10 +30,6 @@ public class OnEcoApplication extends Application {
     // 쓰레기 사용 종류
     public String trashType;
 
-    // 데이터 정의(오늘 사용한 물 사용량, 전일 대비 절약한 물 사용량)
-    public int inputTodayWater = 0;
-    public int savedWater = 0;
-
     public int timerSec = 0;
     public int RtimerSec = 0;
 

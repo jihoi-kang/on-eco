@@ -15,16 +15,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.WaterUsage;
-import com.project.oneco.test.TestActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class WriteWater extends AppCompatActivity{
 
     private OnEcoApplication application;
 
-    EditText UserInputWater;
+    EditText ET_UserInputWater;
     TextView TXT_today_water_input;
+    TextView TXT_saved_water;
 
     Button Btn_add;
+
+    private PreferenceManager preferenceManager;
+    private Gson gson;
 
 
     @Override
@@ -33,6 +41,9 @@ public class WriteWater extends AppCompatActivity{
         setContentView(R.layout.activity_write_water);
 
 
+        preferenceManager = PreferenceManager.getInstance(this);
+        gson = new Gson();
+
         Button Btn_toothBrush = findViewById(R.id.Btn_toothBrush);
         Button Btn_handWash = findViewById(R.id.Btn_handWash);
         Button Btn_faceWash = findViewById(R.id.Btn_faceWash);
@@ -40,8 +51,10 @@ public class WriteWater extends AppCompatActivity{
         Button Btn_dishWash = findViewById(R.id.Btn_dishWash);
         Button Btn_etc_water = findViewById(R.id.Btn_etc_water);
 
-        UserInputWater = findViewById(R.id.UserInputWater);
+        ET_UserInputWater = findViewById(R.id.UserInputWater);
         Btn_add = findViewById(R.id.Btn_add);
+        TXT_today_water_input = findViewById(R.id.TXT_today_water_input);
+        TXT_saved_water = findViewById(R.id.TXT_saved_water);
 
         // Activity간의 데이터 공유를 위한 application 가져오기
         application = (OnEcoApplication) getApplication();
@@ -89,8 +102,6 @@ public class WriteWater extends AppCompatActivity{
                 } else{ // 물 사용량 측정 화면으로 넘어가기
                     Intent intent = new Intent(getApplicationContext(), WaterStopWatch.class);
                     startActivity(intent);
-
-                    application.waterType = null;
                 }
             }
         });
@@ -112,15 +123,15 @@ public class WriteWater extends AppCompatActivity{
                 switch (v.getId()){
 
                     case R.id.Btn_toothBrush:
-                        application.waterType = "toothBrush";
+                        application.waterType = "tooth";
                         break;
 
                     case R.id.Btn_handWash:
-                        application.waterType = "handWash";
+                        application.waterType = "hand";
                         break;
 
                     case R.id.Btn_faceWash:
-                        application.waterType = "faceWash";
+                        application.waterType = "face";
                         break;
 
                     case R.id.Btn_shower:
@@ -128,7 +139,7 @@ public class WriteWater extends AppCompatActivity{
                         break;
 
                     case R.id.Btn_dishWash:
-                        application.waterType = "dishWash";
+                        application.waterType = "dish";
                         break;
 
                     case R.id.Btn_etc_water:
@@ -152,18 +163,91 @@ public class WriteWater extends AppCompatActivity{
                 if (application.waterType == null){
                     Toast.makeText(getApplicationContext(), "사용한 물의 유형을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else {
-                    // todo:오류남.. ㅠㅜ
-                    // editText의 값을 변환 후 변수 inputTodayWater에 넣음
-                    application.inputTodayWater = Integer.parseInt(UserInputWater.getText().toString());
-                    TXT_today_water_input.setText(UserInputWater.getText().toString() + "ml");
+                    // 사용자 입력값인 editText의 값을 변환 후, 변수 inputWater에 저장
+                    int inputWater = Integer.parseInt(ET_UserInputWater.getText().toString());
+
+                    // SharedPreference 저장 과정
+                    // 오늘의 날짜를 구한 후 key값으로 등록 - 220531
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
+                    String key = simpledateformat.format(calendar.getTime());
+                    String waterUsageStr = preferenceManager.getString(key + "-water-usage", "");   // 태그 붙이고 변수에 저장
+
+                    // data 만들기 - WaterUseage 클래스 객체 생성
+                    WaterUsage waterUsage;
+
+                    if (waterUsageStr.equals("")) { // 프리퍼런스에 저장된 값이 없다면
+                        waterUsage = new WaterUsage();
+                    } else {    // 프리퍼런스에 저장된 값이 있다면 데이터 모델링
+                        // gson이용하여 가져와 data를 String으로 변환 후 객체에 저장. todo: WaterUsage 클래스?
+                        waterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
+                    }
+
+                    // 물 타입에 따라 사용자가 직접 입력한 값이 들어감
+                    if (application.waterType.equals("tooth")) {
+                        float tooth = waterUsage.getTooth();
+                        waterUsage.setTooth(tooth + inputWater);
+                    } else if (application.waterType.equals("hand")) {
+                        float hand = waterUsage.getHand();
+                        waterUsage.setHand(hand + inputWater);
+                    } else if (application.waterType.equals("face")) {
+                        float face = waterUsage.getFace();
+                        waterUsage.setFace(face + inputWater);
+                    } else if (application.waterType.equals("shower")) {
+                        float shower = waterUsage.getShower();
+                        waterUsage.setShower(shower + inputWater);
+                    } else if (application.waterType.equals("dish")) {
+                        float dish = waterUsage.getDish();
+                        waterUsage.setDish(dish + inputWater);
+                    } else if (application.waterType.equals("etc_water")) {
+                        float etc_water = waterUsage.getEtcWater();
+                        waterUsage.setEtcWater(etc_water + inputWater);
+                    }
+
+                    // 물 전체 사용량(ml) 구하기
+                    float waterTotal = waterUsage.getTooth() + waterUsage.getHand()
+                            + waterUsage.getFace() + waterUsage.getShower()
+                            + waterUsage.getDish() + waterUsage.getEtcWater();
+                    waterUsage.setWaterTotal(waterTotal);
+                    TXT_today_water_input.setText(waterTotal + "ml");
+
+                    // localStorage에 저장
+                    String updatedWaterUsage = gson.toJson(waterUsage);
+                    preferenceManager.putString(key + "-water-usage", updatedWaterUsage);
+
+                    Log.d("jay", "key: " + key);
+                    Log.d("jay", "waterUsageStr: " + waterUsageStr);
+                    Log.d("jay", "waterTotal: " + waterTotal);
+
+
+
+                    // todo: 전일 대비 절약한 물의 양.
+                    // todo: 전일 물 전체 사용량(waterTotal) 불러오기
+                    Date dDate = new Date();
+                    dDate = new Date(dDate.getTime()+(1000*60*60*24*-1));
+                    SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
+                    String key_yesterday = dSdf.format(dDate.getTime());
+
+                    String yesterday_waterUsageStr = preferenceManager.getString(key_yesterday + "-water-usage", "");
+                    WaterUsage yesterday_waterUsage;
+                    if (yesterday_waterUsageStr.equals("")) {
+                        yesterday_waterUsage = new WaterUsage();
+                    } else {
+                        yesterday_waterUsage = gson.fromJson(yesterday_waterUsageStr, WaterUsage.class);
+                    }
+
+                    Log.d("jay", "key_yesterday: " + key_yesterday);
+                    Log.d("jay", "yesterday_waterUsageStr: " + yesterday_waterUsageStr);
+
+                    // todo: 오늘 물 사용량 - 전일 물 사용량
+                    float savedWater = waterTotal - yesterday_waterUsage.getWaterTotal();
+                    // todo: 전일 대비 물 사용량 값 셋해주기
+                    TXT_saved_water.setText(savedWater + "ml");
+
                 }
             }
         });
 
-
-        // SharedPreference 데이터 저장하기
-        PreferenceManager manager = PreferenceManager.getInstance(WriteWater.this);
-        Gson gson = new Gson();
 
         /* <저장할 데이터>
         * todayDate : 오늘의 날짜
@@ -173,34 +257,44 @@ public class WriteWater extends AppCompatActivity{
         * UserInputWater : 오늘 사용한 물의 양 (사용자 입력값)
         * savedWater     : 전일 대비 절약한 물의 양 */
 
-        // data 만들기
-        WaterUsage usage = new WaterUsage();
+        // todo: 저장되어 있는 water 값 반영
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
+        String key = simpledateformat.format(calendar.getTime()); // 0530
 
-        // todo: 측정값 or 사용자가 직접 입력한 값이 들어가도록
-        usage.setTooth(3f);
-        usage.setHand(7f);
-        usage.setFace(3f);
-        usage.setDish(3f);
-        usage.setShower(7f);
-        usage.setEtc(3f);
+        String waterUsageStr = preferenceManager.getString(key + "-water-usage", "");
+        WaterUsage todayWaterUsage;
+        if (waterUsageStr.equals("")) {
+            todayWaterUsage = new WaterUsage();
+        } else {
+            todayWaterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
+        }
 
-        // data를 String화 시키기
-        String json = gson.toJson(usage);
+        // todo: 물 전체 사용량(ml) 구하기
+        float waterTotal = todayWaterUsage.getWaterTotal();
+        TXT_today_water_input.setText(waterTotal + "ml");
 
-        // 변환한 String 값을 SharedPreference에 저장
-        manager.putString("0508", json);
 
-        // 데이터 꺼내오기
-        String data = manager.getString("0508", "");
+        // todo: 전일 대비 절약한 물의 양 반영
+        // todo: 전일 물 전체 사용량(waterTotal) 불러오기
+        Date dDate = new Date();
+        dDate = new Date(dDate.getTime()+(1000*60*60*24*-1));
+        SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
+        String key_yesterday = dSdf.format(dDate.getTime());
 
-        // String을 데이터 모델로 변경
-        WaterUsage waterUsage = gson.fromJson(data, WaterUsage.class);
-        Log.d("jay", "dish: " + waterUsage.getTooth());
-        Log.d("jay", "hand: " + waterUsage.getHand());
-        Log.d("jay", "dish: " + waterUsage.getFace());
-        Log.d("jay", "hand: " + waterUsage.getShower());
-        Log.d("jay", "dish: " + waterUsage.getDish());
-        Log.d("jay", "hand: " + waterUsage.getEtc());
+        String yesterday_waterUsageStr = preferenceManager.getString(key_yesterday + "-water-usage", "");
+        WaterUsage yesterdayWaterUsage;
+        if (yesterday_waterUsageStr.equals("")) {
+            yesterdayWaterUsage = new WaterUsage();
+        } else {
+            yesterdayWaterUsage = gson.fromJson(yesterday_waterUsageStr, WaterUsage.class);
+        }
+
+        // todo: 오늘 물 사용량 - 전일 물 사용량
+        float savedWater = waterTotal - yesterdayWaterUsage.getWaterTotal();
+
+        // todo: 전일 대비 물 사용량 값 셋해주기
+        TXT_saved_water.setText(savedWater + "ml");
 
     } // end of onClick
 

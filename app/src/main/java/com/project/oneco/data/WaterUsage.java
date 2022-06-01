@@ -7,7 +7,8 @@ public class WaterUsage {
     private float face;
     private float shower;
     private float dish;
-    private float etc;
+    private float etc_water;
+    private float waterTotal;
 
     public float getTooth() {
         return tooth;
@@ -42,10 +43,18 @@ public class WaterUsage {
         this.dish = dish;
     }
 
-    public float getEtc() {
-        return etc;
+    public float getEtcWater() {
+        return etc_water;
     }
-    public void setEtc(float etc) {
-        this.etc = etc;
+    public void setEtcWater(float etc_water) {
+        this.etc_water = etc_water;
+    }
+
+    public float getWaterTotal() {
+
+        return waterTotal;
+    }
+    public void setWaterTotal(float waterTotal) {
+        this.waterTotal = waterTotal;
     }
 }

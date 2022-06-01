@@ -52,7 +52,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="92dp" />
+                android:layout_height="80dp" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -72,7 +72,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="51dp" />
+                android:layout_height="40dp" />
 
 
             <!--셋팅 화면-->
@@ -89,7 +89,7 @@
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="150dp" />
+                        android:layout_height="100dp" />
 
                     <Button
                         android:id="@+id/Btn_start_ST"
@@ -106,10 +106,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp" />
 
                     <Button
                         android:id="@+id/Btn_stop_ST"

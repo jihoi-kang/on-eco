@@ -104,7 +104,6 @@ public class TestActivity extends AppCompatActivity {
                     usage.setFace(3f);
                     usage.setDish(3f);
                     usage.setShower(7f);
-                    usage.setEtc(3f);
 
                     // data를 String화 시키기
                     String json = gson.toJson(usage);
@@ -122,7 +121,6 @@ public class TestActivity extends AppCompatActivity {
                     Log.d("jay", "dish: " + waterUsage.getFace());
                     Log.d("jay", "hand: " + waterUsage.getShower());
                     Log.d("jay", "dish: " + waterUsage.getDish());
-                    Log.d("jay", "hand: " + waterUsage.getEtc());
                 }
             });
 

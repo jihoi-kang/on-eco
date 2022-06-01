@@ -109,6 +109,7 @@ public class Statistic extends AppCompatActivity {
         });
     }   // end of onCreate
 
+
     @Override
     @Deprecated
     protected Dialog onCreateDialog(int id){
@@ -118,10 +119,11 @@ public class Statistic extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year, monthOfYear, dayOfMonth);
-                        SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE", Locale.getDefault());
+                        SimpleDateFormat simpledateformat = new SimpleDateFormat("EEE", Locale.KOREA);
                         String dayName = simpledateformat.format(calendar.getTime());
+                        Log.d("jay", "dayName"+ dayName);
                         TextView Text_pickDate = findViewById(R.id.Text_pickDate);
-                        Text_pickDate.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + "(" + dayName + ")");
+                        Text_pickDate.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + " (" + dayName + ")");
                     }
                 },
                 2022, 05, 18);
@@ -129,4 +131,5 @@ public class Statistic extends AppCompatActivity {
         }
         return super.onCreateDialog(id);
     }
+
 }   // end of class
