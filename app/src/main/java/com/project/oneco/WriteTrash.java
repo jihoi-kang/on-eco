@@ -45,7 +45,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     String[] paperItems = {"A4", "B4", "택배박스 1호(50cm)", "택배박스 2호(60cm)", "택배박스 3호(80cm)", "택배박스 4호(100cm)", "택배박스 5호(120cm)"};
     String[] plasticItems = {"250ml", "500ml", "1L", "2L"};
     String[] plasticBagItems = {"3L", "5L", "10L", "20L"};
-    String[] canItems = {"250ml", "355ml", "500ml", "750ml", "참치캔"};
+    String[] canItems = {"250ml", "355ml", "500ml", "750ml", "참치캔(100g)"};
     String[] emptyBottleItems = {"100ml", "180ml"};
     String[] etcItems = {"기타"};
 
@@ -226,54 +226,46 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 } else if (trashType.equals("disposable_cup")) {
                     float disposableCup = trashUsage.getDisposable_cup();
                     trashUsage.setDisposable_cup(disposableCup + currentItemWeight);
+                } else if (trashType.equals("disposable_spoon")) {
+                    float disposableSpoon = trashUsage.getDisposable_spoon();
+                    trashUsage.setDisposable_spoon(disposableSpoon + currentItemWeight);
+                } else if (trashType.equals("paper")) {
+                    float paper = trashUsage.getPaper();
+                    trashUsage.setPaper(paper + currentItemWeight);
+                } else if (trashType.equals("plastic")) {
+                    float plastic = trashUsage.getPlastic();
+                    trashUsage.setPlastic(plastic + currentItemWeight);
+                } else if (trashType.equals("plastic_bag")) {
+                    float plastic_bag = trashUsage.getPlastic_bag();
+                    trashUsage.setPlastic_bag(plastic_bag + currentItemWeight);
+                } else if (trashType.equals("can")) {
+                    float can = trashUsage.getCan();
+                    trashUsage.setCan(can + currentItemWeight);
+                } else if (trashType.equals("empty_bottle")) {
+                    float empty_bottle = trashUsage.getEmpty_bottle();
+                    trashUsage.setEmpty_bottle(empty_bottle + currentItemWeight);
+                } else if (trashType.equals("etc")) {
+                    float etc = trashUsage.getEtc();
+                    trashUsage.setEtc(etc + currentItemWeight);
                 }
+
+
+
+
+
 
                 // todo: localStorage에 저장
                 String updatedTrashUsage = gson.toJson(trashUsage);
                 preferenceManager.putString(key + "-trash-usage", updatedTrashUsage);
 
                 // todo: 쓰레기 전체 g 구하기
-                float total = trashUsage.getTissue() + trashUsage.getDisposable_cup();
+                float total = trashUsage.getTissue() + trashUsage.getDisposable_cup() + trashUsage.getDisposable_spoon()
+                        + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag() + trashUsage.getCan()
+                        + trashUsage.getEmpty_bottle() + trashUsage.getEtc();
+
                 tvTodayTrash.setText(total + "g");
             }
         });
-
-//        PreferenceManager manager = PreferenceManager.getInstance(WriteTrash.this);
-//        Gson gson = new Gson();
-//
-//        TrashUsage usage = new TrashUsage();
-//
-//        // todo: 측정값 or 사용자가 직접 입력한 값이 들어가도록
-//        usage.setTissue(1f);
-//        usage.setDisposable_cup(1f);
-//        usage.setDisposable_spoon(1f);
-//        usage.setPaper(1f);
-//        usage.setPlastic(1f);
-//        usage.setPlastic_bag(1f);
-//        usage.setCan(1f);
-//        usage.setEmpty_bottle(1f);
-//        usage.setEtc(1f);
-//
-//        // data를 String화 시키기
-//        String json = gson.toJson(usage);
-//
-//        // 변환한 String 값을 SharedPreference에 저장
-//        manager.putString("0508", json);
-//
-//        // 데이터 꺼내오기
-//        String data = manager.getString("0508", "");
-//
-//        // String을 데이터 모델로 변경
-//        TrashUsage trashUsage = gson.fromJson(data, TrashUsage.class);
-//        Log.d("jay", "tissue: " + trashUsage.getTissue());
-//        Log.d("jay", "disposable_cup: " + trashUsage.getDisposable_cup());
-//        Log.d("jay", "disposable_spoon: " + trashUsage.getDisposable_spoon());
-//        Log.d("jay", "paper: " + trashUsage.getPaper());
-//        Log.d("jay", "plastic: " + trashUsage.getPlastic());
-//        Log.d("jay", "plastic_bag: " + trashUsage.getPlastic_bag());
-//        Log.d("jay", "can: " + trashUsage.getCan());
-//        Log.d("jay", "empty_bottle: " + trashUsage.getEmpty_bottle());
-//        Log.d("jay", "etc: " + trashUsage.getEtc());
 
 
         // todo: 저장되어 있는 trash 값 반영
@@ -434,7 +426,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 currentItemWeight = 10;
             } else if (itemName.equals("750ml")) {
                 currentItemWeight = 13;
-            } else if (itemName.equals("참치캔")) {
+            } else if (itemName.equals("참치캔(100g)")) {
                 currentItemWeight = 15;
             }
             etItemWeight.setText("" + currentItemWeight);
