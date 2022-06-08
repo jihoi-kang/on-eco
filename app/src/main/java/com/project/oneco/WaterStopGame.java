@@ -168,9 +168,6 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
                 Intent intent = new Intent(getApplicationContext(), WaterAfterStati.class);
                 startActivity(intent);
-
-                // 설정 초기화
-                setInit();
             }
         });
 

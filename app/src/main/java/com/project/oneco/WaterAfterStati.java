@@ -27,12 +27,20 @@ public class WaterAfterStati extends AppCompatActivity {
 
     OnEcoApplication application;
 
+    TextView spended_AllT;
+    TextView spended_RealT;
+    TextView no_SpendedT;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water_after_stati);
 
+
+        spended_AllT = findViewById(R.id.spended_AllT);
+        spended_RealT = findViewById(R.id.spended_RealT);
+        no_SpendedT = findViewById(R.id.no_SpendedT);
 
         preferenceManager = PreferenceManager.getInstance(this);
         gson = new Gson();
@@ -59,7 +67,8 @@ public class WaterAfterStati extends AppCompatActivity {
         // SharedPreference 저장 과정
         // 오늘의 날짜를 구한 후 key값으로 등록 - 220608
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpledateformat = new SimpleDateFormat("MMdd", Locale.getDefault());
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("yy" +
+                "MMdd", Locale.getDefault());
         String key = simpledateformat.format(calendar.getTime());
         String waterUsageStr = preferenceManager.getString(key + "-water-usage", "");
 
@@ -117,13 +126,23 @@ public class WaterAfterStati extends AppCompatActivity {
         };
         handler.post(updater);
 
-        updateTimer(application.RtimerSec);
-        updateTimer(application.usedWT);
-        updateTimer(application.noUsedWT);
+
+
+        Log.d("jay", "application.RtimerSec: " + application.RtimerSec);
+        Log.d("jay", "application.usedWT: " + application.usedWT);
+        Log.d("jay", "application.noUsedWT: " + application.noUsedWT);
+
+        String displayTotalTime = updateTimer(application.RtimerSec);
+        String displayUsedTime = updateTimer(application.usedWT);
+        String displayNoUsedTime = updateTimer(application.noUsedWT);
+
+        spended_AllT.setText("총 소요 시간      : " + displayTotalTime);
+        spended_RealT.setText("물 사용 시간      : " + displayUsedTime);
+        no_SpendedT.setText("물 미사용 시간  : " + displayNoUsedTime);
     }
 
     // 시간 업데이트
-    private void updateTimer(float water) {
+    private String updateTimer(float water) {
         int one_hour = 1 * 60 * 60;
         int one_min = 1 * 60;
         int one_sec = 1;
@@ -141,17 +160,7 @@ public class WaterAfterStati extends AppCompatActivity {
         if (seconds < 10) timeLeftText += "0";
         timeLeftText += seconds + "초";
 
-        // todo: 물 미사용 시간이 안뜸.. 타이머게임 먹통..
-        if (water == application.RtimerSec) {
-            TextView spended_AllT = findViewById(R.id.spended_AllT);
-            spended_AllT.setText("총 소요 시간      : " + timeLeftText);
-        } else if (water == application.usedWT) {
-            TextView spended_RealT = findViewById(R.id.spended_RealT);
-            spended_RealT.setText("물 사용 시간      : " + timeLeftText);
-        } else if (water == application.noUsedWT) {
-            TextView no_SpendedT = findViewById(R.id.no_SpendedT);
-            no_SpendedT.setText("물 미사용 시간 : " + timeLeftText);
-        }
+        return timeLeftText;
     }
 
     // 뒤로 가기 버튼 막기
