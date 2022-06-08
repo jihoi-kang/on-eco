@@ -70,7 +70,7 @@ public class WaterStopWatch extends AppCompatActivity {
         // WaterPower 팝업 띄우기
         startActivity(new Intent(this, WaterPower.class));
 
-        countup_text = findViewById(R.id.countup_text);
+        countup_text = findViewById(R.id.spended_AllT);
         Btn_start_ST = findViewById(R.id.Btn_start_ST);
         Btn_stop_ST = findViewById(R.id.Btn_stop_ST);
         Btn_finish_ST = findViewById(R.id.Btn_finish_ST);

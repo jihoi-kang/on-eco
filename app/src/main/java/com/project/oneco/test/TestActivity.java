@@ -259,7 +259,7 @@ public class TestActivity extends AppCompatActivity {
                     TextView usedWater = findViewById(R.id.usedWater);
                     usedWater.setText("사용한 물의 양 : " + usedW + "ml");
 
-                    TextView spended_AllT = findViewById(R.id.countup_text);
+                    TextView spended_AllT = findViewById(R.id.spended_AllT);
                     spended_AllT.setText("총 소요 시간 : " + timerSec/1000 + "초");
 
                     TextView spended_RealT = findViewById(R.id.spended_RealT);

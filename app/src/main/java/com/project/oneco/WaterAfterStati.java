@@ -2,20 +2,17 @@ package com.project.oneco;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.WaterUsage;
-import com.project.oneco.test.DialogTest;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -60,7 +57,7 @@ public class WaterAfterStati extends AppCompatActivity {
 
         // todo: 잘 되긴하는데.. 새로 만들었는데도 같은 곳에 저장이 되는 이유?
         // SharedPreference 저장 과정
-        // 오늘의 날짜를 구한 후 key값으로 등록 - 0531 todo:년도도 표시하도록 220531, 소문자dd면 0507이 아니라 057으로 나오는게 아닌지?
+        // 오늘의 날짜를 구한 후 key값으로 등록 - 220608
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpledateformat = new SimpleDateFormat("MMdd", Locale.getDefault());
         String key = simpledateformat.format(calendar.getTime());
@@ -115,19 +112,46 @@ public class WaterAfterStati extends AppCompatActivity {
         Runnable updater = new Runnable() {
             public void run() {
                 TextView usedWater = findViewById(R.id.usedWater);
-                usedWater.setText("사용한 물의 양 : " + application.usedW + "ml");
-
-                TextView spended_AllT = findViewById(R.id.countup_text);
-                spended_AllT.setText("총 소요 시간 : " + application.RtimerSec + "초");
-
-                TextView spended_RealT = findViewById(R.id.spended_RealT);
-                spended_RealT.setText("물 사용 시간 : " + application.usedWT + "초");
-
-                TextView savingT = findViewById(R.id.no_SpendedT);
-                savingT.setText("물 절약 시간 : " + application.noUsedWT + "초");
+                usedWater.setText("사용한 물의 양  : " + application.usedW + " ml");
             }
         };
         handler.post(updater);
+
+        updateTimer(application.RtimerSec);
+        updateTimer(application.usedWT);
+        updateTimer(application.noUsedWT);
+    }
+
+    // 시간 업데이트
+    private void updateTimer(float water) {
+        int one_hour = 1 * 60 * 60;
+        int one_min = 1 * 60;
+        int one_sec = 1;
+
+        int minutes = (int) water % one_hour / one_min;
+        int seconds = (int) water % one_hour % one_min / one_sec;
+
+        String timeLeftText = "";
+
+        // 분이 10보다 작으면 0이 붙는다
+        if (minutes < 10) timeLeftText += "0";
+        timeLeftText += minutes + "분 ";
+
+        // 초가 10보다 작으면 0이 붙는다
+        if (seconds < 10) timeLeftText += "0";
+        timeLeftText += seconds + "초";
+
+        // todo: 물 미사용 시간이 안뜸.. 타이머게임 먹통..
+        if (water == application.RtimerSec) {
+            TextView spended_AllT = findViewById(R.id.spended_AllT);
+            spended_AllT.setText("총 소요 시간      : " + timeLeftText);
+        } else if (water == application.usedWT) {
+            TextView spended_RealT = findViewById(R.id.spended_RealT);
+            spended_RealT.setText("물 사용 시간      : " + timeLeftText);
+        } else if (water == application.noUsedWT) {
+            TextView no_SpendedT = findViewById(R.id.no_SpendedT);
+            no_SpendedT.setText("물 미사용 시간 : " + timeLeftText);
+        }
     }
 
     // 뒤로 가기 버튼 막기

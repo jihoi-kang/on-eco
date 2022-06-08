@@ -22,28 +22,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="사용한 물의 양  : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/countup_text"
+            android:id="@+id/spended_AllT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="총 소요 시간      : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/spended_RealT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="물 사용 시간      : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/no_SpendedT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="물 미사용 시간  : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Space
             android:layout_width="match_parent"
