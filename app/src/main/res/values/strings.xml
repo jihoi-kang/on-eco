@@ -58,7 +58,7 @@
     <string name="empty_bottle">공병</string>
     <string name="mtitle_today_trash">오늘 배출한 쓰레기</string>
     <string name="real_used_trash">100G</string>
-    <string name="saving_trash">전일 대비 절약한 쓰레기</string>
+    <string name="saving_trash">전일 대비 배출한 쓰레기</string>
     <string name="real_saving_trash">10G</string>
     <string name="Userinput_today_T">trash</string>
     <!-- TODO: Remove or change this placeholder text -->

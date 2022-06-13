@@ -11,6 +11,7 @@ public class TrashUsage {
     private float can;
     private float empty_bottle;
     private float etc;
+    private float trashTotal;
 
     public float getTissue() {
         return tissue;
@@ -82,5 +83,13 @@ public class TrashUsage {
 
     public void setEtc(float etc) {
         this.etc = etc;
+    }
+
+    public float getTrashTotal() {
+
+        return trashTotal;
+    }
+    public void setTrashTotal(float trashTotal) {
+        this.trashTotal = trashTotal;
     }
 }

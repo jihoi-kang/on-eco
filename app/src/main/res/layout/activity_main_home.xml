@@ -38,28 +38,30 @@
 
                 <ImageButton
                     android:id="@+id/goto_mypage"
-                    android:layout_width="56dp"
-                    android:layout_height="49dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:backgroundTint="#00FFFFFF"
-                    app:tint="#857F7F"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/textView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/ic_launcher_foreground"
-                    android:contentDescription="@string/goto_mypage" />
+                    android:contentDescription="@string/goto_mypage"
+                    app:srcCompat="@drawable/home" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/Environ_tips"
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="#D7EDAA"
-                android:gravity="center"
-                android:text="@string/textview"
-                android:textColor="#33691E" />
+                android:layout_height="50dp" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="223dp"
+                android:contentDescription="@string/timer_img"
+                app:srcCompat="@drawable/tip1" />
+
 
             <Space
                 android:layout_width="match_parent"
