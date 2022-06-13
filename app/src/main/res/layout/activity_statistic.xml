@@ -114,11 +114,10 @@
                 android:text="년" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bc_chart"
             android:layout_width="match_parent"
-            android:layout_height="158dp"
-            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+            android:layout_height="158dp" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -160,55 +159,50 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="년.월.일.요일"
+            android:text="날짜를 선택해주세요"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
+            android:id="@+id/Txt_aDayAllWater"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="총 사용량 : " />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/Txt_aDayTooth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="양치 : " />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/Txt_aDayHand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="손 씻기 : " />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/Txt_aDayFace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="세수 : " />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/Txt_aDayShower"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="샤워 : " />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/Txt_aDayDish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="설거지 : " />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/Txt_aDayEtc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="기타 : " />
     </LinearLayout>
 
 </LinearLayout>

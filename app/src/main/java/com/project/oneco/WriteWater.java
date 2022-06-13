@@ -221,38 +221,8 @@ public class WriteWater extends AppCompatActivity{
                     Log.d("jay", "waterTotal: " + waterTotal);
 
 
-                    // todo: 전일 대비 절약한 물의 양.
-                    // todo: 전날 데이터가 null이 아닐 때까지 데이터 불러오기. 조건?
+                    // 전일 대비 절약한 물의 양.
                     setPreSavedWater(waterTotal);
-//                    for(int i = 1; i<10; i++){
-//                        // todo: 어제 물 전체 사용량(waterTotal) 불러오기
-//                        Date dDate = new Date();
-//                        dDate = new Date(dDate.getTime()+(1000*60*60*24*-i));
-//                        SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
-//                        String key_yesterday = dSdf.format(dDate.getTime());
-//                        Log.d("jay", "key_yesterday: " + key_yesterday);
-//
-//                        String yesterday_waterUsageStr = preferenceManager.getString(key_yesterday + "-water-usage", "");
-//                        WaterUsage yesterday_waterUsage;
-//
-//                        Log.d("jay", "yesterday_waterUsageStr : " + yesterday_waterUsageStr);
-//
-//                        // todo: 만약 어제 데이터가 없으면 그 전날 데이터 데이터 불러오기
-//                        if (yesterday_waterUsageStr.equals("")) {
-//                            continue;
-//                            // yesterday_waterUsage = new WaterUsage();
-//                        } else {
-//                            yesterday_waterUsage = gson.fromJson(yesterday_waterUsageStr, WaterUsage.class);
-//                        }
-//
-//                        Log.d("jay", "key_yesterday: " + key_yesterday);
-//                        Log.d("jay", "yesterday_waterUsageStr: " + yesterday_waterUsageStr);
-//
-//                        // todo: 오늘 물 사용량 - 전일 물 사용량
-//                        float savedWater = waterTotal - yesterday_waterUsage.getWaterTotal();
-//                        // todo: 전일 대비 물 사용량 값 셋해주기
-//                        TXT_saved_water.setText(savedWater + "ml");
-//                    }
                 }
             }
         });
@@ -266,10 +236,10 @@ public class WriteWater extends AppCompatActivity{
         * UserInputWater : 오늘 사용한 물의 양 (사용자 입력값)
         * savedWater     : 전일 대비 절약한 물의 양 */
 
-        // todo: 저장되어 있는 water 값 반영
+        // 저장되어 있는 water 값 반영
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
-        String key = simpledateformat.format(calendar.getTime()); // 0530
+        String key = simpledateformat.format(calendar.getTime()); // 220530
 
         String waterUsageStr = preferenceManager.getString(key + "-water-usage", "");
         WaterUsage todayWaterUsage;
@@ -284,29 +254,9 @@ public class WriteWater extends AppCompatActivity{
         TXT_today_water_input.setText(waterTotal + "ml");
 
 
-        // todo: 전일 대비 절약한 물의 양 반영
-        // todo: 전일 물 전체 사용량(waterTotal) 불러오기
+        // 전일 대비 절약한 물의 양 반영
+        // 전일 물 전체 사용량(waterTotal) 불러오기
         setPreSavedWater(waterTotal);
-
-//        Date dDate = new Date();
-//        dDate = new Date(dDate.getTime()+(1000*60*60*24*-1));
-//        SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
-//        String key_yesterday = dSdf.format(dDate.getTime());
-//
-//        String yesterday_waterUsageStr = preferenceManager.getString(key_yesterday + "-water-usage", "");
-//        WaterUsage yesterdayWaterUsage;
-//        if (yesterday_waterUsageStr.equals("")) {
-//            yesterdayWaterUsage = new WaterUsage();
-//        } else {
-//            yesterdayWaterUsage = gson.fromJson(yesterday_waterUsageStr, WaterUsage.class);
-//        }
-//
-//        // todo: 오늘 물 사용량 - 전일 물 사용량
-//        float savedWater = waterTotal - yesterdayWaterUsage.getWaterTotal();
-//
-//        // todo: 전일 대비 물 사용량 값 셋해주기
-//        TXT_saved_water.setText(savedWater + "ml");
-
     } // end of onClick
 
     @Override
@@ -318,10 +268,10 @@ public class WriteWater extends AppCompatActivity{
     public void setPreSavedWater(float todayTotal) {
         // 전일 사용한 전체 양 구하기
         float preTotal = 0f;
-        // todo: 전일 대비 절약한 물의 양.
-        // todo: 전날 데이터가 null이 아닐 때까지 데이터 불러오기. 조건?
+        // 전일 대비 절약한 물의 양.
+        // 전날 데이터가 null이 아닐 때까지 데이터 불러오기
         for(int i = 1; i<10; i++){
-            // todo: 어제 물 전체 사용량(waterTotal) 불러오기
+            // 어제 물 전체 사용량(waterTotal) 불러오기
             Date dDate = new Date();
             dDate = new Date(dDate.getTime()+(1000*60*60*24*-i));
             SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
@@ -333,23 +283,21 @@ public class WriteWater extends AppCompatActivity{
 
             Log.d("jay", "yesterday_waterUsageStr : " + yesterday_waterUsageStr);
 
-            // todo: 만약 어제 데이터가 없으면 그 전날 데이터 데이터 불러오기
+            // 만약 어제 데이터가 없으면 그 전날 데이터 데이터 불러오기
             if (yesterday_waterUsageStr.equals("")) {
                 continue;
-                // yesterday_waterUsage = new WaterUsage();
             } else {
                 yesterday_waterUsage = gson.fromJson(yesterday_waterUsageStr, WaterUsage.class);
             }
 
             preTotal = yesterday_waterUsage.getWaterTotal();
 
+            if (preTotal > 0) {
+                break;
+            }
+
             Log.d("jay", "key_yesterday: " + key_yesterday);
             Log.d("jay", "yesterday_waterUsageStr: " + yesterday_waterUsageStr);
-
-            // todo: 오늘 물 사용량 - 전일 물 사용량
-//            float savedWater = waterTotal - yesterday_waterUsage.getWaterTotal();
-            // todo: 전일 대비 물 사용량 값 셋해주기
-//            TXT_saved_water.setText(savedWater + "ml");
         }
 
         // 오늘과 전일 비교

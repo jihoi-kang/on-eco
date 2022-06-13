@@ -9,6 +9,9 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.gson.Gson;
+import com.project.oneco.data.PreferenceManager;
+import com.project.oneco.data.WaterUsage;
 import com.project.oneco.test.TestActivity;
 
 public class MainHome extends AppCompatActivity {
@@ -20,6 +23,21 @@ public class MainHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
+
+        // 임의로 값 추가
+        PreferenceManager preferenceManager = PreferenceManager.getInstance(this);
+        WaterUsage waterUsage = new WaterUsage();
+        waterUsage.setHand(40f);
+        waterUsage.setDish(10f);
+        waterUsage.setFace(80f);
+        waterUsage.setEtcWater(700f);
+        waterUsage.setTooth(450f);
+        waterUsage.setShower(150f);
+        waterUsage.setWaterTotal(1350f);
+        preferenceManager.putString("220611-water-usage", new Gson().toJson(waterUsage));
+
+
+
 
         onBackPressed();
 

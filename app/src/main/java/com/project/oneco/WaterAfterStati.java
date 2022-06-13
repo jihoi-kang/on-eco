@@ -30,6 +30,7 @@ public class WaterAfterStati extends AppCompatActivity {
     TextView spended_AllT;
     TextView spended_RealT;
     TextView no_SpendedT;
+    TextView usedWater;
 
 
     @Override
@@ -41,6 +42,7 @@ public class WaterAfterStati extends AppCompatActivity {
         spended_AllT = findViewById(R.id.spended_AllT);
         spended_RealT = findViewById(R.id.spended_RealT);
         no_SpendedT = findViewById(R.id.no_SpendedT);
+        usedWater = findViewById(R.id.usedWater);
 
         preferenceManager = PreferenceManager.getInstance(this);
         gson = new Gson();
@@ -63,12 +65,10 @@ public class WaterAfterStati extends AppCompatActivity {
 
         setResult();
 
-        // todo: 잘 되긴하는데.. 새로 만들었는데도 같은 곳에 저장이 되는 이유?
         // SharedPreference 저장 과정
         // 오늘의 날짜를 구한 후 key값으로 등록 - 220608
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpledateformat = new SimpleDateFormat("yy" +
-                "MMdd", Locale.getDefault());
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
         String key = simpledateformat.format(calendar.getTime());
         String waterUsageStr = preferenceManager.getString(key + "-water-usage", "");
 
@@ -120,7 +120,6 @@ public class WaterAfterStati extends AppCompatActivity {
     public void setResult() {
         Runnable updater = new Runnable() {
             public void run() {
-                TextView usedWater = findViewById(R.id.usedWater);
                 usedWater.setText("사용한 물의 양  : " + application.usedW + " ml");
             }
         };
