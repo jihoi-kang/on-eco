@@ -47,8 +47,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:contentDescription="@string/goto_mypage"
-                app:srcCompat="@drawable/ic_launcher_foreground"
-                app:tint="#857F7F" />
+                app:srcCompat="@drawable/home"/>
 
         </LinearLayout>
 
