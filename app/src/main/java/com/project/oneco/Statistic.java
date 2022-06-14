@@ -12,7 +12,6 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +28,6 @@ import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.WaterUsage;
 import com.project.oneco.test.MyXAxisValueFormatter;
-import com.project.oneco.test.TestActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,16 +40,43 @@ public class Statistic extends AppCompatActivity {
     OnEcoApplication application;
 
     BarChart bcChart;
+    TextView Txt_pickDate;
+    TextView Txt_aDayAllWater;
+    TextView Txt_aDayTooth;
+    TextView Txt_aDayHand;
+    TextView Txt_aDayFace;
+    TextView Txt_aDayShower;
+    TextView Txt_aDayDish;
+    TextView Txt_aDayEtc;
 
     private PreferenceManager preferenceManager;
     private Gson gson;
 
     private ArrayList<WaterUsage> waterUsageList;
 
+    String picked_date_key = "";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistic);
+
+
+        Button Btn_graph_trash = findViewById(R.id.Btn_graph_trash);
+        Button Btn_graph_water = findViewById(R.id.Btn_graph_water);
+
+        ImageView trashTypeColor_View = findViewById(R.id.trashTypeColor_View);
+        ImageView waterTypeColor_View = findViewById(R.id.waterTypeColor_View);
+
+        Txt_pickDate = findViewById(R.id.Txt_pickDate);
+        Txt_aDayAllWater = findViewById(R.id.Txt_aDayAllWater);
+        Txt_aDayTooth = findViewById(R.id.Txt_aDayTooth);
+        Txt_aDayHand = findViewById(R.id.Txt_aDayHand);
+        Txt_aDayFace = findViewById(R.id.Txt_aDayFace);
+        Txt_aDayShower = findViewById(R.id.Txt_aDayShower);
+        Txt_aDayDish = findViewById(R.id.Txt_aDayDish);
+        Txt_aDayEtc = findViewById(R.id.Txt_aDayEtc);
 
         waterUsageList = new ArrayList<>();
 
@@ -63,47 +88,6 @@ public class Statistic extends AppCompatActivity {
 
         bcChart = findViewById(R.id.bc_chart);
 
-        // setting
-        bcChart.getDescription().setEnabled(false);
-
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        bcChart.setMaxVisibleValueCount(40);
-
-        // scaling can now only be done on x- and y-axis separately
-        bcChart.setPinchZoom(false);
-
-        bcChart.setDrawGridBackground(false);
-        bcChart.setDrawBarShadow(false);
-
-        bcChart.setDrawValueAboveBar(false);
-        bcChart.setHighlightFullBarEnabled(false);
-
-        // change the position of the y-labels
-        YAxis leftAxis = bcChart.getAxisLeft();
-        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-        bcChart.getAxisRight().setEnabled(false);
-
-        XAxis xLabels = bcChart.getXAxis();
-        xLabels.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xLabels.setValueFormatter(new MyXAxisValueFormatter());
-
-        Legend l = bcChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-        l.setFormSize(8f);
-        l.setFormToTextSpace(4f);
-        l.setXEntrySpace(6f);
-
-        Button Btn_graph_trash = findViewById(R.id.Btn_graph_trash);
-        Button Btn_graph_water = findViewById(R.id.Btn_graph_water);
-
-        ImageView trashTypeColor_View = findViewById(R.id.trashTypeColor_View);
-        ImageView waterTypeColor_View = findViewById(R.id.waterTypeColor_View);
-
-        TextView Text_pickDate = findViewById(R.id.Text_pickDate);
 
         // 이전 버튼
         ImageButton Btn_back = findViewById(R.id.Btn_back);
@@ -163,17 +147,57 @@ public class Statistic extends AppCompatActivity {
             }
         });
 
-        Text_pickDate.setText(application.todayDate);
+        // <-- chart 그리기 - (1) setting
 
-        Text_pickDate.setOnClickListener(new View.OnClickListener() {
+        bcChart.getDescription().setEnabled(false);
+
+        // if more than 60 entries are displayed in the chart, no values will be
+        // drawn
+        bcChart.setMaxVisibleValueCount(40);
+
+        // scaling can now only be done on x- and y-axis separately
+        bcChart.setPinchZoom(false);
+
+        bcChart.setDrawGridBackground(false);
+        bcChart.setDrawBarShadow(false);
+
+        bcChart.setDrawValueAboveBar(false);
+        bcChart.setHighlightFullBarEnabled(false);
+
+        // change the position of the y-labels
+        YAxis leftAxis = bcChart.getAxisLeft();
+        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        bcChart.getAxisRight().setEnabled(false);
+
+        XAxis xLabels = bcChart.getXAxis();
+        xLabels.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xLabels.setValueFormatter(new MyXAxisValueFormatter());
+
+        Legend l = bcChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+        l.setFormSize(8f);
+        l.setFormToTextSpace(4f);
+        l.setXEntrySpace(6f);
+
+        // chart 그리기 - (1) setting -->
+
+        Txt_pickDate.setText(application.todayDate);
+
+        Txt_pickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDialog(DIALOG_DATE);
             }
         });
 
-        // todo:오늘 포함 일주일치 사용한 물의 양 각각 불러오기
+        // 오늘 포함 일주일치 사용한 물의 양 각각 불러오기
         waterData_week();
+
+        // 오늘 날짜 데이터 값 불러서 UI 표시하기
+        setTodayWaterUsage();
 
     }   // end of onCreate
 
@@ -187,11 +211,52 @@ public class Statistic extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year, monthOfYear, dayOfMonth);
+
+                        monthOfYear = monthOfYear + 1;
+
+                        String new_monthOfYear = "";
+
+                        if (monthOfYear < 10){
+                            new_monthOfYear = "0" + monthOfYear;
+                        }
+
                         SimpleDateFormat simpledateformat = new SimpleDateFormat("EEE", Locale.KOREA);
                         String dayName = simpledateformat.format(calendar.getTime());
                         Log.d("jay", "dayName"+ dayName);
-                        TextView Text_pickDate = findViewById(R.id.Text_pickDate);
-                        Text_pickDate.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + " (" + dayName + ")");
+
+                        Txt_pickDate.setText(year + "." + new_monthOfYear + "." + dayOfMonth + " (" + dayName + ")");
+
+                        String pick_date = year + "" + new_monthOfYear + "" + dayOfMonth ; //20220614
+                        picked_date_key = pick_date.substring(2,8);
+                        Log.d("jay", "pick_date : " + pick_date);
+                        Log.d("jay", "pick_date_key : " + picked_date_key);
+
+                        // todo: 선택한 날짜의 저장된 값 가져와서 찍어주기
+                        String picked_date_waterUsageStr = preferenceManager.getString(picked_date_key + "-water-usage", "");
+
+                        Log.d("jay", "picked_date_waterUsageStr : " + picked_date_waterUsageStr);
+
+                        if (picked_date_waterUsageStr.equals("")) {
+                            // todo : ???
+                        } else { // 데이터 꺼내오기
+                            // String을 데이터 모델로 변경
+                            WaterUsage picked_waterUsage = gson.fromJson(picked_date_waterUsageStr, WaterUsage.class);
+                            Txt_aDayAllWater.setText("총 물 사용량 : " + picked_waterUsage.getWaterTotal() + " ml");
+                            Txt_aDayTooth.setText("양치 : " + picked_waterUsage.getTooth() + " ml");
+                            Txt_aDayHand.setText("손 씻기 : " + picked_waterUsage.getHand() + " ml");
+                            Txt_aDayFace.setText("세수 : " + picked_waterUsage.getFace() + " ml");
+                            Txt_aDayShower.setText("샤워 : " + picked_waterUsage.getShower() + " ml");
+                            Txt_aDayDish.setText("설거지 : " + picked_waterUsage.getDish() + " ml");
+                            Txt_aDayEtc.setText("기타 : " + picked_waterUsage.getEtcWater() + " ml");
+
+                            Log.d("jay", "waterTotal: " + picked_waterUsage.getWaterTotal());
+                            Log.d("jay", "tooth: " + picked_waterUsage.getTooth());
+                            Log.d("jay", "hand: " + picked_waterUsage.getHand());
+                            Log.d("jay", "face: " + picked_waterUsage.getFace());
+                            Log.d("jay", "shower: " + picked_waterUsage.getShower());
+                            Log.d("jay", "dish: " + picked_waterUsage.getDish());
+                            Log.d("jay", "etc: " + picked_waterUsage.getEtcWater());
+                        }
                     }
                 },
                 2022, 05, 18);
@@ -200,7 +265,7 @@ public class Statistic extends AppCompatActivity {
         return super.onCreateDialog(id);
     }
 
-    // todo:오늘 포함 일주일치 사용한 물의 양 각각 불러오기
+    // 오늘 포함 일주일치 사용한 물의 양 각각 불러오기
     public void waterData_week() {
         float preTotal = 0f;
         for(int i = 0; i<7; i++){
@@ -218,31 +283,29 @@ public class Statistic extends AppCompatActivity {
                 WaterUsage yesterday_waterUsage = gson.fromJson(yesterday_waterUsageStr, WaterUsage.class);
                 waterUsageList.add(yesterday_waterUsage);
             }
-//            yesterday_waterUsage = gson.fromJson(yesterday_waterUsageStr, WaterUsage.class);
-
-//            preTotal = yesterday_waterUsage.getWaterTotal();
-
-//            Log.d("jay", "key_yesterday: " + key_yesterday);
-//            Log.d("jay", "yesterday_waterUsageStr: " + yesterday_waterUsageStr);
-//            Log.d("jay", "preTotal: " + preTotal);
         }
 
-        // check values
+
+        // <-- chart 그리기 - (2) check values
+
         for (int i = 0; i < waterUsageList.size(); i++) {
             WaterUsage waterUsage = waterUsageList.get(i);
-            Log.d("jay", "item1: " + waterUsage.getWaterTotal());
-            Log.d("jay", "item2: " + waterUsage.getHand());
+            Log.d("jay", "item" +i+ ": " + waterUsage.getWaterTotal());
         }
+        // chart 그리기 - (2) check values -->
 
 
-        // draw
+        // <-- chart 그리기 - (3) draw
         ArrayList<BarEntry> values = new ArrayList<>();
 
         for (int i = 0; i < waterUsageList.size(); i++) {
             WaterUsage waterUsage = waterUsageList.get(i);
-            float val1 = waterUsage.getHand();
-            float val2 = waterUsage.getShower();
+            float val1 = waterUsage.getTooth();
+            float val2 = waterUsage.getHand();
             float val3 = waterUsage.getFace();
+            float val4 = waterUsage.getShower();
+            float val5 = waterUsage.getDish();
+            float val6 = waterUsage.getEtcWater();
 
             values.add(new BarEntry(
                     i,
@@ -255,7 +318,7 @@ public class Statistic extends AppCompatActivity {
         set1 = new BarDataSet(values, "물 사용량");
         set1.setDrawIcons(false);
         set1.setColors(getColors());
-        set1.setStackLabels(new String[]{"손", "샤워", "얼굴"});
+        set1.setStackLabels(new String[]{"양치", "손 씻기", "세수"});
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
@@ -277,6 +340,31 @@ public class Statistic extends AppCompatActivity {
         System.arraycopy(ColorTemplate.MATERIAL_COLORS, 0, colors, 0, 3);
 
         return colors;
+    }
+    // chart 그리기 - (3) draw -->
+
+
+    public void setTodayWaterUsage() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
+        String key = simpledateformat.format(calendar.getTime());
+        String waterUsageStr = preferenceManager.getString(key + "-water-usage", "");   // 태그 붙이고 변수에 저장
+
+        WaterUsage waterUsage;
+
+        if (waterUsageStr.equals("")) {
+            waterUsage = new WaterUsage();
+        } else {
+            waterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
+
+            Txt_aDayAllWater.setText("총 물 사용량 : " + waterUsage.getWaterTotal() + " ml");
+            Txt_aDayTooth.setText("양치 : " + waterUsage.getTooth() + " ml");
+            Txt_aDayHand.setText("손 씻기 : " + waterUsage.getHand() + " ml");
+            Txt_aDayFace.setText("세수 : " + waterUsage.getFace() + " ml");
+            Txt_aDayShower.setText("샤워 : " + waterUsage.getShower() + " ml");
+            Txt_aDayDish.setText("설거지 : " + waterUsage.getDish() + " ml");
+            Txt_aDayEtc.setText("기타 : " + waterUsage.getEtcWater() + " ml");
+        }
     }
 
 }   // end of class

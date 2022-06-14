@@ -98,7 +98,7 @@ public class TestActivity extends AppCompatActivity {
                     // data 만들기
                     WaterUsage usage = new WaterUsage();
 
-                    // todo: 측정값 or 사용자가 직접 입력한 값이 들어가도록
+                    // 측정값 or 사용자가 직접 입력한 값이 들어가도록
                     usage.setTooth(3f);
                     usage.setHand(7f);
                     usage.setFace(3f);
@@ -116,11 +116,12 @@ public class TestActivity extends AppCompatActivity {
 
                     // String을 데이터 모델로 변경
                     WaterUsage waterUsage = gson.fromJson(data, WaterUsage.class);
-                    Log.d("jay", "dish: " + waterUsage.getTooth());
+                    Log.d("jay", "tooth: " + waterUsage.getTooth());
                     Log.d("jay", "hand: " + waterUsage.getHand());
-                    Log.d("jay", "dish: " + waterUsage.getFace());
-                    Log.d("jay", "hand: " + waterUsage.getShower());
+                    Log.d("jay", "face: " + waterUsage.getFace());
+                    Log.d("jay", "shower: " + waterUsage.getShower());
                     Log.d("jay", "dish: " + waterUsage.getDish());
+                    Log.d("jay", "etc: " + waterUsage.getEtcWater());
                 }
             });
 

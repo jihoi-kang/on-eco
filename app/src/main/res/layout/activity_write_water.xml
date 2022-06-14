@@ -176,17 +176,27 @@
 
                     <EditText
                         android:id="@+id/UserInputWater"
-                        android:layout_width="wrap_content"
+                        android:layout_width="220dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:ems="10"
                         android:hint="사용한 물의 양을 입력하세요"
                         android:inputType="number"
                         android:minHeight="48dp" />
 
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="ml"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
                     <Button
                         android:id="@+id/Btn_add"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="@string/input_TW"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>

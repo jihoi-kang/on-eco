@@ -91,6 +91,7 @@ public class WaterPower extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), WriteWater.class);
                 startActivity(intent);
                 setInit();
+                application.active_activity = null;
             }
         });
 
@@ -162,6 +163,7 @@ public class WaterPower extends AppCompatActivity {
         return true;
     }
 
+    // 백버튼 막은 이유 : 백버튼 누르면 수도꼭지랑 수압 선택 안 한 상태로 스탑워치 화면이 뜨게 됨
     @Override
     public void onBackPressed() {
         //안드로이드 백버튼 막기

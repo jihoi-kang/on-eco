@@ -154,7 +154,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/Text_pickDate"
+            android:id="@+id/Txt_pickDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

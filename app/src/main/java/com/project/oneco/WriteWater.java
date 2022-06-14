@@ -249,7 +249,7 @@ public class WriteWater extends AppCompatActivity{
             todayWaterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
         }
 
-        // todo: 물 전체 사용량(ml) 구하기
+        // 물 전체 사용량(ml) 구하기
         float waterTotal = todayWaterUsage.getWaterTotal();
         TXT_today_water_input.setText(waterTotal + "ml");
 
@@ -259,6 +259,9 @@ public class WriteWater extends AppCompatActivity{
         setPreSavedWater(waterTotal);
     } // end of onClick
 
+
+    // 백버튼 막은 이유는 물 측정하는 화면으로 넘어갔다가 다시 왔을 때,
+    // 백버튼을 누르면 홈화면으로 돌아가지 않고 물측정화면으로 넘어가기 때문
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
