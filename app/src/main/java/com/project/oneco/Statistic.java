@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -23,15 +24,16 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
+import com.project.oneco.data.TrashUsage;
 import com.project.oneco.data.WaterUsage;
 import com.project.oneco.test.MyXAxisValueFormatter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -53,16 +55,30 @@ public class Statistic extends AppCompatActivity {
     private Gson gson;
 
     private ArrayList<WaterUsage> waterUsageList;
+    private ArrayList<TrashUsage> trashUsageList;
 
     String picked_date_key = "";
 
+    public static Date selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistic);
 
+        // 모든 class에서 참조할 수 있는 변수 선언
+        application = (OnEcoApplication) getApplication();
+        preferenceManager = PreferenceManager.getInstance(this);
+        gson = new Gson();
 
+        selectedDate = new Date();
+        waterUsageList = new ArrayList<>();
+        trashUsageList = new ArrayList<>();
+
+        setupUi();
+    }
+
+    private void setupUi() {
         Button Btn_graph_trash = findViewById(R.id.Btn_graph_trash);
         Button Btn_graph_water = findViewById(R.id.Btn_graph_water);
 
@@ -77,17 +93,50 @@ public class Statistic extends AppCompatActivity {
         Txt_aDayShower = findViewById(R.id.Txt_aDayShower);
         Txt_aDayDish = findViewById(R.id.Txt_aDayDish);
         Txt_aDayEtc = findViewById(R.id.Txt_aDayEtc);
-
-        waterUsageList = new ArrayList<>();
-
-        // 모든 class에서 참조할 수 있는 변수 선언
-        application = (OnEcoApplication) getApplication();
-
-        preferenceManager = PreferenceManager.getInstance(this);
-        gson = new Gson();
-
         bcChart = findViewById(R.id.bc_chart);
 
+        // <-- chart 그리기 - (1) setting
+        bcChart.getDescription().setEnabled(false);
+
+        // if more than 60 entries are displayed in the chart, no values will be
+        // drawn
+        bcChart.setMaxVisibleValueCount(40);
+
+        // scaling can now only be done on x- and y-axis separately
+        bcChart.setPinchZoom(false);
+
+        bcChart.setDrawGridBackground(false);
+        bcChart.setDrawBarShadow(false);
+
+        bcChart.setDrawValueAboveBar(false);
+        bcChart.setHighlightFullBarEnabled(false);
+
+        // change the position of the y-labels
+        YAxis leftAxis = bcChart.getAxisLeft();
+        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        bcChart.getAxisRight().setEnabled(false);
+        bcChart.getAxisLeft().setEnabled(false);
+
+        XAxis xLabels = bcChart.getXAxis();
+        xLabels.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xLabels.setValueFormatter(new MyXAxisValueFormatter());
+
+        Legend l = bcChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+        l.setFormSize(0f);
+        l.setFormToTextSpace(0f);
+        l.setXEntrySpace(0f);
+
+        Txt_pickDate.setText(application.todayDate);
+        Txt_pickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(DIALOG_DATE);
+            }
+        });
 
         // 이전 버튼
         ImageButton Btn_back = findViewById(R.id.Btn_back);
@@ -104,7 +153,8 @@ public class Statistic extends AppCompatActivity {
                         Intent intent2 = new Intent(getApplicationContext(), WriteWater.class);
                         startActivity(intent2);
                         break;
-                    default: onBackPressed();
+                    default:
+                        onBackPressed();
                         break;
                 }
             }
@@ -147,65 +197,126 @@ public class Statistic extends AppCompatActivity {
             }
         });
 
-        // <-- chart 그리기 - (1) setting
 
-        bcChart.getDescription().setEnabled(false);
+        if (application.statisticType.equals("water-usage")) {
+            setupWaterUsage();
+        } else if (application.statisticType.equals("trash-usage")) {
+            setupTrashUsage();
+        }
+    }
 
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        bcChart.setMaxVisibleValueCount(40);
+    private void setupWaterUsage() {
+        // 1주일치 데이터 가져오기
+        for (int i = 0; i < 7; i++) {
+            Date dDate = new Date();
+            dDate = new Date(dDate.getTime() + (1000 * 60 * 60 * 24 * -i));
+            SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
+            String key_yesterday = dSdf.format(dDate.getTime());
 
-        // scaling can now only be done on x- and y-axis separately
-        bcChart.setPinchZoom(false);
+            String yesterday_waterUsageStr = preferenceManager.getString(key_yesterday + "-water-usage", "");
+            Log.d("jay", "yesterday_waterUsageStr" + yesterday_waterUsageStr);
 
-        bcChart.setDrawGridBackground(false);
-        bcChart.setDrawBarShadow(false);
-
-        bcChart.setDrawValueAboveBar(false);
-        bcChart.setHighlightFullBarEnabled(false);
-
-        // change the position of the y-labels
-        YAxis leftAxis = bcChart.getAxisLeft();
-        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-        bcChart.getAxisRight().setEnabled(false);
-
-        XAxis xLabels = bcChart.getXAxis();
-        xLabels.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xLabels.setValueFormatter(new MyXAxisValueFormatter());
-
-        Legend l = bcChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-        l.setFormSize(8f);
-        l.setFormToTextSpace(4f);
-        l.setXEntrySpace(6f);
-
-        // chart 그리기 - (1) setting -->
-
-        Txt_pickDate.setText(application.todayDate);
-
-        Txt_pickDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog(DIALOG_DATE);
+            if (yesterday_waterUsageStr.equals("")) {
+                waterUsageList.add(new WaterUsage());
+            } else {
+                WaterUsage yesterday_waterUsage = gson.fromJson(yesterday_waterUsageStr, WaterUsage.class);
+                waterUsageList.add(yesterday_waterUsage);
             }
-        });
+        }
 
-        // 오늘 포함 일주일치 사용한 물의 양 각각 불러오기
-        waterData_week();
+        // 값 만들기
+        ArrayList<BarEntry> values = new ArrayList<>();
+        Collections.reverse(waterUsageList);
+        for (int i = 0; i < waterUsageList.size(); i++) {
+            WaterUsage waterUsage = waterUsageList.get(i);
+            float val1 = waterUsage.getTooth();
+            float val2 = waterUsage.getHand();
+            float val3 = waterUsage.getFace();
+            float val4 = waterUsage.getShower();
+            float val5 = waterUsage.getDish();
+            float val6 = waterUsage.getEtcWater();
 
-        // 오늘 날짜 데이터 값 불러서 UI 표시하기
-        setTodayWaterUsage();
+            values.add(new BarEntry(
+                    i,
+                    new float[]{val1, val2, val3, val4, val5, val6},
+                    getResources().getDrawable(R.drawable.ic_launcher_foreground)));
+        }
 
-    }   // end of onCreate
+        // ui
+        setChart(values, "물 사용량");
+    }
 
+    private void setupTrashUsage() {
+        // 1주일치 데이터 가져오기
+        for (int i = 0; i < 7; i++) {
+            Date dDate = new Date();
+            dDate = new Date(dDate.getTime() + (1000 * 60 * 60 * 24 * -i));
+            SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
+            String key_yesterday = dSdf.format(dDate.getTime());
+
+            String yesterday_trashUsageStr = preferenceManager.getString(key_yesterday + "-trash-usage", "");
+            Log.d("jay", "yesterday_trashUsageStr" + yesterday_trashUsageStr);
+
+            if (yesterday_trashUsageStr.equals("")) {
+                trashUsageList.add(new TrashUsage());
+            } else {
+                TrashUsage yesterday_trashUsage = gson.fromJson(yesterday_trashUsageStr, TrashUsage.class);
+                trashUsageList.add(yesterday_trashUsage);
+            }
+        }
+
+        // 값 만들기
+        ArrayList<BarEntry> values = new ArrayList<>();
+        Collections.reverse(trashUsageList);
+        for (int i = 0; i < trashUsageList.size(); i++) {
+            TrashUsage trashUsage = trashUsageList.get(i);
+            float val1 = trashUsage.getPaper();
+            float val2 = trashUsage.getPlastic();
+            float val3 = trashUsage.getPlastic_bag();
+            float val4 = trashUsage.getCan();
+            float val5 = trashUsage.getEmpty_bottle();
+            float val6 = trashUsage.getEtc();
+
+            values.add(new BarEntry(
+                    i,
+                    new float[]{val1, val2, val3, val4, val5, val6},
+                    getResources().getDrawable(R.drawable.ic_launcher_foreground)));
+        }
+
+        // ui
+        setChart(values, "쓰레기 배출량");
+    }
+
+    private void setChart(ArrayList<BarEntry> values, String label) {
+        // <-- chart 그리기 - (3) draw
+        BarDataSet set1 = new BarDataSet(values, label);
+        set1.setDrawIcons(false);
+        set1.setColors(
+                ContextCompat.getColor(this, R.color.black),
+                ContextCompat.getColor(this, R.color.zzzzzzzzzz),
+                ContextCompat.getColor(this, R.color.yellow),
+                ContextCompat.getColor(this, R.color.pink),
+                ContextCompat.getColor(this, R.color.blue),
+                ContextCompat.getColor(this, R.color.green)
+        );
+        set1.setStackLabels(new String[]{"", "", ""});
+
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        BarData data = new BarData(dataSets);
+        data.setValueTextColor(Color.WHITE);
+
+        bcChart.setData(data);
+
+        bcChart.setFitBars(true);
+        bcChart.invalidate();
+    }
 
     @Override
     @Deprecated
-    protected Dialog onCreateDialog(int id){
-        switch (id){
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
             case DIALOG_DATE:
                 DatePickerDialog dpd = new DatePickerDialog(Statistic.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -216,18 +327,18 @@ public class Statistic extends AppCompatActivity {
 
                         String new_monthOfYear = "";
 
-                        if (monthOfYear < 10){
+                        if (monthOfYear < 10) {
                             new_monthOfYear = "0" + monthOfYear;
                         }
 
                         SimpleDateFormat simpledateformat = new SimpleDateFormat("EEE", Locale.KOREA);
                         String dayName = simpledateformat.format(calendar.getTime());
-                        Log.d("jay", "dayName"+ dayName);
+                        Log.d("jay", "dayName" + dayName);
 
                         Txt_pickDate.setText(year + "." + new_monthOfYear + "." + dayOfMonth + " (" + dayName + ")");
 
-                        String pick_date = year + "" + new_monthOfYear + "" + dayOfMonth ; //20220614
-                        picked_date_key = pick_date.substring(2,8);
+                        String pick_date = year + "" + new_monthOfYear + "" + dayOfMonth; //20220614
+                        picked_date_key = pick_date.substring(2, 8);
                         Log.d("jay", "pick_date : " + pick_date);
                         Log.d("jay", "pick_date_key : " + picked_date_key);
 
@@ -259,92 +370,13 @@ public class Statistic extends AppCompatActivity {
                         }
                     }
                 },
-                2022, 05, 18);
+                        2022, 05, 18);
                 return dpd;
         }
         return super.onCreateDialog(id);
     }
 
-    // 오늘 포함 일주일치 사용한 물의 양 각각 불러오기
-    public void waterData_week() {
-        float preTotal = 0f;
-        for(int i = 0; i<7; i++){
-            Date dDate = new Date();
-            dDate = new Date(dDate.getTime()+(1000*60*60*24*-i));
-            SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
-            String key_yesterday = dSdf.format(dDate.getTime());
-
-            String yesterday_waterUsageStr = preferenceManager.getString(key_yesterday + "-water-usage", "");
-            Log.d("jay", "yesterday_waterUsageStr" + yesterday_waterUsageStr);
-
-            if (yesterday_waterUsageStr.equals("")) {
-                waterUsageList.add(new WaterUsage());
-            } else {
-                WaterUsage yesterday_waterUsage = gson.fromJson(yesterday_waterUsageStr, WaterUsage.class);
-                waterUsageList.add(yesterday_waterUsage);
-            }
-        }
-
-
-        // <-- chart 그리기 - (2) check values
-
-        for (int i = 0; i < waterUsageList.size(); i++) {
-            WaterUsage waterUsage = waterUsageList.get(i);
-            Log.d("jay", "item" +i+ ": " + waterUsage.getWaterTotal());
-        }
-        // chart 그리기 - (2) check values -->
-
-
-        // <-- chart 그리기 - (3) draw
-        ArrayList<BarEntry> values = new ArrayList<>();
-
-        for (int i = 0; i < waterUsageList.size(); i++) {
-            WaterUsage waterUsage = waterUsageList.get(i);
-            float val1 = waterUsage.getTooth();
-            float val2 = waterUsage.getHand();
-            float val3 = waterUsage.getFace();
-            float val4 = waterUsage.getShower();
-            float val5 = waterUsage.getDish();
-            float val6 = waterUsage.getEtcWater();
-
-            values.add(new BarEntry(
-                    i,
-                    new float[]{val1, val2, val3},
-                    getResources().getDrawable(R.drawable.ic_launcher_foreground)));
-        }
-
-        BarDataSet set1;
-
-        set1 = new BarDataSet(values, "물 사용량");
-        set1.setDrawIcons(false);
-        set1.setColors(getColors());
-        set1.setStackLabels(new String[]{"양치", "손 씻기", "세수"});
-
-        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
-
-        BarData data = new BarData(dataSets);
-        data.setValueTextColor(Color.WHITE);
-
-        bcChart.setData(data);
-
-        bcChart.setFitBars(true);
-        bcChart.invalidate();
-    }
-
-    private int[] getColors() {
-
-        // have as many colors as stack-values per entry
-        int[] colors = new int[3];
-
-        System.arraycopy(ColorTemplate.MATERIAL_COLORS, 0, colors, 0, 3);
-
-        return colors;
-    }
-    // chart 그리기 - (3) draw -->
-
-
-    public void setTodayWaterUsage() {
+    public void setWaterUsage(Date date) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
         String key = simpledateformat.format(calendar.getTime());

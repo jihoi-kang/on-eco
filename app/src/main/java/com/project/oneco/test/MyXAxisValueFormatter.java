@@ -2,6 +2,11 @@ package com.project.oneco.test;
 
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.project.oneco.Statistic;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MyXAxisValueFormatter extends ValueFormatter implements IAxisValueFormatter {
 
@@ -13,33 +18,12 @@ public class MyXAxisValueFormatter extends ValueFormatter implements IAxisValueF
         return getDisplayDay(value);
     }
 
-    /**
-     * 일: 0
-     * 월: 1
-     * 화: 2
-     * 수: 3
-     * 목: 4
-     * 금: 5
-     * 토: 6
-     */
     private String getDisplayDay(float value) {
-        if (value == 0) {
-            return "일";
-        } else if (value == 1) {
-            return "월";
-        } else if (value == 2) {
-            return "화";
-        } else if (value == 3) {
-            return "수";
-        } else if (value == 4) {
-            return "목";
-        } else if (value == 5) {
-            return "금";
-        } else if (value == 6) {
-            return "토";
-        } else {
-            return "Unknown";
-        }
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("EEE", Locale.KOREA);
+        Date date = new Date(Statistic.selectedDate.getTime() - 1000 * 60 * 60 * 24 * (6 - (int) value));
+        String dayName = simpledateformat.format(date);
+
+        return dayName;
     }
 
 }

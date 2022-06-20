@@ -34,10 +34,7 @@ public class MainHome extends AppCompatActivity {
         waterUsage.setTooth(450f);
         waterUsage.setShower(150f);
         waterUsage.setWaterTotal(1350f);
-        preferenceManager.putString("220611-water-usage", new Gson().toJson(waterUsage));
-
-
-
+        preferenceManager.putString("220620-water-usage", new Gson().toJson(waterUsage));
 
         onBackPressed();
 
@@ -78,7 +75,7 @@ public class MainHome extends AppCompatActivity {
         goto_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                application.statisticType = "water-usage";
                 application.active_activity = "mainHome";
 
                 Intent intent = new Intent(getApplicationContext(), Statistic.class);

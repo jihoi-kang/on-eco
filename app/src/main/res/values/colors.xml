@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- todo: 그래프 색깔 정의하기 -->
+    <color name="zzzzzzzzzz">#FFFF0000</color>
+    <color name="yellow">#FFFFFF00</color>
+    <color name="pink">#FFFF00FF</color>
+    <color name="blue">#FF0000FF</color>
+    <color name="green">#FF00FF00</color>
 </resources>
