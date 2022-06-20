@@ -2,6 +2,8 @@ package com.project.oneco;
 
 import android.app.Application;
 
+import com.project.oneco.data.PreferenceManager;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -39,5 +41,28 @@ public class OnEcoApplication extends Application {
     public float noUsedWT = 0f;    // 물 미사용 시간
 
     public String Wtap = "null";
+
+    public boolean min1 = false;
+    public boolean min3 = false;
+    public boolean min5 = false;
+    public boolean min7 = false;
+    public boolean min10 = false;
+    public boolean min15 = false;
+
+    private PreferenceManager preferenceManager;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        preferenceManager = PreferenceManager.getInstance(this);
+    }
+
+    public void setPoint(int point) {
+        // 기존의 포인트를 가져와서 파라미터 포인트와 더한다.
+        int prePoint = preferenceManager.getInt("point", 0);
+        // 그리고 다시 저장
+        preferenceManager.putInt("point", prePoint + point);
+    }
 
 }

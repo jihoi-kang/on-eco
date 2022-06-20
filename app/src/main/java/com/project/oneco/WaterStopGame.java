@@ -135,7 +135,6 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
 
         // 완료버튼 누르면
-        // todo: 통계화면 넘어갈 때 물 vs 쓰레기 중 먼저 보여주는 그래프가 다르도록 구현
         Btn_finish_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,7 +165,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
                 application.usedW = application.usedWT * application.Wpower;
 
-                Intent intent = new Intent(getApplicationContext(), WaterAfterStati.class);
+                Intent intent = new Intent(getApplicationContext(), GamePF.class);
                 startActivity(intent);
             }
         });
@@ -174,12 +173,6 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
         // 스피너 구현
         spinner.setOnItemSelectedListener(this);
-
-//        String m3 = "03:00";
-//        String m5 = "05:00";
-//        String m7 = "07:00";
-//        String m10 = "10:00";
-//        String m15 = "15:00";
 
         item = new String[]{"선택하세요", "01:00", "03:00", "05:00", "07:00", "10:00", "15:00"};
 
@@ -278,6 +271,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
                 soundMeter.stop();
                 countDownTimer.cancel();
                 timerRunning = false;
+                itemInit();
 
                 // 통계화면으로 넘어가기
                 Intent intent = new Intent(getApplicationContext(), WaterAfterStati.class);
@@ -335,18 +329,44 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         application.waterType = null;
         application.Wtap = "null";
         application.Wpower = 0f;
+        itemInit();
     }
 
 
+    // 스피너 선택 시 메소드
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         selected_minText.setText(item[i]);
+
+        if(item[i].equals("01:00")){
+            application.min1 = true;
+        } else if(item[i].equals("03:00")){
+            application.min3 = true;
+        } else if(item[i].equals("05:00")){
+            application.min5 = true;
+        } else if(item[i].equals("07:00")){
+            application.min7 = true;
+        } else if(item[i].equals("10:00")){
+            application.min10 = true;
+        } else if(item[i].equals("15:00")){
+            application.min15 = true;
+        }
+
         if(selected_minText.getText().toString().equals("선택하세요")){
             selected_minText.setText("00:00");
         }
         if(i != 0){
             Toast.makeText(getApplicationContext(), "제한 시간 " +item[i]+ "을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void itemInit(){
+        application.min1 = false;
+        application.min3 = false;
+        application.min5 = false;
+        application.min7 = false;
+        application.min10 = false;
+        application.min15 = false;
     }
 
     @Override
@@ -374,5 +394,4 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
                 .setPermissions(Manifest.permission.RECORD_AUDIO)
                 .check();
     }
-
 }   // end of class

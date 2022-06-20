@@ -29,4 +29,14 @@ public class PreferenceManager {
         return pref.getString(key, defaultValue);
     }
 
+    public void putInt(String key, int value) {
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(key, value);
+        editor.commit();
+    }
+
+    public int getInt(String key, int defaultValue) {
+        return pref.getInt(key, defaultValue);
+    }
+
 }
