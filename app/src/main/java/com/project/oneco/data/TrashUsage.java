@@ -77,11 +77,11 @@ public class TrashUsage {
         this.empty_bottle = empty_bottle;
     }
 
-    public float getEtc() {
+    public float getTrashEtc() {
         return etc;
     }
 
-    public void setEtc(float etc) {
+    public void setTrashEtc(float etc) {
         this.etc = etc;
     }
 

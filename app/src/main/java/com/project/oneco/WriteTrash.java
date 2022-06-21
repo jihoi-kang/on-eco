@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.TrashUsage;
-import com.project.oneco.data.WaterUsage;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -101,6 +100,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 onBackPressed();
+                application.active_activity = "";
+                application.statisticType = "";
             }
         });
 
@@ -123,7 +124,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 startActivity(intent);
 
                 application.active_activity = "statistic";
-
+                application.statisticType = "trash-usage";
             }
         });
 
@@ -265,8 +266,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                         float empty_bottle = trashUsage.getEmpty_bottle();
                         trashUsage.setEmpty_bottle(empty_bottle + currentItemWeight);
                     } else if (trashType.equals("etc")) {
-                        float etc = trashUsage.getEtc();
-                        trashUsage.setEtc(etc + currentItemWeight);
+                        float etc = trashUsage.getTrashEtc();
+                        trashUsage.setTrashEtc(etc + currentItemWeight);
                     }
 
                     // todo: localStorage에 저장
@@ -276,7 +277,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     // todo: 쓰레기 전체 g 구하기
                     float total = trashUsage.getTissue() + trashUsage.getDisposable_cup() + trashUsage.getDisposable_spoon()
                             + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag() + trashUsage.getCan()
-                            + trashUsage.getEmpty_bottle() + trashUsage.getEtc();
+                            + trashUsage.getEmpty_bottle() + trashUsage.getTrashEtc();
 
                     TXT_today_trash_input.setText(total + "g");
                     setPreSavedTrash(total);
@@ -302,7 +303,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 //        todayTrashUsage.getTrashTotal();
         float total = todayTrashUsage.getTissue() + todayTrashUsage.getDisposable_cup() + todayTrashUsage.getDisposable_spoon()
                 + todayTrashUsage.getPaper() + todayTrashUsage.getPlastic() + todayTrashUsage.getPlastic_bag() + todayTrashUsage.getCan()
-                + todayTrashUsage.getEmpty_bottle() + todayTrashUsage.getEtc();
+                + todayTrashUsage.getEmpty_bottle() + todayTrashUsage.getTrashEtc();
         TXT_today_trash_input.setText(total + "g");
 
         setPreSavedTrash(total);

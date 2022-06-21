@@ -8,257 +8,286 @@
     tools:context=".Statistic">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/Btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
-                android:contentDescription="@string/Btn_before"
-                app:srcCompat="?attr/actionModeCloseDrawable"
-                app:tint="#606060"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-            <TextView
-                android:id="@+id/title_ONECO"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="ON-ECO"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <ImageButton
-                android:id="@+id/goto_mypage"
-                android:layout_width="56dp"
-                android:layout_height="49dp"
-                android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
-                android:contentDescription="@string/goto_mypage"
-                app:srcCompat="@drawable/home"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/subtitle_statistic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="배출/사용량 통계"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/Btn_graph_trash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="쓰레기 배출량" />
-
-            <Button
-                android:id="@+id/Btn_graph_water"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="물 사용량" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="주" />
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="월" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="년" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_height="wrap_content" >
-            <TextView
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="370ml"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="370ml"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="370ml"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="370ml"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="370ml"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="370ml"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="370ml"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/bc_chart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/trashTypeColor_View"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/trash_type_color" />
-
-            <ImageView
-                android:id="@+id/waterTypeColor_View"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/water_type_color" />
+                android:layout_margin="10dp"
+                android:orientation="vertical">
 
-        </FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-    </LinearLayout>
+                    <ImageButton
+                        android:id="@+id/Btn_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="#00FFFFFF"
+                        android:contentDescription="@string/Btn_before"
+                        app:srcCompat="?attr/actionModeCloseDrawable"
+                        app:tint="#606060"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="일별 기록"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/title_ONECO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="ON-ECO"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/goto_mypage"
+                        android:layout_width="56dp"
+                        android:layout_height="49dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#00FFFFFF"
+                        android:contentDescription="@string/goto_mypage"
+                        app:srcCompat="@drawable/home" />
 
-        <TextView
-            android:id="@+id/Txt_pickDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="날짜를 선택해주세요"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                </LinearLayout>
 
-        <TextView
-            android:id="@+id/Txt_aDayAllWater"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="총 사용량 : " />
+                <TextView
+                    android:id="@+id/subtitle_statistic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="배출/사용량 통계"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/Txt_aDayTooth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="양치 : " />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
 
-        <TextView
-            android:id="@+id/Txt_aDayHand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="손 씻기 : " />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/Txt_aDayFace"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="세수 : " />
+                    <Button
+                        android:id="@+id/Btn_graph_trash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="쓰레기 배출량" />
 
-        <TextView
-            android:id="@+id/Txt_aDayShower"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="샤워 : " />
+                    <Button
+                        android:id="@+id/Btn_graph_water"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="물 사용량" />
 
-        <TextView
-            android:id="@+id/Txt_aDayDish"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="설거지 : " />
+                </LinearLayout>
 
-        <TextView
-            android:id="@+id/Txt_aDayEtc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="기타 : " />
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="주" />
+
+                    <Button
+                        android:id="@+id/button5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="월" />
+
+                    <Button
+                        android:id="@+id/button6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="년" />
+                </LinearLayout>
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/bc_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/day1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="370ml"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/day2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="370ml"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/day3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="370ml"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/day4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="370ml"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/day5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="370ml"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/day6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="370ml"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/day7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="370ml"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/trashTypeColor_View"
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp"
+                        app:srcCompat="@drawable/trash_type_color" />
+
+                    <ImageView
+                        android:id="@+id/waterTypeColor_View"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        app:srcCompat="@drawable/water_type_color" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="일별 기록"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Txt_pickDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="날짜를 선택해주세요"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/Txt_aDayAllWater"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="총 사용량 : " />
+
+                <TextView
+                    android:id="@+id/Txt_aDayTooth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="양치 : " />
+
+                <TextView
+                    android:id="@+id/Txt_aDayHand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="손 씻기 : " />
+
+                <TextView
+                    android:id="@+id/Txt_aDayFace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="세수 : " />
+
+                <TextView
+                    android:id="@+id/Txt_aDayShower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="샤워 : " />
+
+                <TextView
+                    android:id="@+id/Txt_aDayDish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="설거지 : " />
+
+                <TextView
+                    android:id="@+id/Txt_aDayEtc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="기타 : " />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

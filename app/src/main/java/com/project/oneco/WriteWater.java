@@ -66,7 +66,8 @@ public class WriteWater extends AppCompatActivity{
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainHome.class);
                 startActivity(intent);
-                application.active_activity = null;
+                application.active_activity = "";
+                application.statisticType = "";
             }
         });
 
@@ -89,6 +90,7 @@ public class WriteWater extends AppCompatActivity{
                 startActivity(intent);
 
                 application.active_activity = "statistic";
+                application.statisticType = "water-usage";
             }
         });
 

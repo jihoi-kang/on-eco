@@ -9,9 +9,17 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- todo: 그래프 색깔 정의하기 -->
-    <color name="zzzzzzzzzz">#FFFF0000</color>
-    <color name="yellow">#FFFFFF00</color>
-    <color name="pink">#FFFF00FF</color>
-    <color name="blue">#FF0000FF</color>
-    <color name="green">#FF00FF00</color>
+    <color name="etc">#B7B4B4</color>
+
+    <color name="paper">#81B75D</color>
+    <color name="plastic">#2E75B6</color>
+    <color name="pla_bag">#FFC000</color>
+    <color name="can">#FF6600</color>
+    <color name="bottle">#843C0C</color>
+
+    <color name="tooth">#CAE997</color>
+    <color name="hand">#81FFCC</color>
+    <color name="face">#12D9D4</color>
+    <color name="dish">#87B5F9</color>
+    <color name="shower">#0B4CCF</color>
 </resources>

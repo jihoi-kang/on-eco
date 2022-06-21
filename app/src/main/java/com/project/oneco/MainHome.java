@@ -75,7 +75,7 @@ public class MainHome extends AppCompatActivity {
         goto_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                application.statisticType = "water-usage";
+                application.statisticType = "trash-usage";
                 application.active_activity = "mainHome";
 
                 Intent intent = new Intent(getApplicationContext(), Statistic.class);
