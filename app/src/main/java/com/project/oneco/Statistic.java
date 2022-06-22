@@ -53,6 +53,7 @@ public class Statistic extends AppCompatActivity {
 
     String picked_date_key = "";
 
+    // 차트에서 요일 변경해줌
     public static Date selectedDate;
 
     BarChart bcChart;
@@ -437,6 +438,7 @@ public class Statistic extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year, monthOfYear, dayOfMonth);
+                        selectedDate = calendar.getTime();
 
                         monthOfYear = monthOfYear + 1;
 
@@ -550,7 +552,9 @@ public class Statistic extends AppCompatActivity {
                     Txt_aDayEtc.setText("기타 : 0 g");
                 } else {
                     TrashUsage picked_trashUsage = gson.fromJson(picked_date_trashUsageStr, TrashUsage.class);
-                    Txt_aDayAllWater.setText("총 쓰레기 배출량 : " + picked_trashUsage.getTrashTotal() + " g");
+                    float picked_total_trash = picked_trashUsage.getPaper() + picked_trashUsage.getPlastic() + picked_trashUsage.getPlastic_bag()
+                            + picked_trashUsage.getCan() + picked_trashUsage.getEmpty_bottle() + picked_trashUsage.getTrashEtc();
+                    Txt_aDayAllWater.setText("총 쓰레기 배출량 : " + picked_total_trash + " g");
                     Txt_aDayTooth.setText("종이 : " + picked_trashUsage.getPaper() + " g");
                     Txt_aDayHand.setText("플라스틱 : " + picked_trashUsage.getPlastic() + " g");
                     Txt_aDayFace.setText("비닐 : " + picked_trashUsage.getPlastic_bag() + " g");
