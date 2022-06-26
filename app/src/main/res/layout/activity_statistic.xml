@@ -56,7 +56,7 @@
                         android:layout_weight="1"
                         android:backgroundTint="#00FFFFFF"
                         android:contentDescription="@string/goto_mypage"
-                        app:srcCompat="@drawable/home" />
+                        app:srcCompat="@drawable/mypage_sun" />
 
                 </LinearLayout>
 
@@ -245,47 +245,63 @@
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
 
-                <TextView
-                    android:id="@+id/Txt_aDayAllWater"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="총 사용량 : " />
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/Txt_aDayTooth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="양치 : " />
+                    <TextView
+                        android:id="@+id/Txt_item_all"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="총 물 사용량 :"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <TextView
-                    android:id="@+id/Txt_aDayHand"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="손 씻기 : " />
+                    <TextView
+                        android:id="@+id/Txt_item1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="세수 : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <TextView
-                    android:id="@+id/Txt_aDayFace"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="세수 : " />
+                    <TextView
+                        android:id="@+id/Txt_item2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="양치 : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <TextView
-                    android:id="@+id/Txt_aDayShower"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="샤워 : " />
+                    <TextView
+                        android:id="@+id/Txt_item3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="설거지 : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <TextView
-                    android:id="@+id/Txt_aDayDish"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="설거지 : " />
+                    <TextView
+                        android:id="@+id/Txt_item4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="기타 : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <TextView
-                    android:id="@+id/Txt_aDayEtc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="기타 : " />
+                    <TextView
+                        android:id="@+id/Txt_item5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="손 씻기 : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <TextView
+                        android:id="@+id/Txt_item6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="기타 : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

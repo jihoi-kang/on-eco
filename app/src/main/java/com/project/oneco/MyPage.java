@@ -12,11 +12,21 @@ import android.widget.TextView;
 import com.project.oneco.test.GetDialogTest;
 
 public class MyPage extends AppCompatActivity {
+    private OnEcoApplication application;
+    TextView Txt_tempPoint;
+    ImageView Img_temp_level;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
+
+        application = (OnEcoApplication) getApplication();
+        Txt_tempPoint = findViewById(R.id.Txt_tempPoint);
+        Img_temp_level = findViewById(R.id.Img_temp_level);
+
+        Txt_tempPoint.setText("눈송이님의 햇살은 " + application.getPoint() + "밝기 입니다.");
 
         // 이전 버튼
         ImageButton Btn_back = findViewById(R.id.Btn_back);
@@ -37,15 +47,17 @@ public class MyPage extends AppCompatActivity {
             }
         });
 
-
-//        // todo: remove 임시로 이미지 누르면 다이얼로그 테스트로 넘어가기
-//        ImageView imageView = findViewById(R.id.imageView);
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(view.getContext(), GetDialogTest.class));
-//            }
-//        });
+        if (application.getPoint() < 30){
+            Img_temp_level.setImageResource(R.drawable.level1);
+        } else if (30 <= application.getPoint() & application.getPoint() < 500){
+            Img_temp_level.setImageResource(R.drawable.level2);
+        } else if (500 <= application.getPoint() & application.getPoint() < 1500){
+            Img_temp_level.setImageResource(R.drawable.level3);
+        } else if (1500 <= application.getPoint() & application.getPoint() < 2000){
+            Img_temp_level.setImageResource(R.drawable.level4);
+        } else if (2000 <= application.getPoint()){
+            Img_temp_level.setImageResource(R.drawable.level5);
+        }
 
 
     }   // end of onCreate

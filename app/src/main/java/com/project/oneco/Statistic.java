@@ -58,13 +58,13 @@ public class Statistic extends AppCompatActivity {
 
     BarChart bcChart;
     TextView Txt_pickDate;
-    TextView Txt_aDayAllWater;
-    TextView Txt_aDayTooth;
-    TextView Txt_aDayHand;
-    TextView Txt_aDayFace;
-    TextView Txt_aDayShower;
-    TextView Txt_aDayDish;
-    TextView Txt_aDayEtc;
+    TextView Txt_item_all;
+    TextView Txt_item1;
+    TextView Txt_item2;
+    TextView Txt_item3;
+    TextView Txt_item4;
+    TextView Txt_item5;
+    TextView Txt_item6;
 
     TextView day1;
     TextView day2;
@@ -105,13 +105,13 @@ public class Statistic extends AppCompatActivity {
         Button Btn_graph_water = findViewById(R.id.Btn_graph_water);
 
         Txt_pickDate = findViewById(R.id.Txt_pickDate);
-        Txt_aDayAllWater = findViewById(R.id.Txt_aDayAllWater);
-        Txt_aDayTooth = findViewById(R.id.Txt_aDayTooth);
-        Txt_aDayHand = findViewById(R.id.Txt_aDayHand);
-        Txt_aDayFace = findViewById(R.id.Txt_aDayFace);
-        Txt_aDayShower = findViewById(R.id.Txt_aDayShower);
-        Txt_aDayDish = findViewById(R.id.Txt_aDayDish);
-        Txt_aDayEtc = findViewById(R.id.Txt_aDayEtc);
+        Txt_item_all = findViewById(R.id.Txt_item6);
+        Txt_item1 = findViewById(R.id.Txt_item2);
+        Txt_item2 = findViewById(R.id.Txt_item5);
+        Txt_item3 = findViewById(R.id.Txt_item1);
+        Txt_item4 = findViewById(R.id.Txt_item_all);
+        Txt_item5 = findViewById(R.id.Txt_item3);
+        Txt_item6 = findViewById(R.id.Txt_item4);
         bcChart = findViewById(R.id.bc_chart);
 
         day1 = findViewById(R.id.day1);
@@ -490,45 +490,50 @@ public class Statistic extends AppCompatActivity {
                 String today_key_trashUsageStr = preferenceManager.getString(today_key + "-trash-usage", "");
 
                 if (today_key_trashUsageStr.equals("")) {
-                    Txt_aDayAllWater.setText("총 쓰레기 배출량 : 0 g");
-                    Txt_aDayTooth.setText("종이 : 0 g");
-                    Txt_aDayHand.setText("플라스틱 : 0 g");
-                    Txt_aDayFace.setText("비닐 : 0 g");
-                    Txt_aDayShower.setText("캔 : 0 g");
-                    Txt_aDayDish.setText("공병 : 0 g");
-                    Txt_aDayEtc.setText("기타 : 0 g");
+                    Txt_item_all.setText("총 쓰레기 배출량 : 0 g");
+                    Txt_item1.setText("종이 : 0 g");
+                    Txt_item2.setText("플라스틱 : 0 g");
+                    Txt_item3.setText("비닐 : 0 g");
+                    Txt_item4.setText("캔 : 0 g");
+                    Txt_item5.setText("공병 : 0 g");
+                    Txt_item6.setText("기타 : 0 g");
                 } else { // 데이터 꺼내오기
                     // String을 데이터 모델로 변경
                     TrashUsage today_key_trashUsage = gson.fromJson(today_key_trashUsageStr, TrashUsage.class);
-                    Txt_aDayAllWater.setText("총 쓰레기 배출량 : " + today_key_trashUsage.getTrashTotal() + " g");
-                    Txt_aDayTooth.setText("종이 : " + today_key_trashUsage.getPaper() + " g");
-                    Txt_aDayHand.setText("플라스틱 : " + today_key_trashUsage.getPlastic() + " g");
-                    Txt_aDayFace.setText("비닐 : " + today_key_trashUsage.getPlastic_bag() + " g");
-                    Txt_aDayShower.setText("캔 : " + today_key_trashUsage.getCan() + " g");
-                    Txt_aDayDish.setText("공병 : " + today_key_trashUsage.getEmpty_bottle() + " g");
-                    Txt_aDayEtc.setText("기타 : " + today_key_trashUsage.getTrashEtc() + " g");
+                    float today_total_trash = today_key_trashUsage.getPaper() + today_key_trashUsage.getPlastic() + today_key_trashUsage.getPlastic_bag()
+                            + today_key_trashUsage.getCan() + today_key_trashUsage.getEmpty_bottle() + today_key_trashUsage.getTrashEtc();
+                    Txt_item_all.setText("총 쓰레기 배출량 : " + today_total_trash + " g");
+                    Txt_item1.setText("종이 : " + today_key_trashUsage.getPaper() + " g");
+                    Txt_item2.setText("플라스틱 : " + today_key_trashUsage.getPlastic() + " g");
+                    Txt_item3.setText("비닐 : " + today_key_trashUsage.getPlastic_bag() + " g");
+                    Txt_item4.setText("캔 : " + today_key_trashUsage.getCan() + " g");
+                    Txt_item5.setText("공병 : " + today_key_trashUsage.getEmpty_bottle() + " g");
+                    Txt_item6.setText("기타 : " + today_key_trashUsage.getTrashEtc() + " g");
                 }
 
             } else if (waterTypeColor_View.getVisibility() == VISIBLE) {
                 String today_key_waterUsageStr = preferenceManager.getString(today_key + "-water-usage", "");
 
                 if (today_key_waterUsageStr.equals("")) {
-                    Txt_aDayAllWater.setText("총 물 사용량 : 0 ml");
-                    Txt_aDayTooth.setText("양치 : 0 ml");
-                    Txt_aDayHand.setText("손 씻기 : 0 ml");
-                    Txt_aDayFace.setText("세수 : 0 ml");
-                    Txt_aDayShower.setText("샤워 : 0 ml");
-                    Txt_aDayDish.setText("설거지 : 0 ml");
-                    Txt_aDayEtc.setText("기타 : 0 ml");
+                    Txt_item_all.setText("총 물 사용량 : 0 ml");
+                    Txt_item1.setText("양치 : 0 ml");
+                    Txt_item2.setText("손 씻기 : 0 ml");
+                    Txt_item3.setText("세수 : 0 ml");
+                    Txt_item4.setText("샤워 : 0 ml");
+                    Txt_item5.setText("설거지 : 0 ml");
+                    Txt_item6.setText("기타 : 0 ml");
                 } else {
                     WaterUsage today_key_waterUsage = gson.fromJson(today_key_waterUsageStr, WaterUsage.class);
-                    Txt_aDayAllWater.setText("총 물 사용량 : " + today_key_waterUsage.getWaterTotal() + " ml");
-                    Txt_aDayTooth.setText("양치 : " + today_key_waterUsage.getTooth() + " ml");
-                    Txt_aDayHand.setText("손 씻기 : " + today_key_waterUsage.getHand() + " ml");
-                    Txt_aDayFace.setText("세수 : " + today_key_waterUsage.getFace() + " ml");
-                    Txt_aDayShower.setText("샤워 : " + today_key_waterUsage.getShower() + " ml");
-                    Txt_aDayDish.setText("설거지 : " + today_key_waterUsage.getDish() + " ml");
-                    Txt_aDayEtc.setText("기타 : " + today_key_waterUsage.getEtcWater() + " ml");
+
+                    Txt_item_all.setText("총 물 사용량 : " + today_key_waterUsage.getWaterTotal() + " ml");
+                    Txt_item1.setText("양치 : " + today_key_waterUsage.getTooth() + " ml");
+                    Txt_item2.setText("손 씻기 : " + today_key_waterUsage.getHand() + " ml");
+                    Txt_item3.setText("세수 : " + today_key_waterUsage.getFace() + " ml");
+                    Txt_item4.setText("샤워 : " + today_key_waterUsage.getShower() + " ml");
+                    Txt_item5.setText("설거지 : " + today_key_waterUsage.getDish() + " ml");
+                    Txt_item6.setText("기타 : " + today_key_waterUsage.getEtcWater() + " ml");
+
+                    Log.d("hun","doing");
                 }
             }
         }
@@ -543,24 +548,24 @@ public class Statistic extends AppCompatActivity {
                 Log.d("jay", "picked_date_trashUsageStr : " + picked_date_trashUsageStr);
 
                 if (picked_date_trashUsageStr.equals("")) {
-                    Txt_aDayAllWater.setText("총 쓰레기 배출량 : 0 g");
-                    Txt_aDayTooth.setText("종이 : 0 g");
-                    Txt_aDayHand.setText("플라스틱 : 0 g");
-                    Txt_aDayFace.setText("비닐 : 0 g");
-                    Txt_aDayShower.setText("캔 : 0 g");
-                    Txt_aDayDish.setText("공병 : 0 g");
-                    Txt_aDayEtc.setText("기타 : 0 g");
+                    Txt_item_all.setText("총 쓰레기 배출량 : 0 g");
+                    Txt_item1.setText("종이 : 0 g");
+                    Txt_item2.setText("플라스틱 : 0 g");
+                    Txt_item3.setText("비닐 : 0 g");
+                    Txt_item4.setText("캔 : 0 g");
+                    Txt_item5.setText("공병 : 0 g");
+                    Txt_item6.setText("기타 : 0 g");
                 } else {
                     TrashUsage picked_trashUsage = gson.fromJson(picked_date_trashUsageStr, TrashUsage.class);
                     float picked_total_trash = picked_trashUsage.getPaper() + picked_trashUsage.getPlastic() + picked_trashUsage.getPlastic_bag()
                             + picked_trashUsage.getCan() + picked_trashUsage.getEmpty_bottle() + picked_trashUsage.getTrashEtc();
-                    Txt_aDayAllWater.setText("총 쓰레기 배출량 : " + picked_total_trash + " g");
-                    Txt_aDayTooth.setText("종이 : " + picked_trashUsage.getPaper() + " g");
-                    Txt_aDayHand.setText("플라스틱 : " + picked_trashUsage.getPlastic() + " g");
-                    Txt_aDayFace.setText("비닐 : " + picked_trashUsage.getPlastic_bag() + " g");
-                    Txt_aDayShower.setText("캔 : " + picked_trashUsage.getCan() + " g");
-                    Txt_aDayDish.setText("공병 : " + picked_trashUsage.getEmpty_bottle() + " g");
-                    Txt_aDayEtc.setText("기타 : " + picked_trashUsage.getTrashEtc() + " g");
+                    Txt_item_all.setText("총 쓰레기 배출량 : " + picked_total_trash + " g");
+                    Txt_item1.setText("종이 : " + picked_trashUsage.getPaper() + " g");
+                    Txt_item2.setText("플라스틱 : " + picked_trashUsage.getPlastic() + " g");
+                    Txt_item3.setText("비닐 : " + picked_trashUsage.getPlastic_bag() + " g");
+                    Txt_item4.setText("캔 : " + picked_trashUsage.getCan() + " g");
+                    Txt_item5.setText("공병 : " + picked_trashUsage.getEmpty_bottle() + " g");
+                    Txt_item6.setText("기타 : " + picked_trashUsage.getTrashEtc() + " g");
                 }
 
             } else if (waterTypeColor_View.getVisibility() == VISIBLE){
@@ -572,22 +577,22 @@ public class Statistic extends AppCompatActivity {
                 Log.d("jay", "picked_date_waterUsageStr : " + picked_date_waterUsageStr);
 
                 if (picked_date_waterUsageStr.equals("")) {
-                    Txt_aDayAllWater.setText("총 물 사용량 : 0 ml");
-                    Txt_aDayTooth.setText("양치 : 0 ml");
-                    Txt_aDayHand.setText("손 씻기 : 0 ml");
-                    Txt_aDayFace.setText("세수 : 0 ml");
-                    Txt_aDayShower.setText("샤워 : 0 ml");
-                    Txt_aDayDish.setText("설거지 : 0 ml");
-                    Txt_aDayEtc.setText("기타 : 0 ml");
+                    Txt_item_all.setText("총 물 사용량 : 0 ml");
+                    Txt_item1.setText("양치 : 0 ml");
+                    Txt_item2.setText("손 씻기 : 0 ml");
+                    Txt_item3.setText("세수 : 0 ml");
+                    Txt_item4.setText("샤워 : 0 ml");
+                    Txt_item5.setText("설거지 : 0 ml");
+                    Txt_item6.setText("기타 : 0 ml");
                 } else {
                     WaterUsage picked_waterUsage = gson.fromJson(picked_date_waterUsageStr, WaterUsage.class);
-                    Txt_aDayAllWater.setText("총 물 사용량 : " + picked_waterUsage.getWaterTotal() + " ml");
-                    Txt_aDayTooth.setText("양치 : " + picked_waterUsage.getTooth() + " ml");
-                    Txt_aDayHand.setText("손 씻기 : " + picked_waterUsage.getHand() + " ml");
-                    Txt_aDayFace.setText("세수 : " + picked_waterUsage.getFace() + " ml");
-                    Txt_aDayShower.setText("샤워 : " + picked_waterUsage.getShower() + " ml");
-                    Txt_aDayDish.setText("설거지 : " + picked_waterUsage.getDish() + " ml");
-                    Txt_aDayEtc.setText("기타 : " + picked_waterUsage.getEtcWater() + " ml");
+                    Txt_item_all.setText("총 물 사용량 : " + picked_waterUsage.getWaterTotal() + " ml");
+                    Txt_item1.setText("양치 : " + picked_waterUsage.getTooth() + " ml");
+                    Txt_item2.setText("손 씻기 : " + picked_waterUsage.getHand() + " ml");
+                    Txt_item3.setText("세수 : " + picked_waterUsage.getFace() + " ml");
+                    Txt_item4.setText("샤워 : " + picked_waterUsage.getShower() + " ml");
+                    Txt_item5.setText("설거지 : " + picked_waterUsage.getDish() + " ml");
+                    Txt_item6.setText("기타 : " + picked_waterUsage.getEtcWater() + " ml");
                 }
             }
         }

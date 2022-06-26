@@ -85,7 +85,7 @@
             android:textColor="#ffffff" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/Img_temp_level"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_gravity="center"
@@ -124,7 +124,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/Txt_tempPoint"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="20dp"
@@ -243,7 +243,7 @@
                     android:layout_marginLeft="270dp"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="50 밝기"
+                    android:text="500 밝기"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </FrameLayout>
 
@@ -277,7 +277,7 @@
                     android:layout_marginLeft="270dp"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="70 밝기"
+                    android:text="1500 밝기"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </FrameLayout>
 
@@ -311,7 +311,7 @@
                     android:layout_marginLeft="270dp"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="100 밝기"
+                    android:text="2000 밝기"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </FrameLayout>
         </LinearLayout>

@@ -50,7 +50,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="#00FFFFFF"
                     android:contentDescription="@string/Btn_checkStatis"
-                    app:srcCompat="@drawable/home"
+                    app:srcCompat="@drawable/statistic"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             </LinearLayout>

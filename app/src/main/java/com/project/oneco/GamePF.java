@@ -43,35 +43,29 @@ public class GamePF extends AppCompatActivity {
             }
         }, 3000);
 
-        // todo: 전체 포인트 프리퍼런스 저장
-        // 포인트 계산
+        // 전체 포인트 프리퍼런스 저장
         if (application.min1){
             application.setPoint(10);
             Txt_point.setText("+10");
         } else if (application.min3){
-//            application.gamePoint = 2000;
-//            application.point += application.gamePoint;
+            application.setPoint(2000);
             Txt_point.setText("+2000");
         } else if (application.min5){
-//            application.gamePoint = 1500;
-//            application.point += application.gamePoint;
+            application.setPoint(1500);
             Txt_point.setText("+1500");
         } else if (application.min7){
-//            application.gamePoint = 1000;
-//            application.point += application.gamePoint;
+            application.setPoint(1000);
             Txt_point.setText("+1000");
         } else if (application.min10){
-//            application.gamePoint = 700;
-//            application.point += application.gamePoint;
+            application.setPoint(700);
             Txt_point.setText("+700");
         } else if (application.min15){
-//            application.gamePoint = 500;
-//            application.point += application.gamePoint;
+            application.setPoint(500);
             Txt_point.setText("+500");
         } else {
             Img_sun.setVisibility(View.INVISIBLE);
-//            application.gamePoint = 10;
-//            application.point += application.gamePoint;
+            application.setPoint(10);
+            Txt_point.setText("+10");
             Txt_pf.setText("게임 실패...");
             Txt_message.setText("아쉬워요~\n좀만 더 분발해봅시다!");
         }

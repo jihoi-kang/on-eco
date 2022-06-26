@@ -24,6 +24,9 @@ public class MainHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
 
+        // Activity간의 데이터 공유를 위한 application 가져오기
+        OnEcoApplication application = (OnEcoApplication) getApplication();
+
         // 임의로 값 추가
         PreferenceManager preferenceManager = PreferenceManager.getInstance(this);
         WaterUsage waterUsage = new WaterUsage();
@@ -38,8 +41,10 @@ public class MainHome extends AppCompatActivity {
 
         onBackPressed();
 
-        // Activity간의 데이터 공유를 위한 application 가져오기
-        OnEcoApplication application = (OnEcoApplication) getApplication();
+        // 포인트 값 임의 조정
+        //application.setPoint(-1500);
+
+        application.statisticType = "trash-usage";
 
         ImageButton goto_mypage = findViewById(R.id.goto_mypage);
         goto_mypage.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +68,7 @@ public class MainHome extends AppCompatActivity {
         goto_write_water.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                application.statisticType = "water-usage";
                 application.active_activity = "mainHome";
 
                 Intent intent = new Intent(getApplicationContext(), WriteWater.class);
@@ -75,7 +80,6 @@ public class MainHome extends AppCompatActivity {
         goto_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                application.statisticType = "trash-usage";
                 application.active_activity = "mainHome";
 
                 Intent intent = new Intent(getApplicationContext(), Statistic.class);
@@ -87,6 +91,7 @@ public class MainHome extends AppCompatActivity {
         goto_shower_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                application.statisticType = "water-usage";
                 application.waterType = "shower";
                 Intent intent = new Intent(getApplicationContext(), WaterStopGame.class);
                 startActivity(intent);

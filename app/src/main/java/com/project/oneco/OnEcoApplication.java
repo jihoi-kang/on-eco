@@ -67,4 +67,10 @@ public class OnEcoApplication extends Application {
         preferenceManager.putInt("point", prePoint + point);
     }
 
+    public int getPoint() {
+        // 기존의 포인트를 가져온다
+        int prePoint = preferenceManager.getInt("point", 0);
+        return prePoint;
+    }
+
 }

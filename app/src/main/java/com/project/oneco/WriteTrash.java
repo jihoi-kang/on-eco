@@ -26,11 +26,11 @@ import java.util.Locale;
 
 public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private final static String TAG = "WriteTrash";
-    // todo: 쓰레기 종류
+    // 쓰레기 종류
     private String trashType;
     private OnEcoApplication application;
 
-    // todo: 데이터 정의(오늘 배출한 쓰레기, 전일 대비 절약한 쓰레기)
+    // 데이터 정의(오늘 배출한 쓰레기, 전일 대비 절약한 쓰레기)
     private String todayTrash;
     private String removedTrash;
     TextView TXT_today_trash_input;
@@ -47,7 +47,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     ListView lvList;
     ArrayAdapter<String> adapter;
 
-    // todo: listView에 들어갈 item들 정의(9개)
+    // listView에 들어갈 item들 정의(9개)
     String[] tissueItems = {"물티슈", "각티슈", "손 닦는 휴지", "두루말이 휴지"};
     String[] disposableCupItems = {"종이 정수기컵", "종이 자판기컵", "종이 Tall 사이즈(355ml)", "종이 Grande 사이즈(473ml)", "종이 Venti 사이즈(591ml)",
             "플라스틱 Tall 사이즈(355ml)", "플라스틱 Grande 사이즈(473ml)", "플라스틱 Venti 사이즈(591ml)"};
@@ -71,7 +71,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         gson = new Gson();
 
 
-        // todo: listview bind & item click listener 달기(setOnItemClickListener)
+        // listview bind & item click listener 달기(setOnItemClickListener)
         lvList = findViewById(R.id.lv_list);
         lvList.setOnItemClickListener(this);
 
@@ -81,7 +81,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         ET_UserInputTrash = findViewById(R.id.UserInput_TodayT);
         TXT_saved_trash = findViewById(R.id.TXT_saving_trash);
 
-        // todo: Button 9개 bind
+        // Button 9개 bind
         Button Btn_tissue = findViewById(R.id.Btn_tissue);
         Button Btn_disposable_cup = findViewById(R.id.Btn_disposable_cup);
         Button Btn_disposable_spoon = findViewById(R.id.Btn_disposable_spoon);
@@ -128,14 +128,14 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
-        // todo: Button을 눌렀을 때 trashType에 저장.(9개 모두 구현)
+        // Button을 눌렀을 때 trashType에 저장.(9개 모두 구현)
         Btn_tissue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("jay", "passed");
-                // todo: trashType에 쓰레기 유형 저장
+                // trashType에 쓰레기 유형 저장
                 trashType = "tissue";
-                // todo: item들을 riteTrash 셋해준다.
+                // item들을 riteTrash 셋해준다.
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, tissueItems);
                 lvList.setAdapter(adapter);
             }
@@ -145,7 +145,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 trashType = "disposable_cup";
-                // todo: item들을 riteTrash 셋해준다.
+                // item들을 riteTrash 셋해준다.
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, disposableCupItems);
                 lvList.setAdapter(adapter);
             }
@@ -240,7 +240,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
                     Log.d("jay", "trashUsageStr: " + trashUsageStr);
 
-                    // todo: 각각의 쓰레기 타입에 저장
+                    // 각각의 쓰레기 타입에 저장
                     if (trashType.equals("tissue")) {
                         float tissue = trashUsage.getTissue();
                         trashUsage.setTissue(tissue + currentItemWeight);
@@ -270,11 +270,11 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                         trashUsage.setTrashEtc(etc + currentItemWeight);
                     }
 
-                    // todo: localStorage에 저장
+                    // localStorage에 저장
                     String updatedTrashUsage = gson.toJson(trashUsage);
                     preferenceManager.putString(key + "-trash-usage", updatedTrashUsage);
 
-                    // todo: 쓰레기 전체 g 구하기
+                    // 쓰레기 전체 g 구하기
                     float total = trashUsage.getTissue() + trashUsage.getDisposable_cup() + trashUsage.getDisposable_spoon()
                             + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag() + trashUsage.getCan()
                             + trashUsage.getEmpty_bottle() + trashUsage.getTrashEtc();
@@ -286,7 +286,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         });
 
 
-        // todo: 저장되어 있는 trash 값 반영
+        // 저장되어 있는 trash 값 반영
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
         String key = simpledateformat.format(calendar.getTime()); // 0530
@@ -299,7 +299,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             todayTrashUsage = gson.fromJson(trashUsageStr, TrashUsage.class);
         }
 
-        // todo: 쓰레기 전체 g 구하기
+        // 쓰레기 전체 g 구하기
 //        todayTrashUsage.getTrashTotal();
         float total = todayTrashUsage.getTissue() + todayTrashUsage.getDisposable_cup() + todayTrashUsage.getDisposable_spoon()
                 + todayTrashUsage.getPaper() + todayTrashUsage.getPlastic() + todayTrashUsage.getPlastic_bag() + todayTrashUsage.getCan()
@@ -311,7 +311,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     }   // end of onCreate
 
 
-    // todo: onItemClick 리스너 구현
+    // onItemClick 리스너 구현
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long index) {
         // trashType이 뭔지 알아야되
@@ -475,10 +475,10 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     public void setPreSavedTrash(float todayTotal) {
         // 전일 사용한 전체 양 구하기
         float preTotal = 0f;
-        // todo: 전일 대비 절약한 쓰레기의 양.
-        // todo: 전날 데이터가 null이 아닐 때까지 데이터 불러오기. 조건?
+        // 전일 대비 절약한 쓰레기의 양.
+        // 전날 데이터가 null이 아닐 때까지 데이터 불러오기. 조건?
         for(int i = 1; i<10; i++){
-            // todo: 어제 쓰레기 전체 사용량(trashTotal) 불러오기
+            // 어제 쓰레기 전체 사용량(trashTotal) 불러오기
             Date dDate = new Date();
             dDate = new Date(dDate.getTime()+(1000*60*60*24*-i));
             SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
@@ -490,7 +490,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
             Log.d("jay", "yesterday_trashUsageStr : " + yesterday_trashUsageStr);
 
-            // todo: 만약 어제 데이터가 없으면 그 전날 데이터 데이터 불러오기
+            // 만약 어제 데이터가 없으면 그 전날 데이터 데이터 불러오기
             if (yesterday_trashUsageStr.equals("")) {
                 continue;
                 // yesterday_trashUsage = new TrashUsage();

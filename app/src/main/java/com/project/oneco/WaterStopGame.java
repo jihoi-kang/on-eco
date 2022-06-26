@@ -174,7 +174,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         // 스피너 구현
         spinner.setOnItemSelectedListener(this);
 
-        item = new String[]{"선택하세요", "01:00", "03:00", "05:00", "07:00", "10:00", "15:00"};
+        item = new String[]{"선택하세요", "03:00", "05:00", "07:00", "10:00", "15:00"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -338,9 +338,15 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         selected_minText.setText(item[i]);
 
-        if(item[i].equals("01:00")){
-            application.min1 = true;
-        } else if(item[i].equals("03:00")){
+        // 초기화
+        application.min1 = false;
+        application.min3 = false;
+        application.min5 = false;
+        application.min7 = false;
+        application.min10 = false;
+        application.min15 = false;
+
+        if(item[i].equals("03:00")){
             application.min3 = true;
         } else if(item[i].equals("05:00")){
             application.min5 = true;
