@@ -326,8 +326,8 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
     // 설정 초기화
     private void setInit(){
-        application.waterType = null;
-        application.Wtap = "null";
+        application.waterType = "";
+        application.Wtap = "";
         application.Wpower = 0f;
         itemInit();
     }
@@ -339,7 +339,6 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         selected_minText.setText(item[i]);
 
         // 초기화
-        application.min1 = false;
         application.min3 = false;
         application.min5 = false;
         application.min7 = false;
@@ -367,7 +366,6 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void itemInit(){
-        application.min1 = false;
         application.min3 = false;
         application.min5 = false;
         application.min7 = false;

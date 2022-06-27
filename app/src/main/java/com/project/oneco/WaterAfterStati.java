@@ -116,7 +116,7 @@ public class WaterAfterStati extends AppCompatActivity {
     } // end of onCreate
 
 
-    // todo:00분 00초로 바꾸기
+    // 00분 00초로 바꾸기
     public void setResult() {
         Runnable updater = new Runnable() {
             public void run() {
@@ -170,8 +170,8 @@ public class WaterAfterStati extends AppCompatActivity {
 
     // 설정 초기화
     private void setInit(){
-        application.waterType = null;
-        application.Wtap = "null";
+        application.waterType = "";
+        application.Wtap = "";
         application.Wpower = 0f;
     }
 

@@ -224,7 +224,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     // 오늘 배출한 쓰레기 값 저장
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
-                    String key = simpledateformat.format(calendar.getTime()); // 0530
+                    String key = simpledateformat.format(calendar.getTime()); // 220530
 
                     Log.d("jay", "key: " + key);
 

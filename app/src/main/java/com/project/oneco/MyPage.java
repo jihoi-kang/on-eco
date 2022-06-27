@@ -13,6 +13,7 @@ import com.project.oneco.test.GetDialogTest;
 
 public class MyPage extends AppCompatActivity {
     private OnEcoApplication application;
+    TextView temp_level;
     TextView Txt_tempPoint;
     ImageView Img_temp_level;
 
@@ -23,6 +24,7 @@ public class MyPage extends AppCompatActivity {
         setContentView(R.layout.activity_my_page);
 
         application = (OnEcoApplication) getApplication();
+        temp_level = findViewById(R.id.temp_level);
         Txt_tempPoint = findViewById(R.id.Txt_tempPoint);
         Img_temp_level = findViewById(R.id.Img_temp_level);
 
@@ -49,14 +51,19 @@ public class MyPage extends AppCompatActivity {
 
         if (application.getPoint() < 30){
             Img_temp_level.setImageResource(R.drawable.level1);
+            temp_level.setText("레벨1");
         } else if (30 <= application.getPoint() & application.getPoint() < 500){
             Img_temp_level.setImageResource(R.drawable.level2);
+            temp_level.setText("레벨2");
         } else if (500 <= application.getPoint() & application.getPoint() < 1500){
             Img_temp_level.setImageResource(R.drawable.level3);
+            temp_level.setText("레벨3");
         } else if (1500 <= application.getPoint() & application.getPoint() < 2000){
             Img_temp_level.setImageResource(R.drawable.level4);
+            temp_level.setText("레벨4");
         } else if (2000 <= application.getPoint()){
             Img_temp_level.setImageResource(R.drawable.level5);
+            temp_level.setText("레벨5");
         }
 
 

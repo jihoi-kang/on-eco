@@ -64,10 +64,12 @@ public class WriteWater extends AppCompatActivity{
         Btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainHome.class);
-                startActivity(intent);
                 application.active_activity = "";
                 application.statisticType = "";
+                application.waterType = "";
+                Log.d("hun", "waterType : " + application.waterType);
+                Intent intent = new Intent(getApplicationContext(), MainHome.class);
+                startActivity(intent);
             }
         });
 
@@ -99,9 +101,10 @@ public class WriteWater extends AppCompatActivity{
         Btn_bef_WTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {    // Toast message : 물 사용 유형 먼저 선택하세요
-                if (application.waterType == null){
+                if (application.waterType == ""){
                     Toast.makeText(getApplicationContext(), "사용할 물의 유형을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else{ // 물 사용량 측정 화면으로 넘어가기
+                    application.active_activity = "WriteWater";
                     Intent intent = new Intent(getApplicationContext(), WaterStopWatch.class);
                     startActivity(intent);
                 }
@@ -114,6 +117,7 @@ public class WriteWater extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 application.waterType = "shower";
+                application.active_activity = "WriteWater";
                 Intent intent = new Intent(getApplicationContext(), WaterStopGame.class);
                 startActivity(intent);
             }
@@ -163,7 +167,7 @@ public class WriteWater extends AppCompatActivity{
         Btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (application.waterType == null){
+                if (application.waterType == ""){
                     Toast.makeText(getApplicationContext(), "사용한 물의 유형을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else {
                     // 사용자 입력값인 editText의 값을 변환 후, 변수 inputWater에 저장
@@ -266,7 +270,12 @@ public class WriteWater extends AppCompatActivity{
     // 백버튼을 누르면 홈화면으로 돌아가지 않고 물측정화면으로 넘어가기 때문
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        super.onBackPressed();
+        application.active_activity = "";
+        application.statisticType = "";
+        application.waterType = "";
+        Intent intent = new Intent(getApplicationContext(), MainHome.class);
+        startActivity(intent);
     }
 
     // 오늘 사용한 전체 물의 양과 비교하여 UI도 변경해주는

@@ -84,14 +84,19 @@ public class WaterPower extends AppCompatActivity {
         Wmiddle.setOnClickListener(listener);
         Wweakness.setOnClickListener(listener);
 
-        // <- 버튼 누르면
+        // 상단 이전 버튼 누르면
         btn_backToWriteWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WriteWater.class);
-                startActivity(intent);
+                if(application.active_activity.equals("MainHome")){
+                    Intent intent = new Intent(getApplicationContext(), MainHome.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), WriteWater.class);
+                    startActivity(intent);
+                }
                 setInit();
-                application.active_activity = null;
+                application.active_activity = "";
             }
         });
 
@@ -99,7 +104,7 @@ public class WaterPower extends AppCompatActivity {
         next_choice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(application.Wtap != "null"){
+                if(application.Wtap != ""){
                     waterTab.setVisibility(View.GONE);
                     waterPower.setVisibility(View.VISIBLE);
                     Txt_waterTap.setText("사용할 물의 세기를 선택해주세요");
@@ -109,7 +114,7 @@ public class WaterPower extends AppCompatActivity {
             }
         });
 
-        // 이전 버튼 누르면
+        // 하단의 이전 버튼 누르면
         before_choice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +122,7 @@ public class WaterPower extends AppCompatActivity {
                 waterPower.setVisibility(View.GONE);
                 Txt_waterTap.setText("사용할 수도꼭지를 선택해주세요");
 
-                application.Wtap = "null";
+                application.Wtap = "";
                 application.Wpower = 0f;
             }
         });
@@ -133,26 +138,8 @@ public class WaterPower extends AppCompatActivity {
                 }
             }
         });
-
-
-//        //데이터 가져오기
-//        Intent intent = getIntent();
-//        String data = intent.getStringExtra("data");
-//        //txtText.setText(data);
-
     }   // end of onCreate
 
-
-//    // 확인 버튼 클릭
-//    public void choice(View v){
-//        //데이터 전달하기
-//        Intent intent = new Intent();
-//        intent.putExtra("result", "Close Popup");
-//        setResult(RESULT_OK, intent);
-//
-//        //액티비티(팝업) 닫기
-//        finish();
-//    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -166,13 +153,21 @@ public class WaterPower extends AppCompatActivity {
     // 백버튼 막은 이유 : 백버튼 누르면 수도꼭지랑 수압 선택 안 한 상태로 스탑워치 화면이 뜨게 됨
     @Override
     public void onBackPressed() {
-        //안드로이드 백버튼 막기
-        return;
+        super.onBackPressed();
+        if(application.active_activity.equals("MainHome")){
+            Intent intent = new Intent(getApplicationContext(), MainHome.class);
+            startActivity(intent);
+        } else if (application.active_activity.equals("WriteWater")){
+            Intent intent = new Intent(getApplicationContext(), WriteWater.class);
+            startActivity(intent);
+        }
+        setInit();
+        application.active_activity = "";
     }
 
     private void setInit(){
-        application.waterType = null;
-        application.Wtap = "null";
+        application.waterType = "";
+        application.Wtap = "";
         application.Wpower = 0f;
     }
 }   // end of class

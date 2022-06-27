@@ -44,10 +44,7 @@ public class GamePF extends AppCompatActivity {
         }, 3000);
 
         // 전체 포인트 프리퍼런스 저장
-        if (application.min1){
-            application.setPoint(10);
-            Txt_point.setText("+10");
-        } else if (application.min3){
+        if (application.min3){
             application.setPoint(2000);
             Txt_point.setText("+2000");
         } else if (application.min5){
@@ -70,8 +67,6 @@ public class GamePF extends AppCompatActivity {
             Txt_message.setText("아쉬워요~\n좀만 더 분발해봅시다!");
         }
 
-
-        application.min1 = false;
         application.min3 = false;
         application.min5 = false;
         application.min7 = false;

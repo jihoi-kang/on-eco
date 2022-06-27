@@ -2,6 +2,7 @@ package com.project.oneco;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,22 +28,22 @@ public class MainHome extends AppCompatActivity {
         // Activity간의 데이터 공유를 위한 application 가져오기
         OnEcoApplication application = (OnEcoApplication) getApplication();
 
-        // 임의로 값 추가
-        PreferenceManager preferenceManager = PreferenceManager.getInstance(this);
-        WaterUsage waterUsage = new WaterUsage();
-        waterUsage.setHand(40f);
-        waterUsage.setDish(10f);
-        waterUsage.setFace(80f);
-        waterUsage.setEtcWater(700f);
-        waterUsage.setTooth(450f);
-        waterUsage.setShower(150f);
-        waterUsage.setWaterTotal(1350f);
-        preferenceManager.putString("220620-water-usage", new Gson().toJson(waterUsage));
-
-        onBackPressed();
+//        // 임의로 값 추가
+//        PreferenceManager preferenceManager = PreferenceManager.getInstance(this);
+//        WaterUsage waterUsage = new WaterUsage();
+//        waterUsage.setHand(40f);
+//        waterUsage.setDish(10f);
+//        waterUsage.setFace(80f);
+//        waterUsage.setEtcWater(700f);
+//        waterUsage.setTooth(450f);
+//        waterUsage.setShower(150f);
+//        waterUsage.setWaterTotal(1350f);
+//        preferenceManager.putString("220620-water-usage", new Gson().toJson(waterUsage));
 
         // 포인트 값 임의 조정
         //application.setPoint(-1500);
+
+        onBackPressed();
 
         application.statisticType = "trash-usage";
 
@@ -69,7 +70,7 @@ public class MainHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 application.statisticType = "water-usage";
-                application.active_activity = "mainHome";
+                application.active_activity = "WriteWater";
 
                 Intent intent = new Intent(getApplicationContext(), WriteWater.class);
                 startActivity(intent);
@@ -80,8 +81,7 @@ public class MainHome extends AppCompatActivity {
         goto_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                application.active_activity = "mainHome";
-
+                application.active_activity = "MainHome";
                 Intent intent = new Intent(getApplicationContext(), Statistic.class);
                 startActivity(intent);
             }
@@ -91,6 +91,7 @@ public class MainHome extends AppCompatActivity {
         goto_shower_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                application.active_activity = "MainHome";
                 application.statisticType = "water-usage";
                 application.waterType = "shower";
                 Intent intent = new Intent(getApplicationContext(), WaterStopGame.class);

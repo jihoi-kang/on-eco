@@ -171,7 +171,7 @@ public class Statistic extends AppCompatActivity {
                     case "mainHome":
                         Intent intent = new Intent(getApplicationContext(), MainHome.class);
                         startActivity(intent);
-                        application.active_activity = null;
+                        application.active_activity = "";
                         break;
                     case "waterAfterStati":
                         Intent intent2 = new Intent(getApplicationContext(), WriteWater.class);

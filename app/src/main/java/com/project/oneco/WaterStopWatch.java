@@ -126,7 +126,7 @@ public class WaterStopWatch extends AppCompatActivity {
                             dbUsedList = new ArrayList<>();
                             dbNoUsedList = new ArrayList<>();
                             // 수도꼭지, 수압 초기화
-                            application.Wtap = "null";
+                            application.Wtap = "";
                             application.Wpower = 0f;
 
                             setSec();
@@ -137,7 +137,7 @@ public class WaterStopWatch extends AppCompatActivity {
                     onBackPressed();
 
                     // 수도꼭지, 수압 초기화
-                    application.Wtap = "null";
+                    application.Wtap = "";
                     application.Wpower = 0f;
                 }
             }
