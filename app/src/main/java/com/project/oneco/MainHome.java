@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
+import com.project.oneco.data.TrashUsage;
 import com.project.oneco.data.WaterUsage;
 import com.project.oneco.test.TestActivity;
 
@@ -29,16 +30,32 @@ public class MainHome extends AppCompatActivity {
         OnEcoApplication application = (OnEcoApplication) getApplication();
 
 //        // 임의로 값 추가
-//        PreferenceManager preferenceManager = PreferenceManager.getInstance(this);
-//        WaterUsage waterUsage = new WaterUsage();
-//        waterUsage.setHand(40f);
-//        waterUsage.setDish(10f);
-//        waterUsage.setFace(80f);
-//        waterUsage.setEtcWater(700f);
-//        waterUsage.setTooth(450f);
-//        waterUsage.setShower(150f);
-//        waterUsage.setWaterTotal(1350f);
-//        preferenceManager.putString("220620-water-usage", new Gson().toJson(waterUsage));
+        PreferenceManager preferenceManager = PreferenceManager.getInstance(this);
+        TrashUsage trashUsage = new TrashUsage();
+        trashUsage.setEmpty_bottle(10f);
+        trashUsage.setCan(20f);
+        trashUsage.setPlastic_bag(20f);
+        trashUsage.setPaper(50f);
+        trashUsage.setPlastic(20f);
+        trashUsage.setTrashEtc(30f);
+        trashUsage.setDisposable_spoon(20f);
+        trashUsage.setDisposable_cup(10f);
+        trashUsage.setTissue(20f);
+        trashUsage.setTrashTotal(200f);
+        preferenceManager.putString("220710-trash-usage", new Gson().toJson(trashUsage));
+
+        //        // 임의로 값 추가2
+        trashUsage.setEmpty_bottle(20f);
+        trashUsage.setCan(30f);
+        trashUsage.setPlastic_bag(30f);
+        trashUsage.setPaper(40f);
+        trashUsage.setPlastic(10f);
+        trashUsage.setTrashEtc(40f);
+        trashUsage.setDisposable_spoon(20f);
+        trashUsage.setDisposable_cup(10f);
+        trashUsage.setTissue(20f);
+        trashUsage.setTrashTotal(200f);
+        preferenceManager.putString("220617-trash-usage", new Gson().toJson(trashUsage));
 
         // 포인트 값 임의 조정
         //application.setPoint(-1500);
