@@ -393,6 +393,7 @@ public class Statistic extends AppCompatActivity {
     private void setChart(ArrayList<BarEntry> values, String label) {
         // <-- chart 그리기 - (2) draw
         BarDataSet set1 = new BarDataSet(values, label);
+        set1.setDrawValues(false);
         set1.setDrawIcons(false);
 
         if (label.equals("쓰레기 배출량")){
