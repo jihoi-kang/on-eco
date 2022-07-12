@@ -2,6 +2,8 @@ package com.project.oneco;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -95,6 +97,21 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Button Btn_restore = findViewById(R.id.Btn_restore);
         Button Btn_sub = findViewById(R.id.Btn_sub);
 
+        etItemWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.d("jay", "charSequence: " + charSequence);
+                if (charSequence.equals("")) return;
+
+                currentItemWeight = Integer.parseInt(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
 
         // 이전 버튼
         ImageButton Btn_back = findViewById(R.id.Btn_back);
@@ -592,7 +609,11 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         float savedTrash = todayTotal - preTotal;
 
         // UI 변경
-        TXT_saved_trash.setText(savedTrash + "g");
+        if (savedTrash < 0) {
+            TXT_saved_trash.setText(savedTrash + "g");
+        } else {
+            TXT_saved_trash.setText("+" + savedTrash + "g");
+        }
     }
 
 

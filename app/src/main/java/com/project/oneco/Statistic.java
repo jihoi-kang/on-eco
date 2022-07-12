@@ -53,6 +53,8 @@ public class Statistic extends AppCompatActivity {
 
     String picked_date_key = "";
 
+    private int displayDate = 7; // 7, 30, 365
+
     // 차트에서 요일 변경해줌
     public static Date selectedDate;
 
@@ -103,6 +105,9 @@ public class Statistic extends AppCompatActivity {
     private void setupUi() {
         Button Btn_graph_trash = findViewById(R.id.Btn_graph_trash);
         Button Btn_graph_water = findViewById(R.id.Btn_graph_water);
+        Button Btn_week = findViewById(R.id.Btn_week);
+        Button Btn_month = findViewById(R.id.Btn_month);
+        Button Btn_year = findViewById(R.id.Btn_year);
 
         Txt_pickDate = findViewById(R.id.Txt_pickDate);
         Txt_item_all = findViewById(R.id.Txt_item_all);
@@ -150,6 +155,7 @@ public class Statistic extends AppCompatActivity {
         xLabels.setValueFormatter(new MyXAxisValueFormatter());
 
         Legend l = bcChart.getLegend();
+        l.setEnabled(false);
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
@@ -208,6 +214,7 @@ public class Statistic extends AppCompatActivity {
         Btn_graph_trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                application.statisticType = "trash-usage";
                 setupTrashUsage();
                 setupUiUsage();
             }
@@ -217,8 +224,47 @@ public class Statistic extends AppCompatActivity {
         Btn_graph_water.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                application.statisticType = "water-usage";
                 setupWaterUsage();
                 setupUiUsage();
+            }
+        });
+
+        Btn_week.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayDate = 7;
+                if (application.statisticType.equals("water-usage")) {
+                    setupWaterUsage();
+                } else if (application.statisticType.equals("trash-usage")) {
+                    setupTrashUsage();
+                }
+            }
+        });
+
+        Btn_month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayDate = 30;
+
+                Log.d("jay", "statisticType: " + application.statisticType);
+                if (application.statisticType.equals("water-usage")) {
+                    setupWaterUsage();
+                } else if (application.statisticType.equals("trash-usage")) {
+                    setupTrashUsage();
+                }
+            }
+        });
+
+        Btn_year.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayDate = 365;
+                if (application.statisticType.equals("water-usage")) {
+                    setupWaterUsage();
+                } else if (application.statisticType.equals("trash-usage")) {
+                    setupTrashUsage();
+                }
             }
         });
 
@@ -230,10 +276,13 @@ public class Statistic extends AppCompatActivity {
             setupTrashUsage();
             setupUiUsage();
         }
-        application.statisticType = "";
-
     } // end of setUpUi()
 
+    @Override
+    protected void onDestroy() {
+        application.statisticType = "";
+        super.onDestroy();
+    }
 
     private void setupTrashUsage() {
         // 리스트 초기화
@@ -244,10 +293,9 @@ public class Statistic extends AppCompatActivity {
         waterTypeColor_View.setVisibility(View.GONE);
 
         // 1주일치 데이터 가져오기
-        for (int i = 0; i < 7; i++) {
-
+        for (int i = 0; i < displayDate; i++) {
             // 오늘을 기준으로 -> 하단의 데이트피커에서 날짜를 선택하지 않았을 때 (picked_date_key값이 없을 때)
-            if(picked_date_key.equals("")){
+            if (picked_date_key.equals("")) {
                 setupUiUsage();
 
                 Date dDate = new Date();
@@ -268,7 +316,7 @@ public class Statistic extends AppCompatActivity {
 
             // 특정 날짜를 기준으로 -> 데이트피커에서 날짜를 선택했을 때
             else {
-                String key_week = Integer.toString(Integer.parseInt(picked_date_key) - i) ; // 220621, 220620 ...
+                String key_week = Integer.toString(Integer.parseInt(picked_date_key) - i); // 220621, 220620 ...
 
                 String week_trashUsageStr = preferenceManager.getString(key_week + "-trash-usage", "");
                 Log.d("jay", "week_trashUsageStr" + week_trashUsageStr);
@@ -303,7 +351,7 @@ public class Statistic extends AppCompatActivity {
             dayTotalList.add(Float.toString(
                     trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag()
                             + trashUsage.getCan() + trashUsage.getEmpty_bottle() + trashUsage.getTrashEtc()));
-            Log.d("hun","dayTotal_trash : " + dayTotalList.get(i));
+            Log.d("hun", "dayTotal_trash : " + dayTotalList.get(i));
         }
 
         // ui
@@ -323,10 +371,9 @@ public class Statistic extends AppCompatActivity {
 
         trashTypeColor_View.setVisibility(View.GONE);
         waterTypeColor_View.setVisibility(VISIBLE);
-        application.statisticType = "";
 
         // 1주일치 데이터 가져오기
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < displayDate; i++) {
             if (picked_date_key.equals("")) {
                 setupUiUsage();
 
@@ -345,7 +392,7 @@ public class Statistic extends AppCompatActivity {
                     waterUsageList.add(yesterday_waterUsage);
                 }
             } else {
-                String key_week = Integer.toString(Integer.parseInt(picked_date_key) - i) ; // 220621, 220620 ...
+                String key_week = Integer.toString(Integer.parseInt(picked_date_key) - i); // 220621, 220620 ...
                 Log.d("jay", "key_week" + key_week);
                 String week_waterUsageStr = preferenceManager.getString(key_week + "-water-usage", "");
                 Log.d("jay", "week_waterUsageStr" + week_waterUsageStr);
@@ -376,7 +423,7 @@ public class Statistic extends AppCompatActivity {
                     new float[]{val1, val2, val3, val4, val5, val6},
                     getResources().getDrawable(R.drawable.ic_launcher_foreground)));
             dayTotalList.add(Float.toString(waterUsage.getWaterTotal()));
-            Log.d("hun","dayTotal : " + dayTotalList.get(i));
+            Log.d("hun", "dayTotal : " + dayTotalList.get(i));
         }
 
         // ui
@@ -396,7 +443,7 @@ public class Statistic extends AppCompatActivity {
         set1.setDrawValues(false);
         set1.setDrawIcons(false);
 
-        if (label.equals("쓰레기 배출량")){
+        if (label.equals("쓰레기 배출량")) {
             set1.setColors(
                     ContextCompat.getColor(this, R.color.paper),
                     ContextCompat.getColor(this, R.color.plastic),
@@ -406,7 +453,7 @@ public class Statistic extends AppCompatActivity {
                     ContextCompat.getColor(this, R.color.etc)
             );
             set1.setStackLabels(new String[]{"", "", ""});
-        } else if (label.equals("물 사용량")){
+        } else if (label.equals("물 사용량")) {
             set1.setColors(
                     ContextCompat.getColor(this, R.color.tooth),
                     ContextCompat.getColor(this, R.color.hand),
@@ -534,14 +581,14 @@ public class Statistic extends AppCompatActivity {
                     Txt_item5.setText("설거지 : " + today_key_waterUsage.getDish() + " ml");
                     Txt_item6.setText("기타 : " + today_key_waterUsage.getEtcWater() + " ml");
 
-                    Log.d("hun","doing");
+                    Log.d("hun", "doing");
                 }
             }
         }
 
         // 데이트 피커에 선택된 날짜가 있다면
         else {
-            if(trashTypeColor_View.getVisibility() == VISIBLE){
+            if (trashTypeColor_View.getVisibility() == VISIBLE) {
                 setupTrashUsage();
 
                 // 선택한 날짜의 저장된 값 가져와서 찍어주기
@@ -569,7 +616,7 @@ public class Statistic extends AppCompatActivity {
                     Txt_item6.setText("기타 : " + picked_trashUsage.getTrashEtc() + " g");
                 }
 
-            } else if (waterTypeColor_View.getVisibility() == VISIBLE){
+            } else if (waterTypeColor_View.getVisibility() == VISIBLE) {
                 setupWaterUsage();
 
                 // 선택한 날짜의 저장된 값 가져와서 찍어주기
