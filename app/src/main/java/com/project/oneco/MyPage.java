@@ -65,7 +65,7 @@ public class MyPage extends AppCompatActivity {
             Img_temp_level.setImageResource(R.drawable.level5);
             temp_level.setText("레벨5");
         }
-
+ 
 
     }   // end of onCreate
 

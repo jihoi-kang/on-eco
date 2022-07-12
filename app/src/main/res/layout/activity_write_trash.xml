@@ -165,31 +165,62 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/UserInput_TodayT"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:autofillHints=""
                 android:ems="10"
-                android:hint="@string/user_input_TW"
+                android:gravity="center"
                 android:inputType="number"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="36dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
                 android:text="g"
-                android:textSize="18dp" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <Button
                 android:id="@+id/Btn_add"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right|center_horizontal"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/input_TW"
                 tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/Btn_restore"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="right|center_horizontal"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="↩"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/Btn_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_horizontal"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-" />
         </LinearLayout>
 
         <Space

@@ -105,13 +105,13 @@ public class Statistic extends AppCompatActivity {
         Button Btn_graph_water = findViewById(R.id.Btn_graph_water);
 
         Txt_pickDate = findViewById(R.id.Txt_pickDate);
-        Txt_item_all = findViewById(R.id.Txt_item6);
-        Txt_item1 = findViewById(R.id.Txt_item2);
-        Txt_item2 = findViewById(R.id.Txt_item5);
-        Txt_item3 = findViewById(R.id.Txt_item1);
-        Txt_item4 = findViewById(R.id.Txt_item_all);
-        Txt_item5 = findViewById(R.id.Txt_item3);
-        Txt_item6 = findViewById(R.id.Txt_item4);
+        Txt_item_all = findViewById(R.id.Txt_item_all);
+        Txt_item1 = findViewById(R.id.Txt_item1);
+        Txt_item2 = findViewById(R.id.Txt_item2);
+        Txt_item3 = findViewById(R.id.Txt_item3);
+        Txt_item4 = findViewById(R.id.Txt_item4);
+        Txt_item5 = findViewById(R.id.Txt_item5);
+        Txt_item6 = findViewById(R.id.Txt_item6);
         bcChart = findViewById(R.id.bc_chart);
 
         day1 = findViewById(R.id.day1);
