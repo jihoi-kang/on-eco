@@ -15,15 +15,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-<!--    todo:여기 원래 이런가?-->
-    <style name="Theme.OnEco.NoActionBar">
-        <item name="windowActionBar">false</item>
-            <!-- full screan 설정
-        <item name="android:windowFullscreen">true</item>
-            -->
-    </style>
-
-
     <style name="Theme.OnEco.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.OnEco.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

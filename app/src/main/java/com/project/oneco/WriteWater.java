@@ -190,7 +190,7 @@ public class WriteWater extends AppCompatActivity {
                     if (waterUsageStr.equals("")) { // 프리퍼런스에 저장된 값이 없다면
                         waterUsage = new WaterUsage();
                     } else {    // 프리퍼런스에 저장된 값이 있다면 데이터 모델링
-                        // gson이용하여 가져와 data를 String으로 변환 후 객체에 저장. todo: WaterUsage 클래스?
+                        // gson이용하여 가져와 data를 String으로 변환 후 객체에 저장.
                         waterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
                     }
 
@@ -237,7 +237,6 @@ public class WriteWater extends AppCompatActivity {
             }
         });
 
-        //todo:되돌리기 버튼 눌렀을 때
         Btn_restore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

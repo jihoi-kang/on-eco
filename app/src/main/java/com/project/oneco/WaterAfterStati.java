@@ -50,7 +50,6 @@ public class WaterAfterStati extends AppCompatActivity {
         // Activity간의 데이터 공유를 위한 application 가져오기
         application = (OnEcoApplication) getApplication();
 
-        // todo: 통계화면 넘어갔을 때 물 vs 쓰레기 중 먼저 보여주는 그래프가 다르도록 구현
         // 통계화면으로 넘어가기
         Button goto_statistic = findViewById(R.id.goto_statistic);
         goto_statistic.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +105,6 @@ public class WaterAfterStati extends AppCompatActivity {
         String updatedWaterUsage = gson.toJson(waterUsage);
         preferenceManager.putString(key + "-water-usage", updatedWaterUsage);
 
-        // todo: 그 전의 값이 뜨는 이유?
         Log.d("jay", "waterUsageStr: " + waterUsageStr);
 
         // 초기화

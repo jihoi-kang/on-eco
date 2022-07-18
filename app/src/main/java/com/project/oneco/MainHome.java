@@ -2,26 +2,13 @@ package com.project.oneco;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
-import com.google.gson.Gson;
-import com.project.oneco.data.PreferenceManager;
-import com.project.oneco.data.TrashUsage;
-import com.project.oneco.data.WaterUsage;
-import com.project.oneco.test.TestActivity;
-
-import java.util.Random;
 
 public class MainHome extends AppCompatActivity {
-
-    // todo: layout 공통 =>        application = (OnEcoApplication) getApplication(); 필요한 곳에 ScrollView 달아주기
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

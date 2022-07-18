@@ -8,7 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- todo: 그래프 색깔 정의하기 -->
     <color name="etc">#B7B4B4</color>
 
     <color name="paper">#81B75D</color>

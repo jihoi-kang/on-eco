@@ -1,29 +1,28 @@
 package com.project.oneco;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class WaterStopWatch extends AppCompatActivity {
@@ -32,10 +31,7 @@ public class WaterStopWatch extends AppCompatActivity {
     private OnEcoApplication application;
 
     private SoundMeter soundMeter = null;
-    // todo:checkPermission class를 참조하여 객체를 만든 후 사용하고 싶은데 잘 안됨..
-    //private CheckPermission checkPermission = null;
 
-    // todo:왜 final인지?
     private ArrayList<Float> dbList = new ArrayList<>();
     private ArrayList<Float> dbUsedList = new ArrayList<>();
     private ArrayList<Float> dbNoUsedList = new ArrayList<>();
@@ -57,12 +53,10 @@ public class WaterStopWatch extends AppCompatActivity {
     LinearLayout setting;    // 셋팅 화면
     LinearLayout timeup;      // 타이머 화면
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water_stop_watch);
-
 
         // Activity간의 데이터 공유를 위한 application 가져오기1-2
         application = (OnEcoApplication) getApplication();
@@ -80,10 +74,6 @@ public class WaterStopWatch extends AppCompatActivity {
 
 
         timeup.setVisibility(View.GONE);
-
-        // todo:checkPermission class를 참조하여 객체를 만든 후 사용하고 싶은데 잘 안됨..
-//        checkPermission = new checkPermission();
-//        checkPermission.checkPermission();
 
         soundMeter = new SoundMeter();
 
@@ -183,7 +173,6 @@ public class WaterStopWatch extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
 
         // 타이머 시작

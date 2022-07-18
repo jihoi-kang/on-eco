@@ -61,6 +61,4 @@
     <string name="saving_trash">전일 대비 배출한 쓰레기</string>
     <string name="real_saving_trash">10G</string>
     <string name="Userinput_today_T">trash</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
