@@ -248,6 +248,7 @@ public class WriteWater extends AppCompatActivity {
         Btn_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // todo: string == (X) equals(O)
                 if (application.waterType == "") {
                     Toast.makeText(getApplicationContext(), "사용한 물의 유형을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else {
