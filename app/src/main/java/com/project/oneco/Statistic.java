@@ -1,5 +1,6 @@
 package com.project.oneco;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.app.DatePickerDialog;
@@ -53,7 +54,7 @@ public class Statistic extends AppCompatActivity {
 
     String picked_date_key = "";
 
-    private int displayDate = 7; // 7, 30, 365
+    public static int displayDate = 7; // 7, 30, 365
 
     // 차트에서 요일 변경해줌
     public static Date selectedDate;
@@ -234,6 +235,7 @@ public class Statistic extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 displayDate = 7;
+                setGraphTotalVisibility(true);
                 if (application.statisticType.equals("water-usage")) {
                     setupWaterUsage();
                 } else if (application.statisticType.equals("trash-usage")) {
@@ -246,7 +248,7 @@ public class Statistic extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 displayDate = 30;
-
+                setGraphTotalVisibility(false);
                 Log.d("jay", "statisticType: " + application.statisticType);
                 if (application.statisticType.equals("water-usage")) {
                     setupWaterUsage();
@@ -260,6 +262,7 @@ public class Statistic extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 displayDate = 365;
+                setGraphTotalVisibility(false);
                 if (application.statisticType.equals("water-usage")) {
                     setupWaterUsage();
                 } else if (application.statisticType.equals("trash-usage")) {
@@ -299,12 +302,11 @@ public class Statistic extends AppCompatActivity {
                 setupUiUsage();
 
                 Date dDate = new Date();
-                dDate = new Date(dDate.getTime() + (1000 * 60 * 60 * 24 * -i));
+                dDate = new Date(dDate.getTime() - 1000L * 60 * 60 * 24 * i);
                 SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
                 String key_yesterday = dSdf.format(dDate.getTime());
 
                 String yesterday_trashUsageStr = preferenceManager.getString(key_yesterday + "-trash-usage", "");
-                Log.d("jay", "week_trashUsageStr" + yesterday_trashUsageStr);
 
                 if (yesterday_trashUsageStr.equals("")) {
                     trashUsageList.add(new TrashUsage());
@@ -378,7 +380,7 @@ public class Statistic extends AppCompatActivity {
                 setupUiUsage();
 
                 Date dDate = new Date();
-                dDate = new Date(dDate.getTime() + (1000 * 60 * 60 * 24 * -i));
+                dDate = new Date(dDate.getTime() - 1000L * 60 * 60 * 24 * i);
                 SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
                 String key_yesterday = dSdf.format(dDate.getTime());
 
@@ -646,4 +648,21 @@ public class Statistic extends AppCompatActivity {
         }
 
     }
+
+    private void setGraphTotalVisibility(boolean enable) {
+        int visibility;
+        if (enable) {
+            visibility = VISIBLE;
+        } else {
+            visibility = GONE;
+        }
+        day1.setVisibility(visibility);
+        day2.setVisibility(visibility);
+        day3.setVisibility(visibility);
+        day4.setVisibility(visibility);
+        day5.setVisibility(visibility);
+        day6.setVisibility(visibility);
+        day7.setVisibility(visibility);
+    }
+
 }   // end of class

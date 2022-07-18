@@ -19,6 +19,10 @@ public class MyXAxisValueFormatter extends ValueFormatter implements IAxisValueF
     }
 
     private String getDisplayDay(float value) {
+        if (Statistic.displayDate != 7) {
+            return "";
+        }
+
         SimpleDateFormat simpledateformat = new SimpleDateFormat("EEE", Locale.KOREA);
         Date date = new Date(Statistic.selectedDate.getTime() - 1000 * 60 * 60 * 24 * (6 - (int) value));
         String dayName = simpledateformat.format(date);

@@ -16,6 +16,8 @@ import com.project.oneco.data.TrashUsage;
 import com.project.oneco.data.WaterUsage;
 import com.project.oneco.test.TestActivity;
 
+import java.util.Random;
+
 public class MainHome extends AppCompatActivity {
 
     // todo: layout 공통 =>        application = (OnEcoApplication) getApplication(); 필요한 곳에 ScrollView 달아주기
@@ -29,38 +31,45 @@ public class MainHome extends AppCompatActivity {
         // Activity간의 데이터 공유를 위한 application 가져오기
         OnEcoApplication application = (OnEcoApplication) getApplication();
 
-//        // 임의로 값 추가
-        PreferenceManager preferenceManager = PreferenceManager.getInstance(this);
-        TrashUsage trashUsage = new TrashUsage();
-        trashUsage.setEmpty_bottle(10f);
-        trashUsage.setCan(20f);
-        trashUsage.setPlastic_bag(20f);
-        trashUsage.setPaper(50f);
-        trashUsage.setPlastic(20f);
-        trashUsage.setTrashEtc(30f);
-        trashUsage.setDisposable_spoon(20f);
-        trashUsage.setDisposable_cup(10f);
-        trashUsage.setTissue(20f);
-        trashUsage.setTrashTotal(200f);
-        preferenceManager.putString("220710-trash-usage", new Gson().toJson(trashUsage));
-
-        //        // 임의로 값 추가2
-        trashUsage.setEmpty_bottle(20f);
-        trashUsage.setCan(30f);
-        trashUsage.setPlastic_bag(30f);
-        trashUsage.setPaper(40f);
-        trashUsage.setPlastic(10f);
-        trashUsage.setTrashEtc(40f);
-        trashUsage.setDisposable_spoon(20f);
-        trashUsage.setDisposable_cup(10f);
-        trashUsage.setTissue(20f);
-        trashUsage.setTrashTotal(200f);
-        preferenceManager.putString("220617-trash-usage", new Gson().toJson(trashUsage));
+        // SharedPreference에 임의의 데이터 삽입
+//        PreferenceManager preferenceManager = PreferenceManager.getInstance(this);
+//        Random random = new Random();
+//        for(int i = 1; i < 31; i++) {
+//            TrashUsage trashUsage = new TrashUsage();
+//            float emptyBottle = random.nextInt(300);
+//            float can = random.nextInt(300);
+//            float plasticBag = random.nextInt(300);
+//            float paper = random.nextInt(300);
+//            float plastic = random.nextInt(300);
+//            float trashEtc = random.nextInt(300);
+//            float disposableSpoon = random.nextInt(300);
+//            float disposableCup = random.nextInt(300);
+//            float tissue = random.nextInt(300);
+//            float total = emptyBottle + can + plasticBag + paper + plastic + trashEtc + disposableSpoon + disposableCup + tissue;
+//
+//            trashUsage.setEmpty_bottle(emptyBottle);
+//            trashUsage.setCan(can);
+//            trashUsage.setPlastic_bag(plasticBag);
+//            trashUsage.setPaper(paper);
+//            trashUsage.setPlastic(plastic);
+//            trashUsage.setTrashEtc(trashEtc);
+//            trashUsage.setDisposable_spoon(disposableSpoon);
+//            trashUsage.setDisposable_cup(disposableCup);
+//            trashUsage.setTissue(tissue);
+//            trashUsage.setTrashTotal(total);
+//
+//            String day;
+//            if (i < 10) {
+//                day = "0" + i;
+//            } else {
+//                day = "" + i;
+//            }
+//
+//            preferenceManager.putString("2107" + day + "-trash-usage", new Gson().toJson(trashUsage));
+//        }
 
         // 포인트 값 임의 조정
         //application.setPoint(-1500);
-
-        onBackPressed();
 
         application.statisticType = "trash-usage";
 
