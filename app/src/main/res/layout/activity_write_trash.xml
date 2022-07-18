@@ -209,7 +209,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="↩"
-                android:textAlignment="textStart"
                 android:textSize="20sp" />
 
             <Button

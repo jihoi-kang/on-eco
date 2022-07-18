@@ -99,6 +99,10 @@ public class Statistic extends AppCompatActivity {
         trashTypeColor_View = findViewById(R.id.trashTypeColor_View);
         waterTypeColor_View = findViewById(R.id.waterTypeColor_View);
 
+        if (application.statisticType.equals("")) {
+            application.statisticType = "trash-usage";
+        }
+
         setupUi();
     } // end of onCreate
 
@@ -649,7 +653,7 @@ public class Statistic extends AppCompatActivity {
 
     }
 
-    private void setGraphTotalVisibility(boolean enable) {
+    private void setGraphTotalVisibility(boolean enable) { // true / false
         int visibility;
         if (enable) {
             visibility = VISIBLE;

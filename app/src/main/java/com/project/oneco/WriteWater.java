@@ -55,8 +55,8 @@ public class WriteWater extends AppCompatActivity {
 
         ET_UserInputWater = findViewById(R.id.UserInputWater);
         Btn_add = findViewById(R.id.Btn_add);
-        Btn_add = findViewById(R.id.Btn_restore);
-        Btn_add = findViewById(R.id.Btn_sub);
+        Btn_restore = findViewById(R.id.Btn_restore);
+        Btn_sub = findViewById(R.id.Btn_sub);
         TXT_today_water_input = findViewById(R.id.TXT_today_water_input);
         TXT_saved_water = findViewById(R.id.TXT_saved_water);
 

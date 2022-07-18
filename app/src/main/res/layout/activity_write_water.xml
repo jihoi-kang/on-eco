@@ -222,7 +222,7 @@
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <Button
-                        android:id="@+id/btn_restore"
+                        android:id="@+id/Btn_restore"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
                         android:layout_gravity="right|center_horizontal"
@@ -230,11 +230,10 @@
                         android:layout_weight="1"
                         android:gravity="center|right"
                         android:text="↩"
-                        android:textAlignment="textStart"
                         android:textSize="20sp" />
 
                     <Button
-                        android:id="@+id/btn_sub"
+                        android:id="@+id/Btn_sub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_horizontal"
