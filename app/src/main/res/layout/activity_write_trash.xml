@@ -201,17 +201,6 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <Button
-                android:id="@+id/Btn_restore"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_gravity="right|center_horizontal"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="↩"
-                android:textSize="20sp" />
-
-            <Button
                 android:id="@+id/Btn_sub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

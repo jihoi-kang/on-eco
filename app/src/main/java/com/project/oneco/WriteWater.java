@@ -30,7 +30,6 @@ public class WriteWater extends AppCompatActivity {
     TextView TXT_saved_water;
 
     Button Btn_add;
-    Button Btn_restore;
     Button Btn_sub;
 
     private PreferenceManager preferenceManager;
@@ -55,7 +54,6 @@ public class WriteWater extends AppCompatActivity {
 
         ET_UserInputWater = findViewById(R.id.UserInputWater);
         Btn_add = findViewById(R.id.Btn_add);
-        Btn_restore = findViewById(R.id.Btn_restore);
         Btn_sub = findViewById(R.id.Btn_sub);
         TXT_today_water_input = findViewById(R.id.TXT_today_water_input);
         TXT_saved_water = findViewById(R.id.TXT_saved_water);
@@ -237,19 +235,11 @@ public class WriteWater extends AppCompatActivity {
             }
         });
 
-        Btn_restore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         // 빼기 버튼 눌렀을 때
         Btn_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // todo: string == (X) equals(O)
-                if (application.waterType == "") {
+                if (application.waterType.equals("")) {
                     Toast.makeText(getApplicationContext(), "사용한 물의 유형을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else {
                     // 사용자 입력값인 editText의 값을 변환 후, 변수 inputWater에 저장
@@ -272,42 +262,48 @@ public class WriteWater extends AppCompatActivity {
                         waterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
                     }
 
-                    // 물 타입에 따라 사용자가 직접 입력한 값이 들어감
-                    if (application.waterType.equals("tooth")) {
-                        float tooth = waterUsage.getTooth();
-                        waterUsage.setTooth(tooth - inputWater);
-                    } else if (application.waterType.equals("hand")) {
-                        float hand = waterUsage.getHand();
-                        waterUsage.setHand(hand - inputWater);
-                    } else if (application.waterType.equals("face")) {
-                        float face = waterUsage.getFace();
-                        waterUsage.setFace(face - inputWater);
-                    } else if (application.waterType.equals("shower")) {
-                        float shower = waterUsage.getShower();
-                        waterUsage.setShower(shower - inputWater);
-                    } else if (application.waterType.equals("dish")) {
-                        float dish = waterUsage.getDish();
-                        waterUsage.setDish(dish - inputWater);
-                    } else if (application.waterType.equals("etc_water")) {
-                        float etc_water = waterUsage.getEtcWater();
-                        waterUsage.setEtcWater(etc_water - inputWater);
-                    }
-
                     // 물 전체 사용량(ml) 구하기
                     float waterTotal = waterUsage.getTooth() + waterUsage.getHand()
                             + waterUsage.getFace() + waterUsage.getShower()
                             + waterUsage.getDish() + waterUsage.getEtcWater();
-                    waterUsage.setWaterTotal(waterTotal);
-                    TXT_today_water_input.setText(waterTotal + "ml");
 
-                    // localStorage에 저장
-                    String updatedWaterUsage = gson.toJson(waterUsage);
-                    preferenceManager.putString(key + "-water-usage", updatedWaterUsage);
+                    if(waterTotal - inputWater > 0){
+                        // 물 타입에 따라 사용자가 직접 입력한 값이 들어감
+                        if (application.waterType.equals("tooth")) {
+                            float tooth = waterUsage.getTooth();
+                            waterUsage.setTooth(tooth - inputWater);
+                        } else if (application.waterType.equals("hand")) {
+                            float hand = waterUsage.getHand();
+                            waterUsage.setHand(hand - inputWater);
+                        } else if (application.waterType.equals("face")) {
+                            float face = waterUsage.getFace();
+                            waterUsage.setFace(face - inputWater);
+                        } else if (application.waterType.equals("shower")) {
+                            float shower = waterUsage.getShower();
+                            waterUsage.setShower(shower - inputWater);
+                        } else if (application.waterType.equals("dish")) {
+                            float dish = waterUsage.getDish();
+                            waterUsage.setDish(dish - inputWater);
+                        } else if (application.waterType.equals("etc_water")) {
+                            float etc_water = waterUsage.getEtcWater();
+                            waterUsage.setEtcWater(etc_water - inputWater);
+                        }
 
-                    Log.d("jay", "key: " + key);
-                    Log.d("jay", "waterUsageStr: " + waterUsageStr);
-                    Log.d("jay", "waterTotal: " + waterTotal);
+//                        // 물 전체 사용량(ml) 구하기
+//                        float waterTotal = waterUsage.getTooth() + waterUsage.getHand()
+//                                + waterUsage.getFace() + waterUsage.getShower()
+//                                + waterUsage.getDish() + waterUsage.getEtcWater();
+                        waterUsage.setWaterTotal(waterTotal);
+                        TXT_today_water_input.setText(waterTotal + "ml");
 
+                        // localStorage에 저장
+                        String updatedWaterUsage = gson.toJson(waterUsage);
+                        preferenceManager.putString(key + "-water-usage", updatedWaterUsage);
+
+                        Log.d("jay", "key: " + key);
+                        Log.d("jay", "waterUsageStr: " + waterUsageStr);
+                        Log.d("jay", "waterTotal: " + waterTotal);
+                    }
 
                     // 전일 대비 절약한 물의 양.
                     setPreSavedWater(waterTotal);

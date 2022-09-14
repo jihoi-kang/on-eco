@@ -94,7 +94,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Button Btn_empty_bottle = findViewById(R.id.Btn_empty_bottle);
         Button Btn_etc = findViewById(R.id.Btn_etc);
         Button Btn_add = findViewById(R.id.Btn_add);
-        Button Btn_restore = findViewById(R.id.Btn_restore);
         Button Btn_sub = findViewById(R.id.Btn_sub);
 
         etItemWeight.addTextChangedListener(new TextWatcher() {
@@ -301,13 +300,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     TXT_today_trash_input.setText(total + "g");
                     setPreSavedTrash(total);
                 }
-            }
-        });
-
-        Btn_restore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
             }
         });
 
