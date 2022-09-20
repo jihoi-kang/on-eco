@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.TrashUsage;
+import com.project.oneco.data.WaterUsage;
 
 import java.util.Random;
 
@@ -25,10 +26,10 @@ public class MainHome extends AppCompatActivity {
         OnEcoApplication application = (OnEcoApplication) getApplication();
 
 
-        // SharedPreference에 임의의 데이터 삽입
+        // SharedPreference에 임의의 쓰레기 배출량 데이터 삽입
         PreferenceManager preferenceManager = PreferenceManager.getInstance(this);
         Random random = new Random();
-        for(int i = 1; i < 31; i++) {
+        for(int i = 1; i < 15; i++) {
             TrashUsage trashUsage = new TrashUsage();
             float emptyBottle = random.nextInt(300);
             float can = random.nextInt(300);
@@ -59,7 +60,36 @@ public class MainHome extends AppCompatActivity {
                 day = "" + i;
             }
 
-            preferenceManager.putString("2107" + day + "-trash-usage", new Gson().toJson(trashUsage));
+            preferenceManager.putString("2208" + day + "-trash-usage", new Gson().toJson(trashUsage));
+        }
+
+        // SharedPreference에 임의의 물 사용량 데이터 삽입
+        for(int i = 1; i < 15; i++) {
+            WaterUsage waterUsage = new WaterUsage();
+            float tooth = random.nextInt(300);
+            float hand = random.nextInt(300);
+            float face = random.nextInt(300);
+            float shower = random.nextInt(300);
+            float dish = random.nextInt(300);
+            float etc_water = random.nextInt(300);
+            float waterTotal = tooth + hand + face + shower + dish + etc_water;
+
+            waterUsage.setTooth(tooth);
+            waterUsage.setHand(hand);
+            waterUsage.setFace(face);
+            waterUsage.setShower(shower);
+            waterUsage.setDish(dish);
+            waterUsage.setEtcWater(etc_water);
+            waterUsage.setWaterTotal(waterTotal);
+
+            String day;
+            if (i < 10) {
+                day = "0" + i;
+            } else {
+                day = "" + i;
+            }
+
+            preferenceManager.putString("2208" + day + "-water-usage", new Gson().toJson(waterUsage));
         }
 
         // 포인트 값 임의 조정
