@@ -218,7 +218,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/input_TW"
+                        android:text="+"
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <Button
@@ -235,7 +235,7 @@
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                    android:layout_height="40dp" />
 
                 <TextView
                     android:id="@+id/subtitle_today_water_input"
@@ -252,6 +252,10 @@
                     android:text="ml"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:gravity="end"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
 
                 <TextView
                     android:id="@+id/subtitle_water_compareBefore"

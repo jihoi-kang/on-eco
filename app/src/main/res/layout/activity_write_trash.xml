@@ -197,7 +197,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/input_TW"
+                android:text="+"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <Button
@@ -213,7 +213,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="40dp" />
 
         <TextView
             android:id="@+id/subtitle_today_trash_input"
@@ -231,6 +231,10 @@
             android:text="0g"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
         <TextView
             android:id="@+id/subtitle_saving_trash"
             android:layout_width="match_parent"
@@ -246,12 +250,6 @@
             android:gravity="end"
             android:text="0g"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
 
     </LinearLayout>
 </LinearLayout>

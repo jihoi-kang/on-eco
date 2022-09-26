@@ -60,7 +60,7 @@ public class MainHome extends AppCompatActivity {
                 day = "" + i;
             }
 
-            preferenceManager.putString("2208" + day + "-trash-usage", new Gson().toJson(trashUsage));
+            preferenceManager.putString("2209" + day + "-trash-usage", new Gson().toJson(trashUsage));
         }
 
         // SharedPreference에 임의의 물 사용량 데이터 삽입
@@ -89,7 +89,7 @@ public class MainHome extends AppCompatActivity {
                 day = "" + i;
             }
 
-            preferenceManager.putString("2208" + day + "-water-usage", new Gson().toJson(waterUsage));
+            preferenceManager.putString("2209" + day + "-water-usage", new Gson().toJson(waterUsage));
         }
 
         // 포인트 값 임의 조정
