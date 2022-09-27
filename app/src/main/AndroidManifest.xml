@@ -14,10 +14,8 @@
         android:theme="@style/Theme.OnEco">
 
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.OnEco.NoActionBar">
+            android:name=".TabHost"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,11 +65,10 @@
             android:exported="false" />
         <activity
             android:name=".WriteTrash"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".WaterStopGame"
             android:exported="false" />
-
         <activity
             android:name=".MainHome"
             android:exported="true">

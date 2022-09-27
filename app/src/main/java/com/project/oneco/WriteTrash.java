@@ -39,6 +39,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     TextView TXT_saved_trash;
     private int currentItemWeight = 0;
 
+    private int touchCount1,touchCount2,touchCount3,touchCount4,touchCount5,touchCount6,touchCount7,touchCount8,touchCount9 = 0;
 
     EditText etItemWeight;
     EditText ET_UserInputTrash;
@@ -146,6 +147,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
+
         // Button을 눌렀을 때 trashType에 저장.(9개 모두 구현)
         Btn_tissue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +158,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 // item들을 riteTrash 셋해준다.
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, tissueItems);
                 lvList.setAdapter(adapter);
+                touchCount1++;
+                ListVisible();
             }
         });
 
@@ -166,6 +170,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 // item들을 riteTrash 셋해준다.
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, disposableCupItems);
                 lvList.setAdapter(adapter);
+                touchCount2++;
+                ListVisible();
             }
         });
 
@@ -175,6 +181,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 trashType = "disposable_spoon";
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, disposableSpoonItems);
                 lvList.setAdapter(adapter);
+                touchCount3++;
+                ListVisible();
             }
         });
 
@@ -184,6 +192,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 trashType = "paper";
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, paperItems);
                 lvList.setAdapter(adapter);
+                touchCount4++;
+                ListVisible();
             }
 
         });
@@ -194,6 +204,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 trashType = "plastic";
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticItems);
                 lvList.setAdapter(adapter);
+                touchCount5++;
+                ListVisible();
             }
         });
 
@@ -203,6 +215,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 trashType = "plastic_bag";
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticBagItems);
                 lvList.setAdapter(adapter);
+                touchCount6++;
+                ListVisible();
             }
         });
 
@@ -212,6 +226,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 trashType = "can";
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, canItems);
                 lvList.setAdapter(adapter);
+                touchCount7++;
+                ListVisible();
             }
         });
 
@@ -221,6 +237,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 trashType = "empty_bottle";
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, emptyBottleItems);
                 lvList.setAdapter(adapter);
+                touchCount8++;
+                ListVisible();
             }
         });
 
@@ -230,6 +248,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 trashType = "etc";
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, etcItems);
                 lvList.setAdapter(adapter);
+                touchCount9++;
+                ListVisible();
             }
         });
 
@@ -397,6 +417,21 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         setPreSavedTrash(total);
 
     }   // end of onCreate
+
+
+    // Button을 눌렀을 때 리스트 보이고 안보이기
+    private void ListVisible() {
+        if (lvList.getVisibility() == lvList.GONE) {
+            lvList.setVisibility(View.VISIBLE);
+        } else {
+            if(touchCount1 == 2 || touchCount2 == 2 || touchCount3 == 2 || touchCount4 == 2 || touchCount5 == 2 || touchCount6 == 2 || touchCount7 == 2 || touchCount8 == 2 || touchCount9 == 2){
+                lvList.setVisibility(View.GONE);
+                touchCount1 = 0; touchCount2 = 0; touchCount3 = 0; touchCount4 = 0; touchCount5 = 0;
+                touchCount6 = 0; touchCount7 = 0; touchCount8 = 0; touchCount9 = 0;
+            }
+        }
+    }
+
 
 
     // onItemClick 리스너 구현
