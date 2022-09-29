@@ -113,26 +113,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             public void afterTextChanged(Editable editable) { }
         });
 
-        // 이전 버튼
-        ImageButton Btn_back = findViewById(R.id.Btn_back);
-        Btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-                application.active_activity = "";
-                application.statisticType = "";
-            }
-        });
-
-        // 홈 화면으로 넘어가기
-        TextView title_ONECO = findViewById(R.id.title_ONECO);
-        title_ONECO.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainHome.class);
-                startActivity(intent);
-            }
-        });
 
         // 통계 화면으로 넘어가기
         ImageButton Tstatistic = findViewById(R.id.Tstatistic);

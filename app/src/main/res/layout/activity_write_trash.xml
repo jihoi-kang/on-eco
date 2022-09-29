@@ -15,28 +15,27 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/Btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/logo"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
-            android:contentDescription="@string/Btn_before"
-            app:srcCompat="?attr/actionModeCloseDrawable"
-            app:tint="#606060"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            app:srcCompat="@drawable/oneco_logo" />
 
         <TextView
-            android:id="@+id/title_ONECO"
+            android:id="@+id/subtitle_today_trash"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:text="ON-ECO"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:padding="10dp"
+            android:text="오늘의 쓰레기"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold" />
+
 
         <ImageButton
             android:id="@+id/Tstatistic"
-            android:layout_width="wrap_content"
+            android:layout_width="39dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#ffffff"
@@ -55,34 +54,35 @@
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
-        <TextView
-            android:id="@+id/subtitle_today_trash"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="오늘의 쓰레기"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp">
 
                 <Button
                     android:id="@+id/Btn_tissue"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/tissue" />
+                    android:background="@drawable/custombutton"
+                    android:text="@string/tissue"
+                    android:textColor="@color/black" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <Button
                     android:id="@+id/Btn_disposable_cup"
@@ -90,41 +90,63 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/custombutton"
                     android:text="@string/disposable_cup" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <Button
                     android:id="@+id/Btn_disposable_spoon"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/custombutton"
                     android:text="@string/disposable_spoon" />
             </LinearLayout>
 
             <LinearLayout
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp">
 
                 <Button
                     android:id="@+id/Btn_paper"
-                    style="?android:attr/buttonBarButtonStyle"
+                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/paper" />
 
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
                 <Button
                     android:id="@+id/Btn_plastic"
-                    style="?android:attr/buttonBarButtonStyle"
+                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/plastic" />
 
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
                 <Button
                     android:id="@+id/Btn_plastic_bag"
-                    style="?android:attr/buttonBarButtonStyle"
+                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -133,32 +155,48 @@
 
 
             <LinearLayout
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp">
 
                 <Button
                     android:id="@+id/Btn_can"
-                    style="?android:attr/buttonBarButtonStyle"
+                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/can" />
 
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
                 <Button
                     android:id="@+id/Btn_empty_bottle"
-                    style="?android:attr/buttonBarButtonStyle"
+                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/empty_bottle" />
 
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
                 <Button
                     android:id="@+id/Btn_etc"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/custombutton"
                     android:text="@string/etc" />
             </LinearLayout>
 
