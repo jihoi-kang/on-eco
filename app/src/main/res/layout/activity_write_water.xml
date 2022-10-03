@@ -6,16 +6,18 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical"
+    android:paddingLeft="10dp"
     tools:context=".WriteWater">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,12 +64,42 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="@string/title_write_water"
-                android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/Btn_scan_trash"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#C5E0B4"
+                    android:text="쓰레기 스캔"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/Btn_measure_water_use"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#BDD7EE"
+                    android:text="물 사용량 측정"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,11 +171,165 @@
                             android:layout_weight="1"
                             android:text="@string/Btn_etc" />
                     </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/UserInputWater"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:hint="직접입력"
+                            android:minHeight="48dp"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="20dp"
+                            android:gravity="center"
+                            android:text="ml"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                        <Button
+                            android:id="@+id/Btn_sub"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_horizontal"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFF2CC"
+                            android:gravity="center"
+                            android:text="-"
+                            android:textColor="#000000" />
+
+                        <Button
+                            android:id="@+id/Btn_add"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_horizontal"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFF2CC"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="#000000"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <LinearLayout
+                        android:id="@+id/water_PT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp"
+                            android:text="수압" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/wweakness"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="weakness" />
+
+                            <Button
+                                android:id="@+id/wmiddle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="middle" />
+
+                            <Button
+                                android:id="@+id/wstrenth"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="strenth" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp"
+                            android:text="수도" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/wbath"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="세면대용" />
+
+                            <Button
+                                android:id="@+id/wsink"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="개수대용" />
+
+                            <Button
+                                android:id="@+id/wshowerHead"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="샤워헤드" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="* 선택하지 않을 경우 중간으로 설정됩니다." />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" />
+                    android:layout_height="20dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -159,12 +345,12 @@
                         android:insetLeft="15dp"
                         android:insetTop="4dp"
                         android:insetRight="15dp"
-                        android:text="@string/Btn_afterTimer"
+                        android:text="측정 시작"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="30dp" />
+                        android:layout_height="20dp" />
 
                     <Button
                         android:id="@+id/Btn_bef_WTimer_Game"
@@ -182,56 +368,17 @@
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="60dp" />
+                    android:layout_height="30dp" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/today_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/UserInputWater"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:minHeight="48dp"
-                        tools:ignore="SpeakableTextPresentCheck" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="20dp"
-                        android:gravity="center"
-                        android:text="ml"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                    <Button
-                        android:id="@+id/Btn_add"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_horizontal"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="+"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                    <Button
-                        android:id="@+id/Btn_sub"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_horizontal"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="-" />
-
-                </LinearLayout>
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="오늘의 날짜"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -249,9 +396,9 @@
                     android:id="@+id/TXT_today_water_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="end"
                     android:text="ml"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:gravity="end"/>
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
                 <Space
                     android:layout_width="match_parent"

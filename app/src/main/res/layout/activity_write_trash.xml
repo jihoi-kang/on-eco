@@ -20,7 +20,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
-            app:srcCompat="@drawable/oneco_logo" />
+            app:srcCompat="@drawable/oneco_logo"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/subtitle_today_trash"
