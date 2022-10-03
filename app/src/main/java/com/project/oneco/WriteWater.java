@@ -67,6 +67,17 @@ public class WriteWater extends AppCompatActivity {
         application = (OnEcoApplication) getApplication();
 
 
+        // 검색화면으로 넘어가기
+        ImageButton Btn_search = findViewById(R.id.btn_search);
+        Btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Search.class);
+                startActivity(intent);
+            }
+        });
+
+
         // 측정 시작 버튼 눌렀을 때
         Button Btn_bef_WTimer = findViewById(R.id.Btn_bef_WTimer);
         Btn_bef_WTimer.setOnClickListener(new View.OnClickListener() {

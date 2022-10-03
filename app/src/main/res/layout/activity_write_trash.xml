@@ -34,7 +34,7 @@
 
                 <TextView
                     android:id="@+id/subtitle_today_trash"
-                    android:layout_width="145dp"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="오늘의 쓰레기"
@@ -263,10 +263,12 @@
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:autofillHints=""
                             android:ems="10"
                             android:gravity="center"
                             android:inputType="number"
+                            android:hint="직접입력"
                             android:minHeight="48dp"
                             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -280,25 +282,29 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                         <Button
-                            android:id="@+id/Btn_add"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/Btn_sub"
+                            android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_horizontal"
                             android:layout_marginRight="5dp"
                             android:layout_weight="1"
+                            android:backgroundTint="#FFF2CC"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:text="-" />
+
+                        <Button
+                            android:id="@+id/Btn_add"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_horizontal"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFF2CC"
+                            android:textColor="#000000"
                             android:gravity="center"
                             android:text="+"
                             tools:ignore="TouchTargetSizeCheck" />
-
-                        <Button
-                            android:id="@+id/Btn_sub"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right|center_horizontal"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="-" />
                     </LinearLayout>
 
                     <Space

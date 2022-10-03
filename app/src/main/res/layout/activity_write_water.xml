@@ -36,7 +36,7 @@
 
                 <TextView
                     android:id="@+id/subtitle_today_water"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:padding="10dp"
@@ -186,6 +186,7 @@
                             android:ems="10"
                             android:inputType="number"
                             android:hint="직접입력"
+                            android:gravity="center"
                             android:minHeight="48dp"
                             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -232,10 +233,10 @@
 
                     <LinearLayout
                         android:id="@+id/water_PT"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <TextView
                             android:id="@+id/textView6"
@@ -256,21 +257,24 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="weakness" />
+                                android:background="@drawable/btn_water_pt"
+                                android:text="약" />
 
                             <Button
                                 android:id="@+id/wmiddle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="middle" />
+                                android:background="@drawable/btn_water_pt"
+                                android:text="중" />
 
                             <Button
                                 android:id="@+id/wstrenth"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="strenth" />
+                                android:background="@drawable/btn_water_pt"
+                                android:text="강" />
 
                         </LinearLayout>
 
@@ -294,6 +298,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:background="@drawable/btn_water_pt"
                                 android:text="세면대용" />
 
                             <Button
@@ -301,6 +306,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:background="@drawable/btn_water_pt"
                                 android:text="개수대용" />
 
                             <Button
@@ -308,7 +314,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:background="@drawable/btn_water_pt"
                                 android:text="샤워헤드" />
+
                         </LinearLayout>
 
                         <TextView
@@ -319,30 +327,39 @@
                             android:gravity="center"
                             android:text="* 선택하지 않을 경우 중간으로 설정됩니다." />
 
+                        <TextView
+                            android:id="@+id/spended_AllT2"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="00:00"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+
+                        <Button
+                            android:id="@+id/Btn_bef_WTimer"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="match_parent"
+                            android:layout_height="85dp"
+                            android:backgroundTint="#9EC2FD"
+                            android:insetLeft="15dp"
+                            android:insetTop="4dp"
+                            android:insetRight="15dp"
+                            android:text="측정 시작"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                    android:layout_height="30dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/Btn_bef_WTimer"
-                        style="@style/Widget.Material3.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="85dp"
-                        android:backgroundTint="#9EC2FD"
-                        android:insetLeft="15dp"
-                        android:insetTop="4dp"
-                        android:insetRight="15dp"
-                        android:text="측정 시작"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <Space
                         android:layout_width="match_parent"

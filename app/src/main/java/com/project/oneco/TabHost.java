@@ -19,13 +19,13 @@ public class TabHost extends TabActivity {
 
         android.widget.TabHost tabHost = getTabHost(); //탭 호스트 객체 생성
 
-// 탭스팩 선언하고, 탭의 내부 명칭, 탭에 출력될 글 작성
+        // 탭스팩 선언하고, 탭의 내부 명칭, 탭에 출력될 글 작성
         android.widget.TabHost.TabSpec spec;
         Intent intent; //객체
 
 
 
-//탭에서 액티비티를 사용할 수 있도록 인텐트 생성
+        //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, WriteTrash.class);
         spec = tabHost.newTabSpec("Trash"); // 객체를 생성
         spec.setIndicator("TRASH"); //탭의 이름 설정
@@ -33,7 +33,7 @@ public class TabHost extends TabActivity {
         tabHost.addTab(spec);
 
 
-//탭에서 액티비티를 사용할 수 있도록 인텐트 생성
+        //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, WriteWater.class);
         spec = tabHost.newTabSpec("Water"); // 객체를 생성
         spec.setIndicator("WATER"); //탭의 이름 설정
@@ -49,7 +49,7 @@ public class TabHost extends TabActivity {
         tabHost.addTab(spec);
 
 
-//탭에서 액티비티를 사용할 수 있도록 인텐트 생성
+        //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, MyPage.class);
         spec = tabHost.newTabSpec("Mypage"); // 객체를 생성
         spec.setIndicator("MYPAGE"); //탭의 이름 설정
