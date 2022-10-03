@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.TrashUsage;
+import com.project.oneco.tensorflow.ClassifierActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,7 +40,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     TextView TXT_saved_trash;
     private int currentItemWeight = 0;
 
-    private int touchCount1,touchCount2,touchCount3,touchCount4,touchCount5,touchCount6,touchCount7,touchCount8,touchCount9 = 0;
+    private int touchCount1, touchCount2, touchCount3, touchCount4, touchCount5, touchCount6, touchCount7, touchCount8, touchCount9 = 0;
 
     EditText etItemWeight;
     EditText ET_UserInputTrash;
@@ -61,7 +62,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     String[] canItems = {"250ml", "355ml", "500ml", "750ml", "참치캔(100g)"};
     String[] emptyBottleItems = {"100ml", "180ml"};
     String[] etcItems = {"기타"};
-
 
 
     @Override
@@ -96,10 +96,12 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Button Btn_etc = findViewById(R.id.Btn_etc);
         Button Btn_add = findViewById(R.id.Btn_add);
         Button Btn_sub = findViewById(R.id.Btn_sub);
+        Button Btn_scan = findViewById(R.id.Btn_scan);
 
         etItemWeight.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -110,7 +112,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
 
             @Override
-            public void afterTextChanged(Editable editable) { }
+            public void afterTextChanged(Editable editable) {
+            }
         });
 
 
@@ -373,6 +376,14 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
+        Btn_scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         // 저장되어 있는 trash 값 반영
         Calendar calendar = Calendar.getInstance();
@@ -401,17 +412,23 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
     // Button을 눌렀을 때 리스트 보이고 안보이기
     private void ListVisible() {
-        if (lvList.getVisibility() == lvList.GONE) {
+        if (lvList.getVisibility() == View.GONE) {
             lvList.setVisibility(View.VISIBLE);
         } else {
-            if(touchCount1 == 2 || touchCount2 == 2 || touchCount3 == 2 || touchCount4 == 2 || touchCount5 == 2 || touchCount6 == 2 || touchCount7 == 2 || touchCount8 == 2 || touchCount9 == 2){
+            if (touchCount1 == 2 || touchCount2 == 2 || touchCount3 == 2 || touchCount4 == 2 || touchCount5 == 2 || touchCount6 == 2 || touchCount7 == 2 || touchCount8 == 2 || touchCount9 == 2) {
                 lvList.setVisibility(View.GONE);
-                touchCount1 = 0; touchCount2 = 0; touchCount3 = 0; touchCount4 = 0; touchCount5 = 0;
-                touchCount6 = 0; touchCount7 = 0; touchCount8 = 0; touchCount9 = 0;
+                touchCount1 = 0;
+                touchCount2 = 0;
+                touchCount3 = 0;
+                touchCount4 = 0;
+                touchCount5 = 0;
+                touchCount6 = 0;
+                touchCount7 = 0;
+                touchCount8 = 0;
+                touchCount9 = 0;
             }
         }
     }
-
 
 
     // onItemClick 리스너 구현
@@ -580,10 +597,10 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         float preTotal = 0f;
         // 전일 대비 절약한 쓰레기의 양.
         // 전날 데이터가 null이 아닐 때까지 데이터 불러오기. 조건?
-        for(int i = 1; i<10; i++){
+        for (int i = 1; i < 10; i++) {
             // 어제 쓰레기 전체 사용량(trashTotal) 불러오기
             Date dDate = new Date();
-            dDate = new Date(dDate.getTime()+(1000*60*60*24*-i));
+            dDate = new Date(dDate.getTime() + (1000 * 60 * 60 * 24 * -i));
             SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
             String key_yesterday = dSdf.format(dDate.getTime());
             Log.d("jay", "key_yesterday: " + key_yesterday);

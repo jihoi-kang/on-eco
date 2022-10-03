@@ -108,10 +108,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:padding="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="10dp"
@@ -120,10 +120,10 @@
 
                 <Button
                     android:id="@+id/Btn_paper"
-                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/custombutton"
                     android:text="@string/paper" />
 
                 <Space
@@ -133,10 +133,10 @@
 
                 <Button
                     android:id="@+id/Btn_plastic"
-                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/custombutton"
                     android:text="@string/plastic" />
 
                 <Space
@@ -146,19 +146,19 @@
 
                 <Button
                     android:id="@+id/Btn_plastic_bag"
-                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/custombutton"
                     android:text="@string/plastic_bag" />
             </LinearLayout>
 
 
             <LinearLayout
-                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:padding="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="10dp"
@@ -167,10 +167,10 @@
 
                 <Button
                     android:id="@+id/Btn_can"
-                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/custombutton"
                     android:text="@string/can" />
 
                 <Space
@@ -180,10 +180,10 @@
 
                 <Button
                     android:id="@+id/Btn_empty_bottle"
-                    android:background="@drawable/custombutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/custombutton"
                     android:text="@string/empty_bottle" />
 
                 <Space
@@ -294,6 +294,16 @@
                 android:gravity="end"
                 android:text="0g"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+
+            <Button
+                android:id="@+id/Btn_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custombutton"
+                android:text="@string/scan_trash"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 

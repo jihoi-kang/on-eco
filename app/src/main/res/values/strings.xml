@@ -59,7 +59,11 @@
     <string name="mtitle_today_trash">오늘 배출한 쓰레기</string>
     <string name="real_used_trash">100G</string>
     <string name="saving_trash">전일 대비 배출한 쓰레기</string>
+    <string name="scan_trash">쓰레기 스캔하기</string>
     <string name="real_saving_trash">10G</string>
     <string name="Userinput_today_T">trash</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <string name="tfe_ic_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]">This device doesn\'t support Camera2 API.</string>
+    <string name="tfe_ic_gpu_quant_error" translation_description="Error regarding GPU support for Quant models[CHAR_LIMIT=60]">GPU does not yet supported quantized models.</string>
 </resources>
