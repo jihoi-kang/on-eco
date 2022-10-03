@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical"
-    android:paddingLeft="10dp"
     tools:context=".WriteWater">
 
     <ScrollView
@@ -19,53 +18,50 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/Btn_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/logo"
+                    android:layout_width="125dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="#00FFFFFF"
-                    android:contentDescription="@string/Btn_before"
-                    app:srcCompat="?attr/actionModeCloseDrawable"
-                    app:tint="#606060"
-                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    app:srcCompat="@drawable/oneco_logo"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 <TextView
-                    android:id="@+id/title_ONECO"
+                    android:id="@+id/subtitle_today_water"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="ON-ECO"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:padding="10dp"
+                    android:text="@string/title_write_water"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/Wstatistic"
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:backgroundTint="#00FFFFFF"
-                    android:contentDescription="@string/Btn_checkStatis"
-                    app:srcCompat="@drawable/statistic"
-                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btn_search"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:backgroundTint="#ffffff"
+                        app:srcCompat="@drawable/btn_search"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                </LinearLayout>
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/subtitle_today_water"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/title_write_water"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,7 +71,7 @@
                 <Button
                     android:id="@+id/Btn_scan_trash"
                     style="@style/Widget.Material3.Button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#C5E0B4"
@@ -89,7 +85,7 @@
                 <Button
                     android:id="@+id/Btn_measure_water_use"
                     style="@style/Widget.Material3.Button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#BDD7EE"
@@ -174,7 +170,7 @@
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="20dp" />
+                        android:layout_height="30dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
