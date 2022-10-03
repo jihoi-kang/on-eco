@@ -1,4 +1,4 @@
-package org.tensorflow.lite.examples.classification;
+package com.project.oneco;
 
 public interface OnItemClickListener {
     String onItemClick (String name);

@@ -1,10 +1,11 @@
-package org.tensorflow.lite.examples.classification;
+package com.project.oneco;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,16 +28,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
 
     @NonNull
     @Override
-    public SearchAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent, false);
-        SearchAdapter.CustomViewHolder holder = new SearchAdapter.CustomViewHolder(view);
+        CustomViewHolder holder = new CustomViewHolder(view);
 
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchAdapter.CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         holder.iv_search_item.setImageResource(arrayList.get(position).getImage());
         holder.tv_search_item.setText(arrayList.get(position).getName());
 
@@ -46,16 +47,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
             public void onClick(View v) {
                 // 1. arrayList에서 클릭한 경우
                 if (type == 0) {
-                    callback.onSortItemClick(position);
+                    callback.onSortItemClick(holder.getAdapterPosition());
                     Intent intent = new Intent(v.getContext(), DetailActivity.class);
-                    intent.putExtra("title", callback.onItemClick(arrayList.get(position).getName()));
+                    intent.putExtra("title", callback.onItemClick(arrayList.get(holder.getAdapterPosition()).getName()));
 //                    ((Activity)v.getContext()).setResult(25, intent);
 //                    ((Activity) v.getContext()).finish();
                     ((Activity)v.getContext()).startActivityForResult(intent, 25);
                 } else { // 2. resultList에서 클릭한 경우
-                    callback.onResultItemClick(position);
+                    callback.onResultItemClick(holder.getAdapterPosition());
                     Intent intent = new Intent(v.getContext(), DetailActivity.class);
-                    intent.putExtra("title", callback.onItemClick(arrayList.get(position).getName()));
+                    intent.putExtra("title", callback.onItemClick(arrayList.get(holder.getAdapterPosition()).getName()));
                     v.getContext().startActivity(intent);
                 }
             }

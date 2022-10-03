@@ -1,4 +1,4 @@
-package org.tensorflow.lite.examples.classification;
+package com.project.oneco;
 
 public class SearchItemData {
     private int image;

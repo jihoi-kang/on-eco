@@ -1,4 +1,4 @@
-package org.tensorflow.lite.examples.classification;
+package com.project.oneco;
 
 import android.content.res.Resources;
 import android.os.Bundle;

@@ -114,16 +114,13 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         });
 
 
-        // 통계 화면으로 넘어가기
-        ImageButton Tstatistic = findViewById(R.id.Tstatistic);
-        Tstatistic.setOnClickListener(new View.OnClickListener() {
+        // 검색화면으로 넘어가기
+        ImageButton Btn_search = findViewById(R.id.btn_search);
+        Btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Statistic.class);
+                Intent intent = new Intent(getApplicationContext(), Search.class);
                 startActivity(intent);
-
-                application.active_activity = "statistic";
-                application.statisticType = "trash-usage";
             }
         });
 

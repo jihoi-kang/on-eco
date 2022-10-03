@@ -1,4 +1,4 @@
-package org.tensorflow.lite.examples.classification;
+package com.project.oneco;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class SearchActivity extends AppCompatActivity implements OnItemClickListener {
+public class Search extends AppCompatActivity implements OnItemClickListener {
 
     private ArrayList<SearchItemData> arrayList, totalList, resultList, sortList;
     private ArrayList<String> keyBattery, keyClothes, keyGlass, keyMetal, keyPaper, keyPlastic, keyTrash;
@@ -101,7 +102,7 @@ public class SearchActivity extends AppCompatActivity implements OnItemClickList
                 // 빈 문자열인지 체크
                 if (str.length() > 0) {
                     str = classifier(str);
-                    Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
+                    Intent intent = new Intent(Search.this, DetailActivity.class);
                     intent.putExtra("title", str);
                     //startActivity(intent);
                     startActivityForResult(intent, REQUEST_CODE);
@@ -119,7 +120,7 @@ public class SearchActivity extends AppCompatActivity implements OnItemClickList
                     str = et_searchBar.getText().toString().replace(" ","");
                     if (str.length() > 0) {
                         str = classifier(str);
-                        Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
+                        Intent intent = new Intent(Search.this, DetailActivity.class);
                         intent.putExtra("title", str);
                         //startActivity(intent);
                         startActivityForResult(intent, REQUEST_CODE);
@@ -144,7 +145,7 @@ public class SearchActivity extends AppCompatActivity implements OnItemClickList
         showSortAdapter(arrayList);
 
         resultList = new ArrayList<>();
-        resultAdapter = new SearchAdapter(resultList, SearchActivity.this, 1);
+        resultAdapter = new SearchAdapter(resultList, Search.this, 1);
 
         et_searchBar.addTextChangedListener(new TextWatcher() {
             @Override

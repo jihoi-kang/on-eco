@@ -1,4 +1,4 @@
-package org.tensorflow.lite.examples.classification;
+package com.project.oneco;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +23,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
 
     @NonNull
     @Override
-    public DetailAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail,parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
@@ -32,7 +32,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DetailAdapter.CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         holder.tv_title.setText(arrayList.get(position).getTitle());
         holder.tv_content.setText(arrayList.get(position).getContent());
 
