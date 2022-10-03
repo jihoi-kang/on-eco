@@ -24,6 +24,7 @@
                 android:color="#81b75d"
                 />
         </shape>
+        <color android:color="@color/black"/>
     </item>
 
 

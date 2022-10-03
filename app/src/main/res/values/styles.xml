@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.MyDialog" parent="Theme.AppCompat.Dialog">
+    <style name="Theme.MyDialog" parent="Base.Theme.AppCompat.Dialog">
         <item name = "windowActionBar">false</item>
         <item name = "windowNoTitle">true</item>
         <item name="colorPrimary">@color/white</item>
