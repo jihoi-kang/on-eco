@@ -267,8 +267,8 @@
                             android:autofillHints=""
                             android:ems="10"
                             android:gravity="center"
-                            android:inputType="number"
                             android:hint="직접입력"
+                            android:inputType="number"
                             android:minHeight="48dp"
                             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -289,9 +289,9 @@
                             android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:backgroundTint="#FFF2CC"
-                            android:textColor="#000000"
                             android:gravity="center"
-                            android:text="-" />
+                            android:text="-"
+                            android:textColor="#000000" />
 
                         <Button
                             android:id="@+id/Btn_add"
@@ -301,9 +301,9 @@
                             android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:backgroundTint="#FFF2CC"
-                            android:textColor="#000000"
                             android:gravity="center"
                             android:text="+"
+                            android:textColor="#000000"
                             tools:ignore="TouchTargetSizeCheck" />
                     </LinearLayout>
 

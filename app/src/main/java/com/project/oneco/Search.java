@@ -8,7 +8,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -98,7 +97,7 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
         btn_searchBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                str = et_searchBar.getText().toString().replace(" ","");
+                str = et_searchBar.getText().toString().replace(" ", "");
                 // 빈 문자열인지 체크
                 if (str.length() > 0) {
                     str = classifier(str);
@@ -117,7 +116,7 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
-                    str = et_searchBar.getText().toString().replace(" ","");
+                    str = et_searchBar.getText().toString().replace(" ", "");
                     if (str.length() > 0) {
                         str = classifier(str);
                         Intent intent = new Intent(Search.this, DetailActivity.class);
@@ -135,7 +134,7 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
         });
 
         // RecyclerView
-        recyclerView = (RecyclerView)findViewById(R.id.rv_search);
+        recyclerView = findViewById(R.id.rv_search);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -214,9 +213,9 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
         } else {
             return "일반쓰레기";
         }
-     }
+    }
 
-     // detailAcitivy에서 돌아왔을 때 실행되는 함수
+    // detailAcitivy에서 돌아왔을 때 실행되는 함수
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -252,7 +251,8 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
         Gson gson = new Gson();
         String json = sharedPreferences.getString("SearchObjectList", "");
         // JSON to object list
-        Type type = new TypeToken<ArrayList<SearchItemData>>(){}.getType();
+        Type type = new TypeToken<ArrayList<SearchItemData>>() {
+        }.getType();
         ArrayList<SearchItemData> searchItemList = gson.fromJson(json, type);
         if (searchItemList == null) return new ArrayList<>();
         else return searchItemList;
@@ -261,8 +261,7 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
     private void showSortAdapter(ArrayList<SearchItemData> arrayList) {
         if (!arrayList.isEmpty()) {
             sortList = sortSearchItemData(arrayList);
-        }
-        else sortList = new ArrayList<>();
+        } else sortList = new ArrayList<>();
         searchAdapter = new SearchAdapter(sortList, this, 0);
         recyclerView.setAdapter(searchAdapter);
     }
@@ -279,7 +278,7 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
         // 5개만 뽑아서 저장하기
         ArrayList<SearchItemData> result = new ArrayList<>();
         if (list.size() > 5) {
-            for (int i=0; i<5; i++) {
+            for (int i = 0; i < 5; i++) {
                 result.add(list.get(i));
             }
         } else {
@@ -300,7 +299,7 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
     }
 
     @Override
-    public void onResultItemClick (int pos) {
+    public void onResultItemClick(int pos) {
         // resultList에서 클릭한 경우
         SearchItemData obj = resultList.get(pos);
         if (arrayList.isEmpty()) {
@@ -318,13 +317,13 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
     }
 
     @Override
-    public String onItemClick (String name) {
+    public String onItemClick(String name) {
         return classifier(name);
     }
 
     // name으로 해당하는 인덱스 찾기
     public int findIndexByName(String name, ArrayList<SearchItemData> list) {
-        for (int i=0; i<list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals(name)) return i;
         }
         return -1;

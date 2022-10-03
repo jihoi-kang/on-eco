@@ -40,8 +40,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     // intent에서 값 가져오기
-   private void getIncomingIntent() {
-        if(getIntent().hasExtra("title")) {
+    private void getIncomingIntent() {
+        if (getIntent().hasExtra("title")) {
             String title = getIntent().getStringExtra("title");
             setDetailTitle(title);
             setDetailContent(title);
@@ -99,7 +99,7 @@ public class DetailActivity extends AppCompatActivity {
         for (String i : items) {
             // title과 content로 나누기
             String[] result = i.split(";");
-            arrayList.add(new DetailItemData(result[0].toString(), result[1].toString()));
+            arrayList.add(new DetailItemData(result[0], result[1]));
         }
     }
 

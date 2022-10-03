@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomViewHolder>{
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomViewHolder> {
 
-    private ArrayList<SearchItemData> arrayList;
-    private OnItemClickListener callback;
-    private int type;
+    private final ArrayList<SearchItemData> arrayList;
+    private final OnItemClickListener callback;
+    private final int type;
 
     public SearchAdapter(ArrayList<SearchItemData> arrayList, OnItemClickListener callback, int type) {
         this.arrayList = arrayList;
@@ -28,16 +27,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
 
     @NonNull
     @Override
-    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent, false);
-        CustomViewHolder holder = new CustomViewHolder(view);
+        SearchAdapter.CustomViewHolder holder = new SearchAdapter.CustomViewHolder(view);
 
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchAdapter.CustomViewHolder holder, int position) {
         holder.iv_search_item.setImageResource(arrayList.get(position).getImage());
         holder.tv_search_item.setText(arrayList.get(position).getName());
 
@@ -47,16 +46,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
             public void onClick(View v) {
                 // 1. arrayList에서 클릭한 경우
                 if (type == 0) {
-                    callback.onSortItemClick(holder.getAdapterPosition());
+                    callback.onSortItemClick(position);
                     Intent intent = new Intent(v.getContext(), DetailActivity.class);
-                    intent.putExtra("title", callback.onItemClick(arrayList.get(holder.getAdapterPosition()).getName()));
+                    intent.putExtra("title", callback.onItemClick(arrayList.get(position).getName()));
 //                    ((Activity)v.getContext()).setResult(25, intent);
 //                    ((Activity) v.getContext()).finish();
-                    ((Activity)v.getContext()).startActivityForResult(intent, 25);
+                    ((Activity) v.getContext()).startActivityForResult(intent, 25);
                 } else { // 2. resultList에서 클릭한 경우
-                    callback.onResultItemClick(holder.getAdapterPosition());
+                    callback.onResultItemClick(position);
                     Intent intent = new Intent(v.getContext(), DetailActivity.class);
-                    intent.putExtra("title", callback.onItemClick(arrayList.get(holder.getAdapterPosition()).getName()));
+                    intent.putExtra("title", callback.onItemClick(arrayList.get(position).getName()));
                     v.getContext().startActivity(intent);
                 }
             }
@@ -74,8 +73,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.iv_search_item = (ImageView) itemView.findViewById(R.id.iv_search_item);
-            this.tv_search_item = (TextView) itemView.findViewById(R.id.tv_search_item);
+            this.iv_search_item = itemView.findViewById(R.id.iv_search_item);
+            this.tv_search_item = itemView.findViewById(R.id.tv_search_item);
 
         }
     }
