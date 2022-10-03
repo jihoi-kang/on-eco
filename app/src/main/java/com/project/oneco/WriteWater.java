@@ -66,44 +66,8 @@ public class WriteWater extends AppCompatActivity {
         // Activity간의 데이터 공유를 위한 application 가져오기
         application = (OnEcoApplication) getApplication();
 
-        // 이전 버튼
-        ImageButton Btn_back = findViewById(R.id.Btn_back);
-        Btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                application.active_activity = "";
-                application.statisticType = "";
-                application.waterType = "";
-                Log.d("hun", "waterType : " + application.waterType);
-                Intent intent = new Intent(getApplicationContext(), MainHome.class);
-                startActivity(intent);
-            }
-        });
 
-        // 홈 화면으로 넘어가기
-        TextView title_ONECO = findViewById(R.id.title_ONECO);
-        title_ONECO.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainHome.class);
-                startActivity(intent);
-            }
-        });
-
-        // 통계 화면으로 넘어가기
-        ImageButton Wstatistic = findViewById(R.id.Wstatistic);
-        Wstatistic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Statistic.class);
-                startActivity(intent);
-
-                application.active_activity = "statistic";
-                application.statisticType = "water-usage";
-            }
-        });
-
-        // 물 사용량 측정 버튼 눌렀을 때
+        // 측정 시작 버튼 눌렀을 때
         Button Btn_bef_WTimer = findViewById(R.id.Btn_bef_WTimer);
         Btn_bef_WTimer.setOnClickListener(new View.OnClickListener() {
             @Override
