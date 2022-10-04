@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +26,15 @@ public class WriteWater extends AppCompatActivity {
 
     private OnEcoApplication application;
 
+    LinearLayout LO_water_PT;
     EditText ET_UserInputWater;
     TextView TXT_today_water_input;
     TextView TXT_saved_water;
 
     Button Btn_add;
     Button Btn_sub;
+
+    private int touchCount1,touchCount2,touchCount3,touchCount4,touchCount5,touchCount6,touchCount7,touchCount8,touchCount9 = 0;
 
     private PreferenceManager preferenceManager;
     private Gson gson;
@@ -55,50 +59,26 @@ public class WriteWater extends AppCompatActivity {
         ET_UserInputWater = findViewById(R.id.UserInputWater);
         Btn_add = findViewById(R.id.Btn_add);
         Btn_sub = findViewById(R.id.Btn_sub);
+        LO_water_PT = findViewById(R.id.water_PT);
         TXT_today_water_input = findViewById(R.id.TXT_today_water_input);
         TXT_saved_water = findViewById(R.id.TXT_saved_water);
 
         // Activity간의 데이터 공유를 위한 application 가져오기
         application = (OnEcoApplication) getApplication();
 
-        // 이전 버튼
-        ImageButton Btn_back = findViewById(R.id.Btn_back);
-        Btn_back.setOnClickListener(new View.OnClickListener() {
+
+        // 검색화면으로 넘어가기
+        ImageButton Btn_search = findViewById(R.id.btn_search);
+        Btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                application.active_activity = "";
-                application.statisticType = "";
-                application.waterType = "";
-                Log.d("hun", "waterType : " + application.waterType);
-                Intent intent = new Intent(getApplicationContext(), MainHome.class);
+                Intent intent = new Intent(getApplicationContext(), Search.class);
                 startActivity(intent);
             }
         });
 
-        // 홈 화면으로 넘어가기
-        TextView title_ONECO = findViewById(R.id.title_ONECO);
-        title_ONECO.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainHome.class);
-                startActivity(intent);
-            }
-        });
 
-        // 통계 화면으로 넘어가기
-        ImageButton Wstatistic = findViewById(R.id.Wstatistic);
-        Wstatistic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Statistic.class);
-                startActivity(intent);
-
-                application.active_activity = "statistic";
-                application.statisticType = "water-usage";
-            }
-        });
-
-        // 물 사용량 측정 버튼 눌렀을 때
+        // 측정 시작 버튼 눌렀을 때
         Button Btn_bef_WTimer = findViewById(R.id.Btn_bef_WTimer);
         Btn_bef_WTimer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,26 +113,38 @@ public class WriteWater extends AppCompatActivity {
 
                     case R.id.Btn_toothBrush:
                         application.waterType = "tooth";
+                        touchCount1++;
+                        ListVisible();
                         break;
 
                     case R.id.Btn_handWash:
                         application.waterType = "hand";
+                        touchCount2++;
+                        ListVisible();
                         break;
 
                     case R.id.Btn_faceWash:
                         application.waterType = "face";
+                        touchCount3++;
+                        ListVisible();
                         break;
 
                     case R.id.Btn_shower:
                         application.waterType = "shower";
+                        touchCount4++;
+                        ListVisible();
                         break;
 
                     case R.id.Btn_dishWash:
                         application.waterType = "dish";
+                        touchCount5++;
+                        ListVisible();
                         break;
 
                     case R.id.Btn_etc_water:
                         application.waterType = "etc_water";
+                        touchCount6++;
+                        ListVisible();
                         break;
                 }
             }
@@ -397,6 +389,19 @@ public class WriteWater extends AppCompatActivity {
 
         // UI 변경
         TXT_saved_water.setText(savedWater + "ml");
+    }
+
+    // Button을 눌렀을 때 레이아웃 보이고 안보이기
+    private void ListVisible() {
+        if (LO_water_PT.getVisibility() == LO_water_PT.GONE) {
+            LO_water_PT.setVisibility(View.VISIBLE);
+        } else {
+            if(touchCount1 == 2 || touchCount2 == 2 || touchCount3 == 2 || touchCount4 == 2 || touchCount5 == 2 || touchCount6 == 2 || touchCount7 == 2 || touchCount8 == 2 || touchCount9 == 2){
+                LO_water_PT.setVisibility(View.GONE);
+                touchCount1 = 0; touchCount2 = 0; touchCount3 = 0; touchCount4 = 0; touchCount5 = 0;
+                touchCount6 = 0; touchCount7 = 0; touchCount8 = 0; touchCount9 = 0;
+            }
+        }
     }
 
 

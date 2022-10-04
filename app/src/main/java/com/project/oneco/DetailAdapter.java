@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomViewHolder> {
 
-    private ArrayList<DetailItemData> arrayList;
-    private int deviderColor;
+    private final ArrayList<DetailItemData> arrayList;
+    private final int deviderColor;
 
     public DetailAdapter(ArrayList<DetailItemData> arrayList, int deviderColor) {
         this.arrayList = arrayList;
@@ -23,16 +23,16 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
 
     @NonNull
     @Override
-    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DetailAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
         holder.iv_devider.setImageResource(deviderColor);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DetailAdapter.CustomViewHolder holder, int position) {
         holder.tv_title.setText(arrayList.get(position).getTitle());
         holder.tv_content.setText(arrayList.get(position).getContent());
 
