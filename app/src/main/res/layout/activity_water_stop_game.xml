@@ -82,7 +82,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/setting"
+                    android:id="@+id/Layout_play"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -108,7 +108,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/timeup"
+                    android:id="@+id/Layout_pauseStop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">

@@ -49,10 +49,6 @@
             android:name=".WaterAfterStati"
             android:exported="false" />
         <activity
-            android:name=".WaterPower"
-            android:exported="false"
-            android:theme="@style/Theme.MyDialog" />
-        <activity
             android:name=".test.TimerTest"
             android:exported="false" />
         <activity
@@ -60,9 +56,6 @@
             android:exported="false" />
         <activity
             android:name=".Statistic"
-            android:exported="false" />
-        <activity
-            android:name=".WaterStopWatch"
             android:exported="false" />
         <activity
             android:name=".WriteWater"

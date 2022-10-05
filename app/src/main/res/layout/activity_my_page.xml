@@ -15,47 +15,75 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/Btn_back"
-                android:layout_width="35dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/logo"
+                android:layout_width="125dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
-                android:contentDescription="@string/Btn_before"
-                app:srcCompat="?attr/actionModeCloseDrawable"
-                app:tint="#606060"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                app:srcCompat="@drawable/oneco_logo"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/title_ONECO"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="ON-ECO"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:padding="10dp"
+                android:text="마이페이지"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
 
-            <Space
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+            <ImageButton
+                android:id="@+id/btn_search"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/btn_search"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/subtitle_mypage"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="마이페이지"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Btn_scan_trash"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#C5E0B4"
+                android:text="쓰레기 스캔"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/Btn_measure_water_use"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#BDD7EE"
+                android:text="물 사용량 측정"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
 
     </LinearLayout>
 

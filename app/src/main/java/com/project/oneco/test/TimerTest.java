@@ -49,8 +49,8 @@ public class TimerTest extends AppCompatActivity {
         minText = findViewById(R.id.min);
         secondText = findViewById(R.id.second);
 
-        setting = findViewById(R.id.setting);
-        timer = findViewById(R.id.timeup);
+        setting = findViewById(R.id.Layout_play);
+        timer = findViewById(R.id.Layout_pauseStop);
 
         // 타이머 시작
         startButton.setOnClickListener(new View.OnClickListener() {

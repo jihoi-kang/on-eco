@@ -28,7 +28,7 @@ public class TabHost extends TabActivity {
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, WriteTrash.class);
         spec = tabHost.newTabSpec("Trash"); // 객체를 생성
-        spec.setIndicator("TRASH"); //탭의 이름 설정
+        spec.setIndicator("TRASH", this.getResources().getDrawable(R.drawable.write_trash)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -36,7 +36,7 @@ public class TabHost extends TabActivity {
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, WriteWater.class);
         spec = tabHost.newTabSpec("Water"); // 객체를 생성
-        spec.setIndicator("WATER"); //탭의 이름 설정
+        spec.setIndicator("WATER", this.getResources().getDrawable(R.drawable.write_water)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -44,7 +44,7 @@ public class TabHost extends TabActivity {
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, Statistic.class);
         spec = tabHost.newTabSpec("Statistic"); // 객체를 생성
-        spec.setIndicator("STATISTIC"); //탭의 이름 설정
+        spec.setIndicator("STATISTIC", this.getResources().getDrawable(R.drawable.statistic)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -52,7 +52,7 @@ public class TabHost extends TabActivity {
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, MyPage.class);
         spec = tabHost.newTabSpec("Mypage"); // 객체를 생성
-        spec.setIndicator("MYPAGE"); //탭의 이름 설정
+        spec.setIndicator("MYPAGE", this.getResources().getDrawable(R.drawable.mypage)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 

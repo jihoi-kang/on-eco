@@ -27,7 +27,7 @@ public class OnEcoApplication extends Application {
     public int count = 0;
 
     // 물 사용 종류
-    public String waterType;
+    public String waterType = "";
 
     // 쓰레기 사용 종류
     public String trashType;

@@ -44,22 +44,14 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold" />
 
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="10dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/btn_search"
-                        android:layout_width="10dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:backgroundTint="#ffffff"
-                        app:srcCompat="@drawable/btn_search"
-                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-                </LinearLayout>
+                    android:backgroundTint="#00ffffff"
+                    app:srcCompat="@drawable/btn_search"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </LinearLayout>
 
@@ -113,29 +105,32 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Btn_toothBrush"
-                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/Btn_tooth" />
+                            android:background="@drawable/btn_water"
+                            android:text="@string/Btn_tooth"
+                            android:textColor="#5B9BD5" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Btn_handWash"
-                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="손 씻기" />
+                            android:background="@drawable/btn_water"
+                            android:text="손 씻기"
+                            android:textColor="#5B9BD5" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Btn_faceWash"
-                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/Btn_facewash" />
+                            android:background="@drawable/btn_water"
+                            android:text="@string/Btn_facewash"
+                            android:textColor="#5B9BD5" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -143,29 +138,32 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Btn_shower"
-                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/Btn_bodywash" />
+                            android:background="@drawable/btn_water"
+                            android:text="@string/Btn_bodywash"
+                            android:textColor="#5B9BD5" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Btn_dishWash"
-                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/Btn_dishwash" />
+                            android:background="@drawable/btn_water"
+                            android:text="@string/Btn_dishwash"
+                            android:textColor="#5B9BD5" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Btn_etc_water"
-                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/Btn_etc" />
+                            android:background="@drawable/btn_water"
+                            android:text="@string/Btn_etc"
+                            android:textColor="#5B9BD5" />
                     </LinearLayout>
 
                     <Space
@@ -184,9 +182,9 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="number"
-                            android:hint="직접입력"
                             android:gravity="center"
+                            android:hint="직접입력"
+                            android:inputType="number"
                             android:minHeight="48dp"
                             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -236,7 +234,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/textView6"
@@ -252,24 +250,24 @@
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
 
-                            <Button
-                                android:id="@+id/wweakness"
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/Wweakness"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:background="@drawable/btn_water_pt"
                                 android:text="약" />
 
-                            <Button
-                                android:id="@+id/wmiddle"
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/Wmiddle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:background="@drawable/btn_water_pt"
                                 android:text="중" />
 
-                            <Button
-                                android:id="@+id/wstrenth"
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/Wstrenth"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -293,24 +291,24 @@
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
-                            <Button
-                                android:id="@+id/wbath"
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/Wbath"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:background="@drawable/btn_water_pt"
                                 android:text="세면대용" />
 
-                            <Button
-                                android:id="@+id/wsink"
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/Wsink"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:background="@drawable/btn_water_pt"
                                 android:text="개수대용" />
 
-                            <Button
-                                android:id="@+id/wshowerHead"
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/WshowerHead"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -328,7 +326,7 @@
                             android:text="* 선택하지 않을 경우 중간으로 설정됩니다." />
 
                         <TextView
-                            android:id="@+id/spended_AllT2"
+                            android:id="@+id/spended_AllT"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_weight="1"
@@ -336,25 +334,57 @@
                             android:text="00:00"
                             android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
 
-                        <Button
-                            android:id="@+id/Btn_bef_WTimer"
-                            style="@style/Widget.Material3.Button"
+                        <FrameLayout
+                            android:id="@+id/stopwatch_btns"
                             android:layout_width="match_parent"
-                            android:layout_height="85dp"
-                            android:backgroundTint="#9EC2FD"
-                            android:insetLeft="15dp"
-                            android:insetTop="4dp"
-                            android:insetRight="15dp"
-                            android:text="측정 시작"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:id="@+id/Layout_play"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageButton
+                                    android:id="@+id/Btn_bef_WTimer"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:backgroundTint="#00FFFFFF"
+                                    app:srcCompat="@drawable/play"
+                                    tools:ignore="SpeakableTextPresentCheck,DuplicateClickableBoundsCheck,ImageContrastCheck" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/Layout_pauseStop"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <ImageButton
+                                    android:id="@+id/Btn_pause_ST"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="#00FFFFFF"
+                                    app:srcCompat="@drawable/pause"
+                                    tools:ignore="SpeakableTextPresentCheck" />
+
+                                <ImageButton
+                                    android:id="@+id/Btn_stop_ST"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="#00FFFFFF"
+                                    app:srcCompat="@drawable/stop"
+                                    tools:ignore="DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
+                            </LinearLayout>
+
+
+                        </FrameLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -406,7 +436,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <TextView
-                    android:id="@+id/TXT_today_water_input"
+                    android:id="@+id/TXT_today_water"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"

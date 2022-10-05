@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context=".Statistic">
 
@@ -19,60 +20,74 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/Btn_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:backgroundTint="#00FFFFFF"
-                        android:contentDescription="@string/Btn_before"
-                        app:srcCompat="?attr/actionModeCloseDrawable"
-                        app:tint="#606060"
-                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-                    <TextView
-                        android:id="@+id/title_ONECO"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="ON-ECO"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                    <ImageButton
-                        android:id="@+id/goto_mypage"
-                        android:layout_width="56dp"
-                        android:layout_height="49dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#00FFFFFF"
-                        android:contentDescription="@string/goto_mypage"
-                        app:srcCompat="@drawable/mypage_sun" />
-
-                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/logo"
+                    android:layout_width="125dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00FFFFFF"
+                    app:srcCompat="@drawable/oneco_logo"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 <TextView
                     android:id="@+id/subtitle_statistic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="배출/사용량 통계"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold" />
 
+                <ImageButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00FFFFFF"
+                    app:srcCompat="@drawable/btn_search"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/Btn_scan_trash"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#C5E0B4"
+                    android:text="쓰레기 스캔"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
                 <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp" />
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/Btn_measure_water_use"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#BDD7EE"
+                    android:text="물 사용량 측정"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"

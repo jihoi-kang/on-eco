@@ -82,7 +82,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/setting"
+                    android:id="@+id/Layout_play"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -102,19 +102,19 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/timeup"
+                    android:id="@+id/Layout_pauseStop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/Btn_stop_ST"
+                        android:id="@+id/Btn_pause_ST"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:text="일시 정지" />
 
                     <Button
-                        android:id="@+id/Btn_finish_ST"
+                        android:id="@+id/Btn_stop_ST"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:layout_gravity="bottom"

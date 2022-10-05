@@ -66,9 +66,9 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
         // Activity간의 데이터 공유를 위한 application 가져오기1-2
         application = (OnEcoApplication) getApplication();
-
-        // WaterPower 팝업 띄우기
-        startActivity(new Intent(this, WaterPower.class));
+//
+//        // WaterPower 팝업 띄우기
+//        startActivity(new Intent(this, WaterPower.class));
 
         spinner = (Spinner) findViewById(R.id.spinner);
 
@@ -77,8 +77,8 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         stopButton = findViewById(R.id.stopButton);
         Btn_finish_game = findViewById(R.id.Btn_finish_game);
 
-        setting = findViewById(R.id.setting);
-        timer = findViewById(R.id.timeup);
+        setting = findViewById(R.id.Layout_play);
+        timer = findViewById(R.id.Layout_pauseStop);
 
 
         checkPermission();
