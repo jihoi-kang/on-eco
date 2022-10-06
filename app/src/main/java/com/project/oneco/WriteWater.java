@@ -23,6 +23,8 @@ import com.gun0912.tedpermission.normal.TedPermission;
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.WaterUsage;
+import com.project.oneco.tensorflow.CameraActivity;
+import com.project.oneco.tensorflow.ClassifierActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ import java.util.TimerTask;
 
 public class WriteWater extends AppCompatActivity {
 
+    private int touchCount1, touchCount2, touchCount3, touchCount4, touchCount5, touchCount6, touchCount7, touchCount8, touchCount9 = 0;
     androidx.appcompat.widget.AppCompatButton Btn_toothBrush;
     androidx.appcompat.widget.AppCompatButton Btn_handWash;
     androidx.appcompat.widget.AppCompatButton Btn_faceWash;
@@ -57,10 +60,9 @@ public class WriteWater extends AppCompatActivity {
     LinearLayout Layout_play;    // 플레이 버튼 화면
     LinearLayout Layout_pauseStop;      // 정지, 종료 버튼 화면
 
+    TextView Txt_today_date;
     TextView Txt_today_water_input;
     TextView Txt_saved_water;
-
-    private int touchCount1, touchCount2, touchCount3, touchCount4, touchCount5, touchCount6, touchCount7, touchCount8, touchCount9 = 0;
 
     private ArrayList<Float> dbList = new ArrayList<>();
     private ArrayList<Float> dbUsedList = new ArrayList<>();
@@ -69,7 +71,7 @@ public class WriteWater extends AppCompatActivity {
     private TextView Txt_countup;// 타이머 현황
 
     private ImageButton Btn_pause_ST;
-    private ImageButton  Btn_stop_ST;
+    private ImageButton Btn_stop_ST;
 
     private Timer countUpTimer;
     private TimerTask second;
@@ -97,6 +99,7 @@ public class WriteWater extends AppCompatActivity {
         Btn_dishWash = findViewById(R.id.Btn_dishWash);
         Btn_etc_water = findViewById(R.id.Btn_etc_water);
 
+
         ET_UserInputWater = findViewById(R.id.UserInputWater);
         Btn_add = findViewById(R.id.Btn_add);
         Btn_sub = findViewById(R.id.Btn_sub);
@@ -108,6 +111,13 @@ public class WriteWater extends AppCompatActivity {
         Wstrenth = findViewById(R.id.Wstrenth);
         Wmiddle = findViewById(R.id.Wmiddle);
         Wweakness = findViewById(R.id.Wweakness);
+
+        Wbath.setOnClickListener(listener);
+        Wsink.setOnClickListener(listener);
+        WshowerHead.setOnClickListener(listener);
+        Wstrenth.setOnClickListener(listener);
+        Wmiddle.setOnClickListener(listener);
+        Wweakness.setOnClickListener(listener);
 
         Layout_play = findViewById(R.id.Layout_play);
         Layout_pauseStop = findViewById(R.id.Layout_pauseStop);
@@ -123,17 +133,13 @@ public class WriteWater extends AppCompatActivity {
         gson = new Gson();
         soundMeter = new SoundMeter();
 
-        Wbath.setOnClickListener(listener);
-        Wsink.setOnClickListener(listener);
-        WshowerHead.setOnClickListener(listener);
-        Wstrenth.setOnClickListener(listener);
-        Wmiddle.setOnClickListener(listener);
-        Wweakness.setOnClickListener(listener);
 
         checkPermission();
+        checkPermission_camera();
         Layout_pauseStop.setVisibility(View.GONE);
         Wbath.setSelected(true);
         Wmiddle.setSelected(true);
+        Btn_etc_water.setSelected(true);
 
         // 검색화면으로 넘어가기
         ImageButton Btn_search = findViewById(R.id.btn_search);
@@ -145,6 +151,15 @@ public class WriteWater extends AppCompatActivity {
             }
         });
 
+        // 쓰레기 스캔
+        Button Btn_scan_trash = findViewById(R.id.Btn_scan_trash);
+        Btn_scan_trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 샤워 타이머 게임 화면으로 넘어가기
         Button Btn_bef_WTimer_Game = findViewById(R.id.Btn_bef_WTimer_Game);
@@ -158,6 +173,8 @@ public class WriteWater extends AppCompatActivity {
             }
         });
 
+
+
         // Button을 눌렀을 때 waterType에 물 사용 유형 저장
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -166,85 +183,85 @@ public class WriteWater extends AppCompatActivity {
 
                     case R.id.Btn_toothBrush:
                         application.waterType = "tooth";
-                        tooth.setSelected(true);
-                        hand.setSelected(false);
-                        face.setSelected(false);
-                        shower.setSelected(false);
-                        dish.setSelected(false);
-                        etc_water.setSelected(false);
+                        Btn_toothBrush.setSelected(true);
+                        Btn_handWash.setSelected(false);
+                        Btn_faceWash.setSelected(false);
+                        Btn_shower.setSelected(false);
+                        Btn_dishWash.setSelected(false);
+                        Btn_etc_water.setSelected(false);
                         touchCount1++;
                         ListVisible();
                         break;
 
                     case R.id.Btn_handWash:
                         application.waterType = "hand";
-                        tooth.setSelected(false);
-                        hand.setSelected(true);
-                        face.setSelected(false);
-                        shower.setSelected(false);
-                        dish.setSelected(false);
-                        etc_water.setSelected(false);
+                        Btn_toothBrush.setSelected(false);
+                        Btn_handWash.setSelected(true);
+                        Btn_faceWash.setSelected(false);
+                        Btn_shower.setSelected(false);
+                        Btn_dishWash.setSelected(false);
+                        Btn_etc_water.setSelected(false);
                         touchCount2++;
                         ListVisible();
                         break;
 
                     case R.id.Btn_faceWash:
                         application.waterType = "face";
-                        tooth.setSelected(false);
-                        hand.setSelected(false);
-                        face.setSelected(true);
-                        shower.setSelected(false);
-                        dish.setSelected(false);
-                        etc_water.setSelected(false);
+                        Btn_toothBrush.setSelected(false);
+                        Btn_handWash.setSelected(false);
+                        Btn_faceWash.setSelected(true);
+                        Btn_shower.setSelected(false);
+                        Btn_dishWash.setSelected(false);
+                        Btn_etc_water.setSelected(false);
                         touchCount3++;
                         ListVisible();
                         break;
 
                     case R.id.Btn_shower:
                         application.waterType = "shower";
-                        tooth.setSelected(false);
-                        hand.setSelected(false);
-                        face.setSelected(false);
-                        shower.setSelected(true);
-                        dish.setSelected(false);
-                        etc_water.setSelected(false);
+                        Btn_toothBrush.setSelected(false);
+                        Btn_handWash.setSelected(false);
+                        Btn_faceWash.setSelected(false);
+                        Btn_shower.setSelected(true);
+                        Btn_dishWash.setSelected(false);
+                        Btn_etc_water.setSelected(false);
                         touchCount4++;
                         ListVisible();
                         break;
 
                     case R.id.Btn_dishWash:
                         application.waterType = "dish";
-                        tooth.setSelected(false);
-                        hand.setSelected(false);
-                        face.setSelected(false);
-                        shower.setSelected(false);
-                        dish.setSelected(true);
-                        etc_water.setSelected(false);
+                        Btn_toothBrush.setSelected(false);
+                        Btn_handWash.setSelected(false);
+                        Btn_faceWash.setSelected(false);
+                        Btn_shower.setSelected(false);
+                        Btn_dishWash.setSelected(true);
+                        Btn_etc_water.setSelected(false);
                         touchCount5++;
                         ListVisible();
                         break;
 
                     case R.id.Btn_etc_water:
                         application.waterType = "etc_water";
-                        tooth.setSelected(false);
-                        hand.setSelected(false);
-                        face.setSelected(false);
-                        shower.setSelected(false);
-                        dish.setSelected(false);
-                        etc_water.setSelected(true);
+                        Btn_toothBrush.setSelected(false);
+                        Btn_handWash.setSelected(false);
+                        Btn_faceWash.setSelected(false);
+                        Btn_shower.setSelected(false);
+                        Btn_dishWash.setSelected(false);
+                        Btn_etc_water.setSelected(true);
                         touchCount6++;
                         ListVisible();
                         break;
                 }
             }
         };
-
         Btn_toothBrush.setOnClickListener(onClickListener);
         Btn_handWash.setOnClickListener(onClickListener);
         Btn_faceWash.setOnClickListener(onClickListener);
         Btn_shower.setOnClickListener(onClickListener);
         Btn_dishWash.setOnClickListener(onClickListener);
         Btn_etc_water.setOnClickListener(onClickListener);
+
 
         // + 버튼 눌렀을 때
         Btn_add.setOnClickListener(new View.OnClickListener() {
@@ -342,6 +359,9 @@ public class WriteWater extends AppCompatActivity {
                         // gson이용하여 가져와 data를 String으로 변환 후 객체에 저장.
                         waterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
                     }
+
+                    // todo:오늘 날짜로 데이트 피커 날짜 세팅
+                    Txt_today_date.setText(application.todayDate);
 
                     // 물 전체 사용량(ml) 구하기
                     float waterTotal = waterUsage.getTooth() + waterUsage.getHand()
@@ -570,6 +590,7 @@ public class WriteWater extends AppCompatActivity {
 
 
 
+
     // 백버튼을 누르면
     @Override
     public void onBackPressed() {
@@ -644,6 +665,13 @@ public class WriteWater extends AppCompatActivity {
                 touchCount7 = 0;
                 touchCount8 = 0;
                 touchCount9 = 0;
+                Btn_toothBrush.setSelected(false);
+                Btn_handWash.setSelected(false);
+                Btn_faceWash.setSelected(false);
+                Btn_shower.setSelected(false);
+                Btn_dishWash.setSelected(false);
+                Btn_etc_water.setSelected(true);
+                application.waterType = "etc_water";
             }
         }
     }
@@ -696,7 +724,7 @@ public class WriteWater extends AppCompatActivity {
         }
     };
 
-    private void setInit(){
+    private void setInit() {
         application.waterType = "Wmiddle";
         application.Wtap = "Wbath";
         application.Wpower = 80f;
@@ -747,6 +775,25 @@ public class WriteWater extends AppCompatActivity {
     }
 
 
+    /**
+     * CAMERA 권한이 있는지 확인합니다.
+     */
+    private void checkPermission_camera() {
+        TedPermission.create()
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        Toast.makeText(WriteWater.this, "Camera Permission Granted", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(List<String> deniedPermissions) {
+                        Toast.makeText(WriteWater.this, "Camera Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }).setDeniedMessage("권한을 허용하지 않을 경우 서비스를 제대로 이용할 수 없습니다. [Setting] > [Permission]에서 권한을 확인해주세요.")
+                .setPermissions(Manifest.permission.CAMERA)
+                .check();
+    }
 
     /**
      * 데시벨을 측정하기 위해선 RECORD_AUDIO라는 권한을 사용자로부터 받아야 합니다.
@@ -757,12 +804,12 @@ public class WriteWater extends AppCompatActivity {
                 .setPermissionListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted() {
-                        Toast.makeText(WriteWater.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WriteWater.this, "Audio Permission Granted", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onPermissionDenied(List<String> deniedPermissions) {
-                        Toast.makeText(WriteWater.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WriteWater.this, "Audio Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }).setDeniedMessage("권한을 허용하지 않을 경우 서비스를 제대로 이용할 수 없습니다. [Setting] > [Permission]에서 권한을 확인해주세요.")
                 .setPermissions(Manifest.permission.RECORD_AUDIO)

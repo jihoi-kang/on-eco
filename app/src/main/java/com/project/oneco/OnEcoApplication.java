@@ -27,7 +27,7 @@ public class OnEcoApplication extends Application {
     public int count = 0;
 
     // 물 사용 종류
-    public String waterType = "";
+    public String waterType = "etc_water";
 
     // 쓰레기 사용 종류
     public String trashType;
@@ -35,8 +35,8 @@ public class OnEcoApplication extends Application {
     public int timerSec = 0;
     public int RtimerSec = 0;
 
-    public String Wtap = "";
-    public float Wpower = 0f;
+    public String Wtap = "Wbath";
+    public float Wpower = 80f;
 
     public float usedW = 0f;      // 물 사용량 = Wpower * usedWT
     public float usedWT = 0f;      // 물 사용 시간
