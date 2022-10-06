@@ -39,7 +39,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     TextView TXT_saved_trash;
     private int currentItemWeight = 0;
 
-    private int touchCount1, touchCount2, touchCount3, touchCount4, touchCount5, touchCount6, touchCount7, touchCount8, touchCount9 = 0;
+    private int touchCount1, touchCount2, touchCount3, touchCount4, touchCount5, touchCount6 = 0;
 
     EditText etItemWeight;
     EditText ET_UserInputTrash;
@@ -50,17 +50,13 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     ListView lvList;
     ArrayAdapter<String> adapter;
 
-    // listView에 들어갈 item들 정의(9개)
-    String[] tissueItems = {"물티슈", "각티슈", "손 닦는 휴지", "두루말이 휴지"};
-    String[] disposableCupItems = {"종이 정수기컵", "종이 자판기컵", "종이 Tall 사이즈(355ml)", "종이 Grande 사이즈(473ml)", "종이 Venti 사이즈(591ml)",
-            "플라스틱 Tall 사이즈(355ml)", "플라스틱 Grande 사이즈(473ml)", "플라스틱 Venti 사이즈(591ml)"};
-    String[] disposableSpoonItems = {"일회용 수저", "일회용 그릇"};
-    String[] paperItems = {"A4", "B4", "택배박스 1호(50cm)", "택배박스 2호(60cm)", "택배박스 3호(80cm)", "택배박스 4호(100cm)", "택배박스 5호(120cm)"};
-    String[] plasticItems = {"250ml", "500ml", "1L", "2L"};
-    String[] plasticBagItems = {"3L", "5L", "10L", "20L"};
+    // listView에 들어갈 item들 정의(9개 >> 6개)
+    String[] normalTrashItems = {};
+    String[] glassItems = {"100ml", "180ml"};
     String[] canItems = {"250ml", "355ml", "500ml", "750ml", "참치캔(100g)"};
-    String[] emptyBottleItems = {"100ml", "180ml"};
-    String[] etcItems = {"기타"};
+    String[] paperItems = {"A4", "B4", "종이 정수기컵", "종이 자판기컵", "종이컵 Tall 사이즈(355ml)", "종이컵 Grande 사이즈(473ml)", "종이컵 Venti 사이즈(591ml)","택배박스 1호(50cm)", "택배박스 2호(60cm)", "택배박스 3호(80cm)", "택배박스 4호(100cm)", "택배박스 5호(120cm)"};
+    String[] plasticItems = {"플라스틱컵 Tall 사이즈(355ml)", "플라스틱컵 Grande 사이즈(473ml)", "플라스틱컵 Venti 사이즈(591ml)", "250ml", "500ml", "1L", "2L"};
+    String[] plasticBagItems = {"3L", "5L", "10L", "20L"};
 
 
     @Override
@@ -83,16 +79,14 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         ET_UserInputTrash = findViewById(R.id.UserInput_TodayT);
         TXT_saved_trash = findViewById(R.id.TXT_saving_trash);
 
-        // Button 9개 bind
-        Button Btn_tissue = findViewById(R.id.Btn_tissue);
-        Button Btn_disposable_cup = findViewById(R.id.Btn_disposable_cup);
-        Button Btn_disposable_spoon = findViewById(R.id.Btn_disposable_spoon);
+        // Button 9개 bind >> 6로 수정
+        Button Btn_normal_trash = findViewById(R.id.Btn_normal_trash);
+        Button Btn_glass = findViewById(R.id.Btn_glass);
+        Button Btn_can = findViewById(R.id.Btn_can);
         Button Btn_paper = findViewById(R.id.Btn_paper);
         Button Btn_plastic = findViewById(R.id.Btn_plastic);
         Button Btn_plastic_bag = findViewById(R.id.Btn_plastic_bag);
-        Button Btn_can = findViewById(R.id.Btn_can);
-        Button Btn_empty_bottle = findViewById(R.id.Btn_empty_bottle);
-        Button Btn_etc = findViewById(R.id.Btn_etc);
+
         Button Btn_add = findViewById(R.id.Btn_add);
         Button Btn_sub = findViewById(R.id.Btn_sub);
 
@@ -127,41 +121,43 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
 
         // Button을 눌렀을 때 trashType에 저장.(9개 모두 구현)
-        Btn_tissue.setOnClickListener(new View.OnClickListener() {
+        Btn_normal_trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("jay", "passed");
                 // trashType에 쓰레기 유형 저장
-                trashType = "tissue";
+                trashType = "normal_trash";
                 // item들을 riteTrash 셋해준다.
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, tissueItems);
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, normalTrashItems);
                 lvList.setAdapter(adapter);
                 touchCount1++;
                 ListVisible();
             }
         });
 
-        Btn_disposable_cup.setOnClickListener(new View.OnClickListener() {
+        Btn_glass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                trashType = "disposable_cup";
+                trashType = "glass";
                 // item들을 riteTrash 셋해준다.
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, disposableCupItems);
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, glassItems);
                 lvList.setAdapter(adapter);
                 touchCount2++;
                 ListVisible();
             }
         });
 
-        Btn_disposable_spoon.setOnClickListener(new View.OnClickListener() {
+
+        Btn_can.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                trashType = "disposable_spoon";
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, disposableSpoonItems);
+                trashType = "can";
+                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, canItems);
                 lvList.setAdapter(adapter);
                 touchCount3++;
                 ListVisible();
             }
+
         });
 
         Btn_paper.setOnClickListener(new View.OnClickListener() {
@@ -173,13 +169,12 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 touchCount4++;
                 ListVisible();
             }
-
         });
 
         Btn_plastic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                trashType = "plastic";
+                trashType = "plastic_bag";
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticItems);
                 lvList.setAdapter(adapter);
                 touchCount5++;
@@ -190,7 +185,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Btn_plastic_bag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                trashType = "plastic_bag";
+                trashType = "plastic";
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticBagItems);
                 lvList.setAdapter(adapter);
                 touchCount6++;
@@ -198,38 +193,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
-        Btn_can.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                trashType = "can";
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, canItems);
-                lvList.setAdapter(adapter);
-                touchCount7++;
-                ListVisible();
-            }
-        });
-
-        Btn_empty_bottle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                trashType = "empty_bottle";
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, emptyBottleItems);
-                lvList.setAdapter(adapter);
-                touchCount8++;
-                ListVisible();
-            }
-        });
-
-        Btn_etc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                trashType = "etc";
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, etcItems);
-                lvList.setAdapter(adapter);
-                touchCount9++;
-                ListVisible();
-            }
-        });
 
         Btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,15 +220,15 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     Log.d("jay", "trashUsageStr: " + trashUsageStr);
 
                     // 각각의 쓰레기 타입에 저장
-                    if (trashType.equals("tissue")) {
-                        float tissue = trashUsage.getTissue();
-                        trashUsage.setTissue(tissue + currentItemWeight);
-                    } else if (trashType.equals("disposable_cup")) {
-                        float disposableCup = trashUsage.getDisposable_cup();
-                        trashUsage.setDisposable_cup(disposableCup + currentItemWeight);
-                    } else if (trashType.equals("disposable_spoon")) {
-                        float disposableSpoon = trashUsage.getDisposable_spoon();
-                        trashUsage.setDisposable_spoon(disposableSpoon + currentItemWeight);
+                    if (trashType.equals("normal_trash")) {
+                        float normal_trash = trashUsage.getNormalTrash();
+                        trashUsage.setNormalTrash(normal_trash + currentItemWeight);
+                    } else if (trashType.equals("glass")) {
+                        float glass = trashUsage.getGlass();
+                        trashUsage.setGlass(glass + currentItemWeight);
+                    } else if (trashType.equals("can")) {
+                        float can = trashUsage.getCan();
+                        trashUsage.setCan(can + currentItemWeight);
                     } else if (trashType.equals("paper")) {
                         float paper = trashUsage.getPaper();
                         trashUsage.setPaper(paper + currentItemWeight);
@@ -275,15 +238,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     } else if (trashType.equals("plastic_bag")) {
                         float plastic_bag = trashUsage.getPlastic_bag();
                         trashUsage.setPlastic_bag(plastic_bag + currentItemWeight);
-                    } else if (trashType.equals("can")) {
-                        float can = trashUsage.getCan();
-                        trashUsage.setCan(can + currentItemWeight);
-                    } else if (trashType.equals("empty_bottle")) {
-                        float empty_bottle = trashUsage.getEmpty_bottle();
-                        trashUsage.setEmpty_bottle(empty_bottle + currentItemWeight);
-                    } else if (trashType.equals("etc")) {
-                        float etc = trashUsage.getTrashEtc();
-                        trashUsage.setTrashEtc(etc + currentItemWeight);
                     }
 
                     // localStorage에 저장
@@ -291,9 +245,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     preferenceManager.putString(key + "-trash-usage", updatedTrashUsage);
 
                     // 쓰레기 전체 g 구하기
-                    float total = trashUsage.getTissue() + trashUsage.getDisposable_cup() + trashUsage.getDisposable_spoon()
-                            + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag() + trashUsage.getCan()
-                            + trashUsage.getEmpty_bottle() + trashUsage.getTrashEtc();
+                    float total = trashUsage.getNormalTrash() + trashUsage.getGlass() + trashUsage.getCan()
+                            + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag();
 
                     TXT_today_trash_input.setText(total + "g");
                     setPreSavedTrash(total);
@@ -327,15 +280,15 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     Log.d("jay", "trashUsageStr: " + trashUsageStr);
 
                     // 각각의 쓰레기 타입에 저장
-                    if (trashType.equals("tissue")) {
-                        float tissue = trashUsage.getTissue();
-                        trashUsage.setTissue(tissue - currentItemWeight);
-                    } else if (trashType.equals("disposable_cup")) {
-                        float disposableCup = trashUsage.getDisposable_cup();
-                        trashUsage.setDisposable_cup(disposableCup - currentItemWeight);
-                    } else if (trashType.equals("disposable_spoon")) {
-                        float disposableSpoon = trashUsage.getDisposable_spoon();
-                        trashUsage.setDisposable_spoon(disposableSpoon - currentItemWeight);
+                    if (trashType.equals("normal_trash")) {
+                        float normal_trash = trashUsage.getNormalTrash();
+                        trashUsage.setNormalTrash(normal_trash - currentItemWeight);
+                    } else if (trashType.equals("glass")) {
+                        float glass = trashUsage.getGlass();
+                        trashUsage.setGlass(glass - currentItemWeight);
+                    } else if (trashType.equals("can")) {
+                        float can = trashUsage.getCan();
+                        trashUsage.setCan(can - currentItemWeight);
                     } else if (trashType.equals("paper")) {
                         float paper = trashUsage.getPaper();
                         trashUsage.setPaper(paper - currentItemWeight);
@@ -345,15 +298,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     } else if (trashType.equals("plastic_bag")) {
                         float plastic_bag = trashUsage.getPlastic_bag();
                         trashUsage.setPlastic_bag(plastic_bag - currentItemWeight);
-                    } else if (trashType.equals("can")) {
-                        float can = trashUsage.getCan();
-                        trashUsage.setCan(can - currentItemWeight);
-                    } else if (trashType.equals("empty_bottle")) {
-                        float empty_bottle = trashUsage.getEmpty_bottle();
-                        trashUsage.setEmpty_bottle(empty_bottle - currentItemWeight);
-                    } else if (trashType.equals("etc")) {
-                        float etc = trashUsage.getTrashEtc();
-                        trashUsage.setTrashEtc(etc - currentItemWeight);
                     }
 
                     // localStorage에 저장
@@ -361,10 +305,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     preferenceManager.putString(key + "-trash-usage", updatedTrashUsage);
 
                     // 쓰레기 전체 g 구하기
-                    float total = trashUsage.getTissue() + trashUsage.getDisposable_cup() + trashUsage.getDisposable_spoon()
-                            + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag() + trashUsage.getCan()
-                            + trashUsage.getEmpty_bottle() + trashUsage.getTrashEtc();
-
+                    float total = trashUsage.getNormalTrash() + trashUsage.getGlass() + trashUsage.getCan()
+                            + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag();
                     TXT_today_trash_input.setText(total + "g");
                     setPreSavedTrash(total);
                 }
@@ -386,9 +328,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
         // 쓰레기 전체 g 구하기
 //        todayTrashUsage.getTrashTotal();
-        float total = todayTrashUsage.getTissue() + todayTrashUsage.getDisposable_cup() + todayTrashUsage.getDisposable_spoon()
-                + todayTrashUsage.getPaper() + todayTrashUsage.getPlastic() + todayTrashUsage.getPlastic_bag() + todayTrashUsage.getCan()
-                + todayTrashUsage.getEmpty_bottle() + todayTrashUsage.getTrashEtc();
+        float total = todayTrashUsage.getNormalTrash() + todayTrashUsage.getGlass() + todayTrashUsage.getCan()
+                + todayTrashUsage.getPaper() + todayTrashUsage.getPlastic() + todayTrashUsage.getPlastic_bag();
         TXT_today_trash_input.setText(total + "g");
 
         setPreSavedTrash(total);
@@ -401,7 +342,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         if (lvList.getVisibility() == View.GONE) {
             lvList.setVisibility(View.VISIBLE);
         } else {
-            if (touchCount1 == 2 || touchCount2 == 2 || touchCount3 == 2 || touchCount4 == 2 || touchCount5 == 2 || touchCount6 == 2 || touchCount7 == 2 || touchCount8 == 2 || touchCount9 == 2) {
+            if (touchCount1 == 2 || touchCount2 == 2 || touchCount3 == 2 || touchCount4 == 2 || touchCount5 == 2 || touchCount6 == 2) {
                 lvList.setVisibility(View.GONE);
                 touchCount1 = 0;
                 touchCount2 = 0;
@@ -409,9 +350,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 touchCount4 = 0;
                 touchCount5 = 0;
                 touchCount6 = 0;
-                touchCount7 = 0;
-                touchCount8 = 0;
-                touchCount9 = 0;
             }
         }
     }
@@ -422,58 +360,46 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long index) {
         // trashType이 뭔지 알아야되
         String itemName = null;
-        if (trashType.equals("tissue")) {
-            itemName = tissueItems[position];
+        if (trashType.equals("normal_trash")) {
+            itemName = normalTrashItems[position];
             // 물티슈, 각티슈 등등 에 따라 값을 넣어주는거에요(editTextView에)
-            if (itemName.equals("물티슈")) {
-                currentItemWeight = 2;
-            } else if (itemName.equals("각티슈")) {
-                currentItemWeight = 1;
-            } else if (itemName.equals("손 닦는 휴지")) {
-                currentItemWeight = 2;
-            } else if (itemName.equals("두루말이 휴지")) {
-                currentItemWeight = 1;
-            }
+
             etItemWeight.setText("" + currentItemWeight);
-        } else if (trashType.equals("disposable_cup")) {
-            itemName = disposableCupItems[position];
+        } else if (trashType.equals("glass")) {
+            itemName = glassItems[position];
         }
 
-        if (trashType.equals("disposable_cup")) {
-            itemName = disposableCupItems[position];
-            if (itemName.equals("종이 정수기컵")) {
-                currentItemWeight = 3;
-            } else if (itemName.equals("종이 자판기컵")) {
-                currentItemWeight = 5;
-            } else if (itemName.equals("종이 Tall 사이즈(355ml)")) {
-                currentItemWeight = 7;
-            } else if (itemName.equals("종이 Grande 사이즈(473ml)")) {
-                currentItemWeight = 9;
-            } else if (itemName.equals("종이 Venti 사이즈(591ml)")) {
-                currentItemWeight = 11;
-            } else if (itemName.equals("플라스틱 Tall 사이즈(355ml)")) {
-                currentItemWeight = 7;
-            } else if (itemName.equals("플라스틱 Grande 사이즈(473ml)")) {
-                currentItemWeight = 9;
-            } else if (itemName.equals("플라스틱 Venti 사이즈(591ml)")) {
-                currentItemWeight = 11;
+        Log.d(TAG, "trashType: " + trashType);
+        if (trashType.equals("glass")) {
+            itemName = glassItems[position];
+            if (itemName.equals("100ml")) {
+                currentItemWeight = 150;
+            } else if (itemName.equals("180ml")) {
+                currentItemWeight = 190;
             }
             etItemWeight.setText("" + currentItemWeight);
-        } else if (trashType.equals("disposable_spoon")) {
-            itemName = disposableSpoonItems[position];
+        } else if (trashType.equals("can")) {
+            itemName = canItems[position];
         }
 
-        if (trashType.equals("disposable_spoon")) {
-            itemName = disposableSpoonItems[position];
-            if (itemName.equals("일회용 수저")) {
-                currentItemWeight = 3;
-            } else if (itemName.equals("일회용 그릇")) {
-                currentItemWeight = 2;
+        if (trashType.equals("can")) {
+            itemName = canItems[position];
+            if (itemName.equals("250ml")) {
+                currentItemWeight = 60;
+            } else if (itemName.equals("355ml")) {
+                currentItemWeight = 85;
+            } else if (itemName.equals("500ml")) {
+                currentItemWeight = 100;
+            } else if (itemName.equals("750ml")) {
+                currentItemWeight = 145;
+            } else if (itemName.equals("참치캔(100g)")) {
+                currentItemWeight = 100;
             }
             etItemWeight.setText("" + currentItemWeight);
         } else if (trashType.equals("paper")) {
             itemName = paperItems[position];
         }
+
 
         if (trashType.equals("paper")) {
             itemName = paperItems[position];
@@ -481,6 +407,16 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 currentItemWeight = 5;
             } else if (itemName.equals("B4")) {
                 currentItemWeight = 10;
+            } else if (itemName.equals("종이 정수기컵")) {
+                    currentItemWeight = 3;
+            } else if (itemName.equals("종이 자판기컵")) {
+                    currentItemWeight = 5;
+            } else if (itemName.equals("종이컵 Tall 사이즈(355ml)")) {
+                    currentItemWeight = 7;
+            } else if (itemName.equals("종이컵 Grande 사이즈(473ml)")) {
+                    currentItemWeight = 9;
+            } else if (itemName.equals("종이컵 Venti 사이즈(591ml)")) {
+                    currentItemWeight = 11;
             } else if (itemName.equals("택배박스 1호(50cm)")) {
                 currentItemWeight = 145;
             } else if (itemName.equals("택배박스 2호(60cm)")) {
@@ -499,7 +435,13 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
         if (trashType.equals("plastic")) {
             itemName = plasticItems[position];
-            if (itemName.equals("250ml")) {
+            if (itemName.equals("플라스틱컵 Tall 사이즈(355ml)")) {
+                currentItemWeight = 7;
+            } else if (itemName.equals("플라스틱컵 Grande 사이즈(473ml)")) {
+                currentItemWeight = 9;
+            } else if (itemName.equals("플라스틱컵 Venti 사이즈(591ml)")) {
+                currentItemWeight = 11;
+            } else if (itemName.equals("250ml")) {
                 currentItemWeight = 10;
             } else if (itemName.equals("500ml")) {
                 currentItemWeight = 15;
@@ -525,56 +467,10 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 currentItemWeight = 7;
             }
             etItemWeight.setText("" + currentItemWeight);
-        } else if (trashType.equals("can")) {
+        } else if (trashType.equals("plastic_bag")) {
             itemName = canItems[position];
         }
 
-        if (trashType.equals("plastic_bag")) {
-            itemName = plasticBagItems[position];
-            if (itemName.equals("3L")) {
-                currentItemWeight = 2;
-            } else if (itemName.equals("5L")) {
-                currentItemWeight = 2;
-            } else if (itemName.equals("10L")) {
-                currentItemWeight = 5;
-            } else if (itemName.equals("20L")) {
-                currentItemWeight = 7;
-            }
-            etItemWeight.setText("" + currentItemWeight);
-        } else if (trashType.equals("can")) {
-            itemName = canItems[position];
-        }
-
-        if (trashType.equals("can")) {
-            itemName = canItems[position];
-            if (itemName.equals("250ml")) {
-                currentItemWeight = 60;
-            } else if (itemName.equals("355ml")) {
-                currentItemWeight = 85;
-            } else if (itemName.equals("500ml")) {
-                currentItemWeight = 100;
-            } else if (itemName.equals("750ml")) {
-                currentItemWeight = 145;
-            } else if (itemName.equals("참치캔(100g)")) {
-                currentItemWeight = 100;
-            }
-            etItemWeight.setText("" + currentItemWeight);
-        } else if (trashType.equals("empty_bottle")) {
-            itemName = emptyBottleItems[position];
-        }
-
-        Log.d(TAG, "trashType: " + trashType);
-        if (trashType.equals("empty_bottle")) {
-            itemName = emptyBottleItems[position];
-            if (itemName.equals("100ml")) {
-                currentItemWeight = 150;
-            } else if (itemName.equals("180ml")) {
-                currentItemWeight = 190;
-            }
-            etItemWeight.setText("" + currentItemWeight);
-        } else if (trashType.equals("etc")) {
-            itemName = etcItems[position];
-        }
     }
 
     // 오늘 사용한 전체 쓰레기의 양과 비교하여 UI도 변경해주는

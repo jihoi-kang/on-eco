@@ -2,44 +2,36 @@ package com.project.oneco.data;
 
 public class TrashUsage {
 
-    private float tissue;
-    private float disposable_cup;
-    private float disposable_spoon;
+    private float normal_trash;
+    private float glass;
+    private float can;
     private float paper;
     private float plastic;
     private float plastic_bag;
-    private float can;
-    private float empty_bottle;
-    private float etc;
+
     private float trashTotal;
 
-    public float getTissue() {
-        return tissue;
+    public float getNormalTrash() {
+        return normal_trash;
     }
 
-    public void setTissue(float tissue) {
-        this.tissue = tissue;
+    public void setNormalTrash(float normal_trash) {this.normal_trash = normal_trash;}
+
+    public float getGlass() {
+        return glass;
     }
 
-    public float getDisposable_cup() {
-        return disposable_cup;
+    public void setGlass(float glass) {
+        this.glass = glass;
     }
 
-    public void setDisposable_cup(float disposable_cup) {
-        this.disposable_cup = disposable_cup;
+    public float getCan() {
+        return can;
     }
 
-    public float getDisposable_spoon() {
-        return disposable_spoon;
-    }
+    public void setCan(float can) { this.can = can;}
 
-    public void setDisposable_spoon(float disposable_spoon) {
-        this.disposable_spoon = disposable_spoon;
-    }
-
-    public float getPaper() {
-        return paper;
-    }
+    public float getPaper() {return paper;}
 
     public void setPaper(float paper) {
         this.paper = paper;
@@ -59,30 +51,6 @@ public class TrashUsage {
 
     public void setPlastic_bag(float plastic_bag) {
         this.plastic_bag = plastic_bag;
-    }
-
-    public float getCan() {
-        return can;
-    }
-
-    public void setCan(float can) {
-        this.can = can;
-    }
-
-    public float getEmpty_bottle() {
-        return empty_bottle;
-    }
-
-    public void setEmpty_bottle(float empty_bottle) {
-        this.empty_bottle = empty_bottle;
-    }
-
-    public float getTrashEtc() {
-        return etc;
-    }
-
-    public void setTrashEtc(float etc) {
-        this.etc = etc;
     }
 
     public float getTrashTotal() {

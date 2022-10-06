@@ -14,7 +14,8 @@
     <color name="plastic">#2E75B6</color>
     <color name="pla_bag">#FFC000</color>
     <color name="can">#FF6600</color>
-    <color name="bottle">#843C0C</color>
+    <color name="glass">#843C0C</color>
+    <color name="normal_trash">#B7B4B4</color>
 
     <color name="tooth">#CAE997</color>
     <color name="hand">#81FFCC</color>

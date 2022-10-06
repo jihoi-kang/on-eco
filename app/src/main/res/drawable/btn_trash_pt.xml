@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_pressed="false">
+    <item android:state_pressed="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-            <corners
-                android:radius="10dp"
-                />
             <solid
                 android:color="#FFFFFF"
                 />
@@ -15,43 +11,43 @@
                 android:right="0dp"
                 android:bottom="0dp"
                 />
-            <size
-                android:width="100dp"
-                android:height="90dp"
+            <stroke
+                android:width="3dp"
+                android:color="#DEEBF7"
+                />
+        </shape>
+    </item>
+
+    <item android:state_selected="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <solid
+                android:color="#FFFFFF"
+                />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
                 />
             <stroke
-                android:width="2dp"
-                android:color="#81b75d"
+                android:width="3dp"
+                android:color="#DEEBF7"
+                />
+        </shape>
+    </item>
+
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <solid
+                android:color="#DEEBF7"
+                />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
                 />
         </shape>
         <color android:color="@color/black"/>
     </item>
-
-
-
-    <item android:state_pressed="true">
-        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-            <corners
-                android:radius="14dp"
-                />
-            <solid
-                android:color="#FFFFFF"
-                />
-            <padding
-                android:left="0dp"
-                android:top="0dp"
-                android:right="0dp"
-                android:bottom="0dp"
-                />
-            <size
-                android:width="100dp"
-                android:height="90dp"
-                />
-            <stroke
-                android:width="3dp"
-                android:color="#81b75d"
-                />
-        </shape>
-    </item>
-
 </selector>

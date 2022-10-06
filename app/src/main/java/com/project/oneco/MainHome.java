@@ -31,26 +31,20 @@ public class MainHome extends AppCompatActivity {
         Random random = new Random();
         for(int i = 1; i < 15; i++) {
             TrashUsage trashUsage = new TrashUsage();
-            float emptyBottle = random.nextInt(300);
+            float normal_trash = random.nextInt(300);
+            float glass = random.nextInt(300);
             float can = random.nextInt(300);
             float plasticBag = random.nextInt(300);
             float paper = random.nextInt(300);
             float plastic = random.nextInt(300);
-            float trashEtc = random.nextInt(300);
-            float disposableSpoon = random.nextInt(300);
-            float disposableCup = random.nextInt(300);
-            float tissue = random.nextInt(300);
-            float total = emptyBottle + can + plasticBag + paper + plastic + trashEtc + disposableSpoon + disposableCup + tissue;
+            float total = glass + can + plasticBag + paper + plastic + normal_trash;
 
-            trashUsage.setEmpty_bottle(emptyBottle);
+            trashUsage.setGlass(glass);
             trashUsage.setCan(can);
             trashUsage.setPlastic_bag(plasticBag);
             trashUsage.setPaper(paper);
             trashUsage.setPlastic(plastic);
-            trashUsage.setTrashEtc(trashEtc);
-            trashUsage.setDisposable_spoon(disposableSpoon);
-            trashUsage.setDisposable_cup(disposableCup);
-            trashUsage.setTissue(tissue);
+            trashUsage.setNormalTrash(normal_trash);
             trashUsage.setTrashTotal(total);
 
             String day;
