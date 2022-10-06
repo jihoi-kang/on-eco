@@ -114,7 +114,7 @@ public class MainHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 application.statisticType = "water-usage";
-                application.active_activity = "WriteWater";
+                application.bf_activity = "WriteWater";
 
                 Intent intent = new Intent(getApplicationContext(), WriteWater.class);
                 startActivity(intent);
@@ -125,7 +125,7 @@ public class MainHome extends AppCompatActivity {
         goto_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                application.active_activity = "MainHome";
+                application.bf_activity = "MainHome";
                 Intent intent = new Intent(getApplicationContext(), Statistic.class);
                 startActivity(intent);
             }
@@ -135,7 +135,7 @@ public class MainHome extends AppCompatActivity {
         goto_shower_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                application.active_activity = "MainHome";
+                application.bf_activity = "MainHome";
                 application.statisticType = "water-usage";
                 application.waterType = "shower";
                 Intent intent = new Intent(getApplicationContext(), WaterStopGame.class);
