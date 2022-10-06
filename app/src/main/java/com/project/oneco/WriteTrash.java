@@ -51,7 +51,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     ArrayAdapter<String> adapter;
 
     // listView에 들어갈 item들 정의(9개 >> 6개)
-    String[] normalTrashItems = {};
+    String[] normalTrashItems = {"물티슈", "각티슈", "손 닦는 휴지", "두루말이 휴지"};
     String[] glassItems = {"100ml", "180ml"};
     String[] canItems = {"250ml", "355ml", "500ml", "750ml", "참치캔(100g)"};
     String[] paperItems = {"A4", "B4", "종이 정수기컵", "종이 자판기컵", "종이컵 Tall 사이즈(355ml)", "종이컵 Grande 사이즈(473ml)", "종이컵 Venti 사이즈(591ml)","택배박스 1호(50cm)", "택배박스 2호(60cm)", "택배박스 3호(80cm)", "택배박스 4호(100cm)", "택배박스 5호(120cm)"};
@@ -362,7 +362,15 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         String itemName = null;
         if (trashType.equals("normal_trash")) {
             itemName = normalTrashItems[position];
-            // 물티슈, 각티슈 등등 에 따라 값을 넣어주는거에요(editTextView에)
+            if (itemName.equals("물티슈")) {
+                currentItemWeight = 2;
+            } else if (itemName.equals("각티슈")){
+                currentItemWeight = 1;
+            } else if (itemName.equals("손 닦는 휴지")){
+                currentItemWeight = 2;
+            } else if (itemName.equals("두루말이 휴지")){
+                currentItemWeight = 1;
+            }
 
             etItemWeight.setText("" + currentItemWeight);
         } else if (trashType.equals("glass")) {

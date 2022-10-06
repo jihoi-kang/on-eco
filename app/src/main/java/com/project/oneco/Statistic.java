@@ -319,12 +319,12 @@ public class Statistic extends AppCompatActivity {
         Collections.reverse(trashUsageList);
         for (int i = 0; i < trashUsageList.size(); i++) {
             TrashUsage trashUsage = trashUsageList.get(i);
-            float val1 = trashUsage.getPaper();
-            float val2 = trashUsage.getPlastic();
-            float val3 = trashUsage.getPlastic_bag();
-            float val4 = trashUsage.getCan();
-            float val5 = trashUsage.getGlass();
-            float val6 = trashUsage.getNormalTrash();
+            float val1 = trashUsage.getNormalTrash();
+            float val2 = trashUsage.getGlass();
+            float val3 = trashUsage.getCan();
+            float val4 = trashUsage.getPaper();
+            float val5 = trashUsage.getPlastic();
+            float val6 = trashUsage.getPlastic_bag();
 
             values.add(new BarEntry(
                     i,
@@ -428,12 +428,12 @@ public class Statistic extends AppCompatActivity {
 
         if (label.equals("쓰레기 배출량")) {
             set1.setColors(
+                    ContextCompat.getColor(this, R.color.normal_trash),
+                    ContextCompat.getColor(this, R.color.glass),
+                    ContextCompat.getColor(this, R.color.can),
                     ContextCompat.getColor(this, R.color.paper),
                     ContextCompat.getColor(this, R.color.plastic),
-                    ContextCompat.getColor(this, R.color.pla_bag),
-                    ContextCompat.getColor(this, R.color.can),
-                    ContextCompat.getColor(this, R.color.glass),
-                    ContextCompat.getColor(this, R.color.etc)
+                    ContextCompat.getColor(this, R.color.pla_bag)
             );
             set1.setStackLabels(new String[]{"", "", ""});
         } else if (label.equals("물 사용량")) {
@@ -534,12 +534,12 @@ public class Statistic extends AppCompatActivity {
                     float today_total_trash = today_key_trashUsage.getPaper() + today_key_trashUsage.getPlastic() + today_key_trashUsage.getPlastic_bag()
                             + today_key_trashUsage.getCan() + today_key_trashUsage.getGlass() + today_key_trashUsage.getNormalTrash();
                     Txt_item_all.setText("총 쓰레기 배출량 : " + today_total_trash + " g");
-                    Txt_item1.setText("종이 : " + today_key_trashUsage.getPaper() + " g");
-                    Txt_item2.setText("플라스틱 : " + today_key_trashUsage.getPlastic() + " g");
-                    Txt_item3.setText("비닐 : " + today_key_trashUsage.getPlastic_bag() + " g");
-                    Txt_item4.setText("캔 : " + today_key_trashUsage.getCan() + " g");
-                    Txt_item5.setText("공병 : " + today_key_trashUsage.getGlass() + " g");
-                    Txt_item6.setText("기타 : " + today_key_trashUsage.getNormalTrash() + " g");
+                    Txt_item1.setText("일반쓰레기 : 0 g");
+                    Txt_item2.setText("유리 : 0 g");
+                    Txt_item3.setText("캔 : 0 g");
+                    Txt_item4.setText("종이 : 0 g");
+                    Txt_item5.setText("플라스틱 : 0 g");
+                    Txt_item6.setText("비닐 : 0 g");
                 }
 
             } else if (waterTypeColor_View.getVisibility() == VISIBLE) {
@@ -580,23 +580,23 @@ public class Statistic extends AppCompatActivity {
 
                 if (picked_date_trashUsageStr.equals("")) {
                     Txt_item_all.setText("총 쓰레기 배출량 : 0 g");
-                    Txt_item1.setText("종이 : 0 g");
-                    Txt_item2.setText("플라스틱 : 0 g");
-                    Txt_item3.setText("비닐 : 0 g");
-                    Txt_item4.setText("캔 : 0 g");
-                    Txt_item5.setText("공병 : 0 g");
-                    Txt_item6.setText("기타 : 0 g");
+                    Txt_item1.setText("일반쓰레기 : 0 g");
+                    Txt_item2.setText("유리 : 0 g");
+                    Txt_item3.setText("캔 : 0 g");
+                    Txt_item4.setText("종이 : 0 g");
+                    Txt_item5.setText("플라스틱 : 0 g");
+                    Txt_item6.setText("비닐 : 0 g");
                 } else {
                     TrashUsage picked_trashUsage = gson.fromJson(picked_date_trashUsageStr, TrashUsage.class);
                     float picked_total_trash = picked_trashUsage.getPaper() + picked_trashUsage.getPlastic() + picked_trashUsage.getPlastic_bag()
                             + picked_trashUsage.getCan() + picked_trashUsage.getGlass() + picked_trashUsage.getNormalTrash();
                     Txt_item_all.setText("총 쓰레기 배출량 : " + picked_total_trash + " g");
-                    Txt_item1.setText("종이 : " + picked_trashUsage.getPaper() + " g");
-                    Txt_item2.setText("플라스틱 : " + picked_trashUsage.getPlastic() + " g");
-                    Txt_item3.setText("비닐 : " + picked_trashUsage.getPlastic_bag() + " g");
-                    Txt_item4.setText("캔 : " + picked_trashUsage.getCan() + " g");
-                    Txt_item5.setText("공병 : " + picked_trashUsage.getGlass() + " g");
-                    Txt_item6.setText("기타 : " + picked_trashUsage.getNormalTrash() + " g");
+                    Txt_item1.setText("일반쓰레기 : " + picked_trashUsage.getNormalTrash() + " g");
+                    Txt_item2.setText("유리 : " + picked_trashUsage.getGlass() + " g");
+                    Txt_item3.setText("캔 : " + picked_trashUsage.getCan() + " g");
+                    Txt_item4.setText("종이 : " + picked_trashUsage.getPaper() + " g");
+                    Txt_item5.setText("플라스틱 : " + picked_trashUsage.getPlastic() + " g");
+                    Txt_item6.setText("비닐 : " + picked_trashUsage.getPlastic_bag() + " g");
                 }
 
             } else if (waterTypeColor_View.getVisibility() == VISIBLE) {
