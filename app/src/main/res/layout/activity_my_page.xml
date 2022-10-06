@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#C5E0B4"
+        android:background="#E2F0D9"
         android:orientation="vertical">
 
         <LinearLayout
@@ -90,7 +90,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:background="#C5E0B4">
+        android:background="#E2F0D9">
 
         <TextView
             android:id="@+id/temp_level"
@@ -176,7 +176,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:background="#D8D2D2">
+                android:background="#F5F5F5">
 
                 <TextView
                     android:id="@+id/level1_text"
@@ -244,7 +244,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:background="#D8D2D2">
+                android:background="#F5F5F5">
 
                 <TextView
                     android:id="@+id/level3_text"
@@ -312,7 +312,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:background="#D8D2D2">
+                android:background="#F5F5F5">
 
                 <TextView
                     android:id="@+id/level5_text"

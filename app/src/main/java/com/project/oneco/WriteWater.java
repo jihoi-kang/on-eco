@@ -23,7 +23,6 @@ import com.gun0912.tedpermission.normal.TedPermission;
 import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.WaterUsage;
-import com.project.oneco.tensorflow.CameraActivity;
 import com.project.oneco.tensorflow.ClassifierActivity;
 
 import java.text.SimpleDateFormat;
@@ -57,7 +56,7 @@ public class WriteWater extends AppCompatActivity {
     androidx.appcompat.widget.AppCompatButton Wmiddle;
     androidx.appcompat.widget.AppCompatButton Wweakness;
 
-    LinearLayout Layout_play;    // 플레이 버튼 화면
+    LinearLayout Layout_play;           // 플레이 버튼 화면
     LinearLayout Layout_pauseStop;      // 정지, 종료 버튼 화면
 
     TextView Txt_today_date;
@@ -85,6 +84,7 @@ public class WriteWater extends AppCompatActivity {
     private Gson gson;
     private final Handler handler = new Handler();
     private SoundMeter soundMeter = null;
+    private long backpressedTime = 0;
 
 
     @Override
@@ -125,6 +125,7 @@ public class WriteWater extends AppCompatActivity {
         Btn_pause_ST = findViewById(R.id.Btn_pause_ST);
         Btn_stop_ST = findViewById(R.id.Btn_stop_ST);
 
+        Txt_today_date = findViewById(R.id.Txt_today_date);
         Txt_today_water_input = findViewById(R.id.TXT_today_water);
         Txt_saved_water = findViewById(R.id.TXT_saved_water);
 
@@ -140,6 +141,13 @@ public class WriteWater extends AppCompatActivity {
         Wbath.setSelected(true);
         Wmiddle.setSelected(true);
         Btn_etc_water.setSelected(true);
+
+        Txt_today_date.setText(application.todayDate);
+
+        //todo:
+        if(application.bf_activity.equals("WaterAfterStati")){
+            setInit();
+        }
 
         // 검색화면으로 넘어가기
         ImageButton Btn_search = findViewById(R.id.btn_search);
@@ -161,13 +169,23 @@ public class WriteWater extends AppCompatActivity {
             }
         });
 
+        // 물 사용량 측정
+        Button Btn_measure_water_use = findViewById(R.id.Btn_measure_water_use);
+        Btn_measure_water_use.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WaterStopWatch.class);
+                startActivity(intent);
+            }
+        });
+
         // 샤워 타이머 게임 화면으로 넘어가기
         Button Btn_bef_WTimer_Game = findViewById(R.id.Btn_bef_WTimer_Game);
         Btn_bef_WTimer_Game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 application.waterType = "shower";
-                application.active_activity = "WriteWater";
+                application.bf_activity = "WriteWater";
                 Intent intent = new Intent(getApplicationContext(), WaterStopGame.class);
                 startActivity(intent);
             }
@@ -360,9 +378,6 @@ public class WriteWater extends AppCompatActivity {
                         waterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
                     }
 
-                    // todo:오늘 날짜로 데이트 피커 날짜 세팅
-                    Txt_today_date.setText(application.todayDate);
-
                     // 물 전체 사용량(ml) 구하기
                     float waterTotal = waterUsage.getTooth() + waterUsage.getHand()
                             + waterUsage.getFace() + waterUsage.getShower()
@@ -421,7 +436,7 @@ public class WriteWater extends AppCompatActivity {
                 if (application.waterType == "") {
                     Toast.makeText(getApplicationContext(), "사용할 물의 유형을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else { // 타이머 시작
-                    application.active_activity = "WriteWater";
+                    application.bf_activity = "WriteWater";
                     firstState = true;
                     start_already = true;
                     Layout_play.setVisibility(View.GONE);    // 플레이 버튼 사라짐
@@ -535,7 +550,6 @@ public class WriteWater extends AppCompatActivity {
         Timer CountUpTimer = new Timer();  // Timer는 안드로이드 클래스
         CountUpTimer.schedule(second, 0, 1000);
 
-        //Btn_pause_ST.setText("일시정지");
         timerRunning = true;
         firstState = false;
     }
@@ -556,7 +570,6 @@ public class WriteWater extends AppCompatActivity {
         second.cancel();
         timerRunning = false;
         soundMeter.stop();
-        //Btn_pause_ST.setText("계속");
     }
 
     // 시간 업데이트
@@ -591,13 +604,13 @@ public class WriteWater extends AppCompatActivity {
 
 
 
+
     // 백버튼을 누르면
     @Override
     public void onBackPressed() {
         // super.onBackPressed();
-        application.active_activity = "";
-        application.statisticType = "";
-        application.waterType = "";
+        application.bf_activity = "WriteWater";
+        application.statisticType = "water-usage";
 
         if (start_already) {
             stopTimer();
@@ -616,35 +629,22 @@ public class WriteWater extends AppCompatActivity {
             dlg_sure_out.setNegativeButton("네", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Layout_play.setVisibility(View.VISIBLE); // 설정 생김
-                    Layout_pauseStop.setVisibility(View.GONE);        // 타이머 사라짐
-
-                    firstState = true;
-                    start_already = false;
-                    // updateTimer();
-
-                    // 초기화
-                    Txt_countup.setText("00:00");
-                    application.timerSec = 0;
-                    application.RtimerSec = 0;
-                    soundMeter = null;
-                    dbList = new ArrayList<>();
-                    dbUsedList = new ArrayList<>();
-                    dbNoUsedList = new ArrayList<>();
-                    // 수도꼭지, 수압 초기화
-                    application.Wtap = "";
-                    application.Wpower = 0f;
-
-                    setSec();
+                    setInit();
                 }
             });
             dlg_sure_out.show();
         } else {
-            onBackPressed();
+
+            if (System.currentTimeMillis() > backpressedTime + 2000) {
+                backpressedTime = System.currentTimeMillis();
+                Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            } else if (System.currentTimeMillis() <= backpressedTime + 2000) {
+                finish();
+            }
 
             // 수도꼭지, 수압 초기화
-            application.Wtap = "";
-            application.Wpower = 0f;
+            application.Wtap = "Wbath";
+            application.Wpower = 80f;
         }
     }
 
@@ -724,10 +724,33 @@ public class WriteWater extends AppCompatActivity {
         }
     };
 
-    private void setInit() {
+    private void setDefault() {
         application.waterType = "Wmiddle";
         application.Wtap = "Wbath";
         application.Wpower = 80f;
+    }
+
+    private void setInit() {
+        Layout_play.setVisibility(View.VISIBLE);           // 설정 생김
+        Layout_pauseStop.setVisibility(View.GONE);        // 타이머 사라짐
+
+        firstState = true;
+        start_already = false;
+        // updateTimer();
+
+        // 초기화
+        Txt_countup.setText("00:00");
+        application.timerSec = 0;
+        application.RtimerSec = 0;
+        soundMeter = null;
+        dbList = new ArrayList<>();
+        dbUsedList = new ArrayList<>();
+        dbNoUsedList = new ArrayList<>();
+        // 수도꼭지, 수압 초기화
+        application.Wtap = "Wbath";
+        application.Wpower = 80f;
+
+        setSec();
     }
 
 

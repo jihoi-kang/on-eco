@@ -79,7 +79,8 @@
             <FrameLayout
                 android:id="@+id/stopwatch_btns"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <LinearLayout
                     android:id="@+id/Layout_play"
@@ -87,43 +88,42 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp" />
-
-                    <Button
+                    <ImageButton
                         android:id="@+id/Btn_start_ST"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="bottom"
-                        android:text="@string/Btn_start_TimerW"
-                        tools:ignore="DuplicateClickableBoundsCheck" />
-
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="#00FFFFFF"
+                        app:srcCompat="@drawable/play"
+                        tools:ignore="SpeakableTextPresentCheck,DuplicateClickableBoundsCheck,ImageContrastCheck" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/Layout_pauseStop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/Btn_pause_ST"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:text="일시 정지" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#00FFFFFF"
+                        app:srcCompat="@drawable/pause"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/Btn_stop_ST"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="bottom"
-                        android:text="완료"
-                        tools:ignore="DuplicateClickableBoundsCheck" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#00FFFFFF"
+                        app:srcCompat="@drawable/stop"
+                        tools:ignore="DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
                 </LinearLayout>
 
 
             </FrameLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

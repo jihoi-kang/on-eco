@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -55,6 +56,8 @@ public class Statistic extends AppCompatActivity {
     String picked_date_key = "";
 
     public static int displayDate = 7; // 7, 30, 365
+
+    private long backpressedTime = 0;
 
     // 차트에서 요일 변경해줌
     public static Date selectedDate;
@@ -170,55 +173,18 @@ public class Statistic extends AppCompatActivity {
         l.setXEntrySpace(0f);
         // chart 그리기 - (1) setting -->
 
+
         // 오늘 날짜로 세팅하기
         setupUiUsage();
 
-        // 이전 버튼
-        ImageButton Btn_back = findViewById(R.id.Btn_back);
-        Btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (application.active_activity) {
-                    case "mainHome":
-                        Intent intent = new Intent(getApplicationContext(), MainHome.class);
-                        startActivity(intent);
-                        application.active_activity = "";
-                        break;
-                    case "waterAfterStati":
-                        Intent intent2 = new Intent(getApplicationContext(), WriteWater.class);
-                        startActivity(intent2);
-                        break;
-                    default:
-                        onBackPressed();
-                        break;
-                }
-            }
-        });
-
-        // 홈 화면으로 넘어가기
-        TextView title_ONECO = findViewById(R.id.title_ONECO);
-        title_ONECO.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainHome.class);
-                startActivity(intent);
-            }
-        });
-
-        // 마이페이지로 넘어가기
-        ImageButton goto_mypage = findViewById(R.id.goto_mypage);
-        goto_mypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MyPage.class);
-                startActivity(intent);
-            }
-        });
+        onBackPressed();
 
         // 쓰레기 배출량 버튼
         Btn_graph_trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Btn_graph_trash.setSelected(true);
+                Btn_graph_water.setSelected(false);
                 application.statisticType = "trash-usage";
                 setupTrashUsage();
                 setupUiUsage();
@@ -229,6 +195,8 @@ public class Statistic extends AppCompatActivity {
         Btn_graph_water.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Btn_graph_trash.setSelected(false);
+                Btn_graph_water.setSelected(true);
                 application.statisticType = "water-usage";
                 setupWaterUsage();
                 setupUiUsage();
@@ -238,6 +206,9 @@ public class Statistic extends AppCompatActivity {
         Btn_week.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Btn_week.setSelected(true);
+                Btn_month.setSelected(false);
+                Btn_year.setSelected(false);
                 displayDate = 7;
                 setGraphTotalVisibility(true);
                 if (application.statisticType.equals("water-usage")) {
@@ -251,6 +222,9 @@ public class Statistic extends AppCompatActivity {
         Btn_month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Btn_week.setSelected(false);
+                Btn_month.setSelected(true);
+                Btn_year.setSelected(false);
                 displayDate = 30;
                 setGraphTotalVisibility(false);
                 Log.d("jay", "statisticType: " + application.statisticType);
@@ -265,6 +239,9 @@ public class Statistic extends AppCompatActivity {
         Btn_year.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Btn_week.setSelected(false);
+                Btn_month.setSelected(false);
+                Btn_year.setSelected(true);
                 displayDate = 365;
                 setGraphTotalVisibility(false);
                 if (application.statisticType.equals("water-usage")) {
@@ -342,13 +319,12 @@ public class Statistic extends AppCompatActivity {
         Collections.reverse(trashUsageList);
         for (int i = 0; i < trashUsageList.size(); i++) {
             TrashUsage trashUsage = trashUsageList.get(i);
-            float val1 = trashUsage.getNormalTrash();
-            float val2 = trashUsage.getGlass();
-            float val3 = trashUsage.getCan();
-            float val4 = trashUsage.getPaper();
-            float val5 = trashUsage.getPlastic();
-            float val6 = trashUsage.getPlastic_bag();
-
+            float val1 = trashUsage.getPaper();
+            float val2 = trashUsage.getPlastic();
+            float val3 = trashUsage.getPlastic_bag();
+            float val4 = trashUsage.getCan();
+            float val5 = trashUsage.getEmpty_bottle();
+            float val6 = trashUsage.getTrashEtc();
 
             values.add(new BarEntry(
                     i,
@@ -357,7 +333,7 @@ public class Statistic extends AppCompatActivity {
 
             dayTotalList.add(Float.toString(
                     trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag()
-                            + trashUsage.getCan() + trashUsage.getGlass() + trashUsage.getNormalTrash()));
+                            + trashUsage.getCan() + trashUsage.getEmpty_bottle() + trashUsage.getTrashEtc()));
             Log.d("hun", "dayTotal_trash : " + dayTotalList.get(i));
         }
 
@@ -452,12 +428,12 @@ public class Statistic extends AppCompatActivity {
 
         if (label.equals("쓰레기 배출량")) {
             set1.setColors(
-                    ContextCompat.getColor(this, R.color.normal_trash),
-                    ContextCompat.getColor(this, R.color.glass),
-                    ContextCompat.getColor(this, R.color.can),
                     ContextCompat.getColor(this, R.color.paper),
                     ContextCompat.getColor(this, R.color.plastic),
-                    ContextCompat.getColor(this, R.color.pla_bag)
+                    ContextCompat.getColor(this, R.color.pla_bag),
+                    ContextCompat.getColor(this, R.color.can),
+                    ContextCompat.getColor(this, R.color.bottle),
+                    ContextCompat.getColor(this, R.color.etc)
             );
             set1.setStackLabels(new String[]{"", "", ""});
         } else if (label.equals("물 사용량")) {
@@ -546,24 +522,24 @@ public class Statistic extends AppCompatActivity {
 
                 if (today_key_trashUsageStr.equals("")) {
                     Txt_item_all.setText("총 쓰레기 배출량 : 0 g");
-                    Txt_item1.setText("일반쓰레기 : 0 g");
-                    Txt_item2.setText("유리 : 0 g");
-                    Txt_item3.setText("캔 : 0 g");
-                    Txt_item4.setText("종이 : 0 g");
-                    Txt_item5.setText("플라스틱 : 0 g");
-                    Txt_item6.setText("비닐 : 0 g");
+                    Txt_item1.setText("종이 : 0 g");
+                    Txt_item2.setText("플라스틱 : 0 g");
+                    Txt_item3.setText("비닐 : 0 g");
+                    Txt_item4.setText("캔 : 0 g");
+                    Txt_item5.setText("공병 : 0 g");
+                    Txt_item6.setText("기타 : 0 g");
                 } else { // 데이터 꺼내오기
                     // String을 데이터 모델로 변경
                     TrashUsage today_key_trashUsage = gson.fromJson(today_key_trashUsageStr, TrashUsage.class);
                     float today_total_trash = today_key_trashUsage.getPaper() + today_key_trashUsage.getPlastic() + today_key_trashUsage.getPlastic_bag()
-                            + today_key_trashUsage.getCan() + today_key_trashUsage.getGlass() + today_key_trashUsage.getNormalTrash();
+                            + today_key_trashUsage.getCan() + today_key_trashUsage.getEmpty_bottle() + today_key_trashUsage.getTrashEtc();
                     Txt_item_all.setText("총 쓰레기 배출량 : " + today_total_trash + " g");
-                    Txt_item1.setText("일반쓰레기 : " + today_key_trashUsage.getNormalTrash() + " g");
-                    Txt_item2.setText("유리 : " + today_key_trashUsage.getGlass() + " g");
-                    Txt_item3.setText("캔 : " + today_key_trashUsage.getCan() + " g");
-                    Txt_item4.setText("종이 : " + today_key_trashUsage.getPaper() + " g");
-                    Txt_item5.setText("플라스틱 : " + today_key_trashUsage.getPlastic() + " g");
-                    Txt_item6.setText("비닐 : " + today_key_trashUsage.getPlastic_bag() + " g");
+                    Txt_item1.setText("종이 : " + today_key_trashUsage.getPaper() + " g");
+                    Txt_item2.setText("플라스틱 : " + today_key_trashUsage.getPlastic() + " g");
+                    Txt_item3.setText("비닐 : " + today_key_trashUsage.getPlastic_bag() + " g");
+                    Txt_item4.setText("캔 : " + today_key_trashUsage.getCan() + " g");
+                    Txt_item5.setText("공병 : " + today_key_trashUsage.getEmpty_bottle() + " g");
+                    Txt_item6.setText("기타 : " + today_key_trashUsage.getTrashEtc() + " g");
                 }
 
             } else if (waterTypeColor_View.getVisibility() == VISIBLE) {
@@ -604,23 +580,23 @@ public class Statistic extends AppCompatActivity {
 
                 if (picked_date_trashUsageStr.equals("")) {
                     Txt_item_all.setText("총 쓰레기 배출량 : 0 g");
-                    Txt_item1.setText("일반쓰레기 : 0 g");
-                    Txt_item2.setText("유리 : 0 g");
-                    Txt_item3.setText("캔 : 0 g");
-                    Txt_item4.setText("종이 : 0 g");
-                    Txt_item5.setText("플라스틱 : 0 g");
-                    Txt_item6.setText("비닐 : 0 g");
+                    Txt_item1.setText("종이 : 0 g");
+                    Txt_item2.setText("플라스틱 : 0 g");
+                    Txt_item3.setText("비닐 : 0 g");
+                    Txt_item4.setText("캔 : 0 g");
+                    Txt_item5.setText("공병 : 0 g");
+                    Txt_item6.setText("기타 : 0 g");
                 } else {
                     TrashUsage picked_trashUsage = gson.fromJson(picked_date_trashUsageStr, TrashUsage.class);
                     float picked_total_trash = picked_trashUsage.getPaper() + picked_trashUsage.getPlastic() + picked_trashUsage.getPlastic_bag()
-                            + picked_trashUsage.getCan() + picked_trashUsage.getGlass() + picked_trashUsage.getNormalTrash();
+                            + picked_trashUsage.getCan() + picked_trashUsage.getEmpty_bottle() + picked_trashUsage.getTrashEtc();
                     Txt_item_all.setText("총 쓰레기 배출량 : " + picked_total_trash + " g");
-                    Txt_item1.setText("일반쓰레기 : " + picked_trashUsage.getNormalTrash() + " g");
-                    Txt_item2.setText("유리 : " + picked_trashUsage.getGlass() + " g");
-                    Txt_item3.setText("캔 : " + picked_trashUsage.getCan() + " g");
-                    Txt_item4.setText("종이 : " + picked_trashUsage.getPaper() + " g");
-                    Txt_item5.setText("플라스틱 : " + picked_trashUsage.getPlastic() + " g");
-                    Txt_item6.setText("비닐 : " + picked_trashUsage.getPlastic_bag() + " g");
+                    Txt_item1.setText("종이 : " + picked_trashUsage.getPaper() + " g");
+                    Txt_item2.setText("플라스틱 : " + picked_trashUsage.getPlastic() + " g");
+                    Txt_item3.setText("비닐 : " + picked_trashUsage.getPlastic_bag() + " g");
+                    Txt_item4.setText("캔 : " + picked_trashUsage.getCan() + " g");
+                    Txt_item5.setText("공병 : " + picked_trashUsage.getEmpty_bottle() + " g");
+                    Txt_item6.setText("기타 : " + picked_trashUsage.getTrashEtc() + " g");
                 }
 
             } else if (waterTypeColor_View.getVisibility() == VISIBLE) {
@@ -668,6 +644,18 @@ public class Statistic extends AppCompatActivity {
         day5.setVisibility(visibility);
         day6.setVisibility(visibility);
         day7.setVisibility(visibility);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (System.currentTimeMillis() > backpressedTime + 2000) {
+            backpressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        } else if (System.currentTimeMillis() <= backpressedTime + 2000) {
+            finish();
+        }
+
     }
 
 }   // end of class

@@ -50,10 +50,42 @@
             android:layout_height="141dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/Btn_afs_back"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            android:text="뒤로가기" />
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="75dp" />
+
+        <Button
+            android:id="@+id/goto_write_water"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            android:text="확인" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
     <Button
         android:id="@+id/goto_statistic"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:text="다음" />
+        android:layout_height="wrap_content"
+        android:text="통계보기" />
 
 </LinearLayout>

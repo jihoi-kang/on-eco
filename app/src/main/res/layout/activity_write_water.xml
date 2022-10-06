@@ -418,19 +418,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#F5F5F5"/>
+
                 <TextView
                     android:id="@+id/Txt_today_date"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="오늘의 날짜"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp" />
 
                 <TextView
                     android:id="@+id/subtitle_today_water_input"
@@ -438,7 +439,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/mtitle_today_water"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <TextView
                     android:id="@+id/TXT_today_water"
@@ -458,7 +459,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="전일 대비 사용한 물의 양"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <TextView
                     android:id="@+id/TXT_saved_water"

@@ -38,7 +38,6 @@ public class WaterAfterStati extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water_after_stati);
 
-
         spended_AllT = findViewById(R.id.spended_AllT);
         spended_RealT = findViewById(R.id.spended_RealT);
         no_SpendedT = findViewById(R.id.no_SpendedT);
@@ -50,15 +49,33 @@ public class WaterAfterStati extends AppCompatActivity {
         // Activity간의 데이터 공유를 위한 application 가져오기
         application = (OnEcoApplication) getApplication();
 
-        // 통계화면으로 넘어가기
+
+        Button Btn_wfs_back = findViewById(R.id.Btn_afs_back);
+        Btn_wfs_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        Button goto_write_water = findViewById(R.id.goto_write_water);
+        goto_write_water.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WriteWater.class);
+                startActivity(intent);
+            }
+        });
+
+        // 다음 버튼 : 통계화면으로 넘어가기
         Button goto_statistic = findViewById(R.id.goto_statistic);
         goto_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Statistic.class);
+                application.bf_activity = "WaterAfterStati";
+                setDefault();  // 설정 초기화
+                Intent intent = new Intent(getApplicationContext(), TabHost.class);
                 startActivity(intent);
-                application.active_activity = "waterAfterStati";
-                setInit();  // 설정 초기화
             }
         });
 
@@ -108,7 +125,7 @@ public class WaterAfterStati extends AppCompatActivity {
         Log.d("jay", "waterUsageStr: " + waterUsageStr);
 
         // 초기화
-        setInit();
+        setDefault();
 
 
     } // end of onCreate
@@ -160,17 +177,20 @@ public class WaterAfterStati extends AppCompatActivity {
         return timeLeftText;
     }
 
-    // 뒤로 가기 버튼 막기
+
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        application.bf_activity = "WaterAfterStati";
+
+        super.onBackPressed(); // 주석 처리 하면 뒤로 가기 버튼 막기
+        setDefault();
     }
 
     // 설정 초기화
-    private void setInit(){
-        application.waterType = "";
-        application.Wtap = "";
-        application.Wpower = 0f;
+    private void setDefault(){
+        application.waterType = "etc_water";
+        application.Wtap = "Wbath";
+        application.Wpower = 80f;
     }
 
 }   // end of class

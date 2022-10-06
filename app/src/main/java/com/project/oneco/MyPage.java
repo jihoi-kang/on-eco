@@ -8,11 +8,15 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.oneco.test.GetDialogTest;
 
 public class MyPage extends AppCompatActivity {
+
     private OnEcoApplication application;
+    private long backpressedTime = 0;
+
     TextView temp_level;
     TextView Txt_tempPoint;
     ImageView Img_temp_level;
@@ -28,26 +32,9 @@ public class MyPage extends AppCompatActivity {
         Txt_tempPoint = findViewById(R.id.Txt_tempPoint);
         Img_temp_level = findViewById(R.id.Img_temp_level);
 
+        onBackPressed();
+
         Txt_tempPoint.setText("눈송이님의 햇살은 " + application.getPoint() + "밝기 입니다.");
-
-        // 이전 버튼
-        ImageButton Btn_back = findViewById(R.id.Btn_back);
-        Btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        // 홈 화면으로 넘어가기
-        TextView title_ONECO = findViewById(R.id.title_ONECO);
-        title_ONECO.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainHome.class);
-                startActivity(intent);
-            }
-        });
 
         if (application.getPoint() < 30){
             Img_temp_level.setImageResource(R.drawable.level1);
@@ -65,8 +52,20 @@ public class MyPage extends AppCompatActivity {
             Img_temp_level.setImageResource(R.drawable.level5);
             temp_level.setText("레벨5");
         }
- 
+
 
     }   // end of onCreate
+
+    @Override
+    public void onBackPressed() {
+
+        if (System.currentTimeMillis() > backpressedTime + 2000) {
+            backpressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        } else if (System.currentTimeMillis() <= backpressedTime + 2000) {
+            finish();
+        }
+
+    }
 
 }   // end of class

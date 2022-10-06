@@ -21,7 +21,7 @@ public class OnEcoApplication extends Application {
     SimpleDateFormat hm = new SimpleDateFormat("aa hh:mm", Locale.KOREA);
     String real_tempTime = hm.format(date);
 
-    public String active_activity;
+    public String bf_activity = "";
 
     public int number = 0;
     public int count = 0;

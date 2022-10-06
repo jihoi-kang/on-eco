@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 public class TabHost extends TabActivity {
 
+    // OnEcoApplication 클래스의 변수 가져오기 사전 작업1
+    private OnEcoApplication application;
 
 
     @Override
@@ -16,6 +18,8 @@ public class TabHost extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab_host);
 
+        // OnEcoApplication 클래스의 변수 가져오기 사전 작업2
+        application = (OnEcoApplication) getApplication();
 
         android.widget.TabHost tabHost = getTabHost(); //탭 호스트 객체 생성
 
@@ -57,8 +61,12 @@ public class TabHost extends TabActivity {
         tabHost.addTab(spec);
 
 
-        tabHost.setCurrentTab(0); //먼저 열릴 탭을 선택!
-
+        //먼저 열릴 탭을 선택!
+        if (application.bf_activity.equals("WaterAfterStati")){
+            tabHost.setCurrentTab(2);
+        } else {
+            tabHost.setCurrentTab(0);
+        }
     }
 
 }
