@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.project.oneco.tensorflow.ClassifierActivity;
 import com.project.oneco.test.GetDialogTest;
 
 public class MyPage extends AppCompatActivity {
@@ -34,6 +36,26 @@ public class MyPage extends AppCompatActivity {
 
         onBackPressed();
 
+        // 검색화면으로 넘어가기
+        ImageButton Btn_search = findViewById(R.id.btn_search);
+        Btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Search.class);
+                startActivity(intent);
+            }
+        });
+
+        // 쓰레기 스캔
+        Button Btn_scan_trash = findViewById(R.id.Btn_scan_trash);
+        Btn_scan_trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Txt_tempPoint.setText("눈송이님의 햇살은 " + application.getPoint() + "밝기 입니다.");
 
         if (application.getPoint() < 30){
@@ -54,7 +76,7 @@ public class MyPage extends AppCompatActivity {
         }
 
 
-    }   // end of onCreate
+    }   /**end of onCreate**/
 
     @Override
     public void onBackPressed() {
@@ -68,4 +90,4 @@ public class MyPage extends AppCompatActivity {
 
     }
 
-}   // end of class
+}   /**end of class**/

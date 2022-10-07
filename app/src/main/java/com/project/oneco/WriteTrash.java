@@ -1,5 +1,6 @@
 package com.project.oneco;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,12 +19,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.normal.TedPermission;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.TrashUsage;
+import com.project.oneco.tensorflow.ClassifierActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -90,6 +95,9 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
         application.statisticType = "trash-usage";
 
+        checkPermission();
+        checkPermission_camera();
+
         // 사용자 입력 텍스트를 인트 변수 currentItemWeight에 저장
         ET_UserInputTrash.addTextChangedListener(new TextWatcher() {
             @Override
@@ -109,7 +117,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
-
         // 검색화면으로 넘어가기
         ImageButton Btn_search = findViewById(R.id.btn_search);
         Btn_search.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +127,15 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
+        // 쓰레기 스캔
+        Button Btn_scan_trash = findViewById(R.id.Btn_scan_trash);
+        Btn_scan_trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Button을 눌렀을 때 trashType에 저장.(9개 모두 구현)
         Btn_normal_trash.setOnClickListener(new View.OnClickListener() {
@@ -536,4 +552,46 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     }
 
 
+
+
+    /**
+     * CAMERA 권한이 있는지 확인합니다.
+     */
+    private void checkPermission_camera() {
+        TedPermission.create()
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        Toast.makeText(WriteTrash.this, "Camera Permission Granted", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(List<String> deniedPermissions) {
+                        Toast.makeText(WriteTrash.this, "Camera Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }).setDeniedMessage("권한을 허용하지 않을 경우 서비스를 제대로 이용할 수 없습니다. [Setting] > [Permission]에서 권한을 확인해주세요.")
+                .setPermissions(Manifest.permission.CAMERA)
+                .check();
+    }
+
+    /**
+     * 데시벨을 측정하기 위해선 RECORD_AUDIO라는 권한을 사용자로부터 받아야 합니다.
+     * RECORD_AUDIO 권한이 있는지 확인합니다.
+     */
+    private void checkPermission() {
+        TedPermission.create()
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        Toast.makeText(WriteTrash.this, "Audio Permission Granted", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(List<String> deniedPermissions) {
+                        Toast.makeText(WriteTrash.this, "Audio Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }).setDeniedMessage("권한을 허용하지 않을 경우 서비스를 제대로 이용할 수 없습니다. [Setting] > [Permission]에서 권한을 확인해주세요.")
+                .setPermissions(Manifest.permission.RECORD_AUDIO)
+                .check();
+    }
 }   /** end of Class **/

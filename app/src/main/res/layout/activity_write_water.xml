@@ -52,7 +52,6 @@
                     android:backgroundTint="#00ffffff"
                     app:srcCompat="@drawable/btn_search"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
             </LinearLayout>
 
             <LinearLayout

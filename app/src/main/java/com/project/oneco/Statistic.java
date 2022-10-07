@@ -32,6 +32,7 @@ import com.google.gson.Gson;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.TrashUsage;
 import com.project.oneco.data.WaterUsage;
+import com.project.oneco.tensorflow.ClassifierActivity;
 import com.project.oneco.test.MyXAxisValueFormatter;
 
 import java.text.SimpleDateFormat;
@@ -116,7 +117,7 @@ public class Statistic extends AppCompatActivity {
         waterTypeColor_View = findViewById(R.id.waterTypeColor_View);
 
         setupUi();
-    } // end of onCreate
+    } /** end of onCreate **/
 
 
     private void setupUi() {
@@ -211,6 +212,26 @@ public class Statistic extends AppCompatActivity {
             Btn_graph_trash.setSelected(true);
             Btn_graph_water.setSelected(false);
         }
+
+        // 검색화면으로 넘어가기
+        ImageButton Btn_search = findViewById(R.id.btn_search);
+        Btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Search.class);
+                startActivity(intent);
+            }
+        });
+
+        // 쓰레기 스캔
+        Button Btn_scan_trash = findViewById(R.id.Btn_scan_trash);
+        Btn_scan_trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 쓰레기 배출량 버튼
         Btn_graph_trash.setOnClickListener(new View.OnClickListener() {
@@ -767,4 +788,4 @@ public class Statistic extends AppCompatActivity {
 
     }
 
-}   // end of class
+}   /**end of class**/
