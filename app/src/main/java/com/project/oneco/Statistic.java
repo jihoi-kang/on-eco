@@ -117,7 +117,10 @@ public class Statistic extends AppCompatActivity {
         waterTypeColor_View = findViewById(R.id.waterTypeColor_View);
 
         setupUi();
+
     } /** end of onCreate **/
+
+
 
 
     private void setupUi() {
@@ -229,6 +232,16 @@ public class Statistic extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 물 사용량 측정
+        Button Btn_measure_water_use = findViewById(R.id.Btn_measure_water_use);
+        Btn_measure_water_use.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WaterStopWatch.class);
                 startActivity(intent);
             }
         });

@@ -58,6 +58,16 @@ public class MyPage extends AppCompatActivity {
             }
         });
 
+        // 물 사용량 측정
+        Button Btn_measure_water_use = findViewById(R.id.Btn_measure_water_use);
+        Btn_measure_water_use.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WaterStopWatch.class);
+                startActivity(intent);
+            }
+        });
+
         Txt_tempPoint.setText("눈송이님의 햇살은 " + application.getPoint() + "밝기 입니다.");
 
         if (application.getPoint() < 30){

@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,10 +34,24 @@ import java.util.Locale;
 
 public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    androidx.appcompat.widget.AppCompatButton BTN_trash_me;
+    androidx.appcompat.widget.AppCompatButton BTN_trash_us;
+
+    LinearLayout LO_myTrash;
+    LinearLayout LO_ourTrash;
+    LinearLayout LO_write_detail;
+
+    Button BTN_my_trash;
+    Button BTN_our_trash;
+
     EditText ET_UserInputTrash;
+    EditText ET_family_num;
+
     TextView TXT_today_trash_input;
     TextView TXT_compare_trash;
     TextView TXT_today_date;
+    TextView TXT_myTrash_weight;
+    TextView TXT_mean_family_weight;
 
     private final static String TAG = "WriteTrash";
     // 쓰레기 종류
@@ -44,6 +59,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     private OnEcoApplication application;
 
     private int currentItemWeight = 0;
+    private int family_num = 0;
+    private float mean_family_weight = 0f;
 
     private int touchCount1, touchCount2, touchCount3, touchCount4, touchCount5, touchCount6 = 0;
 
@@ -71,10 +88,21 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         lvList = findViewById(R.id.lv_list);
         lvList.setOnItemClickListener(this);
 
+        LO_myTrash = findViewById(R.id.LO_myTrash);
+        LO_ourTrash = findViewById(R.id.LO_ourTrash);
+        LO_write_detail = findViewById(R.id.LO_write_detail);
+
+        BTN_my_trash = findViewById(R.id.BTN_my_trash);
+        BTN_our_trash = findViewById(R.id.BTN_our_trash);
+
         ET_UserInputTrash = findViewById(R.id.UserInput_TodayT);
+        ET_family_num = findViewById(R.id.ET_family_num);
+
         TXT_today_trash_input = findViewById(R.id.TXT_today_trash_input);
         TXT_today_date = findViewById(R.id.TXT_today_date);
         TXT_compare_trash = findViewById(R.id.TXT_compare_trash);
+        TXT_myTrash_weight = findViewById(R.id.TXT_myTrash_weight);
+        TXT_mean_family_weight = findViewById(R.id.TXT_mean_family_weight);
 
         // Button 9개 bind >> 6로 수정
         Button Btn_normal_trash = findViewById(R.id.Btn_normal_trash);
@@ -94,6 +122,9 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         TXT_today_date.setText(application.todayDate);
 
         application.statisticType = "trash-usage";
+
+        BTN_my_trash.setSelected(true);
+        BTN_our_trash.setSelected(false);
 
         checkPermission();
         checkPermission_camera();
@@ -117,6 +148,29 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
+        // todo:저장이 안됨?
+        // 사용자 입력 텍스트를 인트 변수 family_num에 저장
+        ET_UserInputTrash.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.d("jay", "charSequence: " + charSequence);
+                if (charSequence.equals("")) return;
+                family_num = Integer.parseInt(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        // family_num 인 가구 월 평균 쓰레기 배출량
+        mean_family_weight = family_num * 0.893f * 30;
+
+
         // 검색화면으로 넘어가기
         ImageButton Btn_search = findViewById(R.id.btn_search);
         Btn_search.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +191,34 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
+        // 물 사용량 측정
+        Button Btn_measure_water_use = findViewById(R.id.Btn_measure_water_use);
+        Btn_measure_water_use.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WaterStopWatch.class);
+                startActivity(intent);
+            }
+        });
+
+        // 내 쓰레기
+        BTN_my_trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                application.whoseTrash = "my";
+                setupMyTrash();
+            }
+        });
+
+        // 우리집 쓰레기
+        BTN_our_trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                application.whoseTrash = "our";
+                setupOurTrash();
+            }
+        });
+
         // Button을 눌렀을 때 trashType에 저장.(9개 모두 구현)
         Btn_normal_trash.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +230,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, normalTrashItems);
                 lvList.setAdapter(adapter);
                 touchCount1++;
-                ListVisible();
+                setVisible_WriteDetail();
             }
         });
 
@@ -160,7 +242,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, glassItems);
                 lvList.setAdapter(adapter);
                 touchCount2++;
-                ListVisible();
+                setVisible_WriteDetail();
             }
         });
 
@@ -172,7 +254,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, canItems);
                 lvList.setAdapter(adapter);
                 touchCount3++;
-                ListVisible();
+                setVisible_WriteDetail();
             }
 
         });
@@ -184,7 +266,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, paperItems);
                 lvList.setAdapter(adapter);
                 touchCount4++;
-                ListVisible();
+                setVisible_WriteDetail();
             }
         });
 
@@ -195,7 +277,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticItems);
                 lvList.setAdapter(adapter);
                 touchCount5++;
-                ListVisible();
+                setVisible_WriteDetail();
             }
         });
 
@@ -206,7 +288,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticBagItems);
                 lvList.setAdapter(adapter);
                 touchCount6++;
-                ListVisible();
+                setVisible_WriteDetail();
             }
         });
 
@@ -265,7 +347,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     float total = trashUsage.getNormalTrash() + trashUsage.getGlass() + trashUsage.getCan()
                             + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag();
 
-                    TXT_today_trash_input.setText(total + "g");
+                    TXT_today_trash_input.setText(total + "g"); // todo: 개수로 변경
+                    TXT_myTrash_weight.setText("이번 달 우리 집 쓰레기 배출량 (" + total + "kg)");
                     setPreSavedTrash(total);
                 }
             }
@@ -324,11 +407,14 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     // 쓰레기 전체 g 구하기
                     float total = trashUsage.getNormalTrash() + trashUsage.getGlass() + trashUsage.getCan()
                             + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag();
-                    TXT_today_trash_input.setText(total + "g");
+                    TXT_today_trash_input.setText(total + "g"); // // todo: 개수로 변경 TXT_today_trash_input는 개수로 변경
+                    TXT_myTrash_weight.setText("이번 달 우리 집 쓰레기 배출량 (" + total + "kg)");
                     setPreSavedTrash(total);
                 }
             }
         });
+
+        TXT_mean_family_weight.setText("인 가구 기준 월 평균 쓰레기 배출량 (" + mean_family_weight + "kg)");
 
         // 저장되어 있는 trash 값 화면에 반영
         SetFirstBottomUI();
@@ -337,13 +423,36 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
 
 
-    // Button을 눌렀을 때 리스트 보이고 안보이기
-    private void ListVisible() {
-        if (lvList.getVisibility() == View.GONE) {
-            lvList.setVisibility(View.VISIBLE);
+    private void setWhoseTrash() {
+        if (application.whoseTrash.equals("my")) {
+            LO_myTrash.setVisibility(View.VISIBLE);
+            LO_ourTrash.setVisibility(View.GONE);
+            BTN_my_trash.setSelected(true);
+            BTN_our_trash.setSelected(false);
+
+        } else if (application.whoseTrash.equals("our")) {
+            LO_myTrash.setVisibility(View.GONE);
+            LO_ourTrash.setVisibility(View.VISIBLE);
+            BTN_my_trash.setSelected(false);
+            BTN_our_trash.setSelected(true);
+        }
+    }
+
+    private void setupMyTrash() {
+        setWhoseTrash();
+    }
+
+    private void setupOurTrash() {
+        setWhoseTrash();
+    }
+
+    // Button을 눌렀을 때 레이아웃 LO_write_detail 보이고 안보이기
+    private void setVisible_WriteDetail() {
+        if (LO_write_detail.getVisibility() == View.GONE) {
+            LO_write_detail.setVisibility(View.VISIBLE);
         } else {
             if (touchCount1 == 2 || touchCount2 == 2 || touchCount3 == 2 || touchCount4 == 2 || touchCount5 == 2 || touchCount6 == 2) {
-                lvList.setVisibility(View.GONE);
+                LO_write_detail.setVisibility(View.GONE);
                 touchCount1 = 0;
                 touchCount2 = 0;
                 touchCount3 = 0;

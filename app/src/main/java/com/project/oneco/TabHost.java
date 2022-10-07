@@ -62,8 +62,10 @@ public class TabHost extends TabActivity {
 
 
         //먼저 열릴 탭을 선택!
-        if (application.bf_activity.equals("WaterAfterStati")){
+        if (application.gotoTab.equals("Statistic")){
             tabHost.setCurrentTab(2);
+        } else if (application.gotoTab.equals("WriteWater")) {
+            tabHost.setCurrentTab(1);
         } else {
             tabHost.setCurrentTab(0);
         }

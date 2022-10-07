@@ -107,6 +107,8 @@ public class WaterAfterStati extends AppCompatActivity {
             }
         });
 
+
+        // todo: writewater 액티비티에 하단탭이 안나타남
         // 완료 후 다시 물 기록 화면으로
         Button goto_write_water = findViewById(R.id.goto_write_water);
         goto_write_water.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +116,7 @@ public class WaterAfterStati extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WriteWater.class);
                 startActivity(intent);
-
+                application.gotoTab = "WriteWater";
                 application.waterType = "etc_water";
             }
         });
@@ -124,6 +126,7 @@ public class WaterAfterStati extends AppCompatActivity {
         goto_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                application.gotoTab = "Statistic";
                 application.bf_activity = "WaterAfterStati";
                 setDefault();  // 설정 초기화
                 Intent intent = new Intent(getApplicationContext(), TabHost.class);
@@ -132,7 +135,9 @@ public class WaterAfterStati extends AppCompatActivity {
         });
 
 
-    } // end of onCreate
+    } /** end of onCreate **/
+
+
 
 
     // 00분 00초로 바꾸기
@@ -197,4 +202,4 @@ public class WaterAfterStati extends AppCompatActivity {
         application.Wpower = 80f;
     }
 
-}   // end of class
+}   /** end of class **/

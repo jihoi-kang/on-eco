@@ -127,6 +127,7 @@ public class WaterStopWatch extends AppCompatActivity {
                 second.cancel();
                 soundMeter.stop();
                 timerRunning = false;
+                Btn_pause_ST.setImageResource(R.drawable.replay);
 
                 // 지금까지 모아둔 데시벨 값을 파싱한다.
                 float total = 0f;
