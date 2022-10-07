@@ -133,6 +133,7 @@ public class Search extends AppCompatActivity implements OnItemClickListener {
             }
         });
 
+        // todo: 리스트에 밑줄 없음
         // RecyclerView
         recyclerView = findViewById(R.id.rv_search);
         linearLayoutManager = new LinearLayoutManager(this);

@@ -10,6 +10,7 @@
     android:paddingRight="15dp">
 
     <LinearLayout
+        android:background="@drawable/rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,7 +29,8 @@
             android:id="@+id/iv_search"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            app:srcCompat="@drawable/search_btn_search"/>
 
         <EditText
             android:id="@+id/et_searchbar"
@@ -43,7 +45,8 @@
             android:gravity="center"
             android:hint="Search for recycle"
             android:inputType="textPersonName"
-            android:textColorHint="#BDBDBD" />
+            android:textColorHint="#BDBDBD"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/btn_searchbar"

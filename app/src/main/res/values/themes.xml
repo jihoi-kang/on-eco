@@ -3,12 +3,12 @@
     <style name="Theme.OnEco" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#82B1FF</item>
-        <item name="colorPrimaryVariant">#8C9EFF</item>
+        <item name="colorPrimary">#B9F6CA</item>
+        <item name="colorPrimaryVariant">#AFBAF6</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#FF80AB</item>
-        <item name="colorSecondaryVariant">#B388FF</item>
+        <item name="colorSecondaryVariant">#C8B1F1</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>

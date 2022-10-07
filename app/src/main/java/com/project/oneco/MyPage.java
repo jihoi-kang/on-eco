@@ -17,6 +17,7 @@ import com.project.oneco.test.GetDialogTest;
 public class MyPage extends AppCompatActivity {
 
     private OnEcoApplication application;
+
     private long backpressedTime = 0;
 
     TextView temp_level;
@@ -30,6 +31,7 @@ public class MyPage extends AppCompatActivity {
         setContentView(R.layout.activity_my_page);
 
         application = (OnEcoApplication) getApplication();
+
         temp_level = findViewById(R.id.temp_level);
         Txt_tempPoint = findViewById(R.id.Txt_tempPoint);
         Img_temp_level = findViewById(R.id.Img_temp_level);

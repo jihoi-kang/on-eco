@@ -50,10 +50,7 @@ public class WaterUsage {
         this.etc_water = etc_water;
     }
 
-    public float getWaterTotal() {
-
-        return waterTotal;
-    }
+    public float getWaterTotal() { return waterTotal; }
     public void setWaterTotal(float waterTotal) {
         this.waterTotal = waterTotal;
     }
