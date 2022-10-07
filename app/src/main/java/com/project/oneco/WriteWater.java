@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +38,6 @@ import java.util.TimerTask;
 
 public class WriteWater extends AppCompatActivity {
 
-    private int touchCount1, touchCount2, touchCount3, touchCount4, touchCount5, touchCount6, touchCount7, touchCount8, touchCount9 = 0;
     androidx.appcompat.widget.AppCompatButton Btn_toothBrush;
     androidx.appcompat.widget.AppCompatButton Btn_handWash;
     androidx.appcompat.widget.AppCompatButton Btn_faceWash;
@@ -59,13 +60,18 @@ public class WriteWater extends AppCompatActivity {
     LinearLayout Layout_play;           // 플레이 버튼 화면
     LinearLayout Layout_pauseStop;      // 정지, 종료 버튼 화면
 
-    TextView Txt_today_date;
+    TextView TXT_today_water;
+    TextView TXT_today_date;
     TextView Txt_today_water_input;
-    TextView Txt_saved_water;
+    TextView TXT_compare_water;
 
     private ArrayList<Float> dbList = new ArrayList<>();
     private ArrayList<Float> dbUsedList = new ArrayList<>();
     private ArrayList<Float> dbNoUsedList = new ArrayList<>();
+
+    private int touchCount1, touchCount2, touchCount3, touchCount4, touchCount5, touchCount6, touchCount7, touchCount8, touchCount9 = 0;
+
+    int inputWater = 0;
 
     private TextView Txt_countup;// 타이머 현황
 
@@ -99,7 +105,6 @@ public class WriteWater extends AppCompatActivity {
         Btn_dishWash = findViewById(R.id.Btn_dishWash);
         Btn_etc_water = findViewById(R.id.Btn_etc_water);
 
-
         ET_UserInputWater = findViewById(R.id.UserInputWater);
         Btn_add = findViewById(R.id.Btn_add);
         Btn_sub = findViewById(R.id.Btn_sub);
@@ -125,9 +130,10 @@ public class WriteWater extends AppCompatActivity {
         Btn_pause_ST = findViewById(R.id.Btn_pause_ST);
         Btn_stop_ST = findViewById(R.id.Btn_stop_ST);
 
-        Txt_today_date = findViewById(R.id.Txt_today_date);
+        TXT_today_water = findViewById(R.id.TXT_today_water);
+        TXT_today_date = findViewById(R.id.TXT_today_date);
         Txt_today_water_input = findViewById(R.id.TXT_today_water);
-        Txt_saved_water = findViewById(R.id.TXT_saved_water);
+        TXT_compare_water = findViewById(R.id.TXT_compare_water);
 
         application = (OnEcoApplication) getApplication();  // Activity간의 데이터 공유를 위한 application 가져오기2
         preferenceManager = PreferenceManager.getInstance(this);
@@ -142,12 +148,33 @@ public class WriteWater extends AppCompatActivity {
         Wmiddle.setSelected(true);
         Btn_etc_water.setSelected(true);
 
-        Txt_today_date.setText(application.todayDate);
+        TXT_today_date.setText(application.todayDate);
+        // todo: 넘어오는 경로에 따라 보여주는 것이 다르도록.. 탭이라서 oncreate가 안되는 건가?
+        application.statisticType = "water-usage";
 
-        //todo:
-        if(application.bf_activity.equals("WaterAfterStati")){
-            setInit();
-        }
+
+        // 사용자 입력값인 editText의 값을 int로 변환 후, 변수 inputWater에 저장 => 오류남
+        // inputWater = Integer.parseInt(ET_UserInputWater.getText().toString());
+        // 사용자 입력 텍스트를 인트 변수 inputWater에 저장
+        ET_UserInputWater.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.d("jay", "charSequence: " + charSequence);
+                if (charSequence.equals("")) return;
+                else {
+                    // todo: 값을 완전히 지우면 오류 발생
+                    inputWater = Integer.parseInt(charSequence.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
 
         // 검색화면으로 넘어가기
         ImageButton Btn_search = findViewById(R.id.btn_search);
@@ -190,7 +217,6 @@ public class WriteWater extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
 
         // Button을 눌렀을 때 waterType에 물 사용 유형 저장
@@ -288,8 +314,6 @@ public class WriteWater extends AppCompatActivity {
                 if (application.waterType == "") {
                     Toast.makeText(getApplicationContext(), "사용한 물의 유형을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else {
-                    // 사용자 입력값인 editText의 값을 변환 후, 변수 inputWater에 저장
-                    int inputWater = Integer.parseInt(ET_UserInputWater.getText().toString());
 
                     // SharedPreference 저장 과정
                     // 오늘의 날짜를 구한 후 key값으로 등록 - 220531
@@ -301,7 +325,9 @@ public class WriteWater extends AppCompatActivity {
                     // data 만들기 - WaterUseage 클래스 객체 생성
                     WaterUsage waterUsage;
 
-                    if (waterUsageStr.equals("")) { // 프리퍼런스에 저장된 값이 없다면
+
+                    // 프리퍼런스에 저장된 값이 없을 시
+                    if (waterUsageStr.equals("")) {
                         waterUsage = new WaterUsage();
                     } else {    // 프리퍼런스에 저장된 값이 있다면 데이터 모델링
                         // gson이용하여 가져와 data를 String으로 변환 후 객체에 저장.
@@ -358,8 +384,6 @@ public class WriteWater extends AppCompatActivity {
                 if (application.waterType.equals("")) {
                     Toast.makeText(getApplicationContext(), "사용한 물의 유형을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
                 } else {
-                    // 사용자 입력값인 editText의 값을 변환 후, 변수 inputWater에 저장
-                    int inputWater = Integer.parseInt(ET_UserInputWater.getText().toString());
 
                     // SharedPreference 저장 과정
                     // 오늘의 날짜를 구한 후 key값으로 등록 - 220531
@@ -486,7 +510,7 @@ public class WriteWater extends AppCompatActivity {
             }
         });
 
-        // 일시 정지
+        // 일시 정지 버튼
         Btn_pause_ST.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -495,7 +519,14 @@ public class WriteWater extends AppCompatActivity {
                 firstState = false;
             }
         });
-    }
+
+        // 저장되어 있는 water 값  화면에 반영
+        SetFirstBottomUI();
+
+    } /** end of onCreate **/
+
+
+
 
     // 타이머 상태에 따른 시작 & 정지
     private void startStop() {
@@ -598,19 +629,13 @@ public class WriteWater extends AppCompatActivity {
         timeLeftText += seconds;
 
         return timeLeftText;
+    }
 
-    } // end of Oncreate
-
-
-
-
-
-    // 백버튼을 누르면
+    // 백버튼 동작
     @Override
     public void onBackPressed() {
         // super.onBackPressed();
         application.bf_activity = "WriteWater";
-        application.statisticType = "water-usage";
 
         if (start_already) {
             stopTimer();
@@ -794,8 +819,34 @@ public class WriteWater extends AppCompatActivity {
         float savedWater = todayTotal - preTotal;
 
         // UI 변경
-        Txt_saved_water.setText(savedWater + "ml");
+        if (savedWater < 0) {
+            TXT_compare_water.setText("- " + savedWater + " ml");
+        } else {
+            TXT_compare_water.setText("+ " + savedWater + " ml");
+        }
     }
+
+
+    public void SetFirstBottomUI(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
+        String key = simpledateformat.format(calendar.getTime()); // 0530
+
+        String waterUsageStr = preferenceManager.getString(key + "-water-usage", "");
+        WaterUsage todayWaterUsage;
+        if (waterUsageStr.equals("")) {
+            todayWaterUsage = new WaterUsage();
+        } else {
+            todayWaterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
+        }
+
+        // water 전체 ml 구하기
+        float total = todayWaterUsage.getWaterTotal();
+        TXT_today_water.setText(total + " ml");
+
+        setPreSavedWater(total);
+    }
+
 
 
     /**
@@ -840,4 +891,4 @@ public class WriteWater extends AppCompatActivity {
     }
 
 
-} // end of class
+} /** end of Class **/

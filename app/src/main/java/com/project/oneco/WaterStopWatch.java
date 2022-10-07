@@ -77,10 +77,7 @@ public class WaterStopWatch extends AppCompatActivity {
 
         soundMeter = new SoundMeter();
 
-        //todo:
-        if(application.bf_activity.equals("WaterAfterStati")){
-            setInit();
-        }
+        application.statisticType = "water-usage";
 
 
         // 상황에 따른 이전 버튼 동작 선택

@@ -12,7 +12,10 @@
     <string name="statisBtn">배출/사용량 통계</string>
     <string name="string_statisbtn">배출/사용량 통계</string>
     <string name="water_gameBtn">샤워 타이머 게임</string>
-    <string name="title_write_water">오늘의 물 사용</string>
+    <string name="title_write_water">물 사용 기록</string>
+    <string name="title_write_trash">쓰레기 배출 기록</string>
+    <string name="title_statistic">나의 통계</string>
+    <string name="title_mypage">마이페이지</string>
     <string name="Btn_tooth">양치</string>
     <string name="Btn_handwash">손씻기</string>
     <string name="Btn_facewash">세수</string>

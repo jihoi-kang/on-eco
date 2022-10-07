@@ -27,22 +27,20 @@ import java.util.Date;
 import java.util.Locale;
 
 public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    EditText ET_UserInputTrash;
+    TextView TXT_today_trash_input;
+    TextView TXT_compare_trash;
+    TextView TXT_today_date;
+
     private final static String TAG = "WriteTrash";
     // 쓰레기 종류
     private String trashType;
     private OnEcoApplication application;
 
-    // 데이터 정의(오늘 배출한 쓰레기, 전일 대비 절약한 쓰레기)
-    private String todayTrash;
-    private String removedTrash;
-    TextView TXT_today_trash_input;
-    TextView TXT_saved_trash;
     private int currentItemWeight = 0;
 
     private int touchCount1, touchCount2, touchCount3, touchCount4, touchCount5, touchCount6 = 0;
-
-    EditText etItemWeight;
-    EditText ET_UserInputTrash;
 
     private PreferenceManager preferenceManager;
     private Gson gson;
@@ -64,20 +62,14 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_trash);
 
-        application = (OnEcoApplication) getApplication();
-        preferenceManager = PreferenceManager.getInstance(this);
-        gson = new Gson();
-
-
         // listview bind & item click listener 달기(setOnItemClickListener)
         lvList = findViewById(R.id.lv_list);
         lvList.setOnItemClickListener(this);
 
-        etItemWeight = findViewById(R.id.UserInput_TodayT);
-
-        TXT_today_trash_input = findViewById(R.id.TXT_today_trash_input);
         ET_UserInputTrash = findViewById(R.id.UserInput_TodayT);
-        TXT_saved_trash = findViewById(R.id.TXT_saving_trash);
+        TXT_today_trash_input = findViewById(R.id.TXT_today_trash_input);
+        TXT_today_date = findViewById(R.id.TXT_today_date);
+        TXT_compare_trash = findViewById(R.id.TXT_compare_trash);
 
         // Button 9개 bind >> 6로 수정
         Button Btn_normal_trash = findViewById(R.id.Btn_normal_trash);
@@ -90,7 +82,16 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Button Btn_add = findViewById(R.id.Btn_add);
         Button Btn_sub = findViewById(R.id.Btn_sub);
 
-        etItemWeight.addTextChangedListener(new TextWatcher() {
+        application = (OnEcoApplication) getApplication();
+        preferenceManager = PreferenceManager.getInstance(this);
+        gson = new Gson();
+
+        TXT_today_date.setText(application.todayDate);
+
+        application.statisticType = "trash-usage";
+
+        // 사용자 입력 텍스트를 인트 변수 currentItemWeight에 저장
+        ET_UserInputTrash.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -99,7 +100,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 Log.d("jay", "charSequence: " + charSequence);
                 if (charSequence.equals("")) return;
-
+                // todo: 값을 완전히 지우면 오류 발생
                 currentItemWeight = Integer.parseInt(charSequence.toString());
             }
 
@@ -210,7 +211,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     String trashUsageStr = preferenceManager.getString(key + "-trash-usage", "");
                     TrashUsage trashUsage;
 
-                    // 저장된 값이 없을 시
+                    // 프리퍼런스에 저장된 값이 없을 시
                     if (trashUsageStr.equals("")) {
                         trashUsage = new TrashUsage();
                     } else {
@@ -313,28 +314,11 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
-        // 저장되어 있는 trash 값 반영
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
-        String key = simpledateformat.format(calendar.getTime()); // 0530
+        // 저장되어 있는 trash 값 화면에 반영
+        SetFirstBottomUI();
 
-        String trashUsageStr = preferenceManager.getString(key + "-trash-usage", "");
-        TrashUsage todayTrashUsage;
-        if (trashUsageStr.equals("")) {
-            todayTrashUsage = new TrashUsage();
-        } else {
-            todayTrashUsage = gson.fromJson(trashUsageStr, TrashUsage.class);
-        }
+    }   /** end of onCreate **/
 
-        // 쓰레기 전체 g 구하기
-//        todayTrashUsage.getTrashTotal();
-        float total = todayTrashUsage.getNormalTrash() + todayTrashUsage.getGlass() + todayTrashUsage.getCan()
-                + todayTrashUsage.getPaper() + todayTrashUsage.getPlastic() + todayTrashUsage.getPlastic_bag();
-        TXT_today_trash_input.setText(total + "g");
-
-        setPreSavedTrash(total);
-
-    }   // end of onCreate
 
 
     // Button을 눌렀을 때 리스트 보이고 안보이기
@@ -372,7 +356,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 currentItemWeight = 1;
             }
 
-            etItemWeight.setText("" + currentItemWeight);
+            ET_UserInputTrash.setText("" + currentItemWeight);
         } else if (trashType.equals("glass")) {
             itemName = glassItems[position];
         }
@@ -385,7 +369,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             } else if (itemName.equals("180ml")) {
                 currentItemWeight = 190;
             }
-            etItemWeight.setText("" + currentItemWeight);
+            ET_UserInputTrash.setText("" + currentItemWeight);
         } else if (trashType.equals("can")) {
             itemName = canItems[position];
         }
@@ -403,7 +387,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             } else if (itemName.equals("참치캔(100g)")) {
                 currentItemWeight = 100;
             }
-            etItemWeight.setText("" + currentItemWeight);
+            ET_UserInputTrash.setText("" + currentItemWeight);
         } else if (trashType.equals("paper")) {
             itemName = paperItems[position];
         }
@@ -436,7 +420,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             } else if (itemName.equals("택배박스 5호(120cm)")) {
                 currentItemWeight = 1200;
             }
-            etItemWeight.setText("" + currentItemWeight);
+            ET_UserInputTrash.setText("" + currentItemWeight);
         } else if (trashType.equals("plastic")) {
             itemName = plasticItems[position];
         }
@@ -458,7 +442,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             } else if (itemName.equals("2L")) {
                 currentItemWeight = 35;
             }
-            etItemWeight.setText("" + currentItemWeight);
+            ET_UserInputTrash.setText("" + currentItemWeight);
         } else if (trashType.equals("plastic_bag")) {
             itemName = plasticBagItems[position];
         }
@@ -474,7 +458,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             } else if (itemName.equals("20L")) {
                 currentItemWeight = 7;
             }
-            etItemWeight.setText("" + currentItemWeight);
+            ET_UserInputTrash.setText("" + currentItemWeight);
         } else if (trashType.equals("plastic_bag")) {
             itemName = canItems[position];
         }
@@ -524,11 +508,32 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
         // UI 변경
         if (savedTrash < 0) {
-            TXT_saved_trash.setText(savedTrash + "g");
+            TXT_compare_trash.setText("- " + savedTrash + " g");
         } else {
-            TXT_saved_trash.setText("+" + savedTrash + "g");
+            TXT_compare_trash.setText("+ " + savedTrash + " g");
         }
     }
 
+    public void SetFirstBottomUI(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
+        String key = simpledateformat.format(calendar.getTime()); // 0530
 
-}   // end of class
+        String trashUsageStr = preferenceManager.getString(key + "-trash-usage", "");
+        TrashUsage todayTrashUsage;
+        if (trashUsageStr.equals("")) {
+            todayTrashUsage = new TrashUsage();
+        } else {
+            todayTrashUsage = gson.fromJson(trashUsageStr, TrashUsage.class);
+        }
+
+        // 쓰레기 전체 g 구하기
+        float total = todayTrashUsage.getNormalTrash() + todayTrashUsage.getGlass() + todayTrashUsage.getCan()
+                + todayTrashUsage.getPaper() + todayTrashUsage.getPlastic() + todayTrashUsage.getPlastic_bag();
+        TXT_today_trash_input.setText(total + " g");
+
+        setPreSavedTrash(total);
+    }
+
+
+}   /** end of Class **/

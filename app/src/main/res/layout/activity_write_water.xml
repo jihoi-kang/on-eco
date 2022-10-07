@@ -424,7 +424,7 @@
                     android:background="#F5F5F5"/>
 
                 <TextView
-                    android:id="@+id/Txt_today_date"
+                    android:id="@+id/TXT_today_date"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:gravity="center"
@@ -446,7 +446,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:text="ml"
+                    android:text="0 ml"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
                 <Space
@@ -462,11 +462,11 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <TextView
-                    android:id="@+id/TXT_saved_water"
+                    android:id="@+id/TXT_compare_water"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:text="ml"
+                    android:text="0 ml"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             </LinearLayout>

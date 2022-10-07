@@ -42,7 +42,7 @@ public class OnEcoApplication extends Application {
     public float usedWT = 0f;      // 물 사용 시간
     public float noUsedWT = 0f;    // 물 미사용 시간
 
-    public String statisticType = ""; // water-usage | trash-usage
+    public String statisticType = "trash-usage"; // water-usage | trash-usage
 
     public boolean min3 = false;
     public boolean min5 = false;

@@ -50,35 +50,6 @@ public class WaterAfterStati extends AppCompatActivity {
         application = (OnEcoApplication) getApplication();
 
 
-        Button Btn_wfs_back = findViewById(R.id.Btn_afs_back);
-        Btn_wfs_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        Button goto_write_water = findViewById(R.id.goto_write_water);
-        goto_write_water.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WriteWater.class);
-                startActivity(intent);
-            }
-        });
-
-        // 다음 버튼 : 통계화면으로 넘어가기
-        Button goto_statistic = findViewById(R.id.goto_statistic);
-        goto_statistic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                application.bf_activity = "WaterAfterStati";
-                setDefault();  // 설정 초기화
-                Intent intent = new Intent(getApplicationContext(), TabHost.class);
-                startActivity(intent);
-            }
-        });
-
         setResult();
 
         // SharedPreference 저장 과정
@@ -126,6 +97,39 @@ public class WaterAfterStati extends AppCompatActivity {
 
         // 초기화
         setDefault();
+
+
+        Button Btn_wfs_back = findViewById(R.id.Btn_afs_back);
+        Btn_wfs_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        // 완료 후 다시 물 기록 화면으로
+        Button goto_write_water = findViewById(R.id.goto_write_water);
+        goto_write_water.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WriteWater.class);
+                startActivity(intent);
+
+                application.waterType = "etc_water";
+            }
+        });
+
+        // 통계화면으로 넘어가기
+        Button goto_statistic = findViewById(R.id.goto_statistic);
+        goto_statistic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                application.bf_activity = "WaterAfterStati";
+                setDefault();  // 설정 초기화
+                Intent intent = new Intent(getApplicationContext(), TabHost.class);
+                startActivity(intent);
+            }
+        });
 
 
     } // end of onCreate
