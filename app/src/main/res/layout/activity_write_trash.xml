@@ -84,7 +84,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
+                android:layout_height="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,6 +110,10 @@
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -126,12 +130,13 @@
                     android:paddingBottom="10dp">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/Btn_normal_trash"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/Btn_paper"
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
                         android:layout_weight="1"
-                        android:background="@drawable/btn_stati_trash"
-                        android:text="@string/normal_trash"
+                        android:background="@drawable/btn_trash_paper"
+                        android:text="종이\n0"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/black" />
 
                     <Space
@@ -140,12 +145,13 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/Btn_glass"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/Btn_plastic"
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
                         android:layout_weight="1"
-                        android:background="@drawable/btn_stati_trash"
-                        android:text="@string/glass"
+                        android:background="@drawable/btn_trash_plastic"
+                        android:text="플라스틱\n0"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/black" />
 
                     <Space
@@ -154,13 +160,15 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/Btn_can"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/Btn_plastic_bag"
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
                         android:layout_weight="1"
-                        android:background="@drawable/btn_stati_trash"
-                        android:text="@string/can"
+                        android:background="@drawable/btn_trash_plastic_bag"
+                        android:text="비닐\n0"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/black" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -175,12 +183,13 @@
                     android:paddingBottom="10dp">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/Btn_paper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/Btn_can"
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
                         android:layout_weight="1"
-                        android:background="@drawable/btn_stati_trash"
-                        android:text="@string/paper"
+                        android:background="@drawable/btn_trash_can"
+                        android:text="캔\n0"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/black" />
 
                     <Space
@@ -189,12 +198,13 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/Btn_plastic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/Btn_glass"
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
                         android:layout_weight="1"
-                        android:background="@drawable/btn_stati_trash"
-                        android:text="@string/plastic"
+                        android:background="@drawable/btn_trash_glass"
+                        android:text="유리\n0"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/black" />
 
                     <Space
@@ -203,13 +213,15 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/Btn_plastic_bag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/Btn_normal_trash"
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
                         android:layout_weight="1"
-                        android:background="@drawable/btn_stati_trash"
-                        android:text="@string/plastic_bag"
+                        android:background="@drawable/btn_trash_normal"
+                        android:text="일반 / 기타\n0"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/black" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -242,7 +254,7 @@
                         </ListView>
 
                         <EditText
-                            android:id="@+id/editTextNumber"
+                            android:id="@+id/ET_my_weight"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:ems="10"
@@ -251,7 +263,7 @@
                             tools:ignore="SpeakableTextPresentCheck" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName"
+                            android:id="@+id/ET_trash_memo"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:ems="10"
@@ -267,24 +279,25 @@
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/button"
+                            android:id="@+id/Btn_cancel_me"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/btn_stati_trash"
+                            android:background="@drawable/btn_stati_term"
                             android:text="취소"
                             android:textColor="@color/black"
                             tools:ignore="TouchTargetSizeCheck" />
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/button4"
+                            android:id="@+id/Btn_add_me"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/btn_stati_trash"
+                            android:background="@drawable/btn_stati_term"
                             android:text="추가"
                             android:textColor="@color/black"
                             tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -324,33 +337,65 @@
                         android:text="@string/mtitle_today_trash"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                    <TextView
-                        android:id="@+id/TXT_today_trash_input"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:text="0 g"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/TXT_myTrash_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="0 개"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                        <TextView
+                            android:id="@+id/TXT_myTrash_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="0 g"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    </LinearLayout>
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="30dp" />
+                        android:layout_height="20dp" />
 
                     <TextView
-                        android:id="@+id/subtitle_saving_trash"
+                        android:id="@+id/subtitle_compare_trash"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/saving_trash"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                    <TextView
-                        android:id="@+id/TXT_compare_trash"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:text="0 g"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/TXT_compare_trash_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="0 개"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                        <TextView
+                            android:id="@+id/TXT_compare_trash_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="0 g"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    </LinearLayout>
 
                     <View
                         android:id="@+id/view"
@@ -392,7 +437,7 @@
 
                     <EditText
 
-                        android:id="@+id/UserInput_TodayT"
+                        android:id="@+id/ET_us_weight"
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -447,7 +492,7 @@
                     android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/TXT_myTrash_weight"
+                        android:id="@+id/TXT_usTrash_weight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="이번 달 우리 집 쓰레기 배출량 (--kg)"
@@ -463,7 +508,8 @@
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:inputType="number" />
+                            android:inputType="number"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                         <TextView
                             android:id="@+id/TXT_mean_family_weight"

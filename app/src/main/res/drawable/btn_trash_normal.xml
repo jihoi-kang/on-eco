@@ -3,7 +3,11 @@
     <item android:state_pressed="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
             <solid
-                android:color="#BDD7EE"
+                android:color="#F2F2F2"
+                />
+            <stroke
+                android:width="3dp"
+                android:color="#AFABAB"
                 />
         </shape>
     </item>
@@ -11,7 +15,11 @@
     <item android:state_selected="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
             <solid
-                android:color="#BDD7EE"
+                android:color="#F2F2F2"
+                />
+            <stroke
+                android:width="3dp"
+                android:color="#AFABAB"
                 />
         </shape>
     </item>
@@ -19,7 +27,11 @@
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
             <solid
-                android:color="#F5F5F5"
+                android:color="#FFFFFF"
+                />
+            <stroke
+                android:width="3dp"
+                android:color="#AFABAB"
                 />
         </shape>
     </item>

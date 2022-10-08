@@ -1,6 +1,7 @@
 package com.project.oneco;
 
 import android.app.Application;
+import android.widget.Button;
 
 import com.project.oneco.data.PreferenceManager;
 
@@ -52,6 +53,16 @@ public class OnEcoApplication extends Application {
     public boolean min7 = false;
     public boolean min10 = false;
     public boolean min15 = false;
+
+    // todo: 앱 나가도 저장되도록
+    public int count_trash_total = 0;
+    public int count_paper = 0;
+    public int count_plastic = 0;
+    public int count_plastic_bag = 0;
+    public int count_can = 0;
+    public int count_glass = 0;
+    public int count_normal_trash = 0;
+
 
     private PreferenceManager preferenceManager;
 
