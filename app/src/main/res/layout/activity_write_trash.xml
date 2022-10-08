@@ -125,13 +125,12 @@
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/Btn_normal_trash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/custombutton"
-                        android:backgroundTint="@color/button_background_color"
+                        android:background="@drawable/btn_stati_trash"
                         android:text="@string/normal_trash"
                         android:textColor="@color/black" />
 
@@ -140,13 +139,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/Btn_glass"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/custombutton"
-                        android:backgroundTint="@color/button_background_color"
+                        android:background="@drawable/btn_stati_trash"
                         android:text="@string/glass"
                         android:textColor="@color/black" />
 
@@ -155,13 +153,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/Btn_can"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/custombutton"
-                        android:backgroundTint="@color/button_background_color"
+                        android:background="@drawable/btn_stati_trash"
                         android:text="@string/can"
                         android:textColor="@color/black" />
                 </LinearLayout>
@@ -177,13 +174,12 @@
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/Btn_paper"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/custombutton"
-                        android:backgroundTint="@color/button_background_color"
+                        android:background="@drawable/btn_stati_trash"
                         android:text="@string/paper"
                         android:textColor="@color/black" />
 
@@ -192,12 +188,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/Btn_plastic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/custombutton"
+                        android:background="@drawable/btn_stati_trash"
                         android:text="@string/plastic"
                         android:textColor="@color/black" />
 
@@ -206,12 +202,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/Btn_plastic_bag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/custombutton"
+                        android:background="@drawable/btn_stati_trash"
                         android:text="@string/plastic_bag"
                         android:textColor="@color/black" />
                 </LinearLayout>

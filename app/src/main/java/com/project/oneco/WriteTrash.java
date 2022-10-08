@@ -223,6 +223,17 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Btn_normal_trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                switch (view.getId()) {
+                    case R.id.Btn_normal_trash:
+                        application.trashType = "normal_trash";
+                        Btn_normal_trash.setSelected(true);
+                        Btn_glass.setSelected(false);
+                        Btn_can.setSelected(false);
+                        Btn_paper.setSelected(false);
+                        Btn_plastic.setSelected(false);
+                        Btn_plastic_bag.setSelected(false);
+                }
                 Log.d("jay", "passed");
                 // trashType에 쓰레기 유형 저장
                 trashType = "normal_trash";
@@ -239,6 +250,16 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             public void onClick(View view) {
                 trashType = "glass";
                 // item들을 riteTrash 셋해준다.
+                switch (view.getId()) {
+                    case R.id.Btn_glass:
+                        application.trashType = "glass";
+                        Btn_normal_trash.setSelected(false);
+                        Btn_glass.setSelected(true);
+                        Btn_can.setSelected(false);
+                        Btn_paper.setSelected(false);
+                        Btn_plastic.setSelected(false);
+                        Btn_plastic_bag.setSelected(false);
+                }
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, glassItems);
                 lvList.setAdapter(adapter);
                 touchCount2++;
@@ -251,6 +272,16 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 trashType = "can";
+                switch (view.getId()) {
+                    case R.id.Btn_can:
+                        application.trashType = "can";
+                        Btn_normal_trash.setSelected(false);
+                        Btn_glass.setSelected(false);
+                        Btn_can.setSelected(true);
+                        Btn_paper.setSelected(false);
+                        Btn_plastic.setSelected(false);
+                        Btn_plastic_bag.setSelected(false);
+                }
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, canItems);
                 lvList.setAdapter(adapter);
                 touchCount3++;
@@ -263,6 +294,16 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View view) {
                 trashType = "paper";
+                switch (view.getId()) {
+                    case R.id.Btn_paper:
+                        application.trashType = "paper";
+                        Btn_normal_trash.setSelected(false);
+                        Btn_glass.setSelected(false);
+                        Btn_can.setSelected(false);
+                        Btn_paper.setSelected(true);
+                        Btn_plastic.setSelected(false);
+                        Btn_plastic_bag.setSelected(false);
+                }
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, paperItems);
                 lvList.setAdapter(adapter);
                 touchCount4++;
@@ -273,7 +314,17 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Btn_plastic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                trashType = "plastic_bag";
+                trashType = "plastic";
+                switch (view.getId()) {
+                    case R.id.Btn_plastic:
+                        application.trashType = "plastic";
+                        Btn_normal_trash.setSelected(false);
+                        Btn_glass.setSelected(false);
+                        Btn_can.setSelected(false);
+                        Btn_paper.setSelected(false);
+                        Btn_plastic.setSelected(true);
+                        Btn_plastic_bag.setSelected(false);
+                }
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticItems);
                 lvList.setAdapter(adapter);
                 touchCount5++;
@@ -284,7 +335,17 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Btn_plastic_bag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                trashType = "plastic";
+                trashType = "plastic_bag";
+                switch (view.getId()) {
+                    case R.id.Btn_plastic_bag:
+                        application.trashType = "plastic_bag";
+                        Btn_normal_trash.setSelected(false);
+                        Btn_glass.setSelected(false);
+                        Btn_can.setSelected(false);
+                        Btn_paper.setSelected(false);
+                        Btn_plastic.setSelected(false);
+                        Btn_plastic_bag.setSelected(true);
+                }
                 adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticBagItems);
                 lvList.setAdapter(adapter);
                 touchCount6++;
