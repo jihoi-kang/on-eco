@@ -318,6 +318,12 @@ public class Statistic extends AppCompatActivity {
                 }
             }
         });
+    } // end of setUpUi()
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         // 넘어오는 경로에 따른 화면 변환 (쓰레기 or 물)
         if (application.statisticType.equals("water-usage")) {
@@ -327,7 +333,7 @@ public class Statistic extends AppCompatActivity {
             setupTrashUsage();
             setupUiUsage();
         }
-    } // end of setUpUi()
+    }
 
     @Override
     protected void onDestroy() {
@@ -470,8 +476,8 @@ public class Statistic extends AppCompatActivity {
             float val1 = waterUsage.getTooth();
             float val2 = waterUsage.getHand();
             float val3 = waterUsage.getFace();
-            float val4 = waterUsage.getShower();
-            float val5 = waterUsage.getDish();
+            float val4 = waterUsage.getDish();
+            float val5 = waterUsage.getShower();
             float val6 = waterUsage.getEtcWater();
 
             values.add(new BarEntry(

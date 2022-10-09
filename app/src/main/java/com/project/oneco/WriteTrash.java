@@ -18,15 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.google.gson.Gson;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
+import com.project.oneco.data.MyTrash;
 import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.TrashUsage;
 import com.project.oneco.tensorflow.ClassifierActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -70,6 +74,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     TextView TXT_mean_family_weight;
     TextView TXT_today_date;
 
+    RecyclerView rvMyTrashList;
+
     private final static String TAG = "WriteTrash";
     // 쓰레기 종류
     private String trashType;
@@ -87,6 +93,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
     ListView lvList;
     ArrayAdapter<String> adapter;
+    WriteTrashAdapter writeTrashAdapter;
+    ArrayList<MyTrash> myTrashList;
 
     // listView에 들어갈 item들 정의(9개 >> 6개)
     String[] normalTrashItems = {"물티슈", "각티슈", "손 닦는 휴지", "두루말이 휴지"};
@@ -130,6 +138,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         TXT_mean_family_weight = findViewById(R.id.TXT_mean_family_weight);
         TXT_today_date = findViewById(R.id.TXT_today_date);
 
+        rvMyTrashList = findViewById(R.id.rv_my_trash_list);
 
         // Button 9개 bind >> 6로 수정
         Btn_normal_trash = findViewById(R.id.Btn_normal_trash);
@@ -158,6 +167,11 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         checkPermission();
         checkPermission_camera();
 
+        writeTrashAdapter = new WriteTrashAdapter();
+        rvMyTrashList.setAdapter(writeTrashAdapter);
+
+        myTrashList = new ArrayList();
+
         // 사용자 입력 텍스트를 인트 변수 currentItemWeight에 저장
         ET_us_weight.addTextChangedListener(new TextWatcher() {
             @Override
@@ -167,8 +181,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 Log.d("jay", "charSequence: " + charSequence);
-                if (charSequence.equals("")) return;
-                // todo: 값을 완전히 지우면 오류 발생
+                if (charSequence.toString().equals("")) return;
+
                 us_trash_weight = Integer.parseInt(charSequence.toString());
             }
 
@@ -187,8 +201,10 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 Log.d("jay", "charSequence: " + charSequence);
-                if (charSequence.equals("")) return;
+                if (charSequence.toString().equals("")) return;
                 family_num = Integer.parseInt(charSequence.toString());
+                mean_family_weight = family_num * 0.893f * 30;
+                TXT_mean_family_weight.setText("인 가구 기준 월 평균 쓰레기 배출량 (" + mean_family_weight + "kg)");
             }
 
             @Override
@@ -472,6 +488,12 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
                     TXT_myTrash_weight.setText(total + "g");
                     setPreSavedTrash(total);
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd hh:mm", Locale.getDefault());
+                    String dateStr = dateFormat.format(calendar.getTime());
+                    myTrashList.add(new MyTrash(dateStr, trashType, my_trash_weight, ET_trash_memo.getText().toString()));
+                    writeTrashAdapter.updateItems(myTrashList);
+                    ET_trash_memo.setText("");
                 }
 
                 touchCount1++; touchCount2++; touchCount3++; touchCount4++; touchCount5++; touchCount6++;

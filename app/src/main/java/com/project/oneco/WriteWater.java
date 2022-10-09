@@ -329,6 +329,7 @@ public class WriteWater extends AppCompatActivity {
                         waterUsage = gson.fromJson(waterUsageStr, WaterUsage.class);
                     }
 
+                    Log.d("jay", "inputWater: " + inputWater);
                     // 물 타입에 따라 사용자가 직접 입력한 값이 들어감
                     if (application.waterType.equals("tooth")) {
                         float tooth = waterUsage.getTooth();
@@ -364,7 +365,6 @@ public class WriteWater extends AppCompatActivity {
                     Log.d("jay", "key: " + key);
                     Log.d("jay", "waterUsageStr: " + waterUsageStr);
                     Log.d("jay", "waterTotal: " + waterTotal);
-
 
                     // 전일 대비 절약한 물의 양.
                     setPreSavedWater(waterTotal);
@@ -425,11 +425,11 @@ public class WriteWater extends AppCompatActivity {
                         }
 
 //                        // 물 전체 사용량(ml) 구하기
-//                        float waterTotal = waterUsage.getTooth() + waterUsage.getHand()
-//                                + waterUsage.getFace() + waterUsage.getShower()
-//                                + waterUsage.getDish() + waterUsage.getEtcWater();
-                        waterUsage.setWaterTotal(waterTotal);
-                        Txt_today_water_input.setText(waterTotal + "ml");
+                        float updatedWaterTotal = waterUsage.getTooth() + waterUsage.getHand()
+                                + waterUsage.getFace() + waterUsage.getShower()
+                                + waterUsage.getDish() + waterUsage.getEtcWater();
+                        waterUsage.setWaterTotal(updatedWaterTotal);
+                        Txt_today_water_input.setText(updatedWaterTotal + "ml");
 
                         // localStorage에 저장
                         String updatedWaterUsage = gson.toJson(waterUsage);
@@ -515,13 +515,15 @@ public class WriteWater extends AppCompatActivity {
             }
         });
 
-        // 저장되어 있는 water 값  화면에 반영
-        SetFirstBottomUI();
-
     } /** end of onCreate **/
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-
+        // 저장되어 있는 water 값  화면에 반영
+        SetFirstBottomUI();
+    }
 
     // 타이머 상태에 따른 시작 & 정지
     private void startStop() {

@@ -89,6 +89,11 @@ public class WaterAfterStati extends AppCompatActivity {
             waterUsage.setEtcWater(etc_water + application.usedW);
         }
 
+        float waterTotal = waterUsage.getTooth() + waterUsage.getHand()
+                + waterUsage.getFace() + waterUsage.getShower()
+                + waterUsage.getDish() + waterUsage.getEtcWater();
+        waterUsage.setWaterTotal(waterTotal);
+
         // localStorage에 저장
         String updatedWaterUsage = gson.toJson(waterUsage);
         preferenceManager.putString(key + "-water-usage", updatedWaterUsage);
@@ -114,10 +119,9 @@ public class WaterAfterStati extends AppCompatActivity {
         goto_write_water.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WriteWater.class);
-                startActivity(intent);
                 application.gotoTab = "WriteWater";
                 application.waterType = "etc_water";
+                finish();
             }
         });
 
@@ -135,9 +139,11 @@ public class WaterAfterStati extends AppCompatActivity {
         });
 
 
-    } /** end of onCreate **/
+    }
 
-
+    /**
+     * end of onCreate
+     **/
 
 
     // 00분 00초로 바꾸기
@@ -148,7 +154,6 @@ public class WaterAfterStati extends AppCompatActivity {
             }
         };
         handler.post(updater);
-
 
 
         Log.d("jay", "application.RtimerSec: " + application.RtimerSec);
@@ -196,10 +201,12 @@ public class WaterAfterStati extends AppCompatActivity {
     }
 
     // 설정 초기화
-    private void setDefault(){
+    private void setDefault() {
         application.waterType = "etc_water";
         application.Wtap = "Wbath";
         application.Wpower = 80f;
     }
 
-}   /** end of class **/
+}   /**
+ * end of class
+ **/
