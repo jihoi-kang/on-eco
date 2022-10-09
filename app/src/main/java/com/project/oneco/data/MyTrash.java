@@ -4,10 +4,10 @@ package com.project.oneco.data;
 public class MyTrash {
     private String date;
     private String type;
-    private int amount;
+    private float amount;
     private String memo;
 
-    public MyTrash(String date, String type, int amount, String memo) {
+    public MyTrash(String date, String type, float amount, String memo) {
         this.date = date;
         this.type = type;
         this.amount = amount;
@@ -30,11 +30,11 @@ public class MyTrash {
         this.type = type;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

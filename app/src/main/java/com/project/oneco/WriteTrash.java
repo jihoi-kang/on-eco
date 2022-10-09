@@ -1,12 +1,14 @@
 package com.project.oneco;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -81,8 +83,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     private String trashType;
     private OnEcoApplication application;
 
-    private int us_trash_weight = 0;
-    private int my_trash_weight = 0;
+    private float us_trash_weight = 0;
+    private float my_trash_weight = 0;
     private int family_num = 0;
     private float mean_family_weight = 0f;
 
@@ -182,8 +184,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 Log.d("jay", "charSequence: " + charSequence);
                 if (charSequence.toString().equals("")) return;
-
-                us_trash_weight = Integer.parseInt(charSequence.toString());
+                us_trash_weight = Float.parseFloat(charSequence.toString());
             }
 
             @Override
@@ -223,9 +224,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 Log.d("jay", "charSequence: " + charSequence);
-                // todo: 값을 완전히 지우면 오류 발생?
                 if (charSequence.toString().equals("")) return;
-                my_trash_weight = Integer.parseInt(charSequence.toString());
+                my_trash_weight = Float.parseFloat(charSequence.toString());
             }
 
             @Override
@@ -505,6 +505,11 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 application.count_trash_total = application.count_paper + application.count_plastic +
                         application.count_plastic_bag + application.count_can + application.count_glass + application.count_normal_trash;
                 TXT_myTrash_num.setText(application.count_trash_total + " 개");
+
+                // 키보드 내리기
+                InputMethodManager mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                mInputMethodManager.hideSoftInputFromWindow(ET_my_weight.getWindowToken(), 0);
+                mInputMethodManager.hideSoftInputFromWindow(ET_trash_memo.getWindowToken(), 0);
             }
         });
 
@@ -568,6 +573,10 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
                     TXT_usTrash_weight.setText("이번 달 우리 집 쓰레기 배출량 (" + total + "kg)");
                     setPreSavedTrash(total);
+
+                    // 키보드 내리기
+                    InputMethodManager mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mInputMethodManager.hideSoftInputFromWindow(ET_us_weight.getWindowToken(), 0);
                 }
             }
         });
@@ -628,6 +637,10 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     TXT_usTrash_weight.setText(total + "g"); // // todo: 개수로 변경 TXT_today_trash_input는 개수로 변경
                     TXT_usTrash_weight.setText("이번 달 우리 집 쓰레기 배출량 (" + total + "kg)");
                     setPreSavedTrash(total);
+
+                    // 키보드 내리기
+                    InputMethodManager mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mInputMethodManager.hideSoftInputFromWindow(ET_us_weight.getWindowToken(), 0);
                 }
             }
         });

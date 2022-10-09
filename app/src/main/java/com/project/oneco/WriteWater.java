@@ -1,6 +1,7 @@
 package com.project.oneco;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -161,7 +163,7 @@ public class WriteWater extends AppCompatActivity {
                 Log.d("jay", "charSequence: " + charSequence);
                 if (charSequence.equals("")) return;
                 else {
-                    // todo: 값을 완전히 지우면 오류 발생
+                    if (charSequence.toString().equals("")) return;
                     inputWater = Integer.parseInt(charSequence.toString());
                 }
             }
@@ -368,6 +370,11 @@ public class WriteWater extends AppCompatActivity {
 
                     // 전일 대비 절약한 물의 양.
                     setPreSavedWater(waterTotal);
+
+                    // 키보드 내리기
+                    InputMethodManager mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mInputMethodManager.hideSoftInputFromWindow(ET_UserInputWater.getWindowToken(), 0);
+
                 }
             }
         });
@@ -442,6 +449,10 @@ public class WriteWater extends AppCompatActivity {
 
                     // 전일 대비 절약한 물의 양.
                     setPreSavedWater(waterTotal);
+
+                    // 키보드 내리기
+                    InputMethodManager mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mInputMethodManager.hideSoftInputFromWindow(ET_UserInputWater.getWindowToken(), 0);
                 }
             }
         });

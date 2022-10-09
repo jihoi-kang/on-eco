@@ -100,19 +100,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/Btn_afs_back"
+            android:id="@+id/goto_statistic"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_weight="1"
             android:background="@drawable/btn_after_stati"
-            android:textColor="@color/white"
-            android:text="뒤로가기" />
+            android:text="통계보기"
+            android:textColor="@color/white" />
 
         <Space
-            android:layout_width="30dp"
+            android:layout_width="15dp"
             android:layout_height="75dp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -132,11 +133,12 @@
         android:layout_height="30dp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/goto_statistic"
+        android:id="@+id/Btn_afs_back"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1"
         android:background="@drawable/btn_after_stati"
-        android:textColor="@color/white"
-        android:text="통계보기" />
+        android:text="뒤로가기"
+        android:textColor="@color/white" />
 
 </LinearLayout>

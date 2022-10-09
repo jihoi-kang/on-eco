@@ -104,6 +104,7 @@ public class WaterAfterStati extends AppCompatActivity {
         setDefault();
 
 
+        // todo: 백스페이스를 막아야하나?
         Button Btn_wfs_back = findViewById(R.id.Btn_afs_back);
         Btn_wfs_back.setOnClickListener(new View.OnClickListener() {
             @Override

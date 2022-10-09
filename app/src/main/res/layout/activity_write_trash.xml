@@ -257,7 +257,7 @@
                             android:layout_height="60dp"
                             android:ems="10"
                             android:hint="무게 g"
-                            android:inputType="number"
+                            android:inputType="numberDecimal"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                         <EditText
@@ -459,8 +459,9 @@
                         android:ems="10"
                         android:gravity="center"
                         android:hint="직접입력"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:minHeight="48dp"
+                        android:imeOptions="actionDone"
                         tools:ignore="SpeakableTextPresentCheck" />
 
                     <TextView
@@ -522,6 +523,7 @@
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:inputType="number"
+                            android:imeOptions="actionDone"
                             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                         <TextView
