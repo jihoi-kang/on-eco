@@ -223,8 +223,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 Log.d("jay", "charSequence: " + charSequence);
-                if (charSequence.equals("")) return;
                 // todo: 값을 완전히 지우면 오류 발생?
+                if (charSequence.toString().equals("")) return;
                 my_trash_weight = Integer.parseInt(charSequence.toString());
             }
 
