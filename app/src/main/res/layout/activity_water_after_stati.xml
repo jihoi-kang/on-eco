@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".WaterAfterStati"
-    android:layout_margin="30dp">
+    android:background="@drawable/bg_water_stati"
+    android:layout_margin="0dp">
 
     <Space
         android:layout_width="match_parent"
@@ -38,6 +39,8 @@
             android:background="@drawable/txt_water_stati"
             android:text="사용한 물의 양\n"
             android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Space
@@ -52,6 +55,8 @@
             android:background="@drawable/txt_water_stati"
             android:textAlignment="center"
             android:text="총 소요 시간\n"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Space
@@ -66,6 +71,8 @@
             android:background="@drawable/txt_water_stati"
             android:textAlignment="center"
             android:text="물 사용 시간\n"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Space
@@ -78,8 +85,10 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@drawable/txt_water_stati"
-            android:textAlignment="center"
             android:text="물 미사용 시간\n"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Space
@@ -120,8 +129,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_height="30dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/goto_statistic"
