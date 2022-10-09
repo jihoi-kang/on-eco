@@ -231,12 +231,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="10dp" />
 
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#F5F5F5" />
+
                     <LinearLayout
                         android:id="@+id/water_PT"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/textView6"
@@ -381,10 +387,22 @@
                                     android:backgroundTint="#00FFFFFF"
                                     app:srcCompat="@drawable/stop"
                                     tools:ignore="DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
+
                             </LinearLayout>
 
 
                         </FrameLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp" />
+
+                        <View
+                            android:id="@+id/view4"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_weight="1"
+                            android:background="#F5F5F5" />
 
                     </LinearLayout>
 
