@@ -10,44 +10,82 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="244dp" />
+        android:layout_height="40dp" />
+
+    <ImageView
+    android:id="@+id/imageView5"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:contentDescription="@string/timer_img"
+    app:srcCompat="@drawable/water_drop" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <TextView
             android:id="@+id/usedWater"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="사용한 물의 양  : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <TextView
-            android:id="@+id/spended_AllT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="총 소요 시간      : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <TextView
-            android:id="@+id/spended_RealT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="물 사용 시간      : "
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <TextView
-            android:id="@+id/no_SpendedT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="물 미사용 시간  : "
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/txt_water_stati"
+            android:text="사용한 물의 양\n"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="141dp" />
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/spended_AllT"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/txt_water_stati"
+            android:textAlignment="center"
+            android:text="총 소요 시간\n"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/spended_RealT"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/txt_water_stati"
+            android:textAlignment="center"
+            android:text="물 사용 시간\n"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/no_SpendedT"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/txt_water_stati"
+            android:textAlignment="center"
+            android:text="물 미사용 시간\n"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -55,24 +93,27 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/Btn_afs_back"
-            style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_weight="1"
+            android:background="@drawable/btn_stati_water"
+            android:textColor="@color/white"
             android:text="뒤로가기" />
 
         <Space
             android:layout_width="30dp"
             android:layout_height="75dp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/goto_write_water"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_weight="1"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_stati_water"
             android:text="확인" />
 
     </LinearLayout>
@@ -82,10 +123,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/goto_statistic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_stati_water"
+        android:textColor="@color/white"
         android:text="통계보기" />
 
 </LinearLayout>

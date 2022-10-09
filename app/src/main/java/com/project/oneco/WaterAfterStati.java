@@ -144,7 +144,7 @@ public class WaterAfterStati extends AppCompatActivity {
     public void setResult() {
         Runnable updater = new Runnable() {
             public void run() {
-                usedWater.setText("사용한 물의 양  : " + application.usedW + " ml");
+                usedWater.setText("사용한 물의 양\n" + application.usedW + " ml");
             }
         };
         handler.post(updater);
@@ -159,9 +159,9 @@ public class WaterAfterStati extends AppCompatActivity {
         String displayUsedTime = updateTimer(application.usedWT);
         String displayNoUsedTime = updateTimer(application.noUsedWT);
 
-        spended_AllT.setText("총 소요 시간      : " + displayTotalTime);
-        spended_RealT.setText("물 사용 시간      : " + displayUsedTime);
-        no_SpendedT.setText("물 미사용 시간  : " + displayNoUsedTime);
+        spended_AllT.setText("총 소요 시간\n" + displayTotalTime);
+        spended_RealT.setText("물 사용 시간\n" + displayUsedTime);
+        no_SpendedT.setText("물 미사용 시간\n" + displayNoUsedTime);
     }
 
     // 시간 업데이트
