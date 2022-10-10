@@ -9,17 +9,15 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
@@ -36,12 +34,13 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class WriteTrash extends AppCompatActivity implements OnTrashItemClickListener {
 
     androidx.appcompat.widget.AppCompatButton BTN_trash_me;
     androidx.appcompat.widget.AppCompatButton BTN_trash_us;
@@ -79,6 +78,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     TextView TXT_mean_family_weight;
     TextView TXT_today_date;
 
+    RecyclerView rvList;
     RecyclerView rvMyTrashList;
 
     private final static String TAG = "WriteTrash";
@@ -96,8 +96,9 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     private PreferenceManager preferenceManager;
     private Gson gson;
 
-    ListView lvList;
-    ArrayAdapter<String> adapter;
+    //    ListView lvList;
+//    ArrayAdapter<String> adapter;
+    TrashAdapter trashAdapter;
     WriteTrashAdapter writeTrashAdapter;
     ArrayList<MyTrash> myTrashList;
 
@@ -105,7 +106,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
     String[] normalTrashItems = {"물티슈", "각티슈", "손 닦는 휴지", "두루말이 휴지"};
     String[] glassItems = {"100ml", "180ml"};
     String[] canItems = {"250ml", "355ml", "500ml", "750ml", "참치캔(100g)"};
-    String[] paperItems = {"A4", "B4", "종이 정수기컵", "종이 자판기컵", "종이컵 Tall 사이즈(355ml)", "종이컵 Grande 사이즈(473ml)", "종이컵 Venti 사이즈(591ml)","택배박스 1호(50cm)", "택배박스 2호(60cm)", "택배박스 3호(80cm)", "택배박스 4호(100cm)", "택배박스 5호(120cm)"};
+    String[] paperItems = {"A4", "B4", "종이 정수기컵", "종이 자판기컵", "종이컵 Tall 사이즈(355ml)", "종이컵 Grande 사이즈(473ml)", "종이컵 Venti 사이즈(591ml)", "택배박스 1호(50cm)", "택배박스 2호(60cm)", "택배박스 3호(80cm)", "택배박스 4호(100cm)", "택배박스 5호(120cm)"};
     String[] plasticItems = {"플라스틱컵 Tall 사이즈(355ml)", "플라스틱컵 Grande 사이즈(473ml)", "플라스틱컵 Venti 사이즈(591ml)", "250ml", "500ml", "1L", "2L"};
     String[] plasticBagItems = {"3L", "5L", "10L", "20L"};
 
@@ -119,8 +120,9 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         setContentView(R.layout.activity_write_trash);
 
         // listview bind & item click listener 달기(setOnItemClickListener)
-        lvList = findViewById(R.id.lv_list);
-        lvList.setOnItemClickListener(this);
+//        lvList = findViewById(R.id.lv_list);
+//        lvList.setOnItemClickListener(this);
+        rvList = findViewById(R.id.rv_list);
 
         LO_myTrash = findViewById(R.id.LO_myTrash);
         LO_ourTrash = findViewById(R.id.LO_ourTrash);
@@ -195,6 +197,12 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         }
         writeTrashAdapter.updateItems(myTrashList);
         setTrashAmount();
+
+        trashAdapter = new TrashAdapter(this);
+        rvList.setAdapter(trashAdapter);
+        rvList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        compareTrashDischarge(72, 190);
 
         // 사용자 입력 텍스트를 인트 변수 currentItemWeight에 저장
         ET_us_weight.addTextChangedListener(new TextWatcher() {
@@ -327,8 +335,8 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
                 // todo : 아마도 아래 부분은 우리집 쓰레기 상태에서 누를 때 동작할 필요 없음
                 // item들을 riteTrash 셋해준다.
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, normalTrashItems);
-                lvList.setAdapter(adapter);
+
+                trashAdapter.updateItems(Arrays.asList(normalTrashItems));
                 touchCount1++;
                 setVisible_WriteDetail();
             }
@@ -349,8 +357,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                         Btn_plastic.setSelected(false);
                         Btn_plastic_bag.setSelected(false);
                 }
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, glassItems);
-                lvList.setAdapter(adapter);
+                trashAdapter.updateItems(Arrays.asList(glassItems));
                 touchCount2++;
                 setVisible_WriteDetail();
             }
@@ -371,8 +378,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                         Btn_plastic.setSelected(false);
                         Btn_plastic_bag.setSelected(false);
                 }
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, canItems);
-                lvList.setAdapter(adapter);
+                trashAdapter.updateItems(Arrays.asList(canItems));
                 touchCount3++;
                 setVisible_WriteDetail();
             }
@@ -393,8 +399,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                         Btn_plastic.setSelected(false);
                         Btn_plastic_bag.setSelected(false);
                 }
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, paperItems);
-                lvList.setAdapter(adapter);
+                trashAdapter.updateItems(Arrays.asList(paperItems));
                 touchCount4++;
                 setVisible_WriteDetail();
             }
@@ -414,8 +419,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                         Btn_plastic.setSelected(true);
                         Btn_plastic_bag.setSelected(false);
                 }
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticItems);
-                lvList.setAdapter(adapter);
+                trashAdapter.updateItems(Arrays.asList(plasticItems));
                 touchCount5++;
                 setVisible_WriteDetail();
             }
@@ -435,8 +439,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                         Btn_plastic.setSelected(false);
                         Btn_plastic_bag.setSelected(true);
                 }
-                adapter = new ArrayAdapter<String>(WriteTrash.this, android.R.layout.simple_list_item_1, plasticBagItems);
-                lvList.setAdapter(adapter);
+                trashAdapter.updateItems(Arrays.asList(plasticBagItems));
                 touchCount6++;
                 setVisible_WriteDetail();
             }
@@ -525,7 +528,12 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     setPreSavedTrash(total);
                 }
 
-                touchCount1++; touchCount2++; touchCount3++; touchCount4++; touchCount5++; touchCount6++;
+                touchCount1++;
+                touchCount2++;
+                touchCount3++;
+                touchCount4++;
+                touchCount5++;
+                touchCount6++;
                 setVisible_WriteDetail();
 
                 // todo: 통계는 개수로 변경
@@ -536,7 +544,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 TXT_myTrash_num.setText(application.count_trash_total + " 개");
 
                 // 키보드 내리기
-                InputMethodManager mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 mInputMethodManager.hideSoftInputFromWindow(ET_my_weight.getWindowToken(), 0);
                 mInputMethodManager.hideSoftInputFromWindow(ET_trash_memo.getWindowToken(), 0);
             }
@@ -604,7 +612,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     setPreSavedTrash(total);
 
                     // 키보드 내리기
-                    InputMethodManager mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     mInputMethodManager.hideSoftInputFromWindow(ET_us_weight.getWindowToken(), 0);
                 }
             }
@@ -668,7 +676,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     setPreSavedTrash(total);
 
                     // 키보드 내리기
-                    InputMethodManager mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     mInputMethodManager.hideSoftInputFromWindow(ET_us_weight.getWindowToken(), 0);
                 }
             }
@@ -679,8 +687,11 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         // 저장되어 있는 trash 값 화면에 반영
         SetFirstBottomUI();
 
-    }   /** end of onCreate **/
+    }
 
+    /**
+     * end of onCreate
+     **/
 
 
     private void setWhoseTrash() {
@@ -732,18 +743,18 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
     // onItemClick 리스너 구현
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long index) {
+    public void onItemClick(int position) {
         // trashType이 뭔지 알아야되
         String itemName = null;
         if (trashType.equals("normal_trash")) {
             itemName = normalTrashItems[position];
             if (itemName.equals("물티슈")) {
                 my_trash_weight = 2;
-            } else if (itemName.equals("각티슈")){
+            } else if (itemName.equals("각티슈")) {
                 my_trash_weight = 1;
-            } else if (itemName.equals("손 닦는 휴지")){
+            } else if (itemName.equals("손 닦는 휴지")) {
                 my_trash_weight = 2;
-            } else if (itemName.equals("두루말이 휴지")){
+            } else if (itemName.equals("두루말이 휴지")) {
                 my_trash_weight = 1;
             }
             ET_my_weight.setText("" + my_trash_weight);
@@ -904,7 +915,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         }
     }
 
-    public void SetFirstBottomUI(){
+    public void SetFirstBottomUI() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
         String key = simpledateformat.format(calendar.getTime()); // 0530
@@ -958,6 +969,48 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         Btn_plastic_bag.setText("비닐\n" + application.count_plastic_bag);
     }
 
+    private void compareTrashDischarge(int myTrashWeight, int averageTrashWeight) {
+        int myTrashDp;
+        int averageTrashDp;
+        if (myTrashWeight > averageTrashWeight) {
+            myTrashDp = 300;
+            averageTrashDp = (int) ((averageTrashWeight * 300) / myTrashWeight);
+        } else {
+            averageTrashDp = 300;
+            myTrashDp = (int) ((myTrashWeight * 300) / averageTrashWeight);
+        }
+
+        View myTrashView = new View(this);
+        LinearLayout.LayoutParams myTrashParams = new LinearLayout.LayoutParams(toPx(myTrashDp), toPx(48));
+        myTrashParams.topMargin = toPx(16);
+        myTrashView.setLayoutParams(myTrashParams);
+        myTrashView.setBackgroundColor(getResources().getColor(R.color.glass));
+
+        TextView myTrashTextView = new TextView(this);
+        LinearLayout.LayoutParams myTrashTextParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        myTrashTextView.setText("이번달 쓰레기 배출량");
+        myTrashTextView.setLayoutParams(myTrashTextParams);
+
+        View averageTrashView = new View(this);
+        LinearLayout.LayoutParams averageTrashParams = new LinearLayout.LayoutParams(toPx(averageTrashDp), toPx(48));
+        averageTrashParams.topMargin = toPx(16);
+        averageTrashView.setLayoutParams(averageTrashParams);
+        averageTrashView.setBackgroundColor(getResources().getColor(R.color.can));
+
+        TextView averageTrashTextView = new TextView(this);
+        LinearLayout.LayoutParams averageTrashTextParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        averageTrashTextView.setText("월 평균 쓰레기 배출량");
+        averageTrashTextView.setLayoutParams(averageTrashTextParams);
+
+        LO_ourTrash.addView(myTrashView);
+        LO_ourTrash.addView(myTrashTextView);
+        LO_ourTrash.addView(averageTrashView);
+        LO_ourTrash.addView(averageTrashTextView);
+    }
+
+    private int toPx(int dp) {
+        return (int) (dp * (getResources().getDisplayMetrics().densityDpi / 160f));
+    }
 
     /**
      * CAMERA 권한이 있는지 확인합니다.
@@ -999,4 +1052,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                 .setPermissions(Manifest.permission.RECORD_AUDIO)
                 .check();
     }
-}   /** end of Class **/
+}   /**
+ * end of Class
+ **/

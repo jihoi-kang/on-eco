@@ -246,10 +246,11 @@
                         android:orientation="vertical"
                         android:padding="10dp">
 
-                        <ListView
-                            android:id="@+id/lv_list"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_list"
                             android:layout_width="match_parent"
-                            android:layout_height="174dp" />
+                            android:layout_height="174dp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                         <EditText
                             android:id="@+id/ET_my_weight"
