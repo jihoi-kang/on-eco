@@ -103,17 +103,6 @@ public class WaterAfterStati extends AppCompatActivity {
         // 초기화
         setDefault();
 
-
-        // todo: 백스페이스를 막아야하나?
-        Button Btn_wfs_back = findViewById(R.id.Btn_afs_back);
-        Btn_wfs_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-
         // todo: writewater 액티비티에 하단탭이 안나타남
         // 완료 후 다시 물 기록 화면으로
         Button goto_write_water = findViewById(R.id.goto_write_water);

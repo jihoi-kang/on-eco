@@ -242,12 +242,14 @@ public class Statistic extends AppCompatActivity {
             }
         });
 
-        // 물 사용량 측정
-        Button Btn_measure_water_use = findViewById(R.id.Btn_measure_water_use);
-        Btn_measure_water_use.setOnClickListener(new View.OnClickListener() {
+        // 샤워 타이머 게임
+        Button Btn_measure_shower = findViewById(R.id.Btn_measure_shower);
+        Btn_measure_shower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WaterStopWatch.class);
+                application.waterType = "shower";
+                application.bf_activity = "WriteWater";
+                Intent intent = new Intent(getApplicationContext(), WaterStopGame.class);
                 startActivity(intent);
             }
         });

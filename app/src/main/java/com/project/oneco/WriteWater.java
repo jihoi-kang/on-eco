@@ -1,6 +1,5 @@
 package com.project.oneco;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -193,19 +192,9 @@ public class WriteWater extends AppCompatActivity {
             }
         });
 
-        // 물 사용량 측정
-        Button Btn_measure_water_use = findViewById(R.id.Btn_measure_water_use);
-        Btn_measure_water_use.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WaterStopWatch.class);
-                startActivity(intent);
-            }
-        });
-
-        // 샤워 타이머 게임 화면으로 넘어가기
-        Button Btn_bef_WTimer_Game = findViewById(R.id.Btn_bef_WTimer_Game);
-        Btn_bef_WTimer_Game.setOnClickListener(new View.OnClickListener() {
+        // 샤워 타이머 게임
+        Button Btn_measure_shower = findViewById(R.id.Btn_measure_shower);
+        Btn_measure_shower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 application.waterType = "shower";
@@ -214,7 +203,6 @@ public class WriteWater extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         // Button을 눌렀을 때 waterType에 물 사용 유형 저장
         Button.OnClickListener onClickListener = new Button.OnClickListener() {

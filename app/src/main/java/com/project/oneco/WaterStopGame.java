@@ -66,7 +66,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
         // Activity간의 데이터 공유를 위한 application 가져오기1-2
         application = (OnEcoApplication) getApplication();
-//
+
 //        // WaterPower 팝업 띄우기
 //        startActivity(new Intent(this, WaterPower.class));
 
@@ -102,7 +102,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
                     dlg_sure_out.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int which) {
-                            //startStop();
+                            startStop();  // 바로 시작하는 게 아니라 사용자가 시작하려면 없애기
                             Toast.makeText(WaterStopGame.this, "계속합니다.", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -234,8 +234,6 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         } else {
             timeSec = tempTime;
         }
-
-        // Log.d("tag", "time" + time);
 
         // 데시벨을 얻어오기 위해 sound meter 시작
         if (soundMeter == null) {

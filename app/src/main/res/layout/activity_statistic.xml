@@ -64,13 +64,13 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/Btn_measure_water_use"
+            android:id="@+id/Btn_measure_shower"
             style="@style/Widget.Material3.Button"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#BDD7EE"
-            android:text="물 사용량 측정"
+            android:text="샤워 타이머 게임"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </LinearLayout>
 
