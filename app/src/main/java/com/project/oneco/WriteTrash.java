@@ -86,6 +86,7 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
     private String trashType;
     private OnEcoApplication application;
 
+    float us_total = 0;
     private float us_trash_weight = 0;
     private float my_trash_weight = 0;
     private int family_num = 0;
@@ -202,7 +203,6 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
         rvList.setAdapter(trashAdapter);
         rvList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        compareTrashDischarge(72, 190);
 
         // 사용자 입력 텍스트를 인트 변수 currentItemWeight에 저장
         ET_us_weight.addTextChangedListener(new TextWatcher() {
@@ -235,7 +235,9 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
                 if (charSequence.toString().equals("")) return;
                 family_num = Integer.parseInt(charSequence.toString());
                 mean_family_weight = family_num * 0.893f * 30;
-                TXT_mean_family_weight.setText("인 가구 기준 월 평균 쓰레기 배출량 (" + mean_family_weight + "kg)");
+                TXT_mean_family_weight.setText(mean_family_weight + " kg");
+
+                compareTrashDischarge(us_total, mean_family_weight);
             }
 
             @Override
@@ -334,11 +336,11 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
                 trashType = "normal_trash";
 
                 // todo : 아마도 아래 부분은 우리집 쓰레기 상태에서 누를 때 동작할 필요 없음
-                // item들을 riteTrash 셋해준다.
 
                 trashAdapter.updateItems(Arrays.asList(normalTrashItems));
                 touchCount1++;
                 setVisible_WriteDetail();
+
             }
         });
 
@@ -604,12 +606,14 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
                     String updatedTrashUsage = gson.toJson(trashUsage);
                     preferenceManager.putString(key + "-trash-usage", updatedTrashUsage);
 
+
                     // 쓰레기 전체 g 구하기
-                    float total = trashUsage.getNormalTrash() + trashUsage.getGlass() + trashUsage.getCan()
+                    us_total = trashUsage.getNormalTrash() + trashUsage.getGlass() + trashUsage.getCan()
                             + trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag();
 
-                    TXT_usTrash_weight.setText("이번 달 우리 집 쓰레기 배출량 (" + total + "kg)");
-                    setPreSavedTrash(total);
+                    TXT_usTrash_weight.setText(us_total + " kg");
+                    setPreSavedTrash(us_total);
+
 
                     // 키보드 내리기
                     InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -682,7 +686,7 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
             }
         });
 
-        TXT_mean_family_weight.setText("인 가구 기준 월 평균 쓰레기 배출량 (" + mean_family_weight + "kg)");
+        TXT_mean_family_weight.setText(mean_family_weight + " kg");
 
         // 저장되어 있는 trash 값 화면에 반영
         SetFirstBottomUI();
@@ -701,11 +705,21 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
             BTN_my_trash.setSelected(true);
             BTN_our_trash.setSelected(false);
 
+            setTrashAmount();
+
         } else if (application.whoseTrash.equals("our")) {
             LO_myTrash.setVisibility(View.GONE);
             LO_ourTrash.setVisibility(View.VISIBLE);
             BTN_my_trash.setSelected(false);
             BTN_our_trash.setSelected(true);
+
+            // 버튼 이름만 표시하도록
+            Btn_normal_trash.setText("일반 / 기타");
+            Btn_glass.setText("유리");
+            Btn_can.setText("캔");
+            Btn_paper.setText("종이");
+            Btn_plastic.setText("플라스틱");
+            Btn_plastic_bag.setText("비닐");
         }
     }
 
@@ -969,7 +983,7 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
         Btn_plastic_bag.setText("비닐\n" + application.count_plastic_bag);
     }
 
-    private void compareTrashDischarge(int myTrashWeight, int averageTrashWeight) {
+    private void compareTrashDischarge(float myTrashWeight, float averageTrashWeight) {
         int myTrashDp;
         int averageTrashDp;
         if (myTrashWeight > averageTrashWeight) {
@@ -984,7 +998,7 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
         LinearLayout.LayoutParams myTrashParams = new LinearLayout.LayoutParams(toPx(myTrashDp), toPx(48));
         myTrashParams.topMargin = toPx(16);
         myTrashView.setLayoutParams(myTrashParams);
-        myTrashView.setBackgroundColor(getResources().getColor(R.color.glass));
+        myTrashView.setBackgroundColor(getResources().getColor(R.color.us_trash));
 
         TextView myTrashTextView = new TextView(this);
         LinearLayout.LayoutParams myTrashTextParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -995,7 +1009,7 @@ public class WriteTrash extends AppCompatActivity implements OnTrashItemClickLis
         LinearLayout.LayoutParams averageTrashParams = new LinearLayout.LayoutParams(toPx(averageTrashDp), toPx(48));
         averageTrashParams.topMargin = toPx(16);
         averageTrashView.setLayoutParams(averageTrashParams);
-        averageTrashView.setBackgroundColor(getResources().getColor(R.color.can));
+        averageTrashView.setBackgroundColor(getResources().getColor(R.color.avg_trash));
 
         TextView averageTrashTextView = new TextView(this);
         LinearLayout.LayoutParams averageTrashTextParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);

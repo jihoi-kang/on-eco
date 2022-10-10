@@ -44,8 +44,6 @@ public class WaterStopWatch extends AppCompatActivity {
     private ImageButton Btn_pause_ST;
     private ImageButton Btn_stop_ST;
 
-    private long timeSec = 0;          // 선택한 시간을 초단위로 변경
-    private long tempTime = 0;      // 남은 시간
     private Timer countUpTimer;
     private TimerTask second;
 
@@ -207,8 +205,6 @@ public class WaterStopWatch extends AppCompatActivity {
             // 초기화 작업
             application.timerSec = 0;
             application.RtimerSec = 0;
-        } else {
-            timeSec = tempTime;
         }
 
         // 데시벨을 얻어오기 위해 sound meter 시작

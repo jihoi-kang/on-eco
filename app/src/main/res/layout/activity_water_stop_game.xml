@@ -94,16 +94,14 @@
                         android:contentDescription="타이머 선택"
                         android:minHeight="48dp" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp" />
-
-                    <Button
+                    <ImageButton
                         android:id="@+id/countdown_button"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:text="@string/Btn_gameStart"
-                        tools:ignore="DuplicateSpeakableTextCheck" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="#00FFFFFF"
+                        app:srcCompat="@drawable/play"
+                        tools:ignore="SpeakableTextPresentCheck,DuplicateClickableBoundsCheck,ImageContrastCheck" />
 
                 </LinearLayout>
 
@@ -117,17 +115,29 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp" />
 
-                    <Button
-                        android:id="@+id/stopButton"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:text="일시정지" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/Btn_finish_game"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:text="완료" />
+                        <ImageButton
+                            android:id="@+id/stopButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#00FFFFFF"
+                            app:srcCompat="@drawable/pause"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/Btn_finish_game"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#00FFFFFF"
+                            app:srcCompat="@drawable/stop"
+                            tools:ignore="DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
             </FrameLayout>

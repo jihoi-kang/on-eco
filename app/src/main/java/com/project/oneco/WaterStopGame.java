@@ -40,9 +40,9 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
     private TextView selected_minText; // 타이머 현황
 
-    private Button startButton;
-    private Button stopButton;
-    private Button Btn_finish_game;
+    private ImageButton countdown_button;
+    private ImageButton stopButton;
+    private ImageButton Btn_finish_game;
 
     private CountDownTimer countDownTimer;
 
@@ -73,7 +73,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         spinner = (Spinner) findViewById(R.id.spinner);
 
         selected_minText = findViewById(R.id.selected_minText);
-        startButton = findViewById(R.id.countdown_button);
+        countdown_button = findViewById(R.id.countdown_button);
         stopButton = findViewById(R.id.stopButton);
         Btn_finish_game = findViewById(R.id.Btn_finish_game);
 
@@ -183,7 +183,7 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
 
 
         // 타이머 시작
-        startButton.setOnClickListener(new View.OnClickListener() {
+        countdown_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(selected_minText.getText().toString().equals("00:00")){
@@ -215,8 +215,10 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
     private void startStop() {
         if (timerRunning) {   // 시작이면 정지
             stopTimer();
+            stopButton.setImageResource(R.drawable.replay);
         } else {
             startTimer();   // 정지면 시작
+            stopButton.setImageResource(R.drawable.pause);
         }
     }
 
@@ -277,7 +279,6 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
             }
         }.start();
 
-        stopButton.setText("일시정지");
         timerRunning = true;
         firstState = false;
 
@@ -288,7 +289,6 @@ public class WaterStopGame extends AppCompatActivity implements AdapterView.OnIt
         soundMeter.stop();
         countDownTimer.cancel();
         timerRunning = false;
-        stopButton.setText("계속");
     }
 
     // 시간 업데이트

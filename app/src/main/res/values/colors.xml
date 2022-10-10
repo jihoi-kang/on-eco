@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="us_trash">#CAE997</color>
+    <color name="avg_trash">#FCB0B0</color>
+
     <color name="etc">#B7B4B4</color>
 
     <color name="paper">#81B75D</color>
