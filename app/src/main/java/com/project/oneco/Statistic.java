@@ -29,11 +29,17 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.google.gson.Gson;
+import com.project.oneco.data.MyTrash;
 import com.project.oneco.data.PreferenceManager;
+import com.project.oneco.data.TrashAmount;
 import com.project.oneco.data.TrashUsage;
 import com.project.oneco.data.WaterUsage;
 import com.project.oneco.tensorflow.ClassifierActivity;
 import com.project.oneco.test.MyXAxisValueFormatter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,6 +57,7 @@ public class Statistic extends AppCompatActivity {
     private Gson gson;
 
     private ArrayList<TrashUsage> trashUsageList;
+    private ArrayList<TrashAmount> trashAmountList;
     private ArrayList<WaterUsage> waterUsageList;
     private ArrayList<String> dayTotalList;
 
@@ -111,6 +118,7 @@ public class Statistic extends AppCompatActivity {
         selectedDate = new Date();
         waterUsageList = new ArrayList<>();
         trashUsageList = new ArrayList<>();
+        trashAmountList = new ArrayList<>();
         dayTotalList = new ArrayList<>();
 
         trashTypeColor_View = findViewById(R.id.trashTypeColor_View);
@@ -196,8 +204,6 @@ public class Statistic extends AppCompatActivity {
 
         // 오늘 날짜로 세팅하기
         setupUiUsage();
-
-        onBackPressed();
 
         Btn_week.setSelected(true);
         Btn_month.setSelected(false);
@@ -343,8 +349,8 @@ public class Statistic extends AppCompatActivity {
 
     private void setupTrashUsage() {
         // 리스트 초기화
-        trashUsageList.clear();
-        dayTotalList.clear();
+        trashAmountList.clear();
+//        dayTotalList.clear();
 
         trashTypeColor_View.setVisibility(VISIBLE);
         waterTypeColor_View.setVisibility(View.GONE);
@@ -363,13 +369,46 @@ public class Statistic extends AppCompatActivity {
                 SimpleDateFormat dSdf = new SimpleDateFormat("yyMMdd", Locale.KOREA);
                 String key_yesterday = dSdf.format(dDate.getTime());
 
-                String yesterday_trashUsageStr = preferenceManager.getString(key_yesterday + "-trash-usage", "");
-
-                if (yesterday_trashUsageStr.equals("")) {
-                    trashUsageList.add(new TrashUsage());
-                } else {
-                    TrashUsage yesterday_trashUsage = gson.fromJson(yesterday_trashUsageStr, TrashUsage.class);
-                    trashUsageList.add(yesterday_trashUsage);
+                String yesterday_trashUsageStr = preferenceManager.getString(key_yesterday + "-trash-amount", "");
+                try {
+                    JSONArray jsonArray = new JSONArray(yesterday_trashUsageStr);
+                    int countNormalTrash = 0;
+                    int countGlass = 0;
+                    int countCan = 0;
+                    int countPaper = 0;
+                    int countPlastic = 0;
+                    int countPlasticBag = 0;
+                    for (int index = 0; index < jsonArray.length(); index++) {
+                        JSONObject object = jsonArray.getJSONObject(index);
+                        MyTrash trash = gson.fromJson(object.toString(), MyTrash.class);
+                        if (trash.getType().equals("normal_trash")) {
+                            countNormalTrash++;
+                        } else if (trash.getType().equals("glass")) {
+                            countGlass++;
+                        } else if (trash.getType().equals("can")) {
+                            countCan++;
+                        } else if (trash.getType().equals("paper")) {
+                            countPaper++;
+                        } else if (trash.getType().equals("plastic")) {
+                            countPlastic++;
+                        } else if (trash.getType().equals("plastic_bag")) {
+                            countPlasticBag++;
+                        }
+                    }
+                    TrashAmount trashAmount = new TrashAmount();
+                    trashAmount.setGlass(countGlass);
+                    trashAmount.setCan(countCan);
+                    trashAmount.setPlastic_bag(countPlasticBag);
+                    trashAmount.setPaper(countPaper);
+                    trashAmount.setPlastic(countPlastic);
+                    trashAmount.setNormalTrash(countNormalTrash);
+                    int trashTotal = countGlass + countCan + countPlasticBag + countPaper + countPlastic + countNormalTrash;
+                    trashAmount.setTrashTotal(trashTotal);
+                    trashAmountList.add(trashAmount);
+                } catch (JSONException e) {
+                    TrashAmount trashAmount = new TrashAmount();
+                    trashAmountList.add(trashAmount);
+                    e.printStackTrace();
                 }
             }
 
@@ -377,14 +416,46 @@ public class Statistic extends AppCompatActivity {
             else {
                 String key_week = Integer.toString(Integer.parseInt(picked_date_key) - i); // 220621, 220620 ...
 
-                String week_trashUsageStr = preferenceManager.getString(key_week + "-trash-usage", "");
-                Log.d("jay", "week_trashUsageStr" + week_trashUsageStr);
-
-                if (week_trashUsageStr.equals("")) {
-                    trashUsageList.add(new TrashUsage());
-                } else {
-                    TrashUsage week_trashUsage = gson.fromJson(week_trashUsageStr, TrashUsage.class);
-                    trashUsageList.add(week_trashUsage);
+                String yesterday_trashUsageStr = preferenceManager.getString(key_week + "-trash-amount", "");
+                try {
+                    JSONArray jsonArray = new JSONArray(yesterday_trashUsageStr);
+                    int countNormalTrash = 0;
+                    int countGlass = 0;
+                    int countCan = 0;
+                    int countPaper = 0;
+                    int countPlastic = 0;
+                    int countPlasticBag = 0;
+                    for (int index = 0; index < jsonArray.length(); index++) {
+                        JSONObject object = jsonArray.getJSONObject(index);
+                        MyTrash trash = gson.fromJson(object.toString(), MyTrash.class);
+                        if (trash.getType().equals("normal_trash")) {
+                            countNormalTrash++;
+                        } else if (trash.getType().equals("glass")) {
+                            countGlass++;
+                        } else if (trash.getType().equals("can")) {
+                            countCan++;
+                        } else if (trash.getType().equals("paper")) {
+                            countPaper++;
+                        } else if (trash.getType().equals("plastic")) {
+                            countPlastic++;
+                        } else if (trash.getType().equals("plastic_bag")) {
+                            countPlasticBag++;
+                        }
+                    }
+                    TrashAmount trashAmount = new TrashAmount();
+                    trashAmount.setGlass(countGlass);
+                    trashAmount.setCan(countCan);
+                    trashAmount.setPlastic_bag(countPlasticBag);
+                    trashAmount.setPaper(countPaper);
+                    trashAmount.setPlastic(countPlastic);
+                    trashAmount.setNormalTrash(countNormalTrash);
+                    int trashTotal = countGlass + countCan + countPlasticBag + countPaper + countPlastic + countNormalTrash;
+                    trashAmount.setTrashTotal(trashTotal);
+                    trashAmountList.add(trashAmount);
+                } catch (JSONException e) {
+                    TrashAmount trashAmount = new TrashAmount();
+                    trashAmountList.add(trashAmount);
+                    e.printStackTrace();
                 }
             }
         }
@@ -392,15 +463,15 @@ public class Statistic extends AppCompatActivity {
         // 값 만들기
         ArrayList<BarEntry> values = new ArrayList<>();
 
-        Collections.reverse(trashUsageList);
-        for (int i = 0; i < trashUsageList.size(); i++) {
-            TrashUsage trashUsage = trashUsageList.get(i);
-            float val1 = trashUsage.getNormalTrash();
-            float val2 = trashUsage.getGlass();
-            float val3 = trashUsage.getCan();
-            float val4 = trashUsage.getPaper();
-            float val5 = trashUsage.getPlastic();
-            float val6 = trashUsage.getPlastic_bag();
+        Collections.reverse(trashAmountList);
+        for (int i = 0; i < trashAmountList.size(); i++) {
+            TrashAmount trashAmount = trashAmountList.get(i);
+            float val1 = trashAmount.getNormalTrash();
+            float val2 = trashAmount.getGlass();
+            float val3 = trashAmount.getCan();
+            float val4 = trashAmount.getPaper();
+            float val5 = trashAmount.getPlastic();
+            float val6 = trashAmount.getPlastic_bag();
 
             values.add(new BarEntry(
                     i,
@@ -408,20 +479,20 @@ public class Statistic extends AppCompatActivity {
                     getResources().getDrawable(R.drawable.ic_launcher_foreground)));
 
             dayTotalList.add(Float.toString(
-                    trashUsage.getPaper() + trashUsage.getPlastic() + trashUsage.getPlastic_bag()
-                            + trashUsage.getCan() + trashUsage.getGlass() + trashUsage.getNormalTrash()));
+                    trashAmount.getPaper() + trashAmount.getPlastic() + trashAmount.getPlastic_bag()
+                            + trashAmount.getCan() + trashAmount.getGlass() + trashAmount.getNormalTrash()));
             Log.d("hun", "dayTotal_trash : " + dayTotalList.get(i));
         }
 
         // ui
         setChart(values, "쓰레기 배출량");
-        day1.setText(dayTotalList.get(0) + " g");
-        day2.setText(dayTotalList.get(1) + " g");
-        day3.setText(dayTotalList.get(2) + " g");
-        day4.setText(dayTotalList.get(3) + " g");
-        day5.setText(dayTotalList.get(4) + " g");
-        day6.setText(dayTotalList.get(5) + " g");
-        day7.setText(dayTotalList.get(6) + " g");
+        day1.setText(dayTotalList.get(0) + " 개");
+        day2.setText(dayTotalList.get(1) + " 개");
+        day3.setText(dayTotalList.get(2) + " 개");
+        day4.setText(dayTotalList.get(3) + " 개");
+        day5.setText(dayTotalList.get(4) + " 개");
+        day6.setText(dayTotalList.get(5) + " 개");
+        day7.setText(dayTotalList.get(6) + " 개");
     }
 
     private void setupWaterUsage() {
@@ -597,9 +668,9 @@ public class Statistic extends AppCompatActivity {
             Log.d("jay", "today_key : " + today_key);
 
             if (trashTypeColor_View.getVisibility() == VISIBLE) {
-                String today_key_trashUsageStr = preferenceManager.getString(today_key + "-trash-usage", "");
+                String today_key_trashAmountStr = preferenceManager.getString(today_key + "-trash-amount", "");
 
-                if (today_key_trashUsageStr.equals("")) {
+                if (today_key_trashAmountStr.equals("")) {
                     Txt_item_all.setText("총 쓰레기 배출량");
                     Txt_item1.setText("종이");
                     Txt_item2.setText("플라스틱");
@@ -608,18 +679,55 @@ public class Statistic extends AppCompatActivity {
                     Txt_item5.setText("공병");
                     Txt_item6.setText("기타");
 
-                    Txt_item_all01.setText("0 g");
-                    Txt_item01.setText(": 0 g");
-                    Txt_item02.setText(": 0 g");
-                    Txt_item03.setText(": 0 g");
-                    Txt_item04.setText(": 0 g");
-                    Txt_item05.setText(": 0 g");
-                    Txt_item06.setText(": 0 g");
+                    Txt_item_all01.setText("0 개");
+                    Txt_item01.setText(": 0 개");
+                    Txt_item02.setText(": 0 개");
+                    Txt_item03.setText(": 0 개");
+                    Txt_item04.setText(": 0 개");
+                    Txt_item05.setText(": 0 개");
+                    Txt_item06.setText(": 0 개");
                 } else { // 데이터 꺼내오기
                     // String을 데이터 모델로 변경
-                    TrashUsage today_key_trashUsage = gson.fromJson(today_key_trashUsageStr, TrashUsage.class);
-                    float today_total_trash = today_key_trashUsage.getPaper() + today_key_trashUsage.getPlastic() + today_key_trashUsage.getPlastic_bag()
-                            + today_key_trashUsage.getCan() + today_key_trashUsage.getGlass() + today_key_trashUsage.getNormalTrash();
+                    TrashAmount trashAmount = new TrashAmount();
+                    try {
+                        JSONArray jsonArray = new JSONArray(today_key_trashAmountStr);
+                        int countNormalTrash = 0;
+                        int countGlass = 0;
+                        int countCan = 0;
+                        int countPaper = 0;
+                        int countPlastic = 0;
+                        int countPlasticBag = 0;
+                        for (int index = 0; index < jsonArray.length(); index++) {
+                            JSONObject object = jsonArray.getJSONObject(index);
+                            MyTrash trash = gson.fromJson(object.toString(), MyTrash.class);
+                            if (trash.getType().equals("normal_trash")) {
+                                countNormalTrash++;
+                            } else if (trash.getType().equals("glass")) {
+                                countGlass++;
+                            } else if (trash.getType().equals("can")) {
+                                countCan++;
+                            } else if (trash.getType().equals("paper")) {
+                                countPaper++;
+                            } else if (trash.getType().equals("plastic")) {
+                                countPlastic++;
+                            } else if (trash.getType().equals("plastic_bag")) {
+                                countPlasticBag++;
+                            }
+                        }
+                        trashAmount.setGlass(countGlass);
+                        trashAmount.setCan(countCan);
+                        trashAmount.setPlastic_bag(countPlasticBag);
+                        trashAmount.setPaper(countPaper);
+                        trashAmount.setPlastic(countPlastic);
+                        trashAmount.setNormalTrash(countNormalTrash);
+                        int trashTotal = countGlass + countCan + countPlasticBag + countPaper + countPlastic + countNormalTrash;
+                        trashAmount.setTrashTotal(trashTotal);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+//                    TrashUsage today_key_trashUsage = gson.fromJson(today_key_trashAmountStr, TrashUsage.class);
+//                    float today_total_trash = today_key_trashUsage.getPaper() + today_key_trashUsage.getPlastic() + today_key_trashUsage.getPlastic_bag()
+//                            + today_key_trashUsage.getCan() + today_key_trashUsage.getGlass() + today_key_trashUsage.getNormalTrash();
 
                     Txt_item_all.setText("총 쓰레기 배출량");
                     Txt_item1.setText("종이");
@@ -629,13 +737,13 @@ public class Statistic extends AppCompatActivity {
                     Txt_item5.setText("공병");
                     Txt_item6.setText("기타");
 
-                    Txt_item_all01.setText(": " + today_total_trash + " g");
-                    Txt_item01.setText(": " + today_key_trashUsage.getNormalTrash() + " g");
-                    Txt_item02.setText(": " + today_key_trashUsage.getGlass() + " g");
-                    Txt_item03.setText(": " + today_key_trashUsage.getCan() + " g");
-                    Txt_item04.setText(": " + today_key_trashUsage.getPaper() + " g");
-                    Txt_item05.setText(": " + today_key_trashUsage.getPlastic() + " g");
-                    Txt_item06.setText(": " + today_key_trashUsage.getPlastic_bag() + " g");
+                    Txt_item_all01.setText(": " + (int) trashAmount.getTrashTotal() + " 개");
+                    Txt_item01.setText(": " + (int) trashAmount.getPaper() + " 개");
+                    Txt_item02.setText(": " + (int) trashAmount.getPlastic() + " 개");
+                    Txt_item03.setText(": " + (int) trashAmount.getPlastic_bag() + " 개");
+                    Txt_item04.setText(": " + (int) trashAmount.getCan() + " 개");
+                    Txt_item05.setText(": " + (int) trashAmount.getGlass() + " 개");
+                    Txt_item06.setText(": " + (int) trashAmount.getNormalTrash() + " 개");
 
                 }
 

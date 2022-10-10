@@ -192,7 +192,6 @@ public class WaterAfterStati extends AppCompatActivity {
         return timeLeftText;
     }
 
-
     @Override
     public void onBackPressed() {
         application.bf_activity = "WaterAfterStati";

@@ -1,5 +1,6 @@
 package com.project.oneco;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class WriteTrashAdapter extends RecyclerView.Adapter<WriteTrashAdapter.Wr
         private final TextView tvType;
         private final TextView tvAmount;
         private final TextView tvMemo;
+        private final View vLine;
 
         public WriteTrashViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +60,7 @@ public class WriteTrashAdapter extends RecyclerView.Adapter<WriteTrashAdapter.Wr
             tvType = itemView.findViewById(R.id.tv_type);
             tvAmount = itemView.findViewById(R.id.tv_amount);
             tvMemo = itemView.findViewById(R.id.tv_memo);
+            vLine = itemView.findViewById(R.id.v_line);
         }
 
         public void bind(MyTrash item) {
@@ -66,21 +69,27 @@ public class WriteTrashAdapter extends RecyclerView.Adapter<WriteTrashAdapter.Wr
             switch (item.getType()) {
                 case "normal_trash":
                     tvType.setText("일반 / 기타");
+                    vLine.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.normal_trash));
                     break;
                 case "glass":
                     tvType.setText("유리");
+                    vLine.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.glass));
                     break;
                 case "can":
                     tvType.setText("캔");
+                    vLine.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.can));
                     break;
                 case "paper":
                     tvType.setText("종이");
+                    vLine.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.paper));
                     break;
                 case "plastic":
                     tvType.setText("플라스틱");
+                    vLine.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.plastic));
                     break;
                 case "plastic_bag":
                     tvType.setText("비닐");
+                    vLine.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.pla_bag));
                     break;
             }
             tvAmount.setText(item.getAmount() + "g");

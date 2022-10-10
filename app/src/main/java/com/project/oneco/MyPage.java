@@ -36,8 +36,6 @@ public class MyPage extends AppCompatActivity {
         Txt_tempPoint = findViewById(R.id.Txt_tempPoint);
         Img_temp_level = findViewById(R.id.Img_temp_level);
 
-        onBackPressed();
-
         // 검색화면으로 넘어가기
         ImageButton Btn_search = findViewById(R.id.btn_search);
         Btn_search.setOnClickListener(new View.OnClickListener() {

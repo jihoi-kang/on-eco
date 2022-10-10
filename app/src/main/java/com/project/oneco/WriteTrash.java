@@ -31,6 +31,10 @@ import com.project.oneco.data.PreferenceManager;
 import com.project.oneco.data.TrashUsage;
 import com.project.oneco.tensorflow.ClassifierActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -173,6 +177,25 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         rvMyTrashList.setAdapter(writeTrashAdapter);
 
         myTrashList = new ArrayList();
+
+        // trash-amount 값 가져오기
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpledateformat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
+        String key = simpledateformat.format(calendar.getTime()); // 220530
+        String trashAmountListStr = preferenceManager.getString(key + "-trash-amount", "");
+        Log.d("jay", "trashAmountListStr:" + trashAmountListStr);
+        try {
+            JSONArray jsonArray = new JSONArray(trashAmountListStr);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                MyTrash trash = gson.fromJson(object.toString(), MyTrash.class);
+                myTrashList.add(trash);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        writeTrashAdapter.updateItems(myTrashList);
+        setTrashAmount();
 
         // 사용자 입력 텍스트를 인트 변수 currentItemWeight에 저장
         ET_us_weight.addTextChangedListener(new TextWatcher() {
@@ -432,6 +455,7 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
                     Log.d("jay", "key: " + key);
 
+                    // trash-usage
                     String trashUsageStr = preferenceManager.getString(key + "-trash-usage", "");
                     TrashUsage trashUsage;
 
@@ -481,6 +505,16 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
                     String updatedTrashUsage = gson.toJson(trashUsage);
                     preferenceManager.putString(key + "-trash-usage", updatedTrashUsage);
 
+                    // trash-amount
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm", Locale.getDefault());
+                    String dateStr = dateFormat.format(calendar.getTime());
+                    MyTrash myTrash = new MyTrash(dateStr, trashType, my_trash_weight, ET_trash_memo.getText().toString());
+                    myTrashList.add(myTrash);
+                    preferenceManager.putString(key + "-trash-amount", gson.toJson(myTrashList));
+
+                    writeTrashAdapter.updateItems(myTrashList);
+                    ET_trash_memo.setText("");
+
                     // todo: 내 쓰레기와 우리집 쓰레기 g 구분
                     // 쓰레기 전체 g 구하기
                     float total = trashUsage.getNormalTrash() + trashUsage.getGlass() + trashUsage.getCan()
@@ -488,12 +522,6 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
 
                     TXT_myTrash_weight.setText(total + "g");
                     setPreSavedTrash(total);
-
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd hh:mm", Locale.getDefault());
-                    String dateStr = dateFormat.format(calendar.getTime());
-                    myTrashList.add(new MyTrash(dateStr, trashType, my_trash_weight, ET_trash_memo.getText().toString()));
-                    writeTrashAdapter.updateItems(myTrashList);
-                    ET_trash_memo.setText("");
                 }
 
                 touchCount1++; touchCount2++; touchCount3++; touchCount4++; touchCount5++; touchCount6++;
@@ -896,7 +924,38 @@ public class WriteTrash extends AppCompatActivity implements AdapterView.OnItemC
         setPreSavedTrash(total);
     }
 
+    private void setTrashAmount() {
+        application.count_normal_trash = 0;
+        application.count_glass = 0;
+        application.count_can = 0;
+        application.count_paper = 0;
+        application.count_plastic = 0;
+        application.count_plastic_bag = 0;
 
+        for (int index = 0; index < myTrashList.size(); index++) {
+            MyTrash myTrash = myTrashList.get(index);
+            if (myTrash.getType().equals("normal_trash")) {
+                application.count_normal_trash++;
+            } else if (myTrash.getType().equals("glass")) {
+                application.count_glass++;
+            } else if (myTrash.getType().equals("can")) {
+                application.count_can++;
+            } else if (myTrash.getType().equals("paper")) {
+                application.count_paper++;
+            } else if (myTrash.getType().equals("plastic")) {
+                application.count_plastic++;
+            } else if (myTrash.getType().equals("plastic_bag")) {
+                application.count_plastic_bag++;
+            }
+        }
+
+        Btn_normal_trash.setText("일반 / 기타\n" + application.count_normal_trash);
+        Btn_glass.setText("유리\n" + application.count_glass);
+        Btn_can.setText("캔\n" + application.count_can);
+        Btn_paper.setText("종이\n" + application.count_paper);
+        Btn_plastic.setText("플라스틱\n" + application.count_plastic);
+        Btn_plastic_bag.setText("비닐\n" + application.count_plastic_bag);
+    }
 
 
     /**
